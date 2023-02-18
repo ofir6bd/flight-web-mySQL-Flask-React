@@ -1,0 +1,17 @@
+
+init Flask project
+internal DB for all
+
+
+UI (HTML templates css etc)
+REST API
+users
+external DB for flights list
+tests with Pytest
+
+
+
+
+
+
+
