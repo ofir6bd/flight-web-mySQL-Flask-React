@@ -1,6 +1,5 @@
 """
 first run the create_DB file 
-This module need to run one time using terminal "python DB_Creation/tables_creation.py"
 it will create the tables in flight_DB  
 """
 
@@ -58,7 +57,7 @@ my_cursor.execute("""CREATE TABLE Airline_Companies (Id INT AUTO_INCREMENT PRIMA
                                             FOREIGN KEY (Country_Id) REFERENCES Countries(Id),
                                             User_Id INT,
                                             FOREIGN KEY (User_Id) REFERENCES Users(Id)
-                                            )""")     
+                                            )""")
 
 my_cursor.execute("""CREATE TABLE Flights (Id INT AUTO_INCREMENT PRIMARY KEY,                                            
                                             Airline_Company_Id INT,
@@ -79,10 +78,6 @@ my_cursor.execute("""CREATE TABLE Tickets (Id INT AUTO_INCREMENT PRIMARY KEY,
                                             FOREIGN KEY (Customer_Id) REFERENCES Customers(Id)
                                             )""")
                                             #TODO flight_ID and Customer_ID combination should be Unique
-
-
-
-                                       
 
 
 # my_cursor.execute("INSERT INTO Users (Username, Password, Email) VALUES (%s, %s, %s)", ("Benda", "13579864", "Ofir6bd@gmail.com"))
