@@ -2,20 +2,12 @@
 import sys
 import os
  
-# getting the name of the directory
-# where the this file is present.
+# import a module in the parent
 current = os.path.dirname(os.path.realpath(__file__))
- 
 # Getting the parent directory name
-# where the current directory is present.
 parent = os.path.dirname(current)
- 
-# adding the parent directory to
-# the sys.path.
+# adding the parent directory to the sys.path.
 sys.path.append(parent)
- 
-# now we can import the module in the parent
-# directory.
 from DAL import *
 
 class FacadeBase(object):
@@ -75,21 +67,19 @@ class FacadeBase(object):
         dal_obj.insert_obj(user)
 
 
-    def login(self,username,password):
-        pass
-    
 
 
 ######################### testing functions
-with app.app_context():
-    # obj1 = FacadeBase(id=1) 
-    # ans = obj1.get_flight_by_id()
-    # ans = obj1.get_all_flights()
-    # ans = obj1.get_all_airlines()
-    # ans = obj1.get_airline_by_id()
-    # ans = obj1.get_all_countries()
-    # ans = obj1.get_country_by_id()
-    obj2 = FacadeBase(username='Ofir',password='123456',email='q@q.com', user_role= 2 )
-    obj2.create_new_user()
-    # print(ans)
-    print("Done")
+# with app.app_context():
+#     # obj1 = FacadeBase(id=1) 
+#     # ans = obj1.get_flight_by_id()
+#     # ans = obj1.get_all_flights()
+#     # ans = obj1.get_all_airlines()
+#     # ans = obj1.get_airline_by_id()
+#     # ans = obj1.get_all_countries()
+#     # ans = obj1.get_country_by_id()
+#     # obj2 = FacadeBase(username='Ofir',password='123456',email='q@q.com', user_role= 2 )
+#     # obj2.create_new_user()
+    
+#     # print(ans)
+#     print("Done")
