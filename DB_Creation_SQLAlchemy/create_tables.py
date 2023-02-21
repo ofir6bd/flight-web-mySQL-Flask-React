@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:admin@localhost/flight_db'
@@ -7,14 +8,14 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-class User_Roles(db.Model):
+class UserRoles(db.Model):
     __tablename__ = 'user_roles'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     role_name = db.Column(db.String(50), nullable=False)
-    users_table = db.relationship('Users', backref='User_Roles')
+    users_table = db.relationship('Users', backref='UserRoles')
     
     def __repr__(self): # for print option
-        return f'<Table: "User_Roles", role_name:"{self.role_name}">'
+        return f'<Table: "UserRoles", role_name:"{self.role_name}">'
 
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -24,7 +25,7 @@ class Users(db.Model):
     user_role = db.Column(db.Integer, db.ForeignKey('user_roles.id'))
     administrators_table = db.relationship('Administrators', backref='Users')
     customers_table = db.relationship('Customers', backref='Users')
-    airline_companies_table = db.relationship('Airline_Companies', backref='Users')
+    airline_companies_table = db.relationship('AirlineCompanies', backref='Users')
 
     def __repr__(self):
         return f'<Table: "Users", username:"{self.username}, password:"{self.password}, email:"{self.email}, user_role:"{self.user_role}">'
@@ -46,6 +47,7 @@ class Customers(db.Model):
     phone_no = db.Column(db.String(50), nullable=False, unique=True)
     credit_card_no = db.Column(db.String(50), nullable=False, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    tickets_table = db.relationship('Tickets', backref='Customers')
 
     def __repr__(self):
         return f'<Table: "Customers", first_name:"{self.first_name}, last_name:"{self.last_name}, address:"{self.address},phone_no:"{self.phone_no}, credit_card_no:"{self.credit_card_no}, user_id:"{self.user_id} ">'
@@ -58,26 +60,38 @@ class Countries(db.Model):
     def __repr__(self):
         return f'<Table: "Countries", name:"{self.name}">'
 
-class Airline_Companies(db.Model):
+class AirlineCompanies(db.Model):
     __tablename__ = 'airline_companies'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(50), nullable=False, unique=True)
     country_id = db.Column(db.Integer, db.ForeignKey('countries.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    flights_table_origin_country = db.relationship('Flights', backref='Airline_Companies')
+    flights_table_origin_country = db.relationship('Flights', backref='AirlineCompanies')
     
     def __repr__(self):
-        return f'<Table: "Airline_Companies", name:"{self.name}, country_id:"{self.country_id}, user_id:"{self.user_id}">'
+        return f'<Table: "AirlineCompanies", name:"{self.name}, country_id:"{self.country_id}, user_id:"{self.user_id}">'
 
 class Flights(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     airline_company_id = db.Column(db.Integer, db.ForeignKey('airline_companies.id'))
     origin_country_id = db.Column(db.Integer, db.ForeignKey('countries.id'))
-    # destination_country_id = db.Column(db.Integer, db.ForeignKey('countries.id'))
+    destination_country_id = db.Column(db.String(50), nullable=False)
+    departure_time = db.Column(db.DateTime, nullable=False)
+    landing_time = db.Column(db.DateTime, nullable=False)
+    remaining_tickets = db.Column(db.Integer, default=0)
+    tickets_table = db.relationship('Tickets', backref='Flights')
+    #TODO destination_country_id = db.Column(db.Integer, db.ForeignKey('countries.id'))
 
     def __repr__(self):
-        return f'<Table: "Flights", airline_company_id:"{self.airline_company_id}, origin_country_id:"{self.origin_country_id}">'
+        return f'<Table: "Flights", airline_company_id:"{self.airline_company_id}, origin_country_id:"{self.origin_country_id}",departure_time:"{self.departure_time}",landing_time:"{self.landing_time}",remaining_tickets:"{self.remaining_tickets}">'
 
+class Tickets(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    flight_id = db.Column(db.Integer, db.ForeignKey('flights.id'))
+    customer_id = db.Column(db.Integer, db.ForeignKey('customers.id'))
+    
+    def __repr__(self):
+        return f'<Table: "Tickets", flight_id:"{self.flight_id}",customer_id:"{self.customer_id}">'
 
 user_roles_list = ['Administrator', 'Airline_Company', 'Customer', 'Anonymous']
 users_list = [['Ofir6bd','123456789','Ofir6bd@gmail.com',1],['Ofir7bd','123456789','Ofir7bd@gmail.com',2],['Ofir8bd','123456789','Ofir8bd@gmail.com',3],['Ofir9bd','123456789','Ofir9bd@gmail.com',4],['Kobe24','123456789','Kobe24@gmail.com',3]]
@@ -85,7 +99,8 @@ administrators_list = [['John','Travolta', 1 ]]
 customers_list = [['Kobe','Bryant','Phili USA',"+1 (123) 456–7890", "5465-8776-5476-7643", 5]]
 countries_list = ['Israel', 'Marocco', 'USA', 'Lebanon']
 airlines_list = [['El-Al', 1, 1], ['Ryanair',2,2], ['Lufthansa',3,3], ['united airlines',4,4]]
-flights_list = [[1,1,1]]
+flights_list = [[1,1,'Maroco',2022,2,21,3,50,2022,2,22,4,30,100],[2,2,'Israel',2023,4,21,5,45,2023,4,26,4,30,100]]
+tickets_list = [[1,1],[2,1]]
 
 if __name__ == '__main__':
     with app.app_context():
@@ -93,14 +108,14 @@ if __name__ == '__main__':
         db.create_all()
         for i in range(len(user_roles_list)):
             try:
-                db.session.add(User_Roles(role_name=user_roles_list[i]))
+                db.session.add(UserRoles(role_name=user_roles_list[i]))
                 db.session.commit()
             except Exception as e:
                 print(f"Error: {e}")
 
         for i in range(len(users_list)):
             try:
-                # usr_role = User_Roles.query.filter_by(role_name='Customer').first()
+                # usr_role = UserRoles.query.filter_by(role_name='Customer').first()
                 # print(usr_role.id)
                 # db.session.add(Users(username=users_list[i][0],password=users_list[i][1],email=users_list[i][2],user_role=usr_role.id))
                 user = Users(username=users_list[i][0],password=users_list[i][1],email=users_list[i][2],user_role=users_list[i][3])
@@ -137,7 +152,7 @@ if __name__ == '__main__':
         
         for i in range(len(airlines_list)):
             try:
-                airline_company = Airline_Companies(name=airlines_list[i][0],country_id=airlines_list[i][1],user_id=airlines_list[i][2])
+                airline_company = AirlineCompanies(name=airlines_list[i][0],country_id=airlines_list[i][1],user_id=airlines_list[i][2])
                 # print(airline_company)
                 db.session.add(airline_company)
                 db.session.commit()
@@ -146,9 +161,23 @@ if __name__ == '__main__':
 
         for i in range(len(flights_list)):
             try:
-                flight = Flights(airline_company_id=flights_list[i][0],origin_country_id=flights_list[i][1])
-                print(flight)
+                flight = Flights(airline_company_id=flights_list[i][0],
+                                origin_country_id=flights_list[i][1],
+                                destination_country_id=flights_list[i][2],
+                                departure_time=datetime(flights_list[i][3],flights_list[i][4],flights_list[i][5],flights_list[i][6],flights_list[i][7]),
+                                landing_time=datetime(flights_list[i][8],flights_list[i][9],flights_list[i][10],flights_list[i][11],flights_list[i][12]),
+                                remaining_tickets=flights_list[i][13])
+                # print(flight)
                 db.session.add(flight)
+                db.session.commit()
+            except Exception as e:
+                print(f"Error: {e}")
+        
+        for i in range(len(tickets_list)):
+            try:
+                ticket = Tickets(flight_id=tickets_list[i][0],customer_id=tickets_list[i][1])
+                print(ticket)
+                db.session.add(ticket)
                 db.session.commit()
             except Exception as e:
                 print(f"Error: {e}")
