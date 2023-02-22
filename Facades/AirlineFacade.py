@@ -11,9 +11,8 @@ from DAL import *
 from FacadeBase import FacadeBase
 class AirlineFacade(FacadeBase):
 
-    def __init__(self, id=0,username="",table_column=""):
+    def __init__(self, id=0,username=""):
         super().__init__(id=id,username=username)
-        self.table_column =table_column
         
 
     def update_airline(airline):
@@ -32,14 +31,16 @@ class AirlineFacade(FacadeBase):
         pass
 
     def get_airline_by_username(self):
-        dal_obj = DataLayer(table=AirlineCompanies,table2=Users,username=self.username,table_column=self.table_column)
+        dal_obj = DataLayer(table1=AirlineCompanies,table_column1="user_id",\
+                    table2=Users,table_column2="id",\
+                    input_attribute="username",input_value=self.username)
         final_table = dal_obj.join_tables()
         # print(final_table)
         return final_table[0].name
 
 with app.app_context():
 
-    obj6 = AirlineFacade(username="Ofir8bd",table_column="user_id") 
+    obj6 = AirlineFacade(username="Ofir8bd") 
     ans = obj6.get_airline_by_username()
     
     print(ans)
