@@ -179,9 +179,11 @@ if __name__ == '__main__':
                 
                 db.session.add(ticket)
                 db.session.commit()
-                print(ticket)
+                # print(ticket)
             except Exception as e:
                 print(f"Error: {e}")
+
+print("Tables created and data inserted")
 
 
 
