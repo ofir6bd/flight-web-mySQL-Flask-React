@@ -1,9 +1,12 @@
 from flask import Flask, redirect, url_for,request, render_template, session, flash
 # from flask_mysqldb import MySQL
 # import mysql.connector
-from flask_sqlalchemy import SQLAlchemy
+# from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin, login_user, LoginManager,login_required, logout_user,current_user
+from Facades.AnonymousFacade import AnonymousFacade
 
 app = Flask(__name__)          
+app.secret_key = 'your_secret_key_here'
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:admin@localhost/flight_db'
 # db = SQLAlchemy(app)
@@ -77,17 +80,25 @@ def flights_func():
 
 @app.route('/login',methods=['GET','POST'])
 def login():
-    if request.method=="POST":
-        session.permanent = True
-        session["user"] = user     
-        user = request.form["nm"]
-        flash("Login Succesfuly!")
-        return redirect(url_for("user"))
-    else:
-        if "user" in session:
-            flash('Already logged in!')
-            return redirect(url_for("user")) 
+    if request.method=="GET":
         return render_template('login.html')
+    elif request.method=="POST":
+        username = request.form['username']
+        password = request.form['password']
+        user =AnonymousFacade(username=username,password=password)
+        user_exists = user.login()
+        if user_exists:
+            # If user exists, set session variable and redirect to home page
+            # session.permanent = True
+            try:
+                session["username"] = username 
+            except Exception as e:
+                print(f"Error: {e}")
+            flash("Login Succesfuly!")
+            return redirect(url_for("home"))
+        else:
+            error = 'Invalid username or password'
+            return render_template('login.html', error=error)
 
 
 if __name__ == "__main__":

@@ -18,35 +18,40 @@ class DataLayer(object):
 
     def get_by_id(self):
         try:
-            item = self.table1.query.filter_by(id=self.id).first()
+            with app.app_context():
+                item = self.table1.query.filter_by(id=self.id).first()
         except Exception as e:
             print(f"Error: {e}")
         return item
     
     def get_all(self):
         try:
-            item = self.table1.query.all()
+            with app.app_context():
+                item = self.table1.query.all()
         except Exception as e:
             print(f"Error: {e}")
         return item
     
     def insert_obj(self, obj):
         try:
-            db.session.add(obj)
-            db.session.commit()
+            with app.app_context():
+                db.session.add(obj)
+                db.session.commit()
         except Exception as e:
             print(f"Error: {e}")
 
     def delete_obj(self, obj):
         try:
-            db.session.delete(obj)
-            db.session.commit()
+            with app.app_context():
+                db.session.delete(obj)
+                db.session.commit()
         except Exception as e:
             print(f"Error: {e}")
 
     def check_user_and_pass(self):
         try:
-            user = Users.query.filter_by(username=self.username,password=self.password).first()
+            with app.app_context():
+                user = Users.query.filter_by(username=self.username,password=self.password).first()
             if user:
                 return True
             else:
@@ -56,9 +61,10 @@ class DataLayer(object):
 
     def join_tables(self):
         try:
-            final_table = db.session.query(self.table1,self.table2).\
-                filter(getattr(self.table2, self.input_attribute)==self.input_value)\
-                .join(self.table1,getattr(self.table1, self.table_column1)==getattr(self.table2, self.table_column2)).first()
+            with app.app_context():
+                final_table = db.session.query(self.table1,self.table2).\
+                    filter(getattr(self.table2, self.input_attribute)==self.input_value)\
+                    .join(self.table1,getattr(self.table1, self.table_column1)==getattr(self.table2, self.table_column2)).first()
             return final_table
         except Exception as e:
             print(f"Error: {e}")

@@ -38,10 +38,13 @@ class AirlineFacade(FacadeBase):
         # print(final_table)
         return final_table[0].name
 
-with app.app_context():
 
-    obj6 = AirlineFacade(username="Ofir8bd") 
-    ans = obj6.get_airline_by_username()
+
+# # ######################### testing functions
+# with app.app_context():
+
+#     obj6 = AirlineFacade(username="Ofir7bd") 
+#     ans = obj6.get_airline_by_username()
     
-    print(ans)
-    print("Done")
+#     print(ans)
+#     print("Done")
