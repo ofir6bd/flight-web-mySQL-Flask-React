@@ -35,7 +35,7 @@ class DataLayer(object):
     def insert_obj(self, obj):
         try:
             with app.app_context():
-                print(obj)
+                # print(obj)
                 db.session.add(obj)
                 db.session.commit()
             return True

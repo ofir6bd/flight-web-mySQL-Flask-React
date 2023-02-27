@@ -1,0 +1,16 @@
+{% extends "customer/layout.html" %}
+{% block content %}
+
+    <h1>Create new user</h1>
+    <form action="" method="post">
+        <label>Username:</label>
+        <input type="text" name="username" title="username" placeholder="Please insert username" />
+        <label>Password:</label>
+        <input type="password" name="password" title="password" placeholder="Please insert password" />
+        <label>Email:</label>
+        <input type="email" name="email" title="email" placeholder="Please insert email" />
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+
+{% endblock %}

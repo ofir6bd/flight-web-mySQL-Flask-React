@@ -7,6 +7,7 @@ from Facades.AnonymousFacade import AnonymousFacade
 # from flask_wtf import FlaskForm
 # from wtforms import StringField, PasswordField,SubmitField
 # from wtforms.validators import DataRequired
+import hashlib
 
 app = Flask(__name__)          
 
@@ -14,32 +15,21 @@ app = Flask(__name__)
 @app.route('/add_user',methods=['GET','POST'])                   # 1st option to create view - the home route http://127.0.0.1:5000
 def add_user(): 
     if request.method == 'GET':
-        return render_template("add_user.html")
+        return render_template("customer/add_user.html")
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        hash_password= hashlib.md5(password.encode()) #encryption - hashing the passwored 
+        print(hash_password)
         email = request.form['email']
-        new_user = AnonymousFacade(username=username,password=password,email=email,user_role=3)
+        new_user = AnonymousFacade(username=username,password=hash_password,email=email,user_role=3)
         res = new_user.create_new_user()
         if res: 
-            print("user added")
+            print("User added!")
         else: 
             print("error")
-        return render_template("home.html")
+        return redirect(url_for("home"))
 
-# class Users_table(db.Model):
-#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-#     username = db.Column(db.String(50), nullable=False, unique=True)
-#     password = db.Column(db.String(50), nullable=False)
-#     email = db.Column(db.String(50), nullable=False, unique=True)
-#     user_role = db.Column(db.Integer, db.ForeignKey('user_roles_table.id'))
-    
-
-# create login class
-# class LoginForm(FlaskForm):
-#     username = StringField("Username",validators=[DataRequired()])
-#     password = PasswordField("Password",validators=[DataRequired()])
-#     submit = SubmitField("Submit")
 
 @app.route('/login',methods=['GET','POST'])
 def login():
@@ -65,7 +55,7 @@ def login():
 
 
 @app.route('/',methods=['GET','POST'])                   # 1st option to create view - the home route http://127.0.0.1:5000
-def hello():   
+def home():   
     print('**********Starting main route')               				             # this function is the name of the route
     if request.method == 'GET':
         print('**********Starting GET main route')
@@ -77,16 +67,16 @@ def hello():
         
         return render_template('flight.html')
         
-@app.route('/Countries',methods=['GET','POST'])                   # 1st option to create view - the home route http://127.0.0.1:5000
-def countriesFunc():       
-    if request.method == 'GET':
-        print('**********Starting GET Countries route')
-        return render_template('home.html')      
+# @app.route('/Countries',methods=['GET','POST'])                   # 1st option to create view - the home route http://127.0.0.1:5000
+# def countriesFunc():       
+#     if request.method == 'GET':
+#         print('**********Starting GET Countries route')
+#         return render_template('home.html')      
      
-    if request.method == 'POST':
-        print('**********Starting POST at main route')
-        print(request.args)
-        return render_template('flight.html')      
+#     if request.method == 'POST':
+#         print('**********Starting POST at main route')
+#         print(request.args)
+#         return render_template('flight.html')      
 
 @app.route('/flights',methods=['GET','POST'])
 def flights_func():
