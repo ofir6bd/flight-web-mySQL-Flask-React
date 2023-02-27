@@ -35,10 +35,13 @@ class DataLayer(object):
     def insert_obj(self, obj):
         try:
             with app.app_context():
+                print(obj)
                 db.session.add(obj)
                 db.session.commit()
+            return True
         except Exception as e:
             print(f"Error: {e}")
+            return False
 
     def delete_obj(self, obj):
         try:

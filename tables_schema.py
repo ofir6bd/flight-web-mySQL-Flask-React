@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from flask_login import UserMixin
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:admin@localhost/flight_db'
@@ -16,7 +17,7 @@ class UserRoles(db.Model):
     def __repr__(self): # for print option
         return f'<Table: "UserRoles", role_name:"{self.role_name}">'
 
-class Users(db.Model):
+class Users(db.Model,UserMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(50), nullable=False)
@@ -25,7 +26,7 @@ class Users(db.Model):
     user_role_ = db.relationship('UserRoles')
 
     def __repr__(self):
-        return f'<Table: "Users", id:"{self.id}", username:"{self.username}, password:"{self.password}, email:"{self.email}, user_role:"{self.user_role}">'
+        return f'<Table: "Users", id:"{self.id}", username:"{self.username}", password:"{self.password}", email:"{self.email}", user_role:"{self.user_role}">'
 
 class Administrators(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)

@@ -9,6 +9,7 @@ from Facades.AnonymousFacade import AnonymousFacade
 # from wtforms.validators import DataRequired
 
 app = Flask(__name__)          
+<<<<<<< Updated upstream
 
 
 @app.route('/add_user',methods=['GET','POST'])                   # 1st option to create view - the home route http://127.0.0.1:5000
@@ -26,14 +27,13 @@ def add_user():
         else: 
             print("error")
         return render_template("home.html")
+=======
+>>>>>>> Stashed changes
 
-# class Users_table(db.Model):
-#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-#     username = db.Column(db.String(50), nullable=False, unique=True)
-#     password = db.Column(db.String(50), nullable=False)
-#     email = db.Column(db.String(50), nullable=False, unique=True)
-#     user_role = db.Column(db.Integer, db.ForeignKey('user_roles_table.id'))
-    
+# flask login stuff
+# login_manager = LoginManager()
+# login_manager.init_app(app)
+
 
 # create login class
 # class LoginForm(FlaskForm):

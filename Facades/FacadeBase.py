@@ -62,10 +62,10 @@ class FacadeBase(object):
         return country
 
     def create_new_user(self):
-        user = Users(username=self.username,password=self.password,email=self.email,user_role=3)
+        user = Users(username=self.username,password=self.password,email=self.email,user_role=self.user_role)
         dal_obj = DataLayer()      
-        dal_obj.insert_obj(user)
-
+        res = dal_obj.insert_obj(user)
+        return res
 
 
 

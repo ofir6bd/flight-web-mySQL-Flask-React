@@ -8,12 +8,14 @@
     <title>Flight Project</title>
 </head>
 <body>
+    <a href="{{ url_for('add_user') }}">Create new user</a>
     <h1>Welcome to the best flight booking site</h1>
     <p>Find you next flight</p>
     <form method="POST" action="http://127.0.0.1:5000/flights">
         <input type="text" name="destination" placeholder="Where are you going?">
         <input type="submit" value="submit">
     </form>
+
 
 </body>
 </html>

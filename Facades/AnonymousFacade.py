@@ -12,8 +12,8 @@ from Facades.FacadeBase import FacadeBase
 
 class AnonymousFacade(FacadeBase):
 
-    def __init__(self, username="", password=""):
-        super().__init__(username=username,password=password)
+    def __init__(self, username="", password="", email="",user_role=""):
+        super().__init__(username=username,password=password,email=email,user_role=user_role)
 
     def login(self):
         dal_obj = DataLayer(username=self.username,password=self.password)      
