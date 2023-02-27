@@ -56,15 +56,9 @@ def login():
 
 @app.route('/',methods=['GET','POST'])                   # 1st option to create view - the home route http://127.0.0.1:5000
 def home():   
-    print('**********Starting main route')               				             # this function is the name of the route
     if request.method == 'GET':
-        print('**********Starting GET main route')
         return render_template('home.html')        # render a template
-     
     if request.method == 'POST':
-        print('**********Starting POST at main route')
-        print(request)
-        
         return render_template('flight.html')
         
 # @app.route('/Countries',methods=['GET','POST'])                   # 1st option to create view - the home route http://127.0.0.1:5000
@@ -79,13 +73,20 @@ def home():
 #         return render_template('flight.html')      
 
 @app.route('/flights',methods=['GET','POST'])
-def flights_func():
+def flights():
     print('start flights_func')
     if request.method=='POST':
-        print(request.form.get('destination'))
-        destination = request.form.get('destination')
-        print(destination)
-    return render_template('flights.html', destination=destination)
+        origin_country = request.form.get('origin_country')
+        destination_country = request.form.get('destination_country')
+        departure_time = request.form.get('departure_time')
+        landing_time = request.form.get('landing_time')
+        travelers = request.form.get('travelers')
+        flights = AnonymousFacade(origin_country=origin_country,destination_country=destination_country,departure_time=departure_time,landing_time=landing_time,travelers=travelers)
+        res = flights.get_flights_by_parameters()
+        print(res)
+
+        # print(destination)
+    return render_template('flights.html', origin_country=origin_country)
 
 
 

@@ -28,6 +28,7 @@ class DataLayer(object):
         try:
             with app.app_context():
                 item = self.table1.query.all()
+                print(item)
         except Exception as e:
             print(f"Error: {e}")
         return item

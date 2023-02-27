@@ -12,7 +12,7 @@ from DAL import *
 
 class FacadeBase(object):
 
-    def __init__(self, id=0, username="", password="", email="", role_name="",user_role="", first_name="", last_name="", adress="", phone_no="", credit_card_no=""):
+    def __init__(self, id=0, username="", password="", email="", role_name="",user_role="", first_name="", last_name="", adress="", phone_no="", credit_card_no="",origin_country="",destination_country="",departure_time="",landing_time="",travelers=""):
         self.id = id
         self.username = username
         self.password = password
@@ -24,27 +24,36 @@ class FacadeBase(object):
         self.adress = adress
         self.phone_no = phone_no
         self.credit_card_no = credit_card_no
+        self.origin_country = origin_country
+        self.destination_country = destination_country
+        self.departure_time = departure_time
+        self.landing_time = landing_time
+        self.travelers = travelers
+
 
     def get_all_flights(self):
-        dal_obj = DataLayer(id=self.id, table=Flights)      
+        dal_obj = DataLayer(table1=Flights)      
         flights = dal_obj.get_all()
         return flights
 
     def get_flight_by_id(self):
-        dal_obj = DataLayer(table=Flights,id=self.id)      
+        dal_obj = DataLayer(table1=Flights,id=self.id)      
         flight = dal_obj.get_by_id()
         return flight
 
-    def get_flights_by_parameters(self,origin_country_id,destination_country_id, date):
-        pass
+    def get_flights_by_parameters(self):
+        all_flights = DataLayer(table1=Flights)  
+        req_flights = []
+        print(all_flights)
+        return req_flights
 
     def get_all_airlines(self):
-        dal_obj = DataLayer(table=AirlineCompanies)      
+        dal_obj = DataLayer(table1=AirlineCompanies)      
         airline_company = dal_obj.get_all()
         return airline_company
 
     def get_airline_by_id(self):
-        dal_obj = DataLayer(table=AirlineCompanies,id=self.id)      
+        dal_obj = DataLayer(table1=AirlineCompanies,id=self.id)      
         airline = dal_obj.get_by_id()
         return airline
 
@@ -52,12 +61,12 @@ class FacadeBase(object):
         pass
 
     def get_all_countries(self):
-        dal_obj = DataLayer(table=Countries)      
+        dal_obj = DataLayer(table1=Countries)      
         countries = dal_obj.get_all()
         return countries
 
     def get_country_by_id(self):
-        dal_obj = DataLayer(table=Countries,id=self.id)      
+        dal_obj = DataLayer(table1=Countries,id=self.id)      
         country = dal_obj.get_by_id()
         return country
 

@@ -10,7 +10,14 @@
 </head>
 
 <body>
-    <p><strong>Navigation:</strong> <a href="/">Home</a> <a href="{{url_for('add_user')}}">Add user</a> <a href="mailto:Ofir6bd@gmail.com">Contact us</a></p>
+    <p><strong>Navigation:</strong> <a href="/">Home</a> 
+                                    <a href="{{url_for('add_user')}}">Add user</a> 
+
+
+                                    <a href="{{url_for('login')}}">Log in</a>
+                                    <a href="">Sign up</a>
+
+                                    </p>
     {% block content %}
     
     
@@ -18,7 +25,7 @@
 
     
     {% endblock %}
-    <p>&copy; 2023 Incredible flight site LLC</p>
+    <p>&copy; 2023 Incredible flight site LLC <a href="mailto:Ofir6bd@gmail.com">Contact us</a></p>
 </body>
 
 </html>
