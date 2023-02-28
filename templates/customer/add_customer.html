@@ -1,0 +1,20 @@
+{% extends "customer/layout.html" %}
+{% block content %}
+
+    <h1>Create new customer</h1>
+    <form action="{{url_for('add_customer')}}" method="post">
+        <label>First name:</label>
+        <input type="text" name="firstName" placeholder="Insert first name" />
+        <label>Last name:</label>
+        <input type="text" name="lastName" placeholder="Insert last name" />
+        <label>Address:</label>
+        <input type="text" name="address" placeholder="Insert address" />
+        <label>Phone Number:</label>
+        <input type="text" name="phoneNumber" placeholder="054-1234567" />
+        <label>Credit card number:</label>
+        <input type="text" name="creditCardNumber" placeholder="1234-5678-1234-5678" />
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+
+{% endblock %}

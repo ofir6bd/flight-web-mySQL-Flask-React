@@ -42,8 +42,10 @@ class FacadeBase(object):
         return flight
 
     def get_flights_by_parameters(self):
-        all_flights = DataLayer(table1=Flights)  
+        dal_obj = DataLayer(table1=Flights)  
+        all_flights = dal_obj.get_all()
         req_flights = []
+
         print(all_flights)
         return req_flights
 

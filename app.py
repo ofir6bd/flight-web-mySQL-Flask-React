@@ -15,7 +15,7 @@ app = Flask(__name__)
 @app.route('/add_user',methods=['GET','POST'])                   # 1st option to create view - the home route http://127.0.0.1:5000
 def add_user(): 
     if request.method == 'GET':
-        return render_template("customer/add_user.html")
+        return render_template("add_user.html")
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -29,6 +29,7 @@ def add_user():
         else: 
             print("error")
         return redirect(url_for("home"))
+    
 
 
 @app.route('/login',methods=['GET','POST'])
@@ -74,7 +75,6 @@ def home():
 
 @app.route('/flights',methods=['GET','POST'])
 def flights():
-    print('start flights_func')
     if request.method=='POST':
         origin_country = request.form.get('origin_country')
         destination_country = request.form.get('destination_country')
