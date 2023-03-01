@@ -3,6 +3,8 @@ This data layer will be the only file that communicate with the DB, universal fo
 """
 from tables_schema import *
 
+app=create_app()
+
 class DataLayer(object):
 
     def __init__(self, id=0, table1="",table_column1="",table2="",table_column2="",input_attribute="",input_value="",username="",password=""):
@@ -94,16 +96,16 @@ class DataLayer(object):
 
 # ######################### testing functions
 # with app.app_context():
-#     dal_obj = DataLayer()
-#     ans = dal_obj.flights_joined()
-# #     dal_obj = DataLayer(table=AirlineCompanies,table2=Users,username="Ofir9bd",table_column="user_id")
-# #     final_table = dal_obj.join_tables()    
-# #     print(final_table[0].name)
-# #     print("Done")
-# # # #     # obj1 = FacadeBase() 
-# # # #     # ans = obj1.get_flight_by_id(1)
-# # # #     obj1 = DataLayer() 
-# # # #     ans = obj1.get_all(Flights)
-# #     ans = db.session.query(AirlineCompanies,Users ).filter(Users.username=='Ofir7bd').join(AirlineCompanies,AirlineCompanies.user_id==Users.id).first()
+#     dal_obj = DataLayer(table1=UserRoles)
+#     ans = dal_obj.get_all()
+# # #     dal_obj = DataLayer(table=AirlineCompanies,table2=Users,username="Ofir9bd",table_column="user_id")
+# # #     final_table = dal_obj.join_tables()    
+# # #     print(final_table[0].name)
+# # #     print("Done")
+# # # # #     # obj1 = FacadeBase() 
+# # # # #     # ans = obj1.get_flight_by_id(1)
+# # # # #     obj1 = DataLayer() 
+# # # # #     ans = obj1.get_all(Flights)
+# # #     ans = db.session.query(AirlineCompanies,Users ).filter(Users.username=='Ofir7bd').join(AirlineCompanies,AirlineCompanies.user_id==Users.id).first()
 #     print(ans)
 #     print("Done")

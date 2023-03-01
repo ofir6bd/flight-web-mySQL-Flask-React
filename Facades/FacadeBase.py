@@ -8,7 +8,8 @@ current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 # adding the parent directory to the sys.path.
 sys.path.append(parent)
-from DAL import *
+from DAL import DataLayer
+from tables_schema import UserRoles,Users,Administrators,Customers, Countries,AirlineCompanies,Flights,Tickets
 
 class FacadeBase(object):
 
