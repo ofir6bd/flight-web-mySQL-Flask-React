@@ -12,10 +12,12 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask_login import UserMixin
-from tables_schema import create_app
-
+from models import create_app
 
 app = create_app()
+
+
+
 
 @app.route('/add_user',methods=['GET','POST'])                   # 1st option to create view - the home route http://127.0.0.1:5000
 def add_user(): 
@@ -34,8 +36,6 @@ def add_user():
         else: 
             print("error")
         return redirect(url_for("home"))
-
-
 
 
 @app.route('/login',methods=['GET','POST'])

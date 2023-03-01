@@ -1,7 +1,7 @@
 """
 This data layer will be the only file that communicate with the DB, universal for all tables
 """
-from tables_schema import *
+from models import *
 
 app=create_app()
 
