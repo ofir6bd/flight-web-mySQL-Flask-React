@@ -1,7 +1,8 @@
 """
 This data layer will be the only file that communicate with the DB, universal for all tables
 """
-from models import *
+from app import create_app,db,login_manager,bcrypt
+from models import UserRoles,Users,Administrators,Customers, Countries,AirlineCompanies,Flights,Tickets
 
 app=create_app()
 
