@@ -7,12 +7,14 @@ from wtforms import (
     TextAreaField,
 )
 
+
 from flask_wtf import FlaskForm
 from wtforms.validators import InputRequired, Length, EqualTo, Email, Regexp ,Optional
 import email_validator
 from flask_login import current_user
 from wtforms import ValidationError,validators
 from models import *
+from DAL import DataLayer
 
 class login_form(FlaskForm):
     email = StringField(validators=[InputRequired(), Email(), Length(1, 64)])
@@ -46,12 +48,13 @@ class register_form(FlaskForm):
     )
 
     def validate_email(self, email):
-
-        if Users.query.filter_by(email=email.data).first():
+        dal_obj = DataLayer(table1=Users,input_attribute='email', input_value=email.data)
+        if dal_obj.get_one_by_param():
             raise ValidationError("Email already registered!")
 
     def validate_username(self, username):
-        if Users.query.filter_by(username=username.data).first():
+        dal_obj = DataLayer(table1=Users,input_attribute='username', input_value=username.data)
+        if dal_obj.get_one_by_param():
             raise ValidationError("Username already taken!")
 
     # def validate_email(self, email):

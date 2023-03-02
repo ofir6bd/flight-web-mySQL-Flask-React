@@ -46,7 +46,11 @@ class DataLayer(object):
         self.username = username
         self.password = password
 
-    
+
+    def get_one_by_param(self):
+        item = self.table1.query.filter_by(**{self.input_attribute: self.input_value}).first()
+        return item
+
 
     def get_by_id(self):
         try:
