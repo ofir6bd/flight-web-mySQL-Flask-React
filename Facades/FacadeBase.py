@@ -74,7 +74,7 @@ class FacadeBase(object):
         return country
 
     def create_new_user(self):
-        user = Users(username=self.username,password=self.password,email=self.email,user_role=self.user_role)
+        user = Users(username=self.username,password=self.password,email=self.email,user_role=int(self.user_role))
         dal_obj = DataLayer()      
         res = dal_obj.insert_obj(user)
         return res

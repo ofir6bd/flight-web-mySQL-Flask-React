@@ -3,8 +3,35 @@ This data layer will be the only file that communicate with the DB, universal fo
 """
 from app import create_app,db,login_manager,bcrypt
 from models import UserRoles,Users,Administrators,Customers, Countries,AirlineCompanies,Flights,Tickets
+from flask import flash
+from sqlalchemy.exc import (
+    IntegrityError,
+    DataError,
+    DatabaseError,
+    InterfaceError,
+    InvalidRequestError,
+)
+from werkzeug.routing import BuildError
 
 app=create_app()
+
+
+def customError(e):
+    if e == InvalidRequestError:
+        flash(f"Something went wrong!", "danger")
+    elif e == IntegrityError:
+        flash(f"User already exists!.", "warning")
+    elif e == DataError:
+        flash(f"Invalid Entry", "warning")
+    elif e == InterfaceError:
+        flash(f"Error connecting to the database", "danger")
+    elif e == DatabaseError:
+        flash(f"Error connecting to the database", "danger")
+    elif e == BuildError:
+        flash(f"An error occured !", "danger")
+    else:
+        flash(f"An error occured !", "danger")
+
 
 class DataLayer(object):
 
@@ -18,6 +45,8 @@ class DataLayer(object):
         self.input_value = input_value
         self.username = username
         self.password = password
+
+    
 
     def get_by_id(self):
         try:
@@ -44,9 +73,13 @@ class DataLayer(object):
                 db.session.add(obj)
                 db.session.commit()
             return True
-        except Exception as e:
-            print(f"Error: {e}")
+        except (IntegrityError, DataError, DatabaseError, InterfaceError, InvalidRequestError, BuildError) as e:
+            db.session.rollback()
+            # print(f"Error: {e}")
+            print(f'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee {str(e)}')
+            customError(str(e))
             return False
+            
 
     def delete_obj(self, obj):
         try:
@@ -77,6 +110,8 @@ class DataLayer(object):
             return final_table
         except Exception as e:
             print(f"Error: {e}")
+
+ 
 
     # @staticmethod
     # def flights_joined():

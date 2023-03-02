@@ -48,43 +48,21 @@ def login():
 @app.route("/register/", methods=("GET", "POST"), strict_slashes=False)
 def register():
     form = register_form()
-    if form.validate_on_submit():
-        try:
-            email = form.email.data
-            pwd = form.pwd.data
-            username = form.username.data
-            
-            
-            newuser = Users(
-                username=username,
-                email=email,
-                password=bcrypt.generate_password_hash(pwd),
-                user_role = 3
-            )
     
-            db.session.add(newuser)
-            db.session.commit()
+    if form.validate_on_submit():
+        
+        username = form.username.data
+        password = form.pwd.data
+        # password=bcrypt.generate_password_hash(password) # encrypt password
+        email = form.email.data
+        
+        
+        fac_obj = AnonymousFacade(username=username,password=password,email=email,user_role=3)
+        res = fac_obj.create_new_user()
+        if res:
             flash(f"Account Succesfully created", "success")
             return redirect(url_for("login"))
-
-        except InvalidRequestError:
-            db.session.rollback()
-            flash(f"Something went wrong!", "danger")
-        except IntegrityError:
-            db.session.rollback()
-            flash(f"User already exists!.", "warning")
-        except DataError:
-            db.session.rollback()
-            flash(f"Invalid Entry", "warning")
-        except InterfaceError:
-            db.session.rollback()
-            flash(f"Error connecting to the database", "danger")
-        except DatabaseError:
-            db.session.rollback()
-            flash(f"Error connecting to the database", "danger")
-        except BuildError:
-            db.session.rollback()
-            flash(f"An error occured !", "danger")
+        
     return render_template("auth.html",
         form=form,
         text="Create account",
