@@ -47,16 +47,15 @@ def login():
 # Register route
 @app.route("/register/", methods=("GET", "POST"), strict_slashes=False)
 def register():
-    form = register_form()
-    
-    if form.validate_on_submit():
-        
+    form = register_form() 
+
+    if form.validate_on_submit():        
         username = form.username.data
         password = form.pwd.data
+        password = hashlib.md5(password.encode())
         # password=bcrypt.generate_password_hash(password) # encrypt password
         email = form.email.data
-        
-        
+               
         fac_obj = AnonymousFacade(username=username,password=password,email=email,user_role=3)
         res = fac_obj.create_new_user()
         if res:
@@ -76,7 +75,6 @@ def logout():
     logout_user()
     return redirect(url_for('login'))    
 
-    
   
 if __name__ == "__main__":
     app.run(debug=True)

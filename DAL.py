@@ -75,9 +75,9 @@ class DataLayer(object):
             return True
         except (IntegrityError, DataError, DatabaseError, InterfaceError, InvalidRequestError, BuildError) as e:
             db.session.rollback()
-            # print(f"Error: {e}")
-            print(f'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee {str(e)}')
-            customError(str(e))
+            print(f"Error: {e}")
+            # customError(str(e))
+            flash(f"An error occured !", "danger")
             return False
             
 
