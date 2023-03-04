@@ -25,9 +25,11 @@ from sqlalchemy.exc import (
     InvalidRequestError,
 )
 from werkzeug.routing import BuildError
-from Forms_templates.customer_form import update_customer_form
-from Forms_templates.admin_forms import add_airline_form
+
 from per_req_Wrappers import *
+from Routes_files.customer_routes import update_customer
+from Routes_files.admin_routes import add_airline
+
 # from Routes_files.customer_routes import *
 
 @login_manager.user_loader
@@ -101,54 +103,18 @@ def logout():
     logout_user()
     return redirect(url_for('login'))    
 
+# Customer routes
+app.add_url_rule('/update_customer', view_func=update_customer)
 
+# admin routes
+app.add_url_rule('/add_airline', view_func=add_airline)
 
-# update_customer route
-@app.route("/update_customer/", methods=("GET", "POST"), strict_slashes=False)
-@login_required
-def update_customer():
-    form = update_customer_form() 
-
-    return render_template("customer/customer.html",
-        form=form,
-        text="Update customer",
-        title="Update customer",
-        btn_action="Update customer",
-        )
-
-# @login_manager.unauthorized_handler
-# def unauthorized():
-#     # do stuff
-#     return a_response
+# Airline compny routes
 
 
 
 
-# update_customer route
-@app.route("/add_airline/", methods=("GET", "POST"), strict_slashes=False)
-@login_required
-@require_admin_role
-def add_airline():
-    form = add_airline_form() 
-    
-    return render_template("admin/airline.html",
-        form=form,
-        text="add airline",
-        title="add airline",
-        btn_action="add airline",
-        )
 
-# def update_customer():
-#     form = update_customer_form()
-#     return render_template("auth.html",
-#         form=form,
-#         text="Create account",
-#         title="Register",
-#         btn_action="Register account"
-#         )
-
-
-# app.add_url_rule('/update_customer', view_func=update_customer)
 
 
 

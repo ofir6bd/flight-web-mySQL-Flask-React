@@ -13,14 +13,17 @@ from Forms_templates.customer_form import update_customer_form
 # from Facades.CustomerFacade import CustomerFacade
 from flask import Flask, redirect, url_for,request, render_template, session, flash
 from flask_login import UserMixin, login_user, LoginManager,login_required, logout_user,current_user
+from per_req_Wrappers import require_admin_role
+from Forms_templates.admin_forms import add_airline_form
 
 @login_required
-def update_customer():
-    form = update_customer_form() 
-
-    return render_template("customer/customer.html",
+@require_admin_role
+def add_airline():
+    form = add_airline_form() 
+    
+    return render_template("admin/airline.html",
         form=form,
-        text="Update customer",
-        title="Update customer",
-        btn_action="Update customer",
+        text="add airline",
+        title="add airline",
+        btn_action="add airline",
         )
