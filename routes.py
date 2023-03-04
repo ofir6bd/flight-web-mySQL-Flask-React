@@ -27,8 +27,7 @@ from sqlalchemy.exc import (
 from werkzeug.routing import BuildError
 from Forms_templates.customer_form import update_customer_form
 from Forms_templates.admin_forms import add_airline_form
-from functools import wraps
-
+from per_req_Wrappers import *
 # from Routes_files.customer_routes import *
 
 @login_manager.user_loader
@@ -123,14 +122,7 @@ def update_customer():
 #     return a_response
 
 
-# admin wrapper 
-def require_admin_role(func):
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        if session['user_role'] != 1:
-            return redirect(url_for('login'))  
-        return func(*args, **kwargs)
-    return wrapper
+
 
 # update_customer route
 @app.route("/add_airline/", methods=("GET", "POST"), strict_slashes=False)
