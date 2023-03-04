@@ -78,6 +78,20 @@ class FacadeBase(object):
         dal_obj = DataLayer()      
         res = dal_obj.insert_obj(user)
         return res
+    
+    def get_user_by_email(self):
+        dal_obj = DataLayer(table1=Users,input_attribute='email', input_value=self.email)
+        return dal_obj.get_one_by_param()
+    
+    def get_user_by_username(self):
+        dal_obj = DataLayer(table1=Users,input_attribute='username', input_value=self.username)
+        return dal_obj.get_one_by_param()
+    
+    def get_user_by_id(self):
+        dal_obj = DataLayer(table1=Users,input_attribute='id', input_value=self.id)
+        return dal_obj.get_one_by_param()
+        
+
 
 
 

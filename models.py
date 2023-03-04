@@ -14,7 +14,7 @@ class UserRoles(db.Model):
 class Users(db.Model,UserMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(50), nullable=False, unique=True)
-    password = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(1000), nullable=False)
     email = db.Column(db.String(50), nullable=False, unique=True)
     user_role = db.Column(db.Integer, db.ForeignKey('user_roles.id'))
     user_role_ = db.relationship('UserRoles')

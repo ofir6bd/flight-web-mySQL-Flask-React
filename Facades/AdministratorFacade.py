@@ -1,14 +1,4 @@
-import sys
-import os
- 
-# import a module in the parent
-current = os.path.dirname(os.path.realpath(__file__))
-# Getting the parent directory name
-parent = os.path.dirname(current)
-# adding the parent directory to the sys.path.
-sys.path.append(parent)
-from DAL import *
-from FacadeBase import FacadeBase
+from Facades.FacadeBase import *
 
 class AdministratorFacade(FacadeBase):
 

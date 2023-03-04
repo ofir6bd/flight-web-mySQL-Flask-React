@@ -14,11 +14,12 @@ import email_validator
 from flask_login import current_user
 from wtforms import ValidationError,validators
 from models import *
+from Facades.AnonymousFacade import AnonymousFacade
 from DAL import DataLayer
 
 class login_form(FlaskForm):
     email = StringField(validators=[InputRequired(), Email(), Length(1, 64)])
-    pwd = PasswordField(validators=[InputRequired(), Length(min=8, max=72)])
+    password = PasswordField(validators=[InputRequired(), Length(min=8, max=72)])
     # Placeholder labels to enable form rendering
     username = StringField(
         validators=[Optional()]
@@ -38,23 +39,23 @@ class register_form(FlaskForm):
         ]
     )
     email = StringField(validators=[InputRequired(), Email(), Length(1, 64)])
-    pwd = PasswordField(validators=[InputRequired(), Length(8, 72)])
-    cpwd = PasswordField(
+    password = PasswordField(validators=[InputRequired(), Length(8, 72)])
+    cpassword = PasswordField(
         validators=[
             InputRequired(),
             Length(8, 72),
-            EqualTo("pwd", message="Passwords must match !"),
+            EqualTo("password", message="Passwords must match !"),
         ]
     )
 
     def validate_email(self, email):
-        dal_obj = DataLayer(table1=Users,input_attribute='email', input_value=email.data)
-        if dal_obj.get_one_by_param():
+        fac_obj = AnonymousFacade(email=email.data)
+        if fac_obj.get_user_by_email():
             raise ValidationError("Email already registered!")
 
     def validate_username(self, username):
-        dal_obj = DataLayer(table1=Users,input_attribute='username', input_value=username.data)
-        if dal_obj.get_one_by_param():
+        fac_obj = AnonymousFacade(username=username.data)
+        if fac_obj.get_user_by_username():
             raise ValidationError("Username already taken!")
 
     # def validate_email(self, email):

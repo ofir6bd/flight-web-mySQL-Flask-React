@@ -3,8 +3,8 @@ from Facades.FacadeBase import *
 
 class AnonymousFacade(FacadeBase):
 
-    def __init__(self, username="", password="", email="",user_role="",origin_country="",destination_country="",departure_time="",landing_time="",travelers=""):
-        super().__init__(username=username,password=password,email=email,user_role=user_role,origin_country=origin_country,destination_country=destination_country,departure_time=departure_time,landing_time=landing_time,travelers=travelers)
+    def __init__(self,id="", username="", password="", email="",user_role="",origin_country="",destination_country="",departure_time="",landing_time="",travelers=""):
+        super().__init__(id=id,username=username,password=password,email=email,user_role=user_role,origin_country=origin_country,destination_country=destination_country,departure_time=departure_time,landing_time=landing_time,travelers=travelers)
 
     def login(self):
         dal_obj = DataLayer(username=self.username,password=self.password)      

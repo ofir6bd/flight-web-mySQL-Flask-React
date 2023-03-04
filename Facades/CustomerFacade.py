@@ -1,19 +1,10 @@
-import sys
-import os
- 
-# import a module in the parent
-current = os.path.dirname(os.path.realpath(__file__))
-# Getting the parent directory name
-parent = os.path.dirname(current)
-# adding the parent directory to the sys.path.
-sys.path.append(parent)
-from DAL import *
-from FacadeBase import FacadeBase
+from Facades.FacadeBase import *
 
 class CustomerFacade(FacadeBase):
 
-    def __init__(self, id=0):
-        super().__init__(id=id)
+    def __init__(self, id=0,email=""):
+        super().__init__(id=id,email=email)
+
 
     def update_customer(self,customer):
         pass

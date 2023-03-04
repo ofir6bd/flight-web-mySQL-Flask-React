@@ -4,6 +4,7 @@ from flask import Flask, redirect, url_for,request, render_template, session, fl
 # from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager,login_required, logout_user,current_user
 from Facades.AnonymousFacade import AnonymousFacade
+from Facades.CustomerFacade import CustomerFacade
 # from flask_wtf import FlaskForm
 # from wtforms import StringField, PasswordField,SubmitField
 # from wtforms.validators import DataRequired
@@ -12,6 +13,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask_login import UserMixin
+from flask_bcrypt import Bcrypt,generate_password_hash, check_password_hash
 from forms import login_form,register_form
 from app import create_app,db,login_manager,bcrypt
 from models import UserRoles,Users,Administrators,Customers, Countries,AirlineCompanies,Flights,Tickets
@@ -27,7 +29,9 @@ from werkzeug.routing import BuildError
 
 @login_manager.user_loader
 def load_user(user_id):
-    return Users.query.get(int(user_id))
+    fac_obj = AnonymousFacade(id=user_id)
+    return fac_obj.get_user_by_id()
+    # return Users.query.get(int(user_id))
 
 app = create_app()
 
@@ -41,7 +45,24 @@ def index():
 def login():
     form = login_form()
 
-    return render_template("auth.html",form=form)
+    if form.validate_on_submit():
+        try:
+            fac_obj = CustomerFacade(email=form.email.data)
+            user = fac_obj.get_user_by_email()
+            if check_password_hash(user.password, form.password.data):
+                login_user(user)
+                return redirect(url_for('index'))
+            else:
+                flash("Invalid Username or password!", "danger")
+        except Exception as e:
+            flash(e, "danger")
+
+    return render_template("auth.html",
+        form=form,
+        text="Login",
+        title="Login",
+        btn_action="Login"
+        )
 
 
 # Register route
@@ -51,9 +72,9 @@ def register():
 
     if form.validate_on_submit():        
         username = form.username.data
-        password = form.pwd.data
-        password = hashlib.md5(password.encode())
-        # password=bcrypt.generate_password_hash(password) # encrypt password
+        password = form.password.data
+        # password = hashlib.md5(password.encode())
+        password=bcrypt.generate_password_hash(password) # encrypt password
         email = form.email.data
                
         fac_obj = AnonymousFacade(username=username,password=password,email=email,user_role=3)

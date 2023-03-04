@@ -55,7 +55,7 @@ class DataLayer(object):
     def get_by_id(self):
         try:
             with app.app_context():
-                item = self.table1.query.filter_by(id=self.id).first()
+                item = self.table1.query.filter_by(id=int(self.id)).first()
         except Exception as e:
             print(f"Error: {e}")
         return item
