@@ -13,7 +13,11 @@ from models import UserRoles,Users,Administrators,Customers, Countries,AirlineCo
 
 class FacadeBase(object):
 
-    def __init__(self, id=0, username="", password="", email="", role_name="",user_role="", first_name="", last_name="", adress="", phone_no="", credit_card_no="",origin_country="",destination_country="",departure_time="",landing_time="",travelers=""):
+    def __init__(self, id=0, username="", password="", email="", role_name="",\
+                 user_role="", first_name="", last_name="", adress="", phone_no="",\
+                      credit_card_no="",origin_country="",origin_country_id="",\
+                        destination_country="", destination_country_id="",\
+                      departure_time="",landing_time="",travelers=""):
         self.id = id
         self.username = username
         self.password = password
@@ -26,7 +30,9 @@ class FacadeBase(object):
         self.phone_no = phone_no
         self.credit_card_no = credit_card_no
         self.origin_country = origin_country
+        self.origin_country_id = origin_country_id
         self.destination_country = destination_country
+        self.destination_country_id = destination_country_id
         self.departure_time = departure_time
         self.landing_time = landing_time
         self.travelers = travelers
@@ -43,12 +49,33 @@ class FacadeBase(object):
         return flight
 
     def get_flights_by_parameters(self):
-        dal_obj = DataLayer(table1=Flights)  
-        all_flights = dal_obj.get_all()
-        req_flights = []
+        dal_obj = DataLayer() 
+        all_flight_and_countries = dal_obj.join_flights_countries()
 
-        print(all_flights)
-        return req_flights
+        for i in reversed(range(len(all_flight_and_countries))):
+            if self.origin_country != all_flight_and_countries[i][1].name:
+                all_flight_and_countries.pop(i)
+
+        if all_flight_and_countries:
+            if self.destination_country != all_flight_and_countries[i][2].name:
+                all_flight_and_countries.pop(i)
+        return all_flight_and_countries
+
+        # dal_obj = DataLayer(table1=Countries)  
+        # all_countries = dal_obj.get_all()
+        
+        # for i in range(len(all_countries)):
+        #     if self.origin_country_id == all_countries[i].id:
+        #         origin_country_name = all_countries[i].
+        #     elif self.destination_country_id == all_countries[i].id:
+        #         destination_country_name = all_countries[i].id
+
+        # dal_obj = DataLayer(table1=Flights)  
+        # all_flights = dal_obj.get_all()
+        # for i in reversed(range(len(all_countries))):
+        #     if all_flights
+
+        return 
 
     def get_all_airlines(self):
         dal_obj = DataLayer(table1=AirlineCompanies)      

@@ -8,7 +8,7 @@ current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 # adding the parent directory to the sys.path.
 sys.path.append(parent)
-from Forms_templates.customer_form import update_customer_form
+from Forms_templates.customer_forms import update_customer_form
 # from Facades.AnonymousFacade import AnonymousFacade
 # from Facades.CustomerFacade import CustomerFacade
 from flask import Flask, redirect, url_for,request, render_template, session, flash

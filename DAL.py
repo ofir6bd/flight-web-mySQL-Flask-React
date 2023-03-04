@@ -12,6 +12,7 @@ from sqlalchemy.exc import (
     InvalidRequestError,
 )
 from werkzeug.routing import BuildError
+from sqlalchemy.orm import aliased
 
 app=create_app()
 
@@ -65,7 +66,6 @@ class DataLayer(object):
         try:
             with app.app_context():
                 item = self.table1.query.all()
-                print(item)
         except Exception as e:
             print(f"Error: {e}")
         return item
@@ -115,37 +115,30 @@ class DataLayer(object):
         except Exception as e:
             print(f"Error: {e}")
 
- 
-
-    # @staticmethod
-    # def flights_joined():
-    #     try:
-    #         with app.app_context():
-    #             query = db.session.query(Flights, AirlineCompanies, Countries)\
-    #                     .join(AirlineCompanies, Flights.airline_company_id == AirlineCompanies.id)\
-    #                     .join(Countries, Flights.origin_country_id == Countries.id)\
-    #                     .join(Countries, Flights.destination_country_id == Countries.id)\
-    #                     .all()
-    #         return query
-    #     except Exception as e:
-    #         print(f"Error: {e}")
-        
-
-    
+    @staticmethod
+    def join_flights_countries():
+        origin_country = aliased(Countries)
+        dest_country = aliased(Countries)
+        flight_country_join = db.session.query(Flights, origin_country, dest_country)\
+                        .join(origin_country, Flights.origin_country_id == origin_country.id)\
+                        .join(dest_country, Flights.destination_country_id == dest_country.id)\
+                        .all()
+        return flight_country_join
+      
 
 
 # ######################### testing functions
 # with app.app_context():
-#     dal_obj = DataLayer(table1=UserRoles)
-#     ans = dal_obj.get_all()
-# # #     dal_obj = DataLayer(table=AirlineCompanies,table2=Users,username="Ofir9bd",table_column="user_id")
-# # #     final_table = dal_obj.join_tables()    
-# # #     print(final_table[0].name)
-# # #     print("Done")
-# # # # #     # obj1 = FacadeBase() 
-# # # # #     # ans = obj1.get_flight_by_id(1)
-# # # # #     obj1 = DataLayer() 
-# # # # #     ans = obj1.get_all(Flights)
-# # #     ans = db.session.query(AirlineCompanies,Users ).filter(Users.username=='Ofir7bd').join(AirlineCompanies,AirlineCompanies.user_id==Users.id).first()
+#     dal_obj = DataLayer()
+#     ans = dal_obj.join_flights_countries()
+# # # #     dal_obj = DataLayer(table=AirlineCompanies,table2=Users,username="Ofir9bd",table_column="user_id")
+# # # #     final_table = dal_obj.join_tables()    
+# # # #     print(final_table[0].name)
+# # # #     print("Done")
+# # # # # #     # obj1 = FacadeBase() 
+# # # # # #     # ans = obj1.get_flight_by_id(1)
+# # # # # #     obj1 = DataLayer() 
+# # # # # #     ans = obj1.get_all(Flights)
+# # # #     ans = db.session.query(AirlineCompanies,Users ).filter(Users.username=='Ofir7bd').join(AirlineCompanies,AirlineCompanies.user_id==Users.id).first()
 #     print(ans)
 #     print("Done")
