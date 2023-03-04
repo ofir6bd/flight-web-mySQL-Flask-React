@@ -24,7 +24,7 @@
                     <h3 class="text-primary">{{ text }}</h3>
                 </div>
 
-                {% if request.path == '/register/' %}
+                {% if request.path == '/add_airline/' %}
                 <div class="form-group mb-3">
                     {{ form.username(class_="form-control",placeholder="Username")}}
                 </div>
@@ -68,7 +68,7 @@
                         <button type="submit" class="btn btn-block btn-primary mb-3"> {{ btn_action }} </button>
                     </div>
 
-                    <p>
+                    <!-- <p>
                         {% if request.path != '/register/' %}
                         New here?
                         <a href="{{url_for('register')}}">Create account</a>
@@ -76,7 +76,7 @@
                         Already have an account?
                         <a href="{{url_for('login')}}">Login</a>
                         {% endif %}
-                    </p>
+                    </p> -->
 
                 </div>
             </form>
