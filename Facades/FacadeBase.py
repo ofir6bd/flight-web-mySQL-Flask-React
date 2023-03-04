@@ -56,7 +56,7 @@ class FacadeBase(object):
             if self.origin_country != all_flight_and_countries[i][1].name:
                 all_flight_and_countries.pop(i)
 
-        if all_flight_and_countries:
+        for i in reversed(range(len(all_flight_and_countries))):
             if self.destination_country != all_flight_and_countries[i][2].name:
                 all_flight_and_countries.pop(i)
         return all_flight_and_countries

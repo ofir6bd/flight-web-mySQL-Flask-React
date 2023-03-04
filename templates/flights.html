@@ -3,13 +3,33 @@
 {% block title%} {{ title }} {% endblock %}
 {% block content%}
 
+
+    <div class="container">
+
+        
+
+    </div>
+
+
+
+
     <div>
+        {{flights}}
+        <p>-----</p>
+        {% for flight in flights %}
 
-        {% for i in flights %}
+        <div class="col-lg-5">
+            <p>From: {{flight[1].name}}
+                <br>
+              To: {{flight[2].name}}
+            <br>
+              Deparure time: {{flight[0].departure_time}}
+            <br>
+              Landing time: {{flight[0].landing_time}}
+              <a href=""> Book</a>
+            <br><br>
 
-        <div>
-            <p>
-                {{flights}}
+               
             </p>
         </div>
 

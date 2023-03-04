@@ -59,7 +59,6 @@ def index():
 
         fac_obj = AnonymousFacade(origin_country=origin_country,destination_country=destination_country)
         flights = fac_obj.get_flights_by_parameters()
-        print(flights)
         return render_template("flights.html",
             form=form,
             text="Book your next flight today with us!",
