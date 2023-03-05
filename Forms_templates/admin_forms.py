@@ -58,7 +58,6 @@ def get_customer_user_list():
     for i in users:
         if i.user_role == 3:
             final_list.append((i.id, i.username))
-    print(final_list)
     return final_list
 
 

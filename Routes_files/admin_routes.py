@@ -17,6 +17,7 @@ from per_req_Wrappers import require_admin_role
 from Forms_templates.admin_forms import add_airline_form,add_customer_form
 from models import UserRoles,Users,Administrators,Customers, Countries,AirlineCompanies,Flights,Tickets
 from app import db
+from Facades.AdministratorFacade import AdministratorFacade
 
 @login_required
 @require_admin_role
@@ -25,17 +26,19 @@ def add_airline():
     if form.validate_on_submit():
         country = Countries.query.get(form.country.data)
         user = Users.query.get(form.user.data)
-
-        airline_company = AirlineCompanies(name=form.name.data, country_id=country.id,user_id=user.id)
-        print('here')
-        db.session.add(airline_company)
-        db.session.commit()
+        fac_obj = AdministratorFacade(name=form.name.data, country_id=country.id,user_id=user.id)
+        res = fac_obj.add_airline()
+        if res:
+        # airline_company = AirlineCompanies(name=form.name.data, country_id=country.id,user_id=user.id)
+        # db.session.add(airline_company)
+        # db.session.commit()
+            flash(f"Airline company added", "success")
         return redirect(url_for('index'))
-    return render_template("admin/airline.html",
+    return render_template("admin/add_airline.html",
         form=form,
-        text="add airline",
-        title="add airline",
-        btn_action="add airline",
+        text="Add airline",
+        title="Add airline",
+        btn_action="Add airline",
         )
 
 @login_required
@@ -45,7 +48,6 @@ def add_customer():
     if form.validate_on_submit():
         country = Countries.query.get(form.country.data)
         user = Users.query.get(form.user.data)
-
         airline_company = AirlineCompanies(name=form.name.data, country_id=country.id,user_id=user.id)
         print('here')
         db.session.add(airline_company)

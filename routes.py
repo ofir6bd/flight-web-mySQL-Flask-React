@@ -138,6 +138,8 @@ def register():
 @login_required
 def logout():
     logout_user()
+    session.pop('user_id', None)
+    session.pop('user_role', None)
     return redirect(url_for('login'))    
 
 # Customer routes

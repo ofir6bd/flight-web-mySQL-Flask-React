@@ -70,7 +70,8 @@ class DataLayer(object):
             print(f"Error: {e}")
         return item
     
-    def insert_obj(self, obj):
+    @staticmethod
+    def insert_obj(obj):
         try:
             with app.app_context():
                 # print(obj)
