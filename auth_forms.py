@@ -26,6 +26,14 @@ class login_form(FlaskForm):
         validators=[Optional()]
     )
 
+def get_user_role_list():
+    user_roles_list = []
+    fac_obj = AnonymousFacade()
+    user_roles = fac_obj.get_all_user_roles()
+    for c in user_roles:
+        if c.role_name != "Anonymous":
+            user_roles_list.append((c.id, c.role_name))
+    return user_roles_list
 
 class register_form(FlaskForm):
     username = StringField(
@@ -53,8 +61,7 @@ class register_form(FlaskForm):
 
     def __init__(self, *args, **kwargs):
         super(register_form, self).__init__(*args, **kwargs)
-        self.role.choices = [(c.id, c.role_name) for c in UserRoles.query.all()]
-        
+        self.role.choices =  get_user_role_list()
 
     def validate_email(self, email):
         fac_obj = AnonymousFacade(email=email.data)

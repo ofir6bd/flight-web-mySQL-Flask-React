@@ -134,6 +134,5 @@ app.add_url_rule('/add_airline', view_func=add_airline,  methods=("GET", "POST")
 # Airline compny routes
 
 
-
 if __name__ == "__main__":
     app.run(debug=True)

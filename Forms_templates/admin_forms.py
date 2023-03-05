@@ -29,6 +29,25 @@ from Facades.AnonymousFacade import AnonymousFacade
 from DAL import DataLayer
 from wtforms.validators import DataRequired
 
+def get_countries_list():
+    countries_list = []
+    fac_obj = AnonymousFacade()
+    countries = fac_obj.get_all_countries()
+    for c in countries:
+        countries_list.append((c.id, c.name))
+    return countries_list
+
+def get_user_admin_list():
+    user_admin_list = []
+    fac_obj = AnonymousFacade()
+    user_admin = fac_obj.get_all_users()
+    #TODO create join table and not use 2 as filter to if 
+    print(user_admin)
+    for i in user_admin:
+        if i.user_role == 2:
+            user_admin_list.append((i.id, i.username))
+    return user_admin_list
+
 class add_airline_form(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     country = SelectField('Country', coerce=int, validators=[DataRequired()])
@@ -37,8 +56,8 @@ class add_airline_form(FlaskForm):
 
     def __init__(self, *args, **kwargs):
         super(add_airline_form, self).__init__(*args, **kwargs)
-        self.country.choices = [(c.id, c.name) for c in Countries.query.all()]
-        self.user.choices = [(u.id, u.username) for u in Users.query.all()]
+        self.country.choices = get_countries_list()
+        self.user.choices = get_user_admin_list()
 
     def validate_name(self, name):
         airline_company = AirlineCompanies.query.filter_by(name=name.data).first()
