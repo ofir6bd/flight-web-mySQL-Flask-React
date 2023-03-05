@@ -14,7 +14,7 @@ from models import UserRoles,Users,Administrators,Customers, Countries,AirlineCo
 class FacadeBase(object):
 
     def __init__(self, id=0, username="", password="", email="", role_name="",\
-                 user_role="", first_name="", last_name="", adress="", phone_no="",\
+                 user_id="",user_role="", first_name="", last_name="", adress="", phone_no="",\
                       credit_card_no="",origin_country="",origin_country_id="",\
                         destination_country="", destination_country_id="",\
                       departure_time="",landing_time="",travelers=""):
@@ -23,6 +23,7 @@ class FacadeBase(object):
         self.password = password
         self.email = email
         self.role_name = role_name
+        self.user_id = user_id
         self.user_role = user_role
         self.first_name =first_name
         self.last_name = last_name
@@ -131,6 +132,18 @@ class FacadeBase(object):
     
     def get_user_by_id(self):
         dal_obj = DataLayer(table1=Users,input_attribute='id', input_value=self.id)
+        return dal_obj.get_one_by_param()
+    
+    def get_admin_by_user_id(self):
+        dal_obj = DataLayer(table1=Administrators,input_attribute='user_id', input_value=self.user_id)
+        return dal_obj.get_one_by_param()
+    
+    def get_airline_by_user_id(self):
+        dal_obj = DataLayer(table1=AirlineCompanies,input_attribute='user_id', input_value=self.user_id)
+        return dal_obj.get_one_by_param()
+    
+    def get_customer_by_user_id(self):
+        dal_obj = DataLayer(table1=Customers,input_attribute='user_id', input_value=self.user_id)
         return dal_obj.get_one_by_param()
         
 

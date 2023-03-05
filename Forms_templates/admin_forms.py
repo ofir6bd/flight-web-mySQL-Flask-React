@@ -42,7 +42,6 @@ def get_user_admin_list():
     fac_obj = AnonymousFacade()
     user_admin = fac_obj.get_all_users()
     #TODO create join table and not use 2 as filter to if 
-    print(user_admin)
     for i in user_admin:
         if i.user_role == 2:
             user_admin_list.append((i.id, i.username))

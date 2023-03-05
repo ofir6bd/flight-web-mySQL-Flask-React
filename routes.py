@@ -80,7 +80,21 @@ def login():
                 login_user(user)
                 print(user.id)
                 session['user_id'] = user.id
-                session['user_role'] = user.user_role
+
+                fac_obj = AnonymousFacade(user_id=int(user.id))
+                admin = fac_obj.get_admin_by_user_id()
+                airline = fac_obj.get_airline_by_user_id()
+                customer = fac_obj.get_customer_by_user_id()
+                if admin:
+                    session['user_role'] = 'admin'
+                elif airline:
+                    session['user_role'] = 'airline'
+                elif customer:
+                    session['user_role'] = 'customer'
+                else:
+                    session['user_role'] = 'general_user'
+
+ 
                 return redirect(url_for('index'))
             else:
                 flash("Invalid Username or password!", "danger")
