@@ -1,5 +1,5 @@
 .topnav {
-    background-color: #333;
+    background-color: #036cf5;
     overflow: hidden;
 }
 
@@ -21,6 +21,6 @@
 
 /* Add a color to the active/current link */
 .topnav a.active {
-    background-color: #04AA6D;
+    background-color: #2803fa;
     color: white;
 }

@@ -15,12 +15,21 @@ from flask import Flask, redirect, url_for,request, render_template, session, fl
 from flask_login import UserMixin, login_user, LoginManager,login_required, logout_user,current_user
 from per_req_Wrappers import require_admin_role
 from Forms_templates.admin_forms import add_airline_form
+from models import UserRoles,Users,Administrators,Customers, Countries,AirlineCompanies,Flights,Tickets
+from app import db
 
 @login_required
 @require_admin_role
 def add_airline():
     form = add_airline_form() 
-    
+    if form.validate_on_submit():
+        country = Countries.query.get(form.country.data)
+
+        airline_company = AirlineCompanies(name=form.name.data, country_id=country.id,user_id=1)
+        print('here')
+        db.session.add(airline_company)
+        db.session.commit()
+        return redirect(url_for('index'))
     return render_template("admin/airline.html",
         form=form,
         text="add airline",

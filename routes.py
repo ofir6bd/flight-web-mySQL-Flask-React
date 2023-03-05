@@ -126,11 +126,10 @@ def logout():
     return redirect(url_for('login'))    
 
 # Customer routes
-app.add_url_rule('/update_customer', view_func=update_customer)
+app.add_url_rule('/update_customer', view_func=update_customer, methods=("GET", "POST"), strict_slashes=False)
 
 # admin routes
-app.add_url_rule('/add_airline', view_func=add_airline)
-
+app.add_url_rule('/add_airline', view_func=add_airline,  methods=("GET", "POST"), strict_slashes=False)
 # Airline compny routes
 
 

@@ -23,39 +23,23 @@ from flask_wtf import FlaskForm
 from wtforms.validators import InputRequired, Length, EqualTo, Email, Regexp ,Optional
 import email_validator
 from flask_login import current_user
-from wtforms import ValidationError,validators
+from wtforms import ValidationError,validators,SelectField
 from models import *
 from Facades.AnonymousFacade import AnonymousFacade
 from DAL import DataLayer
+from wtforms.validators import DataRequired
 
 class add_airline_form(FlaskForm):
-    username = StringField(
-        validators=[
-            InputRequired(),
-            Length(3, 20, message="Please provide a valid name"),
-            Regexp(
-                "^[A-Za-z][A-Za-z0-9_.]*$",
-                0,
-                "Usernames must have only letters, " "numbers, dots or underscores",
-            ),
-        ]
-    )
-    email = StringField(validators=[InputRequired(), Email(), Length(1, 64)])
-    password = PasswordField(validators=[InputRequired(), Length(8, 72)])
-    cpassword = PasswordField(
-        validators=[
-            InputRequired(),
-            Length(8, 72),
-            EqualTo("password", message="Passwords must match !"),
-        ]
-    )
+    name = StringField('Name', validators=[DataRequired()])
+    country = SelectField('Country', coerce=int, validators=[DataRequired()])
+    # submit = SubmitField('Add')
 
-    def validate_email(self, email):
-        fac_obj = AnonymousFacade(email=email.data)
-        if fac_obj.get_user_by_email():
-            raise ValidationError("Email already registered!")
+    def __init__(self, *args, **kwargs):
+        super(add_airline_form, self).__init__(*args, **kwargs)
+        self.country.choices = [(c.id, c.name) for c in Countries.query.all()]
 
-    def validate_username(self, username):
-        fac_obj = AnonymousFacade(username=username.data)
-        if fac_obj.get_user_by_username():
-            raise ValidationError("Username already taken!")
+    def validate_name(self, name):
+        airline_company = AirlineCompanies.query.filter_by(name=name.data).first()
+        if airline_company is not None:
+            raise ValidationError('Please use a different name.')
+      

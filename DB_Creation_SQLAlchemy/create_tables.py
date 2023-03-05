@@ -95,7 +95,7 @@ class Tickets(db.Model):
         return f'<Table: "Tickets",id:"{self.id}", flight_id:"{self.flight_id}",customer_id:"{self.customer_id}">'
 
 user_roles_list = ['Administrator', 'Airline_Company', 'Customer', 'Anonymous']
-users_list = [['Ofir8bd','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','Ofir8bd@gmail.com',1],\
+users_list = [['admin1234','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','admin1234@gmail.com',1],\
                 ['Ofir7bd','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','Ofir7bd@gmail.com',2],\
                 ['Ofir6bd','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','Ofir6bd@gmail.com',3],\
                 ['Ofir66bd','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','Ofir66bd@gmail.com',3],\
