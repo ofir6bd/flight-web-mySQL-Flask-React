@@ -45,6 +45,17 @@
                 </div>
                 {% endfor%}
 
+                <div class="form-group mb-3">
+                    {{ form.user(class_="form-control",placeholder="user")}}
+                </div>
+                {% for error in form.user.errors %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{ error }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor%}
+
+
                 <div class="text-center">
 
                     <div class="d-grid gap-2">

@@ -32,11 +32,13 @@ from wtforms.validators import DataRequired
 class add_airline_form(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     country = SelectField('Country', coerce=int, validators=[DataRequired()])
+    user = SelectField('Users', coerce=int, validators=[DataRequired()])
     # submit = SubmitField('Add')
 
     def __init__(self, *args, **kwargs):
         super(add_airline_form, self).__init__(*args, **kwargs)
         self.country.choices = [(c.id, c.name) for c in Countries.query.all()]
+        self.user.choices = [(u.id, u.username) for u in Users.query.all()]
 
     def validate_name(self, name):
         airline_company = AirlineCompanies.query.filter_by(name=name.data).first()

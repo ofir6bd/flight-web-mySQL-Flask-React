@@ -24,8 +24,9 @@ def add_airline():
     form = add_airline_form() 
     if form.validate_on_submit():
         country = Countries.query.get(form.country.data)
+        user = Users.query.get(form.user.data)
 
-        airline_company = AirlineCompanies(name=form.name.data, country_id=country.id,user_id=1)
+        airline_company = AirlineCompanies(name=form.name.data, country_id=country.id,user_id=user.id)
         print('here')
         db.session.add(airline_company)
         db.session.commit()
