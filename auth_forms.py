@@ -12,10 +12,11 @@ from flask_wtf import FlaskForm
 from wtforms.validators import InputRequired, Length, EqualTo, Email, Regexp ,Optional
 import email_validator
 from flask_login import current_user
-from wtforms import ValidationError,validators
+from wtforms import ValidationError,validators,SelectField
 from models import *
 from Facades.AnonymousFacade import AnonymousFacade
 from DAL import DataLayer
+from wtforms.validators import DataRequired
 
 class login_form(FlaskForm):
     email = StringField(validators=[InputRequired(), Email(), Length(1, 64)])
@@ -47,6 +48,13 @@ class register_form(FlaskForm):
             EqualTo("password", message="Passwords must match !"),
         ]
     )
+
+    role = SelectField('UserRoles', coerce=int, validators=[DataRequired()])
+
+    def __init__(self, *args, **kwargs):
+        super(register_form, self).__init__(*args, **kwargs)
+        self.role.choices = [(c.id, c.role_name) for c in UserRoles.query.all()]
+        
 
     def validate_email(self, email):
         fac_obj = AnonymousFacade(email=email.data)
