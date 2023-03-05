@@ -10,10 +10,26 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Sweet alert Js -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title> {% block title%} {{ title }} {% endblock %} </title>
 </head>
 
 <body>
+    <div class="topnav">
+        <a class="active" href="{{ url_for('index') }}">Home</a>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+        {% if current_user.is_authenticated %}
+        <h1>Welcome {{ current_user.username }}</h1>
+        <a href="{{url_for('logout')}}">Logout</a>
+        {% else %}
+        <a href="{{url_for('login')}}">Sign in/Sign Up</a>
+        {% endif %}
+    </div>
+    
+
+
     <div class="container-fluid">
         {% block content%}
         {% endblock %}

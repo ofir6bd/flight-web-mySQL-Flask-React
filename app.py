@@ -23,7 +23,9 @@ bcrypt = Bcrypt()
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder='static')
+    
+    # app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0 # Disable caching for static files
     app.secret_key = 'secret-key'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:admin@localhost/flight_db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

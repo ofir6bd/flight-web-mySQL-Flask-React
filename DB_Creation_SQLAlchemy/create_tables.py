@@ -95,16 +95,16 @@ class Tickets(db.Model):
         return f'<Table: "Tickets",id:"{self.id}", flight_id:"{self.flight_id}",customer_id:"{self.customer_id}">'
 
 user_roles_list = ['Administrator', 'Airline_Company', 'Customer', 'Anonymous']
-users_list = [['Ofir8bd','123456789','Ofir8bd@gmail.com',1],\
-                ['Ofir7bd','123456789','Ofir7bd@gmail.com',2],\
-                ['Ofir6bd','123456789','Ofir6bd@gmail.com',3],\
-                ['Ofir66bd','123456789','Ofir66bd@gmail.com',3],\
-                ['Ofir9bd','123456789','Ofir9bd@gmail.com',4],\
-                    ['Kobe24','123456789','Kobe24@gmail.com',1],\
-                       ['El_Al_company','123456789','El_Al_company@gmail.com',2],\
-                        ['Ryanair_company','123456789','Ryanair_company@gmail.com',2],\
-                            ['Lufthansa_company','123456789','Lufthansa_company@gmail.com',2],\
-                        ['United_airlines_company','123456789','United_airlines_company@gmail.com',2]]
+users_list = [['Ofir8bd','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','Ofir8bd@gmail.com',1],\
+                ['Ofir7bd','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','Ofir7bd@gmail.com',2],\
+                ['Ofir6bd','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','Ofir6bd@gmail.com',3],\
+                ['Ofir66bd','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','Ofir66bd@gmail.com',3],\
+                ['Ofir9bd','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','Ofir9bd@gmail.com',4],\
+                    ['Kobe24','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','Kobe24@gmail.com',1],\
+                       ['El_Al_company','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','El_Al_company@gmail.com',2],\
+                        ['Ryanair_company','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','Ryanair_company@gmail.com',2],\
+                            ['Lufthansa_company','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','Lufthansa_company@gmail.com',2],\
+                        ['United_airlines_company','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','United_airlines_company@gmail.com',2]]
 administrators_list = [['Ofir8','Ben David8', 1 ],['Kobe','Bryant', 6 ]]
 customers_list = [['Ofir','Ben David','Atlit',"972548105702", "5465-8776-5476-7643", 3],['Ofir66','Ben David66','Atlit66',"97254810570266", "5465-8776-6676-7643", 4]]
 countries_list = ['Israel', 'Marocco', 'USA', 'Lebanon']

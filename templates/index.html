@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="row mt-4">
-        {% if current_user.is_authenticated %}
+        <!-- {% if current_user.is_authenticated %}
         
         <h1>Welcome {{ current_user.username }}</h1>
         <a href="{{url_for('logout')}}">Logout</a>
@@ -13,7 +13,7 @@
         
         <a href="{{url_for('login')}}">Sign in/Sign Up</a>
         
-        {% endif %}
+        {% endif %} -->
         <div class="col-lg-5 col-md-6 m-auto card p-4">
             <form action="{{ request.path }}" method="POST" class="card-body">
                 {{ form.csrf_token }}
