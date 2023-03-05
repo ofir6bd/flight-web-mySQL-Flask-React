@@ -17,7 +17,17 @@
 <body>
     <div class="topnav">
         <a class="active" href="{{ url_for('index') }}">Home</a>
-        <a href="{{url_for('add_airline')}}">Add airline</a>
+        {% if session['user_role'] == 'admin': %}
+            <a href="{{url_for('add_airline')}}">Add airline</a>
+            <a href="{{url_for('add_customer')}}">Add customer</a>
+        {% endif %}
+        {% if session['user_role'] == 'airline': %}
+        <a href="">Add</a>
+        {% endif %}
+        {% if session['user_role'] == 'admin': %}
+        <a href="">Add </a>
+        {% endif %}
+
         <a href="#contact">Contact</a>
         <a href="#about">About us</a>
         {% if current_user.is_authenticated %}
