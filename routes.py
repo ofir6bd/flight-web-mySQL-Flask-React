@@ -150,7 +150,7 @@ app.add_url_rule('/add_airline', view_func=add_airline,  methods=("GET", "POST")
 app.add_url_rule('/add_customer', view_func=add_customer,  methods=("GET", "POST"), strict_slashes=False)
 
 
-# Airline compny routes
+# Airline company routes
 
 
 if __name__ == "__main__":

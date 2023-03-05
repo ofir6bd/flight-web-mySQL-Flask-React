@@ -145,6 +145,7 @@ class FacadeBase(object):
     def get_customer_by_user_id(self):
         dal_obj = DataLayer(table1=Customers,input_attribute='user_id', input_value=self.user_id)
         return dal_obj.get_one_by_param()
+    
         
 
 

@@ -2,8 +2,8 @@ from Facades.FacadeBase import *
 
 class AdministratorFacade(FacadeBase):
 
-    def __init__(self, id=0,name="",country_id="",user_id=""):
-        super().__init__(id=id,user_id=user_id)
+    def __init__(self, id=0,name="",country_id="",user_id="",origin_country=""):
+        super().__init__(id=id,user_id=user_id,origin_country=origin_country)
         self.country_id = country_id
         self.name = name
 
@@ -14,7 +14,6 @@ class AdministratorFacade(FacadeBase):
         new_airline = AirlineCompanies(name=self.name, country_id=self.country_id,user_id=int(self.user_id))
         dal_obj = DataLayer()
         return dal_obj.insert_obj(new_airline)
-
 
 
     def add_customer():

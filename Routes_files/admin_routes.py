@@ -24,14 +24,13 @@ from Facades.AdministratorFacade import AdministratorFacade
 def add_airline():
     form = add_airline_form() 
     if form.validate_on_submit():
-        country = Countries.query.get(form.country.data)
-        user = Users.query.get(form.user.data)
+        fac_obj = AdministratorFacade(id=form.country.data)
+        country = fac_obj.get_country_by_id()
+        fac_obj = AdministratorFacade(id=form.user.data)
+        user = fac_obj.get_user_by_id()
         fac_obj = AdministratorFacade(name=form.name.data, country_id=country.id,user_id=user.id)
         res = fac_obj.add_airline()
         if res:
-        # airline_company = AirlineCompanies(name=form.name.data, country_id=country.id,user_id=user.id)
-        # db.session.add(airline_company)
-        # db.session.commit()
             flash(f"Airline company added", "success")
         return redirect(url_for('index'))
     return render_template("admin/add_airline.html",
@@ -46,12 +45,14 @@ def add_airline():
 def add_customer():
     form = add_customer_form() 
     if form.validate_on_submit():
-        country = Countries.query.get(form.country.data)
-        user = Users.query.get(form.user.data)
-        airline_company = AirlineCompanies(name=form.name.data, country_id=country.id,user_id=user.id)
-        print('here')
-        db.session.add(airline_company)
-        db.session.commit()
+        fac_obj = AdministratorFacade(id=form.country.data)
+        country = fac_obj.get_country_by_id()
+        fac_obj = AdministratorFacade(id=form.user.data)
+        user = fac_obj.get_user_by_id()
+        fac_obj = AdministratorFacade(name=form.name.data, country_id=country.id,user_id=user.id)
+        res = fac_obj.add_airline()
+        if res:
+            flash(f"Customer added", "success")
         return redirect(url_for('index'))
     return render_template("admin/add_customer.html",
         form=form,
