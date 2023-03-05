@@ -27,13 +27,14 @@ class login_form(FlaskForm):
     )
 
 def get_user_role_list():
-    user_roles_list = []
+    final_list = []
+    final_list.append((0, 'User role'))
     fac_obj = AnonymousFacade()
-    user_roles = fac_obj.get_all_user_roles()
-    for c in user_roles:
-        if c.role_name != "Anonymous":
-            user_roles_list.append((c.id, c.role_name))
-    return user_roles_list
+    items = fac_obj.get_all_user_roles()
+    for i in items:
+        if i.role_name != "Anonymous":
+            final_list.append((i.id, i.role_name))
+    return final_list
 
 class register_form(FlaskForm):
     username = StringField(

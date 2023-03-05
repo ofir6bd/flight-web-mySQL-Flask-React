@@ -30,15 +30,17 @@ from DAL import DataLayer
 from wtforms.validators import DataRequired
 
 def get_countries_list():
-    countries_list = []
+    final_list = []
+    final_list.append((0, 'Choose which Country'))
     fac_obj = AnonymousFacade()
-    countries = fac_obj.get_all_countries()
-    for c in countries:
-        countries_list.append((c.id, c.name))
-    return countries_list
+    items = fac_obj.get_all_countries()
+    for i in items:
+        final_list.append((i.id, i.name))
+    return final_list
 
 def get_airline_user_list():
     final_list = []
+    final_list.append((0, 'Choose which user'))
     fac_obj = AnonymousFacade()
     users = fac_obj.get_all_users()
     #TODO create join table and not use 2 as filter to if 
@@ -49,12 +51,14 @@ def get_airline_user_list():
 
 def get_customer_user_list():
     final_list = []
+    final_list.append((0, 'Choose which user'))
     fac_obj = AnonymousFacade()
     users = fac_obj.get_all_users()
     #TODO create join table and not use 2 as filter to if 
     for i in users:
         if i.user_role == 3:
             final_list.append((i.id, i.username))
+    print(final_list)
     return final_list
 
 
