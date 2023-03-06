@@ -81,7 +81,6 @@ class DataLayer(object):
         except (IntegrityError, DataError, DatabaseError, InterfaceError, InvalidRequestError, BuildError) as e:
             db.session.rollback()
             print(f"Error: {e}")
-            # customError(str(e))
             flash(f"An error occured !", "danger")
             return False
             
@@ -91,8 +90,11 @@ class DataLayer(object):
             with app.app_context():
                 db.session.delete(obj)
                 db.session.commit()
+                return True
         except Exception as e:
             print(f"Error: {e}")
+            flash(f"An error occured !", "danger")
+            return False
 
     def check_user_and_pass(self):
         try:

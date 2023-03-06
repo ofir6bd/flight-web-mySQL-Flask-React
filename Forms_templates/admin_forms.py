@@ -71,6 +71,14 @@ def get_admin_user_list():
             final_list.append((i.id, i.username))
     return final_list
 
+def get_all_airlines():
+    final_list = []
+    final_list.append((0, 'Airline company'))
+    fac_obj = AnonymousFacade()
+    airlines = fac_obj.get_all_airlines() 
+    for i in airlines:
+        final_list.append((i.id, i.name))
+    return final_list
 
 class add_airline_form(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
@@ -120,4 +128,11 @@ class add_admin_form(FlaskForm):
     def __init__(self, *args, **kwargs):
         super(add_admin_form, self).__init__(*args, **kwargs)
         self.user.choices = get_admin_user_list()
+
+
+class remove_airline_form(FlaskForm):
+    airline_company_id = SelectField('Airline Company', validators=[DataRequired()], coerce=int)
+    def __init__(self, *args, **kwargs):
+        super(remove_airline_form, self).__init__(*args, **kwargs)
+        self.airline_company_id.choices = get_all_airlines()
         

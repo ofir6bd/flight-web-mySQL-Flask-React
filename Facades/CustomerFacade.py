@@ -13,10 +13,9 @@ class CustomerFacade(FacadeBase):
         pass
 
     def remove_ticket(self):
-        dal_obj = DataLayer(id=self.id,table=Tickets)
+        dal_obj = DataLayer(id=self.id,table1=Tickets)
         ticket = dal_obj.get_by_id()
-        dal_obj.delete_obj(ticket)
-        print('record deleted')
+        return dal_obj.delete_obj(ticket)
 
     def get_my_ticket(self,ticket):
         pass
