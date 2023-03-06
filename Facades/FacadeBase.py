@@ -58,6 +58,16 @@ class FacadeBase(object):
         dal_obj = DataLayer(table1=Countries)      
         countries = dal_obj.get_all()
         return countries
+    
+    def get_all_customers(self):
+        dal_obj = DataLayer(table1=Customers)      
+        customers = dal_obj.get_all()
+        return customers
+
+    def get_all_administrators(self):
+        dal_obj = DataLayer(table1=Administrators)      
+        admins = dal_obj.get_all()
+        return admins
 
     def get_flight_by_id(self):
         dal_obj = DataLayer(table1=Flights,id=self.id)      

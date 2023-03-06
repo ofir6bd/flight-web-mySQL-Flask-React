@@ -31,8 +31,12 @@ class AdministratorFacade(FacadeBase):
         airline = dal_obj.get_by_id()
         return dal_obj.delete_obj(airline)
 
-    def remove_customer(customer):
-        pass
+    def remove_customer(self):
+        dal_obj = DataLayer(id=self.id,table1=Customers)
+        customer = dal_obj.get_by_id()
+        return dal_obj.delete_obj(customer)
 
-    def remove_administrator(administrator):
-        pass
+    def remove_administrator(self):
+        dal_obj = DataLayer(id=self.id,table1=Administrators)
+        admin = dal_obj.get_by_id()
+        return dal_obj.delete_obj(admin)

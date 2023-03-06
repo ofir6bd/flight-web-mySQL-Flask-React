@@ -76,8 +76,32 @@ def get_all_airlines():
     final_list.append((0, 'Airline company'))
     fac_obj = AnonymousFacade()
     airlines = fac_obj.get_all_airlines() 
+    # TODO add filter to show only if not FK to other table
     for i in airlines:
-        final_list.append((i.id, i.name))
+        full_details = f'{i.name},{i.country_id}'
+        final_list.append((i.id, full_details))
+    return final_list
+
+def get_all_customers():
+    final_list = []
+    final_list.append((0, 'Customers'))
+    fac_obj = AnonymousFacade()
+    customers = fac_obj.get_all_customers() 
+        # TODO add filter to show only if not FK to other table
+    for i in customers:
+        full_details = f'{i.first_name},{i.last_name},{i.address},{i.phone_no}'
+        final_list.append((i.id,full_details))
+    return final_list
+
+def get_all_admins():
+    final_list = []
+    final_list.append((0, 'Administrators'))
+    fac_obj = AnonymousFacade()
+    admins = fac_obj.get_all_administrators() 
+        # TODO add filter to show only if not FK to other table
+    for i in admins:
+        full_details = f'{i.first_name},{i.last_name}'
+        final_list.append((i.id, full_details))
     return final_list
 
 class add_airline_form(FlaskForm):
@@ -135,4 +159,16 @@ class remove_airline_form(FlaskForm):
     def __init__(self, *args, **kwargs):
         super(remove_airline_form, self).__init__(*args, **kwargs)
         self.airline_company_id.choices = get_all_airlines()
-        
+
+class remove_customer_form(FlaskForm):
+    customer_id = SelectField('Customers', validators=[DataRequired()], coerce=int)
+    def __init__(self, *args, **kwargs):
+        super(remove_customer_form, self).__init__(*args, **kwargs)
+        self.customer_id.choices = get_all_customers()
+
+class remove_admin_form(FlaskForm):
+    admin_id = SelectField('Administrators', validators=[DataRequired()], coerce=int)
+    def __init__(self, *args, **kwargs):
+        super(remove_admin_form, self).__init__(*args, **kwargs)
+        self.admin_id.choices = get_all_admins()
+                

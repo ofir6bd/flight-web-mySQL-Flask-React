@@ -28,7 +28,7 @@ from werkzeug.routing import BuildError
 from Forms_templates.general_forms import search_flights_form
 from per_req_Wrappers import *
 from Routes_files.customer_routes import update_customer
-from Routes_files.admin_routes import add_airline,add_customer,add_admin,remove_airline
+from Routes_files.admin_routes import add_airline,add_customer,add_admin,remove_airline,remove_customer,remove_admin
 
 # from Routes_files.customer_routes import *
 
@@ -150,8 +150,8 @@ app.add_url_rule('/add_airline', view_func=add_airline,  methods=("GET", "POST")
 app.add_url_rule('/add_customer', view_func=add_customer,  methods=("GET", "POST"), strict_slashes=False)
 app.add_url_rule('/add_admin', view_func=add_admin,  methods=("GET", "POST"), strict_slashes=False)
 app.add_url_rule('/remove_airline', view_func=remove_airline,  methods=("GET", "POST"), strict_slashes=False)
-# app.add_url_rule('/remove_customer', view_func=remove_customer,  methods=("GET", "POST"), strict_slashes=False)
-# app.add_url_rule('/remove_admin', view_func=remove_admin,  methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/remove_customer', view_func=remove_customer,  methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/remove_admin', view_func=remove_admin,  methods=("GET", "POST"), strict_slashes=False)
 
 
 # Airline company routes

@@ -22,6 +22,8 @@
             <a href="{{url_for('add_customer')}}">Add customer</a>
             <a href="{{url_for('add_admin')}}">Add admin</a>
             <a href="{{url_for('remove_airline')}}">Remove airline</a>
+            <a href="{{url_for('remove_customer')}}">Remove customer</a>
+            <a href="{{url_for('remove_admin')}}">Remove admin</a>
         {% endif %}
         {% if session['user_role'] == 'airline': %}
         <a href="">Add</a>
