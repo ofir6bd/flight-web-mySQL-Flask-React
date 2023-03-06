@@ -28,7 +28,7 @@ from werkzeug.routing import BuildError
 from Forms_templates.general_forms import search_flights_form
 from per_req_Wrappers import *
 from Routes_files.customer_routes import update_customer
-from Routes_files.admin_routes import add_airline,add_customer
+from Routes_files.admin_routes import add_airline,add_customer,add_admin
 
 # from Routes_files.customer_routes import *
 
@@ -148,6 +148,7 @@ app.add_url_rule('/update_customer', view_func=update_customer, methods=("GET", 
 # admin routes
 app.add_url_rule('/add_airline', view_func=add_airline,  methods=("GET", "POST"), strict_slashes=False)
 app.add_url_rule('/add_customer', view_func=add_customer,  methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/add_admin', view_func=add_admin,  methods=("GET", "POST"), strict_slashes=False)
 
 
 # Airline company routes

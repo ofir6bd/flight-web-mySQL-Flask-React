@@ -60,6 +60,17 @@ def get_customer_user_list():
             final_list.append((i.id, i.username))
     return final_list
 
+def get_admin_user_list():
+    final_list = []
+    final_list.append((0, 'Choose which user'))
+    fac_obj = AnonymousFacade()
+    users = fac_obj.get_all_users()
+    #TODO create join table and not use 2 as filter to if 
+    for i in users:
+        if i.user_role == 1:
+            final_list.append((i.id, i.username))
+    return final_list
+
 
 class add_airline_form(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
@@ -100,4 +111,13 @@ class add_customer_form(FlaskForm):
         item = Customers.query.filter_by(credit_card_no=credit_card_no.data).first()
         if item is not None:
             raise ValidationError('Please use a different credit_card_no.')
-      
+
+class add_admin_form(FlaskForm):
+    first_name = StringField(validators=[DataRequired()])
+    last_name = StringField(validators=[DataRequired()])
+    user = SelectField('Users', coerce=int, validators=[DataRequired()])
+
+    def __init__(self, *args, **kwargs):
+        super(add_admin_form, self).__init__(*args, **kwargs)
+        self.user.choices = get_admin_user_list()
+        

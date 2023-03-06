@@ -21,9 +21,10 @@ class AdministratorFacade(FacadeBase):
         dal_obj = DataLayer()
         return dal_obj.insert_obj(new_customer)
 
-    def add_administrator():
-        #TODO need to send all parameteres for this function
-        pass
+    def add_administrator(self):
+        new_admin = Administrators(first_name=self.first_name,last_name=self.last_name,user_id=int(self.user_id))
+        dal_obj = DataLayer()
+        return dal_obj.insert_obj(new_admin)
 
     def remove_airline(airline):
         pass

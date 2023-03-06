@@ -14,7 +14,7 @@ from Forms_templates.customer_forms import update_customer_form
 from flask import Flask, redirect, url_for,request, render_template, session, flash
 from flask_login import UserMixin, login_user, LoginManager,login_required, logout_user,current_user
 from per_req_Wrappers import require_admin_role
-from Forms_templates.admin_forms import add_airline_form,add_customer_form
+from Forms_templates.admin_forms import add_airline_form,add_customer_form,add_admin_form
 from models import UserRoles,Users,Administrators,Customers, Countries,AirlineCompanies,Flights,Tickets
 from app import db
 from Facades.AdministratorFacade import AdministratorFacade
@@ -47,7 +47,6 @@ def add_customer():
     if form.validate_on_submit():
         fac_obj = AdministratorFacade(id=form.user.data)
         user = fac_obj.get_user_by_id()
-        # first_name,last_name,address,phone_no,credit_card_no
         fac_obj = AdministratorFacade(first_name=form.first_name.data,\
                                       last_name=form.last_name.data,\
                                          address=form.address.data,\
@@ -62,4 +61,25 @@ def add_customer():
         text="Add customer",
         title="Add customer",
         btn_action="Add customer",
+        )
+
+@login_required
+@require_admin_role
+def add_admin():
+    form = add_admin_form() 
+    if form.validate_on_submit():
+        fac_obj = AdministratorFacade(id=form.user.data)
+        user = fac_obj.get_user_by_id()
+        fac_obj = AdministratorFacade(first_name=form.first_name.data,\
+                                      last_name=form.last_name.data,\
+                                       user_id=user.id)
+        res = fac_obj.add_administrator()
+        if res:
+            flash(f"Admin added", "success")
+        return redirect(url_for('index'))
+    return render_template("admin/add_admin.html",
+        form=form,
+        text="Add admin",
+        title="Add admin",
+        btn_action="Add admin",
         )
