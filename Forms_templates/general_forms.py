@@ -51,8 +51,8 @@ class search_flights_form(FlaskForm):
         ]
     )
     
-    departure_time = DateTimeLocalField('Which date is your favorite?', format='%m/%d/%y')
-    landing_time = DateTimeLocalField('Which date is your favorite?', format='%m/%d/%y')
+    departure_time = DateTimeLocalField('Which date is your favorite?')
+    landing_time = DateTimeLocalField('Which date is your favorite?') #, format='%m/%d/%y'
     
 
     # def validate_email(self, email):

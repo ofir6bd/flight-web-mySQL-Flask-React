@@ -17,6 +17,7 @@ from wtforms import (
     DateField,
     TextAreaField,
     DateTimeLocalField,
+    DateTimeField,
 )
 
 
@@ -63,8 +64,7 @@ class add_airline_form(FlaskForm):
             raise ValidationError("Username already taken!")
         
 def get_all_airlines():
-    final_list = []
-    final_list.append((0, 'Airline company'))
+    final_list = [(0, 'Airline company')]
     fac_obj = AnonymousFacade()
     airlines = fac_obj.get_all_airlines() 
     for i in airlines:
@@ -72,33 +72,24 @@ def get_all_airlines():
     return final_list
 
 def get_all_countries():
-    final_list = []
-    final_list.append((0, 'Choose which Country'))
+    final_list = [(0, 'Choose which Country')]
     fac_obj = AnonymousFacade()
     items = fac_obj.get_all_countries()
     for i in items:
         final_list.append((i.id, i.name))
     return final_list
 
+# from wtforms.widgets.html5 import DateTimeLocalInput
+
 class add_flight_form(FlaskForm):
-    airline_company_id = SelectField('Country', coerce=int, validators=[DataRequired()])
-    origin_country_id = SelectField('Country', coerce=int, validators=[DataRequired()])
-    destination_country_id = SelectField('Country', coerce=int, validators=[DataRequired()])
-    departure_time = DateTimeLocalField('Which date is your favorite?', format='%m/%d/%y')
-    landing_time = DateTimeLocalField('Which date is your favorite?', format='%m/%d/%y')
+    airline_company_id = SelectField( coerce=int, validators=[DataRequired()])
+    origin_country_id = SelectField(coerce=int, validators=[DataRequired()])
+    destination_country_id = SelectField(coerce=int, validators=[DataRequired()])
+    departure_time = DateTimeLocalField( validators=[InputRequired()],format='%Y-%m-%dT%H:%M')
+    landing_time = DateTimeLocalField(validators=[InputRequired()],format='%Y-%m-%dT%H:%M')
     
     def __init__(self, *args, **kwargs):
         super(add_flight_form, self).__init__(*args, **kwargs)
         self.airline_company_id.choices = get_all_airlines()
         self.origin_country_id.choices = get_all_countries()
         self.destination_country_id.choices = get_all_countries()
-
-    def validate_email(self, email):
-        fac_obj = AnonymousFacade(email=email.data)
-        if fac_obj.get_user_by_email():
-            raise ValidationError("Email already registered!")
-
-    def validate_username(self, username):
-        fac_obj = AnonymousFacade(username=username.data)
-        if fac_obj.get_user_by_username():
-            raise ValidationError("Username already taken!")

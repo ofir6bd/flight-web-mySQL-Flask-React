@@ -17,7 +17,7 @@ class FacadeBase(object):
                  user_id="",user_role="", first_name="", last_name="", address="", phone_no="",\
                       credit_card_no="",origin_country="",origin_country_id="",\
                         destination_country="", destination_country_id="",\
-                      departure_time="",landing_time="",travelers=""):
+                      departure_time="",landing_time="",travelers="",remaining_tickets=""):
         self.id = id
         self.username = username
         self.password = password
@@ -37,6 +37,7 @@ class FacadeBase(object):
         self.departure_time = departure_time
         self.landing_time = landing_time
         self.travelers = travelers
+        self.remaining_tickets = remaining_tickets
 
 
     def get_all_flights(self):

@@ -29,9 +29,8 @@ from Facades.AnonymousFacade import AnonymousFacade
 from DAL import DataLayer
 from wtforms.validators import DataRequired
 
-def get_countries_list():
-    final_list = []
-    final_list.append((0, 'Choose which Country'))
+def get_all_countries():
+    final_list = [(0, 'Choose which Country')]
     fac_obj = AnonymousFacade()
     items = fac_obj.get_all_countries()
     for i in items:
@@ -39,8 +38,7 @@ def get_countries_list():
     return final_list
 
 def get_airline_user_list():
-    final_list = []
-    final_list.append((0, 'Choose which user'))
+    final_list = [(0, 'Choose which user')]
     fac_obj = AnonymousFacade()
     users = fac_obj.get_all_users()
     #TODO create join table and not use 2 as filter to if 
@@ -50,8 +48,7 @@ def get_airline_user_list():
     return final_list
 
 def get_customer_user_list():
-    final_list = []
-    final_list.append((0, 'Choose which user'))
+    final_list = [(0, 'Choose which user')]
     fac_obj = AnonymousFacade()
     users = fac_obj.get_all_users()
     #TODO create join table and not use 2 as filter to if 
@@ -61,8 +58,7 @@ def get_customer_user_list():
     return final_list
 
 def get_admin_user_list():
-    final_list = []
-    final_list.append((0, 'Choose which user'))
+    final_list = [(0, 'Choose which user')]
     fac_obj = AnonymousFacade()
     users = fac_obj.get_all_users()
     #TODO create join table and not use 2 as filter to if 
@@ -72,8 +68,7 @@ def get_admin_user_list():
     return final_list
 
 def get_all_airlines():
-    final_list = []
-    final_list.append((0, 'Airline company'))
+    final_list = [(0, 'Airline company')]
     fac_obj = AnonymousFacade()
     airlines = fac_obj.get_all_airlines() 
     #TODO get the country name instead of country_id
@@ -83,8 +78,7 @@ def get_all_airlines():
     return final_list
 
 def get_all_customers():
-    final_list = []
-    final_list.append((0, 'Customers'))
+    final_list = [(0, 'Customers')]
     fac_obj = AnonymousFacade()
     customers = fac_obj.get_all_customers() 
         # TODO add filter to show only if not FK to other table
@@ -94,8 +88,7 @@ def get_all_customers():
     return final_list
 
 def get_all_admins():
-    final_list = []
-    final_list.append((0, 'Administrators'))
+    final_list = [(0, 'Administrators')]
     fac_obj = AnonymousFacade()
     admins = fac_obj.get_all_administrators() 
         # TODO add filter to show only if not FK to other table
@@ -112,7 +105,7 @@ class add_airline_form(FlaskForm):
 
     def __init__(self, *args, **kwargs):
         super(add_airline_form, self).__init__(*args, **kwargs)
-        self.country.choices = get_countries_list()
+        self.country.choices = get_all_countries()
         self.user.choices = get_airline_user_list()
 
     def validate_name(self, name):

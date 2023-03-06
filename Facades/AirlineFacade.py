@@ -2,15 +2,23 @@ from Facades.FacadeBase import *
 
 class AirlineFacade(FacadeBase):
 
-    def __init__(self, id=0,username=""):
-        super().__init__(id=id,username=username)
-        
+    def __init__(self, id=0,username="",airline_company_id="",origin_country_id="",destination_country_id="",departure_time="",landing_time="",remaining_tickets=""):
+        super().__init__(id=id,username=username,\
+                         origin_country_id=origin_country_id,destination_country_id="",departure_time="",landing_time="",remaining_tickets="")
+        self.airline_company_id = airline_company_id
 
     def update_airline(airline):
         pass
 
-    def add_flight(flight):
-        pass
+    def add_flight(self):
+        flight = Flights(airline_company_id=self.airline_company_id,
+                                origin_country_id=self.origin_country_id,
+                                destination_country_id=self.destination_country_id,
+                                departure_time=self.departure_time,
+                                landing_time=self.landing_time,
+                                remaining_tickets=2)
+        dal_obj = DataLayer()
+        return dal_obj.insert_obj(flight)
 
     def update_flight(flight):
         pass

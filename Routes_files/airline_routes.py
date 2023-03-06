@@ -22,14 +22,19 @@ from Facades.AirlineFacade import AirlineFacade
 def add_flight():
     form = add_flight_form() 
     if form.validate_on_submit():
-        fac_obj = AirlineFacade(id=form.user.data)
-        user = fac_obj.get_user_by_id()
-        fac_obj = AirlineFacade(first_name=form.first_name.data,\
-                                      last_name=form.last_name.data,\
-                                     address=form.address.data,\
-                                      phone_no=form.phone_no.data,\
-                                     credit_card_no=form.credit_card_no.data,user_id=user.id)
-        res = fac_obj.add_customer()
+        fac_obj = AirlineFacade(id=form.airline_company_id.data)
+        airline = fac_obj.get_airline_by_id()
+        fac_obj = AirlineFacade(id=form.origin_country_id.data)
+        origin_country_id = fac_obj.get_country_by_id()
+        fac_obj = AirlineFacade(id=form.destination_country_id.data)
+        destination_country_id = fac_obj.get_country_by_id()
+        fac_obj = AirlineFacade(airline_company_id=airline.id,
+                                origin_country_id=origin_country_id.id,
+                                destination_country_id=destination_country_id.id,
+                                departure_time=form.departure_time.data,
+                                landing_time=form.landing_time.data,
+                                remaining_tickets=2)
+        res = fac_obj.add_flight()
         if res:
             flash(f"Flight added", "success")
         return redirect(url_for('index'))
