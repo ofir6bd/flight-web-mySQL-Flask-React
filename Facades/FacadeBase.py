@@ -14,7 +14,7 @@ from models import UserRoles,Users,Administrators,Customers, Countries,AirlineCo
 class FacadeBase(object):
 
     def __init__(self, id=0, username="", password="", email="", role_name="",\
-                 user_id="",user_role="", first_name="", last_name="", adress="", phone_no="",\
+                 user_id="",user_role="", first_name="", last_name="", address="", phone_no="",\
                       credit_card_no="",origin_country="",origin_country_id="",\
                         destination_country="", destination_country_id="",\
                       departure_time="",landing_time="",travelers=""):
@@ -27,7 +27,7 @@ class FacadeBase(object):
         self.user_role = user_role
         self.first_name =first_name
         self.last_name = last_name
-        self.adress = adress
+        self.address = address
         self.phone_no = phone_no
         self.credit_card_no = credit_card_no
         self.origin_country = origin_country
@@ -77,21 +77,6 @@ class FacadeBase(object):
                 all_flight_and_countries.pop(i)
         return all_flight_and_countries
 
-        # dal_obj = DataLayer(table1=Countries)  
-        # all_countries = dal_obj.get_all()
-        
-        # for i in range(len(all_countries)):
-        #     if self.origin_country_id == all_countries[i].id:
-        #         origin_country_name = all_countries[i].
-        #     elif self.destination_country_id == all_countries[i].id:
-        #         destination_country_name = all_countries[i].id
-
-        # dal_obj = DataLayer(table1=Flights)  
-        # all_flights = dal_obj.get_all()
-        # for i in reversed(range(len(all_countries))):
-        #     if all_flights
-
-        return 
 
     def get_all_airlines(self):
         dal_obj = DataLayer(table1=AirlineCompanies)      

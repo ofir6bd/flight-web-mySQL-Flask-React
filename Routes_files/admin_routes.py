@@ -45,12 +45,15 @@ def add_airline():
 def add_customer():
     form = add_customer_form() 
     if form.validate_on_submit():
-        fac_obj = AdministratorFacade(id=form.country.data)
-        country = fac_obj.get_country_by_id()
         fac_obj = AdministratorFacade(id=form.user.data)
         user = fac_obj.get_user_by_id()
-        fac_obj = AdministratorFacade(name=form.name.data, country_id=country.id,user_id=user.id)
-        res = fac_obj.add_airline()
+        # first_name,last_name,address,phone_no,credit_card_no
+        fac_obj = AdministratorFacade(first_name=form.first_name.data,\
+                                      last_name=form.last_name.data,\
+                                         address=form.address.data,\
+                                             phone_no=form.phone_no.data,\
+                                                 credit_card_no=form.credit_card_no.data,user_id=user.id)
+        res = fac_obj.add_customer()
         if res:
             flash(f"Customer added", "success")
         return redirect(url_for('index'))
