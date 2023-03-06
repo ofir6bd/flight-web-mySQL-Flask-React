@@ -41,38 +41,35 @@ class FacadeBase(object):
 
     def get_all_flights(self):
         dal_obj = DataLayer(table1=Flights)      
-        flights = dal_obj.get_all()
-        return flights
+        return dal_obj.get_all()
     
     def get_all_user_roles(self):
         dal_obj = DataLayer(table1=UserRoles)      
-        user_roles = dal_obj.get_all()
-        return user_roles
+        return dal_obj.get_all()
     
     def get_all_users(self):
         dal_obj = DataLayer(table1=Users)      
-        user_roles = dal_obj.get_all()
-        return user_roles
+        return dal_obj.get_all()
     
     def get_all_countries(self):
         dal_obj = DataLayer(table1=Countries)      
-        countries = dal_obj.get_all()
-        return countries
-    
+        return dal_obj.get_all()
+
     def get_all_customers(self):
         dal_obj = DataLayer(table1=Customers)      
-        customers = dal_obj.get_all()
-        return customers
+        return dal_obj.get_all()
 
     def get_all_administrators(self):
         dal_obj = DataLayer(table1=Administrators)      
-        admins = dal_obj.get_all()
-        return admins
+        return dal_obj.get_all()
 
     def get_flight_by_id(self):
         dal_obj = DataLayer(table1=Flights,id=self.id)      
-        flight = dal_obj.get_by_id()
-        return flight
+        return dal_obj.get_by_id()
+    
+    def get_ticket_by_id(self):
+        dal_obj = DataLayer(table1=Tickets,id=self.id)      
+        return dal_obj.get_by_id()
 
     def get_flights_by_parameters(self):
         dal_obj = DataLayer() 

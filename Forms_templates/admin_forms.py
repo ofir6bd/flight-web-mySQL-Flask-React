@@ -76,7 +76,6 @@ def get_all_airlines():
     final_list.append((0, 'Airline company'))
     fac_obj = AnonymousFacade()
     airlines = fac_obj.get_all_airlines() 
-    # TODO add filter to show only if not FK to other table
     for i in airlines:
         full_details = f'{i.name},{i.country_id}'
         final_list.append((i.id, full_details))
@@ -159,12 +158,25 @@ class remove_airline_form(FlaskForm):
     def __init__(self, *args, **kwargs):
         super(remove_airline_form, self).__init__(*args, **kwargs)
         self.airline_company_id.choices = get_all_airlines()
+    
+    def validate_airline_company_id(self, airline_company_id):
+        obj = AnonymousFacade(id=airline_company_id.data)
+        item = obj.get_flight_by_id()
+        if item is not None:
+            raise ValidationError('Tickets exists for this airline, cannot be deleted.')
 
 class remove_customer_form(FlaskForm):
     customer_id = SelectField('Customers', validators=[DataRequired()], coerce=int)
     def __init__(self, *args, **kwargs):
         super(remove_customer_form, self).__init__(*args, **kwargs)
         self.customer_id.choices = get_all_customers()
+    
+    def validate_customer_id(self, customer_id):
+        obj = AnonymousFacade(id=customer_id.data)
+        item = obj.get_ticket_by_id()
+        if item is not None:
+            raise ValidationError('This customer have ticket, cannot be deleted.')
+
 
 class remove_admin_form(FlaskForm):
     admin_id = SelectField('Administrators', validators=[DataRequired()], coerce=int)
