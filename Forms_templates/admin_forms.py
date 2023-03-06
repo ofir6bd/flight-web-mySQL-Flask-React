@@ -76,6 +76,7 @@ def get_all_airlines():
     final_list.append((0, 'Airline company'))
     fac_obj = AnonymousFacade()
     airlines = fac_obj.get_all_airlines() 
+    #TODO get the country name instead of country_id
     for i in airlines:
         full_details = f'{i.name},{i.country_id}'
         final_list.append((i.id, full_details))

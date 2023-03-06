@@ -16,6 +16,7 @@ from wtforms import (
     IntegerField,
     DateField,
     TextAreaField,
+    DateTimeLocalField,
 )
 
 
@@ -23,10 +24,14 @@ from flask_wtf import FlaskForm
 from wtforms.validators import InputRequired, Length, EqualTo, Email, Regexp ,Optional
 import email_validator
 from flask_login import current_user
-from wtforms import ValidationError,validators
+from wtforms import ValidationError,validators,SelectField
 from models import *
 from Facades.AnonymousFacade import AnonymousFacade
 from DAL import DataLayer
+from wtforms.validators import DataRequired
+
+
+        
 
 class update_customer_form(FlaskForm):
     username = StringField(

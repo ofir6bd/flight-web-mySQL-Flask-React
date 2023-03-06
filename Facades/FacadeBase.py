@@ -87,32 +87,27 @@ class FacadeBase(object):
 
     def get_all_airlines(self):
         dal_obj = DataLayer(table1=AirlineCompanies)      
-        airline_company = dal_obj.get_all()
-        return airline_company
+        return dal_obj.get_all()
 
     def get_airline_by_id(self):
         dal_obj = DataLayer(table1=AirlineCompanies,id=self.id)      
-        airline = dal_obj.get_by_id()
-        return airline
+        return dal_obj.get_by_id()
 
     def get_airline_by_parameteres(self,origin_country_id,destination_country_id, date):
         pass
 
     def get_all_countries(self):
         dal_obj = DataLayer(table1=Countries)      
-        countries = dal_obj.get_all()
-        return countries
+        return dal_obj.get_all()
 
     def get_country_by_id(self):
         dal_obj = DataLayer(table1=Countries,id=self.id)      
-        country = dal_obj.get_by_id()
-        return country
+        return dal_obj.get_by_id()
 
     def create_new_user(self):
         user = Users(username=self.username,password=self.password,email=self.email,user_role=int(self.user_role))
         dal_obj = DataLayer()      
-        res = dal_obj.insert_obj(user)
-        return res
+        return dal_obj.insert_obj(user)
     
     def get_user_by_email(self):
         dal_obj = DataLayer(table1=Users,input_attribute='email', input_value=self.email)
