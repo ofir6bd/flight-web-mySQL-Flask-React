@@ -30,6 +30,8 @@ def company_home(company_name):
 @require_airline_role
 def add_flight(company_name):
     form = add_flight_form() 
+    form.airline_company_id.choices = [(0, 'Airline company'),(1, company_name)]
+
     if form.validate_on_submit():
         fac_obj = AirlineFacade(id=form.airline_company_id.data)
         airline = fac_obj.get_airline_by_id()

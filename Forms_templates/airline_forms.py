@@ -82,7 +82,7 @@ def get_all_countries():
 # from wtforms.widgets.html5 import DateTimeLocalInput
 
 class add_flight_form(FlaskForm):
-    airline_company_id = SelectField( coerce=int, validators=[DataRequired()])
+    airline_company_id = SelectField(coerce=int, validators=[DataRequired()])
     origin_country_id = SelectField(coerce=int, validators=[DataRequired()])
     destination_country_id = SelectField(coerce=int, validators=[DataRequired()])
     departure_time = DateTimeLocalField( validators=[InputRequired()],format='%Y-%m-%dT%H:%M')
@@ -90,6 +90,5 @@ class add_flight_form(FlaskForm):
     
     def __init__(self, *args, **kwargs):
         super(add_flight_form, self).__init__(*args, **kwargs)
-        self.airline_company_id.choices = get_all_airlines()
         self.origin_country_id.choices = get_all_countries()
         self.destination_country_id.choices = get_all_countries()
