@@ -92,3 +92,13 @@ class add_flight_form(FlaskForm):
         super(add_flight_form, self).__init__(*args, **kwargs)
         self.origin_country_id.choices = get_all_countries()
         self.destination_country_id.choices = get_all_countries()
+    
+    def validate(self, extra_validators=None):
+        if not FlaskForm.validate(self, extra_validators=extra_validators):
+            return False
+
+        if self.origin_country_id.data == self.destination_country_id.data:
+            self.origin_country_id.errors.append('Origin and destination cannot be the same.')
+            return False
+
+        return True
