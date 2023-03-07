@@ -28,6 +28,7 @@ def add_flight():
         origin_country_id = fac_obj.get_country_by_id()
         fac_obj = AirlineFacade(id=form.destination_country_id.data)
         destination_country_id = fac_obj.get_country_by_id()
+        
         fac_obj = AirlineFacade(airline_company_id=airline.id,
                                 origin_country_id=origin_country_id.id,
                                 destination_country_id=destination_country_id.id,
