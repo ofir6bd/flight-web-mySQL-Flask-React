@@ -89,7 +89,6 @@ def login():
                     session['user_role'] = 'admin'
                 elif airline:
                     session['user_role'] = 'airline'
-                    print(airline.name)
                     return redirect(url_for('company_home',company_name=airline.name))
                 elif customer:
                     session['user_role'] = 'customer'

@@ -25,15 +25,16 @@
             <a href="{{url_for('remove_airline')}}">Remove airline</a>
             <a href="{{url_for('remove_customer')}}">Remove customer</a>
             <a href="{{url_for('remove_admin')}}">Remove admin</a>
-        {% endif %}
-        {% if session['user_role'] == 'airline': %}
-        <a class="active" href="{{ url_for('company_home',company_name=airline_name) }}">Home</a>
-        <a href="{{url_for('add_flight',company_name=airline_name) }}">Add flight</a>
-        {% endif %}
-        {% if session['user_role'] == 'customer': %}
-        <a href="">Add </a>
-        {% endif %}
 
+        {% elif session['user_role'] == 'airline': %}
+            <a class="active" href="{{ url_for('company_home',company_name=airline_name) }}">Home</a>
+            <a href="{{url_for('add_flight',company_name=airline_name) }}">Add flight</a>
+        {% elif session['user_role'] == 'customer': %}
+        
+            <a href="">Add </a>
+        {% else: %}
+            <a class="active" href="{{ url_for('index') }}">Home</a>
+        {% endif %}
         <a href="#contact">Contact</a>
         <a href="#about">About us</a>
         {% if current_user.is_authenticated %}
