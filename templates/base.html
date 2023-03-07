@@ -16,8 +16,9 @@
 
 <body>
     <div class="topnav">
-        <a class="active" href="{{ url_for('index') }}">Home</a>
+        
         {% if session['user_role'] == 'admin': %}
+            <a class="active" href="{{ url_for('index') }}">Home</a>
             <a href="{{url_for('add_airline')}}">Add airline</a>
             <a href="{{url_for('add_customer')}}">Add customer</a>
             <a href="{{url_for('add_admin')}}">Add admin</a>
@@ -26,7 +27,8 @@
             <a href="{{url_for('remove_admin')}}">Remove admin</a>
         {% endif %}
         {% if session['user_role'] == 'airline': %}
-        <a href="{{url_for('add_flight')}}">Add flight</a>
+        <a class="active" href="{{ url_for('company_home',company_name=airline_name) }}">Home</a>
+        <a href="{{url_for('add_flight',company_name=airline_name) }}">Add flight</a>
         {% endif %}
         {% if session['user_role'] == 'customer': %}
         <a href="">Add </a>

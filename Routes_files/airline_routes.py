@@ -19,7 +19,16 @@ from Facades.AirlineFacade import AirlineFacade
 
 @login_required
 @require_airline_role
-def add_flight():
+def company_home(company_name):
+    return render_template("airline/company_home.html",
+        airline_name = company_name,
+        text=company_name,
+        title=company_name,
+        )
+
+@login_required
+@require_airline_role
+def add_flight(company_name):
     form = add_flight_form() 
     if form.validate_on_submit():
         fac_obj = AirlineFacade(id=form.airline_company_id.data)
@@ -38,8 +47,9 @@ def add_flight():
         res = fac_obj.add_flight()
         if res:
             flash(f"Flight added", "success")
-        return redirect(url_for('index'))
-    return render_template("customer/add_flight.html",
+        return redirect(url_for('company_home',company_name=company_name))
+    return render_template("airline/add_flight.html",
+        airline_name = company_name,
         form=form,
         text="Add flight",
         title="Add flight",

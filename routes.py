@@ -28,7 +28,7 @@ from werkzeug.routing import BuildError
 from Forms_templates.general_forms import search_flights_form
 from per_req_Wrappers import *
 from Routes_files.customer_routes import update_customer
-from Routes_files.airline_routes import add_flight
+from Routes_files.airline_routes import add_flight,company_home
 from Routes_files.admin_routes import add_airline,add_customer,add_admin,remove_airline,remove_customer,remove_admin
 
 # from Routes_files.customer_routes import *
@@ -79,7 +79,6 @@ def login():
             user = fac_obj.get_user_by_email()
             if check_password_hash(user.password, form.password.data):
                 login_user(user)
-                print(user.id)
                 session['user_id'] = user.id
 
                 fac_obj = AnonymousFacade(user_id=int(user.id))
@@ -90,6 +89,8 @@ def login():
                     session['user_role'] = 'admin'
                 elif airline:
                     session['user_role'] = 'airline'
+                    print(airline.name)
+                    return redirect(url_for('company_home',company_name=airline.name))
                 elif customer:
                     session['user_role'] = 'customer'
                 else:
@@ -153,7 +154,13 @@ app.add_url_rule('/remove_customer', view_func=remove_customer,  methods=("GET",
 app.add_url_rule('/remove_admin', view_func=remove_admin,  methods=("GET", "POST"), strict_slashes=False)
 
 # Airline company routes
-app.add_url_rule('/add_flight', view_func=add_flight,  methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/<string:company_name>/', view_func=company_home,  methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/<string:company_name>/add_flight', view_func=add_flight,  methods=("GET", "POST"), strict_slashes=False)
+
+
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
