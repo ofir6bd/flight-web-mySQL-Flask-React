@@ -43,7 +43,7 @@ class Customers(db.Model):
     user = db.relationship('Users')
 
     def __repr__(self):
-        return f'<Table: "Customers",id:"{self.id}", first_name:"{self.first_name}, last_name:"{self.last_name}, address:"{self.address},phone_no:"{self.phone_no}, credit_card_no:"{self.credit_card_no}, user_id:"{self.user_id} ">'
+        return f'<Table: "Customers",id:"{self.id}", first_name:"{self.first_name}", last_name:"{self.last_name}, address:"{self.address},phone_no:"{self.phone_no}, credit_card_no:"{self.credit_card_no}, user_id:"{self.user_id} ">'
 
 class Countries(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -61,7 +61,7 @@ class AirlineCompanies(db.Model):
     user = db.relationship('Users')
     
     def __repr__(self):
-        return f'<Table: "AirlineCompanies",id:"{self.id}", name:"{self.name}, country_id:"{self.country_id}, user_id:"{self.user_id}">'
+        return f'<Table: "AirlineCompanies",id:"{self.id}", name:"{self.name}", country_id:"{self.country_id}", user_id:"{self.user_id}">'
 
 class Flights(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -76,7 +76,7 @@ class Flights(db.Model):
     remaining_tickets = db.Column(db.Integer, default=0)
     
     def __repr__(self):
-        return f'<Table: "Flights",id:"{self.id}", airline_company_id:"{self.airline_company_id}, origin_country_id:"{self.origin_country_id}",destination_country_id:"{self.destination_country_id}",departure_time:"{self.departure_time}",landing_time:"{self.landing_time}",remaining_tickets:"{self.remaining_tickets}">'
+        return f'<Table: "Flights",id:"{self.id}", airline_company_id:"{self.airline_company_id}", origin_country_id:"{self.origin_country_id}",destination_country_id:"{self.destination_country_id}",departure_time:"{self.departure_time}",landing_time:"{self.landing_time}",remaining_tickets:"{self.remaining_tickets}">'
 
 class Tickets(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)

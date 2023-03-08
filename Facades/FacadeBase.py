@@ -80,11 +80,11 @@ class FacadeBase(object):
         all_flight_and_countries = dal_obj.join_flights_countries()
 
         for i in reversed(range(len(all_flight_and_countries))):
-            if self.origin_country != all_flight_and_countries[i][1].name:
+            if int(self.origin_country) != int(all_flight_and_countries[i][1].id):
                 all_flight_and_countries.pop(i)
 
         for i in reversed(range(len(all_flight_and_countries))):
-            if self.destination_country != all_flight_and_countries[i][2].name:
+            if int(self.destination_country) != int(all_flight_and_countries[i][2].id):
                 all_flight_and_countries.pop(i)
         return all_flight_and_countries
 

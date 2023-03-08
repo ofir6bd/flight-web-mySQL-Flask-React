@@ -8,7 +8,8 @@ current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 # adding the parent directory to the sys.path.
 sys.path.append(parent)
-
+from wtforms import ValidationError,validators,SelectField
+from wtforms.validators import DataRequired
 from wtforms import (
     StringField,
     PasswordField,
@@ -29,31 +30,25 @@ from models import *
 from Facades.AnonymousFacade import AnonymousFacade
 from DAL import DataLayer
 
+def get_all_countries():
+    final_list = [(0, 'Choose which Country')]
+    fac_obj = AnonymousFacade()
+    items = fac_obj.get_all_countries()
+    for i in items:
+        final_list.append((i.id, i.name))
+    return final_list
+
+
 class search_flights_form(FlaskForm):
-    origin_country = StringField(validators=[
-            InputRequired(),
-            Length(3, 20, message="Please provide a valid name"),
-            Regexp(
-                "^[A-Za-z][A-Za-z0-9_.]*$",
-                0,
-                "Usernames must have only letters, " "numbers, dots or underscores",
-            ),
-        ]
-    )
-    destination_country = StringField(validators=[
-            InputRequired(),
-            Length(3, 20, message="Please provide a valid name"),
-            Regexp(
-                "^[A-Za-z][A-Za-z0-9_.]*$",
-                0,
-                "Usernames must have only letters, " "numbers, dots or underscores",
-            ),
-        ]
-    )
-    
+    origin_country = SelectField(validators=[DataRequired()])
+    destination_country =SelectField(validators=[DataRequired()])
     departure_time = DateTimeLocalField('Which date is your favorite?')
-    landing_time = DateTimeLocalField('Which date is your favorite?') #, format='%m/%d/%y'
+    landing_time = DateTimeLocalField('Which date is your favorite?') 
     
+    def __init__(self, *args, **kwargs):
+        super(search_flights_form, self).__init__(*args, **kwargs)
+        self.origin_country.choices = get_all_countries()
+        self.destination_country.choices = get_all_countries()
 
     # def validate_email(self, email):
     #     fac_obj = AnonymousFacade(email=email.data)
@@ -64,3 +59,24 @@ class search_flights_form(FlaskForm):
     #     fac_obj = AnonymousFacade(username=username.data)
     #     if fac_obj.get_user_by_username():
     #         raise ValidationError("Username already taken!")
+
+     # origin_country = StringField(validators=[
+    #         InputRequired(),
+    #         Length(3, 20, message="Please provide a valid name"),
+    #         Regexp(
+    #             "^[A-Za-z][A-Za-z0-9_.]*$",
+    #             0,
+    #             "Usernames must have only letters, " "numbers, dots or underscores",
+    #         ),
+    #     ]
+    # )
+    # destination_country = StringField(validators=[
+    #         InputRequired(),
+    #         Length(3, 20, message="Please provide a valid name"),
+    #         Regexp(
+    #             "^[A-Za-z][A-Za-z0-9_.]*$",
+    #             0,
+    #             "Usernames must have only letters, " "numbers, dots or underscores",
+    #         ),
+    #     ]
+    # )

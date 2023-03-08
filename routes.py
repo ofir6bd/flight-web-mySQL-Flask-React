@@ -58,6 +58,8 @@ def index():
         departure_time = form.departure_time.data
         landing_time = form.landing_time.data
 
+        print(origin_country)
+        print(destination_country)
         fac_obj = AnonymousFacade(origin_country=origin_country,destination_country=destination_country)
         flights = fac_obj.get_flights_by_parameters()
         return render_template("flights.html",
