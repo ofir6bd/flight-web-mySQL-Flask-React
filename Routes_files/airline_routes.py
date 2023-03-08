@@ -62,14 +62,11 @@ def add_flight(company_name):
 @require_airline_role
 def remove_flight(company_name):
     form = remove_flight_form() 
-    item = AirlineFacade(name=company_name)
-    airline_company = item.get_airline_by_name()
-    fac_obj = AirlineFacade(airline_company_id=airline_company.id)
-    all_company_flights = fac_obj.get_flights_by_airline_id()
+    fac_obj = AirlineFacade(name=company_name)
+    all_company_flights = fac_obj.get_my_flights()
 
     final_list = [(0, 'Choose which flight')]
     for i in all_company_flights:
-        
         dal_obj1 = AirlineFacade(id=i.origin_country_id)
         origin = dal_obj1.get_country_by_id()
         dal_obj2 = AirlineFacade(id=i.destination_country_id)

@@ -28,8 +28,11 @@ class AirlineFacade(FacadeBase):
         flight = dal_obj.get_by_id()
         return dal_obj.delete_obj(flight)
 
-    def get_my_flight():
-        pass
+    def get_my_flights(self):
+        dal_obj = DataLayer(table1=AirlineCompanies,input_attribute='name', input_value=self.name)
+        airline = dal_obj.get_one_by_param()
+        dal_obj = DataLayer(table1=Flights,input_attribute='airline_company_id', input_value=int(airline.id))
+        return dal_obj.get_all_by_filter()
 
     def get_airline_by_username(self):
         dal_obj = DataLayer(table1=AirlineCompanies,table_column1="user_id",\
