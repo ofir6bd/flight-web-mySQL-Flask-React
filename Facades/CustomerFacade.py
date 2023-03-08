@@ -2,8 +2,8 @@ from Facades.FacadeBase import *
 
 class CustomerFacade(FacadeBase):
 
-    def __init__(self, id=0,email=""):
-        super().__init__(id=id,email=email)
+    def __init__(self, id=0,email="",user_id=""):
+        super().__init__(id=id,email=email,user_id=user_id)
 
 
     def update_customer(self,customer):

@@ -16,9 +16,23 @@ from flask_login import UserMixin, login_user, LoginManager,login_required, logo
 from per_req_Wrappers import require_customer_role
 from Facades.CustomerFacade import CustomerFacade
 
+
 @login_required
 @require_customer_role
-def update_customer():
+def customer_home(customer):
+    fac_obj = CustomerFacade(user_id=customer)
+    user = fac_obj.get_customer_by_user_id()
+    print(user)
+    full_name = f'{user.last_name}, {user.first_name}'
+    return render_template("customer/customer_home.html",
+        customer = customer,
+        text=full_name,
+        title=full_name,
+        )
+
+@login_required
+@require_customer_role
+def update_customer(customer):
     form = update_customer_form() 
 
     return render_template("customer/customer.html",

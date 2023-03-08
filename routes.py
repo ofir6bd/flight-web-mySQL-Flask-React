@@ -27,7 +27,7 @@ from sqlalchemy.exc import (
 from werkzeug.routing import BuildError
 from Forms_templates.general_forms import search_flights_form
 from per_req_Wrappers import *
-from Routes_files.customer_routes import update_customer
+from Routes_files.customer_routes import update_customer,customer_home
 from Routes_files.airline_routes import add_flight,company_home,remove_flight
 from Routes_files.admin_routes import add_airline,add_customer,add_admin,remove_airline,remove_customer,remove_admin
 
@@ -92,6 +92,7 @@ def login():
                     return redirect(url_for('company_home',company_name=airline.name))
                 elif customer:
                     session['user_role'] = 'customer'
+                    return redirect(url_for('customer_home',customer=customer.user_id))
                 else:
                     session['user_role'] = 'general_user'
                 return redirect(url_for('index'))
@@ -142,7 +143,8 @@ def logout():
     return redirect(url_for('login'))    
 
 # Customer routes
-app.add_url_rule('/update_customer', view_func=update_customer, methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/<string:customer>/', view_func=customer_home,  methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/<string:customer>/update_customer', view_func=update_customer, methods=("GET", "POST"), strict_slashes=False)
 
 # admin routes
 app.add_url_rule('/add_airline', view_func=add_airline,  methods=("GET", "POST"), strict_slashes=False)
