@@ -31,7 +31,8 @@ from DAL import DataLayer
 from wtforms.validators import DataRequired
 
 
-        
+# class add_ticket_form(FlaskForm):
+#     flight_id    
 
 class update_customer_form(FlaskForm):
     username = StringField(

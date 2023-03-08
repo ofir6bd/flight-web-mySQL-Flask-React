@@ -85,6 +85,7 @@ def login():
                 admin = fac_obj.get_admin_by_user_id()
                 airline = fac_obj.get_airline_by_user_id()
                 customer = fac_obj.get_customer_by_user_id()
+
                 if admin:
                     session['user_role'] = 'admin'
                 elif airline:
@@ -92,7 +93,7 @@ def login():
                     return redirect(url_for('company_home',company_name=airline.name))
                 elif customer:
                     session['user_role'] = 'customer'
-                    return redirect(url_for('customer_home',customer=customer.user_id))
+                    return redirect(url_for('customer_home',customer_details=customer.user_id))
                 else:
                     session['user_role'] = 'general_user'
                 return redirect(url_for('index'))
@@ -107,7 +108,6 @@ def login():
         title="Login",
         btn_action="Login"
         )
-
 
 # Register route
 @app.route("/register/", methods=("GET", "POST"), strict_slashes=False)
@@ -143,22 +143,22 @@ def logout():
     return redirect(url_for('login'))    
 
 # Customer routes
-app.add_url_rule('/<string:customer>/', view_func=customer_home,  methods=("GET", "POST"), strict_slashes=False)
-app.add_url_rule('/<string:customer>/update_customer', view_func=update_customer, methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/customer/<string:customer_details>/', view_func=customer_home,  methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/customer/<string:customer>/update_customer', view_func=update_customer, methods=("GET", "POST"), strict_slashes=False)
+# app.add_url_rule('/<string:customer>/add_ticket', view_func=add_ticket, methods=("GET", "POST"), strict_slashes=False)
 
 # admin routes
-app.add_url_rule('/add_airline', view_func=add_airline,  methods=("GET", "POST"), strict_slashes=False)
-app.add_url_rule('/add_customer', view_func=add_customer,  methods=("GET", "POST"), strict_slashes=False)
-app.add_url_rule('/add_admin', view_func=add_admin,  methods=("GET", "POST"), strict_slashes=False)
-app.add_url_rule('/remove_airline', view_func=remove_airline,  methods=("GET", "POST"), strict_slashes=False)
-app.add_url_rule('/remove_customer', view_func=remove_customer,  methods=("GET", "POST"), strict_slashes=False)
-app.add_url_rule('/remove_admin', view_func=remove_admin,  methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/admin/add_airline', view_func=add_airline,  methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/admin/add_customer', view_func=add_customer,  methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/admin/add_admin', view_func=add_admin,  methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/admin/remove_airline', view_func=remove_airline,  methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/admin/remove_customer', view_func=remove_customer,  methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/admin/remove_admin', view_func=remove_admin,  methods=("GET", "POST"), strict_slashes=False)
 
 # Airline company routes
-app.add_url_rule('/<string:company_name>/', view_func=company_home,  methods=("GET", "POST"), strict_slashes=False)
-app.add_url_rule('/<string:company_name>/add_flight', view_func=add_flight,  methods=("GET", "POST"), strict_slashes=False)
-app.add_url_rule('/<string:company_name>/remove_flight', view_func=remove_flight,  methods=("GET", "POST"), strict_slashes=False)
-
+app.add_url_rule('/airline/<string:company_name>/', view_func=company_home,  methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/airline/<string:company_name>/add_flight', view_func=add_flight,  methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/airline/<string:company_name>/remove_flight', view_func=remove_flight,  methods=("GET", "POST"), strict_slashes=False)
 
 if __name__ == "__main__":
     app.run(debug=True)

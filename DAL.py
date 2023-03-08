@@ -49,7 +49,11 @@ class DataLayer(object):
 
 
     def get_one_by_param(self):
-        item = self.table1.query.filter_by(**{self.input_attribute: self.input_value}).first()
+        try:
+            with app.app_context():
+                item = self.table1.query.filter_by(**{self.input_attribute: self.input_value}).first()
+        except Exception as e:
+            print(f"Error: {e}")
         return item
 
     def get_by_id(self):

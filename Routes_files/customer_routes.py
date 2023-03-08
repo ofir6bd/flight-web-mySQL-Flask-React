@@ -19,16 +19,31 @@ from Facades.CustomerFacade import CustomerFacade
 
 @login_required
 @require_customer_role
-def customer_home(customer):
-    fac_obj = CustomerFacade(user_id=customer)
+def customer_home(customer_details):
+    fac_obj = CustomerFacade(user_id=customer_details)
     user = fac_obj.get_customer_by_user_id()
-    print(user)
-    full_name = f'{user.last_name}, {user.first_name}'
+    full_name = f'{user.last_name}, {user.first_name}' 
     return render_template("customer/customer_home.html",
-        customer = customer,
+        customer_id = customer_details,
         text=full_name,
-        title=full_name,
+        title=customer_details,
         )
+
+# @login_required
+# @require_customer_role
+# def add_ticket(customer):
+#     form = add_ticket_form()
+#     # fac_obj = CustomerFacade(user_id=customer)
+#     # user = fac_obj.get_customer_by_user_id()
+#     # full_name = f'{user.last_name}, {user.first_name}'
+    
+#     return render_template("customer/add_ticket.html",
+#         customer = customer,
+#         form=form,
+#         text="Add ticket",
+#         title="Add ticket",
+#         btn_action="Add ticket",
+#         )
 
 @login_required
 @require_customer_role

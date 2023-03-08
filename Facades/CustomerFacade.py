@@ -20,12 +20,3 @@ class CustomerFacade(FacadeBase):
     def get_my_ticket(self,ticket):
         pass
 
-# with app.app_context():
-#     # obj4 = CustomerFacade(id=1) 
-#     # ans = obj4.login()
-
-#     obj5 = CustomerFacade(id=2) 
-#     obj5.remove_ticket()
-    
-#     # print(ans)
-#     print("Done")
