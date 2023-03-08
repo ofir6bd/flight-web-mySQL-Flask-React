@@ -28,6 +28,7 @@ from flask_login import current_user
 from wtforms import ValidationError,validators,SelectField
 from models import *
 from Facades.AnonymousFacade import AnonymousFacade
+from Facades.AirlineFacade import AirlineFacade
 from DAL import DataLayer
 from wtforms.validators import DataRequired
 
@@ -79,7 +80,7 @@ def get_all_countries():
         final_list.append((i.id, i.name))
     return final_list
 
-# from wtforms.widgets.html5 import DateTimeLocalInput
+
 
 class add_flight_form(FlaskForm):
     airline_company_id = SelectField(coerce=int, validators=[DataRequired()])
@@ -96,9 +97,25 @@ class add_flight_form(FlaskForm):
     def validate(self, extra_validators=None):
         if not FlaskForm.validate(self, extra_validators=extra_validators):
             return False
-
         if self.origin_country_id.data == self.destination_country_id.data:
-            self.origin_country_id.errors.append('Origin and destination cannot be the same.')
+            self.destination_country_id.errors.append('Origin and destination cannot be the same.')
             return False
+        return True
 
+def check_no_ticket(flight_id):
+    fac_obj = AirlineFacade(flight_id = flight_id)
+    return fac_obj.get_ticket_by_flight_id()
+
+
+
+class remove_flight_form(FlaskForm):
+    flights_detailes = SelectField(validators=[DataRequired()], coerce=int)
+
+    def validate(self, extra_validators=None):
+        if not FlaskForm.validate(self, extra_validators=extra_validators):
+            return False
+        print(self.flights_detailes.data)
+        if check_no_ticket(self.flights_detailes.data):
+            self.flights_detailes.errors.append('There are tickets for this flight, cannot be removed')
+            return False
         return True

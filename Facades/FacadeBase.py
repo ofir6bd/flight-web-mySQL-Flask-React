@@ -13,12 +13,13 @@ from models import UserRoles,Users,Administrators,Customers, Countries,AirlineCo
 
 class FacadeBase(object):
 
-    def __init__(self, id=0, username="", password="", email="", role_name="",\
+    def __init__(self, id=0,name="", username="", password="", email="", role_name="",\
                  user_id="",user_role="", first_name="", last_name="", address="", phone_no="",\
                       credit_card_no="",origin_country="",origin_country_id="",\
                         destination_country="", destination_country_id="",\
-                      departure_time="",landing_time="",travelers="",remaining_tickets=""):
+                      departure_time="",flight_id="",landing_time="",travelers="",remaining_tickets="",airline_company_id=""):
         self.id = id
+        self.name = name
         self.username = username
         self.password = password
         self.email = email
@@ -35,9 +36,11 @@ class FacadeBase(object):
         self.destination_country = destination_country
         self.destination_country_id = destination_country_id
         self.departure_time = departure_time
+        self.flight_id = flight_id
         self.landing_time = landing_time
         self.travelers = travelers
         self.remaining_tickets = remaining_tickets
+        self.airline_company_id = airline_company_id
 
 
     def get_all_flights(self):
@@ -85,7 +88,6 @@ class FacadeBase(object):
                 all_flight_and_countries.pop(i)
         return all_flight_and_countries
 
-
     def get_all_airlines(self):
         dal_obj = DataLayer(table1=AirlineCompanies)      
         return dal_obj.get_all()
@@ -96,6 +98,10 @@ class FacadeBase(object):
 
     def get_airline_by_parameteres(self,origin_country_id,destination_country_id, date):
         pass
+
+    def get_airline_by_name(self):
+        dal_obj = DataLayer(table1=AirlineCompanies,input_attribute='name', input_value=self.name)
+        return dal_obj.get_one_by_param()
 
     def get_all_countries(self):
         dal_obj = DataLayer(table1=Countries)      
@@ -134,6 +140,13 @@ class FacadeBase(object):
         dal_obj = DataLayer(table1=Customers,input_attribute='user_id', input_value=self.user_id)
         return dal_obj.get_one_by_param()
     
+    def get_flights_by_airline_id(self):
+        dal_obj = DataLayer(table1=Flights,input_attribute='airline_company_id', input_value=int(self.airline_company_id))
+        return dal_obj.get_all_by_filter()
+    
+    def get_ticket_by_flight_id(self):
+        dal_obj = DataLayer(table1=Tickets,input_attribute='flight_id', input_value=self.flight_id)
+        return dal_obj.get_one_by_param()
         
 
 

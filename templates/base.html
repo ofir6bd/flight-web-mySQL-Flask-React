@@ -29,6 +29,7 @@
         {% elif session['user_role'] == 'airline': %}
             <a class="active" href="{{ url_for('company_home',company_name=airline_name) }}">Home</a>
             <a href="{{url_for('add_flight',company_name=airline_name) }}">Add flight</a>
+            <a href="{{url_for('remove_flight',company_name=airline_name) }}">Remove flight</a>
         {% elif session['user_role'] == 'customer': %}
         
             <a href="">Add </a>
