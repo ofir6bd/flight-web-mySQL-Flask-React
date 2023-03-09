@@ -8,9 +8,9 @@
 
 
     <div>
-        <h1>All flight found:</h1>
+      {% if flights: %}
+        <h3>All flight:</h3>
         {% for flight in flights %}
-
         <div class="col-lg-5">
             <p><b> From:</b> {{flight[1].name}}
                 <br>
@@ -21,14 +21,12 @@
               <b>Landing time:</b> {{flight[0].landing_time}}
               <a href=""> Book</a>
             <br><br>
-
-               
             </p>
         </div>
-
-
         {% endfor %}
-
+      {% else: %}
+        <h3>No flights found</h3>
+        {% endif %}
     </div>
 
 

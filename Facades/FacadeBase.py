@@ -17,7 +17,7 @@ class FacadeBase(object):
                  user_id="",user_role="", first_name="", last_name="", address="", phone_no="",\
                       credit_card_no="",origin_country="",origin_country_id="",\
                         destination_country="", destination_country_id="",\
-                      departure_time="",flight_id="",landing_time="",travelers="",remaining_tickets="",airline_company_id=""):
+                      departure_time=None,flight_id="",landing_time="",travelers="",remaining_tickets="",airline_company_id=""):
         self.id = id
         self.name = name
         self.username = username
@@ -79,13 +79,34 @@ class FacadeBase(object):
         dal_obj = DataLayer() 
         all_flight_and_countries = dal_obj.join_flights_countries()
 
+        # drop flights that not match to the otigin country
         for i in reversed(range(len(all_flight_and_countries))):
-            if int(self.origin_country) != int(all_flight_and_countries[i][1].id):
-                all_flight_and_countries.pop(i)
+            if self.origin_country != "0":
+                if int(self.origin_country) != int(all_flight_and_countries[i][1].id):
+                    all_flight_and_countries.pop(i)
+        # drop flights that not match to the destination country
+        for i in reversed(range(len(all_flight_and_countries))):
+            print(self.destination_country)
+            if self.destination_country != "0":
+                if int(self.destination_country) != int(all_flight_and_countries[i][2].id):
+                    all_flight_and_countries.pop(i)
 
+        # drop flights that not match to the departure_time
         for i in reversed(range(len(all_flight_and_countries))):
-            if int(self.destination_country) != int(all_flight_and_countries[i][2].id):
-                all_flight_and_countries.pop(i)
+            if self.departure_time != None:
+                flight_date = all_flight_and_countries[i][0].departure_time
+                request_date = self.departure_time 
+                if not -1<=((request_date - flight_date).days)<=3:
+                    all_flight_and_countries.pop(i)
+
+        # drop flights that not match to the landing_time
+        for i in reversed(range(len(all_flight_and_countries))):
+            if self.landing_time != None:
+                flight_date = all_flight_and_countries[i][0].landing_time
+                request_date = self.landing_time 
+                if not -1<=((request_date - flight_date).days)<=3:
+                    all_flight_and_countries.pop(i)
+
         return all_flight_and_countries
 
     def get_all_airlines(self):

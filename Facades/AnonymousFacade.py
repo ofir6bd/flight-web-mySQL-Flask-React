@@ -4,7 +4,7 @@ from Facades.FacadeBase import *
 class AnonymousFacade(FacadeBase):
 
     def __init__(self,id="", username="", password="", email="",user_role="",user_id="",\
-                origin_country="",destination_country="",departure_time="",\
+                origin_country="",destination_country="",departure_time=None,\
                 landing_time="",travelers=""):
         super().__init__(id=id,username=username,password=password,email=email,\
                         user_role=user_role,user_id=user_id,origin_country=origin_country,\

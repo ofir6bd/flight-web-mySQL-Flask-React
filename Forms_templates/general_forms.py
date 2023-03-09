@@ -42,8 +42,8 @@ def get_all_countries():
 class search_flights_form(FlaskForm):
     origin_country = SelectField(validators=[DataRequired()])
     destination_country =SelectField(validators=[DataRequired()])
-    departure_time = DateTimeLocalField('Which date is your favorite?')
-    landing_time = DateTimeLocalField('Which date is your favorite?') 
+    departure_time = DateTimeLocalField('Which date is your favorite?',format='%Y-%m-%dT%H:%M')
+    landing_time = DateTimeLocalField('Which date is your favorite?',format='%Y-%m-%dT%H:%M') 
     
     def __init__(self, *args, **kwargs):
         super(search_flights_form, self).__init__(*args, **kwargs)
