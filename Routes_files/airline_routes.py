@@ -8,7 +8,7 @@ current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 # adding the parent directory to the sys.path.
 sys.path.append(parent)
-from Forms_templates.airline_forms import add_flight_form,remove_flight_form
+from Forms_templates.airline_forms import add_flight_form,remove_flight_form,update_airline_form
 # from Facades.AnonymousFacade import AnonymousFacade
 # from Facades.CustomerFacade import CustomerFacade
 from flask import Flask, redirect, url_for,request, render_template, session, flash
@@ -89,4 +89,30 @@ def remove_flight(company_name):
         text="Remove flight",
         title="Remove flight",
         btn_action="Remove flight",
+        )
+
+
+
+@login_required
+@require_airline_role
+def update_airline(company_name):
+    form = update_airline_form() 
+    fac_obj = AirlineFacade(name=company_name)
+    airline = fac_obj.get_airline_by_name()
+    name = airline.name
+
+    if form.validate_on_submit():
+        fac_obj = AirlineFacade(id=airline.id, name=form.name.data)
+        res = fac_obj.update_airline()
+        if res:
+            flash(f"Airline detailes updated", "success")
+        else:
+            flash("error occurred", "danger")
+        return redirect(url_for('company_home',company_name=company_name))
+    return render_template("airline/update_airline.html",
+        name = name,
+        form=form,
+        text="Update airline",
+        title="Update airline",
+        btn_action="Update airline",
         )

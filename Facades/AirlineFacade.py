@@ -2,13 +2,19 @@ from Facades.FacadeBase import *
 
 class AirlineFacade(FacadeBase):
 
-    def __init__(self, id=0,flight_id="",username="",airline_company_id="",name="",origin_country_id="",destination_country_id="",departure_time="",landing_time="",remaining_tickets=""):
-        super().__init__(id=id,flight_id=flight_id,username=username,airline_company_id=airline_company_id,\
-                         origin_country_id=origin_country_id,name=name,destination_country_id=destination_country_id,departure_time=departure_time,landing_time=landing_time,remaining_tickets=remaining_tickets)
+    def __init__(self, id=0,name="",flight_id="",username="",airline_company_id="",origin_country_id="",destination_country_id="",departure_time="",landing_time="",remaining_tickets=""):
+        super().__init__(id=id,flight_id=flight_id,username=username,airline_company_id=airline_company_id,name=name,\
+                         origin_country_id=origin_country_id,destination_country_id=destination_country_id,departure_time=departure_time,landing_time=landing_time,remaining_tickets=remaining_tickets)
         
 
-    def update_airline(airline):
-        pass
+    def update_airline(self):
+        dal_obj = DataLayer(id = self.id,table1=AirlineCompanies)
+        airline = dal_obj.get_by_id()
+        if (self.name != airline.name) and self.name:
+            airline.name = self.name
+        dal_obj = DataLayer()
+        return dal_obj.update_item(airline)
+
 
     def add_flight(self):
         flight = Flights(airline_company_id=self.airline_company_id,

@@ -119,3 +119,6 @@ class remove_flight_form(FlaskForm):
             self.flights_detailes.errors.append('There are tickets for this flight, cannot be removed')
             return False
         return True
+    
+class update_airline_form(FlaskForm):
+    name = StringField()

@@ -13,8 +13,6 @@ class CustomerFacade(FacadeBase):
     def update_customer(self):
         dal_obj = DataLayer(id = self.id,table1=Customers)
         customer = dal_obj.get_by_id()
-        print(self.first_name)
-        print(customer.first_name)
         if (self.first_name != customer.first_name) and self.first_name:
             customer.first_name = self.first_name
         if (self.last_name != customer.last_name) and self.last_name:
