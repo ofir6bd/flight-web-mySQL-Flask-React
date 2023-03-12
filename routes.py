@@ -27,7 +27,7 @@ from sqlalchemy.exc import (
 from werkzeug.routing import BuildError
 from Forms_templates.general_forms import search_flights_form
 from per_req_Wrappers import *
-from Routes_files.customer_routes import update_customer,customer_home,book_verification
+from Routes_files.customer_routes import update_customer,customer_home,book_verification,remove_ticket
 from Routes_files.airline_routes import add_flight,company_home,remove_flight
 from Routes_files.admin_routes import add_airline,add_customer,add_admin,remove_airline,remove_customer,remove_admin
 
@@ -37,20 +37,24 @@ from Routes_files.admin_routes import add_airline,add_customer,add_admin,remove_
 def load_user(user_id):
     fac_obj = AnonymousFacade(id=user_id)
     return fac_obj.get_user_by_id()
-    # return Users.query.get(int(user_id))
 
 app = create_app()
 
 # Home route
 @app.route("/", methods=("GET", "POST"), strict_slashes=False)
 def index():
+    if current_user.is_authenticated:    #Do the authentication here
+        customer_details = session['user_id']
+    else:
+        customer_details="0"
     form = search_flights_form()
     if request.method == "GET":
         return render_template("index.html",
             form=form,
             text="Book your next flight today with us!",
             title="Home",
-            btn_action="Search"
+            btn_action="Search",
+            customer_details=customer_details
             )
     if request.method == "POST":
         origin_country = form.origin_country.data
@@ -67,6 +71,7 @@ def index():
             title="Home",
             btn_action="Search",
             flights=flights,
+            customer_details=customer_details
             )
 
 # Login route
@@ -144,13 +149,12 @@ def logout():
     return redirect(url_for('login'))    
 
 
-
-
 # Customer routes
 app.add_url_rule('/customer/<string:customer_details>/', view_func=customer_home,  methods=("GET", "POST"), strict_slashes=False)
 app.add_url_rule('/customer/<string:customer>/update_customer', view_func=update_customer, methods=("GET", "POST"), strict_slashes=False)
 # app.add_url_rule('/<string:customer>/add_ticket', view_func=add_ticket, methods=("GET", "POST"), strict_slashes=False)
-app.add_url_rule("/flight/<int:flight_id>/",view_func=book_verification, methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule("/customer/<string:customer_details>/<int:flight_id>/",view_func=book_verification, methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule("/customer/<string:customer_details>/remove_ticket",view_func=remove_ticket, methods=("GET", "POST"), strict_slashes=False)
 
 # admin routes
 app.add_url_rule('/admin/add_airline', view_func=add_airline,  methods=("GET", "POST"), strict_slashes=False)

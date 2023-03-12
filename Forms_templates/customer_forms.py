@@ -29,7 +29,7 @@ from models import *
 from Facades.AnonymousFacade import AnonymousFacade
 from DAL import DataLayer
 from wtforms.validators import DataRequired
-
+from Facades.CustomerFacade import CustomerFacade
 
 # class add_ticket_form(FlaskForm):
 #     flight_id    
@@ -65,3 +65,7 @@ class update_customer_form(FlaskForm):
         fac_obj = AnonymousFacade(username=username.data)
         if fac_obj.get_user_by_username():
             raise ValidationError("Username already taken!")
+        
+
+class remove_ticket_form(FlaskForm):
+    tickets_detailes = SelectField(validators=[DataRequired()], coerce=int)

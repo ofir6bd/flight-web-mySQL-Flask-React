@@ -17,7 +17,7 @@ class FacadeBase(object):
                  user_id="",user_role="", first_name="", last_name="", address="", phone_no="",\
                       credit_card_no="",origin_country="",origin_country_id="",\
                         destination_country="", destination_country_id="",\
-                      departure_time=None,flight_id="",landing_time="",travelers="",remaining_tickets="",airline_company_id=""):
+                      departure_time=None,flight_id="",landing_time="",travelers="",remaining_tickets="",airline_company_id="",customer_id=""):
         self.id = id
         self.name = name
         self.username = username
@@ -41,7 +41,7 @@ class FacadeBase(object):
         self.travelers = travelers
         self.remaining_tickets = remaining_tickets
         self.airline_company_id = airline_company_id
-
+        self.customer_id = customer_id
 
     def get_all_flights(self):
         dal_obj = DataLayer(table1=Flights)      
