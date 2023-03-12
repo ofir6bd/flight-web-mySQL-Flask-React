@@ -35,36 +35,30 @@ from Facades.CustomerFacade import CustomerFacade
 #     flight_id    
 
 class update_customer_form(FlaskForm):
-    username = StringField(
-        validators=[
-            InputRequired(),
-            Length(3, 20, message="Please provide a valid name"),
-            Regexp(
-                "^[A-Za-z][A-Za-z0-9_.]*$",
-                0,
-                "Usernames must have only letters, " "numbers, dots or underscores",
-            ),
-        ]
-    )
-    email = StringField(validators=[InputRequired(), Email(), Length(1, 64)])
-    password = PasswordField(validators=[InputRequired(), Length(8, 72)])
-    cpassword = PasswordField(
-        validators=[
-            InputRequired(),
-            Length(8, 72),
-            EqualTo("password", message="Passwords must match !"),
-        ]
-    )
+    first_name = StringField()
+    last_name = StringField()
+    address = StringField()
+    phone_no = StringField()
+    credit_card_no = StringField()
+    # email = StringField(validators=[InputRequired(), Email(), Length(1, 64)])
+    # password = PasswordField(validators=[InputRequired(), Length(8, 72)])
+    # cpassword = PasswordField(
+    #     validators=[
+    #         InputRequired(),
+    #         Length(8, 72),
+    #         EqualTo("password", message="Passwords must match !"),
+    #     ]
+    # )
 
-    def validate_email(self, email):
-        fac_obj = AnonymousFacade(email=email.data)
-        if fac_obj.get_user_by_email():
-            raise ValidationError("Email already registered!")
+    # def validate_email(self, email):
+    #     fac_obj = AnonymousFacade(email=email.data)
+    #     if fac_obj.get_user_by_email():
+    #         raise ValidationError("Email already registered!")
 
-    def validate_username(self, username):
-        fac_obj = AnonymousFacade(username=username.data)
-        if fac_obj.get_user_by_username():
-            raise ValidationError("Username already taken!")
+    # def validate_username(self, username):
+    #     fac_obj = AnonymousFacade(username=username.data)
+    #     if fac_obj.get_user_by_username():
+    #         raise ValidationError("Username already taken!")
         
 
 class remove_ticket_form(FlaskForm):

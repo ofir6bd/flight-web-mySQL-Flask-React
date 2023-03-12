@@ -3,12 +3,30 @@ from Facades.FacadeBase import *
 
 class CustomerFacade(FacadeBase):
 
-    def __init__(self, id=0,email="",user_id="",flight_id="",customer_id=""):
-        super().__init__(id=id,email=email,user_id=user_id,flight_id=flight_id,customer_id=customer_id)
+    def __init__(self, id=0,email="",user_id="",flight_id="",customer_id="",first_name=None\
+                 ,last_name="",address="",phone_no="",credit_card_no=""):
+        super().__init__(id=id,email=email,user_id=user_id,flight_id=flight_id,customer_id=customer_id\
+                         ,first_name=first_name,last_name=last_name,address=address,\
+                            phone_no=phone_no,credit_card_no=credit_card_no)
 
 
-    def update_customer(self,customer):
-        pass
+    def update_customer(self):
+        dal_obj = DataLayer(id = self.id,table1=Customers)
+        customer = dal_obj.get_by_id()
+        print(self.first_name)
+        print(customer.first_name)
+        if (self.first_name != customer.first_name) and self.first_name:
+            customer.first_name = self.first_name
+        if (self.last_name != customer.last_name) and self.last_name:
+            customer.last_name = self.last_name
+        if (self.address != customer.address) and self.address:
+            customer.address = self.address
+        if (self.phone_no != customer.phone_no) and self.phone_no:
+            customer.phone_no = self.phone_no
+        if (self.credit_card_no != customer.credit_card_no) and self.credit_card_no:
+            customer.credit_card_no = self.credit_card_no
+        dal_obj = DataLayer()
+        return dal_obj.update_item(customer)
 
     def add_ticket(self):
         dal_obj = DataLayer(table1=Customers,input_attribute='user_id', input_value=int(session['user_id']))

@@ -33,6 +33,7 @@
         {% elif session['user_role'] == 'customer': %}
             <a class="active" href="{{ url_for('index',customer_details=customer_details) }}">Search Flight</a>
             <a class="active" href="{{ url_for('remove_ticket',customer_details=customer_details) }}">Remove ticket</a>
+            <a class="active" href="{{ url_for('update_customer',customer_details=customer_details) }}">Update customer</a>
         {% else: %}
             <a class="active" href="{{ url_for('index') }}">Home</a>
         {% endif %}

@@ -151,7 +151,7 @@ def logout():
 
 # Customer routes
 app.add_url_rule('/customer/<int:customer_details>/', view_func=customer_home,  methods=("GET", "POST"), strict_slashes=False)
-app.add_url_rule('/customer/<int:customer>/update_customer', view_func=update_customer, methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/customer/<int:customer_details>/update_customer', view_func=update_customer, methods=("GET", "POST"), strict_slashes=False)
 # app.add_url_rule('/<string:customer>/add_ticket', view_func=add_ticket, methods=("GET", "POST"), strict_slashes=False)
 app.add_url_rule("/customer/<int:customer_details>/<int:flight_id>/",view_func=book_verification, methods=("GET", "POST"), strict_slashes=False)
 app.add_url_rule("/customer/<int:customer_details>/remove_ticket",view_func=remove_ticket, methods=("GET", "POST"), strict_slashes=False)

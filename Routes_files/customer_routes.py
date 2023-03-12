@@ -32,10 +32,38 @@ def customer_home(customer_details):
 
 @login_required
 @require_customer_role
-def update_customer(customer):
+def update_customer(customer_details):
     form = update_customer_form() 
+    fac_obj = CustomerFacade(user_id=customer_details)
+    customer = fac_obj.get_customer_by_user_id()
+    first_name = customer.first_name
+    last_name = customer.last_name
+    address = customer.address
+    phone_no = customer.phone_no
+    credit_card_no = customer.credit_card_no
 
-    return render_template("customer/customer.html",
+    if form.validate_on_submit():
+        fac_obj = CustomerFacade(id=customer.id, first_name=form.first_name.data,last_name=form.last_name.data,address=form.address.data,phone_no=form.phone_no.data,credit_card_no=form.credit_card_no.data)
+        res = fac_obj.update_customer()
+        if res:
+            flash(f"Customer detailes updated", "success")
+        else:
+            flash("error occurred", "danger")
+        form = search_flights_form()
+        return render_template("index.html",
+                form=form,
+                text="Book your next flight today with us!",
+                title="Home",
+                btn_action="Search",
+                customer_details=customer_details
+                )
+    return render_template("customer/update_customer.html",
+        first_name = first_name,
+        last_name = last_name,
+        address=address,
+        phone_no=phone_no,
+        credit_card_no=credit_card_no,
+        customer_details = customer_details,
         form=form,
         text="Update customer",
         title="Update customer",

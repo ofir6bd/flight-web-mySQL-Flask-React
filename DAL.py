@@ -139,6 +139,17 @@ class DataLayer(object):
             print(f"Error: {e}")
 
 
+    def update_item(self,obj):
+        try:
+            with app.app_context():
+                db.session.add(obj)
+                db.session.commit()
+        except Exception as e:
+            print(f"Error: {e}")
+            return False
+        return True
+
+
 
 # ######################### testing functions
 # with app.app_contex():
