@@ -86,7 +86,6 @@ class FacadeBase(object):
                     all_flight_and_countries.pop(i)
         # drop flights that not match to the destination country
         for i in reversed(range(len(all_flight_and_countries))):
-            print(self.destination_country)
             if self.destination_country != "0":
                 if int(self.destination_country) != int(all_flight_and_countries[i][2].id):
                     all_flight_and_countries.pop(i)

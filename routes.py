@@ -27,7 +27,7 @@ from sqlalchemy.exc import (
 from werkzeug.routing import BuildError
 from Forms_templates.general_forms import search_flights_form
 from per_req_Wrappers import *
-from Routes_files.customer_routes import update_customer,customer_home
+from Routes_files.customer_routes import update_customer,customer_home,book_verification
 from Routes_files.airline_routes import add_flight,company_home,remove_flight
 from Routes_files.admin_routes import add_airline,add_customer,add_admin,remove_airline,remove_customer,remove_admin
 
@@ -143,10 +143,14 @@ def logout():
     session.pop('user_role', None)
     return redirect(url_for('login'))    
 
+
+
+
 # Customer routes
 app.add_url_rule('/customer/<string:customer_details>/', view_func=customer_home,  methods=("GET", "POST"), strict_slashes=False)
 app.add_url_rule('/customer/<string:customer>/update_customer', view_func=update_customer, methods=("GET", "POST"), strict_slashes=False)
 # app.add_url_rule('/<string:customer>/add_ticket', view_func=add_ticket, methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule("/flight/<int:flight_id>/",view_func=book_verification, methods=("GET", "POST"), strict_slashes=False)
 
 # admin routes
 app.add_url_rule('/admin/add_airline', view_func=add_airline,  methods=("GET", "POST"), strict_slashes=False)
@@ -160,6 +164,8 @@ app.add_url_rule('/admin/remove_admin', view_func=remove_admin,  methods=("GET",
 app.add_url_rule('/airline/<string:company_name>/', view_func=company_home,  methods=("GET", "POST"), strict_slashes=False)
 app.add_url_rule('/airline/<string:company_name>/add_flight', view_func=add_flight,  methods=("GET", "POST"), strict_slashes=False)
 app.add_url_rule('/airline/<string:company_name>/remove_flight', view_func=remove_flight,  methods=("GET", "POST"), strict_slashes=False)
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

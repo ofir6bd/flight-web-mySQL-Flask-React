@@ -31,7 +31,9 @@
             <a href="{{url_for('add_flight',company_name=airline_name) }}">Add flight</a>
             <a href="{{url_for('remove_flight',company_name=airline_name) }}">Remove flight</a>
         {% elif session['user_role'] == 'customer': %}
-            <a class="active" href="{{ url_for('customer_home',customer_details=customer_id) }}">Home</a>
+            <a class="active" href="{{ url_for('index') }}">Search Flight</a>
+            
+            
             <a href="">Add </a>
         {% else: %}
             <a class="active" href="{{ url_for('index') }}">Home</a>

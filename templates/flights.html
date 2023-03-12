@@ -19,7 +19,7 @@
               <b>Deparure time:</b> {{flight[0].departure_time}}
             <br>
               <b>Landing time:</b> {{flight[0].landing_time}}
-              <a href=""> Book</a>
+              <a class="active" href="{{ url_for('book_verification',flight_id=flight[0].id) }}">Book</a>
             <br><br>
             </p>
         </div>
