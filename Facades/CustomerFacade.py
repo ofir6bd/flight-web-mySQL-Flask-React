@@ -4,7 +4,7 @@ from Facades.FacadeBase import *
 class CustomerFacade(FacadeBase):
 
     def __init__(self, id=0,email="",user_id="",flight_id="",customer_id=""):
-        super().__init__(id=id,email=email,user_id=user_id,flight_id=flight_id)
+        super().__init__(id=id,email=email,user_id=user_id,flight_id=flight_id,customer_id=customer_id)
 
 
     def update_customer(self,customer):
@@ -23,6 +23,20 @@ class CustomerFacade(FacadeBase):
         return dal_obj.delete_obj(ticket)
 
     def get_my_ticket(self):
-        dal_obj = DataLayer(table1=Tickets,input_attribute='customer_id', input_value=int(self.customer_id))
-        return dal_obj.get_all_by_filter()
+        dal_obj = DataLayer(table1=Tickets,input_attribute='customer_id', input_value=self.customer_id)
+        all_my_tickets =  dal_obj.get_all_by_filter()
+
+        dal_obj = DataLayer() 
+        all_flight_and_countries = dal_obj.join_flights_countries()
+        final_list = [] 
+        for ticket in all_my_tickets:
+            # print(ticket.flight_id)
+            for i in range(len(all_flight_and_countries)):
+                if ticket.flight_id == all_flight_and_countries[i][0].id:
+                    final_list.append(all_flight_and_countries[i])
+        return final_list
+
+
+
+
 

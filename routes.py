@@ -46,7 +46,7 @@ def index():
     if current_user.is_authenticated:    #Do the authentication here
         customer_details = session['user_id']
     else:
-        customer_details="0"
+        customer_details=0
     form = search_flights_form()
     if request.method == "GET":
         return render_template("index.html",
@@ -150,11 +150,11 @@ def logout():
 
 
 # Customer routes
-app.add_url_rule('/customer/<string:customer_details>/', view_func=customer_home,  methods=("GET", "POST"), strict_slashes=False)
-app.add_url_rule('/customer/<string:customer>/update_customer', view_func=update_customer, methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/customer/<int:customer_details>/', view_func=customer_home,  methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/customer/<int:customer>/update_customer', view_func=update_customer, methods=("GET", "POST"), strict_slashes=False)
 # app.add_url_rule('/<string:customer>/add_ticket', view_func=add_ticket, methods=("GET", "POST"), strict_slashes=False)
-app.add_url_rule("/customer/<string:customer_details>/<int:flight_id>/",view_func=book_verification, methods=("GET", "POST"), strict_slashes=False)
-app.add_url_rule("/customer/<string:customer_details>/remove_ticket",view_func=remove_ticket, methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule("/customer/<int:customer_details>/<int:flight_id>/",view_func=book_verification, methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule("/customer/<int:customer_details>/remove_ticket",view_func=remove_ticket, methods=("GET", "POST"), strict_slashes=False)
 
 # admin routes
 app.add_url_rule('/admin/add_airline', view_func=add_airline,  methods=("GET", "POST"), strict_slashes=False)
@@ -168,7 +168,6 @@ app.add_url_rule('/admin/remove_admin', view_func=remove_admin,  methods=("GET",
 app.add_url_rule('/airline/<string:company_name>/', view_func=company_home,  methods=("GET", "POST"), strict_slashes=False)
 app.add_url_rule('/airline/<string:company_name>/add_flight', view_func=add_flight,  methods=("GET", "POST"), strict_slashes=False)
 app.add_url_rule('/airline/<string:company_name>/remove_flight', view_func=remove_flight,  methods=("GET", "POST"), strict_slashes=False)
-
 
 
 if __name__ == "__main__":

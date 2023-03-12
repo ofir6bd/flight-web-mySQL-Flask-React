@@ -133,8 +133,8 @@ class DataLayer(object):
     def get_all_by_filter(self):
         try:
             with app.app_context():
-                flights = self.table1.query.filter_by(**{self.input_attribute: self.input_value}).all()
-                return flights
+                items = self.table1.query.filter_by(**{self.input_attribute: self.input_value}).all()
+                return items
         except Exception as e:
             print(f"Error: {e}")
 

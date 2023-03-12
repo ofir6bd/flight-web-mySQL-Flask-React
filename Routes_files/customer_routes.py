@@ -79,29 +79,29 @@ def remove_ticket(customer_details):
     customer = fac_obj.get_customer_by_user_id()
     fac_obj = CustomerFacade(customer_id=customer.id)
     all_customer_tickets = fac_obj.get_my_ticket()
-    print(all_customer_tickets)
-    # final_list = [(0, 'Choose which ticket')]
-    # for i in all_company_flights:
-    #     dal_obj1 = AirlineFacade(id=i.origin_country_id)
-    #     origin = dal_obj1.get_country_by_id()
-    #     dal_obj2 = AirlineFacade(id=i.destination_country_id)
-    #     destination = dal_obj2.get_country_by_id()
-    #     full_flight_details = f'{company_name}, From:{origin.name}, To:{destination.name}, Departure Date:{i.departure_time}, Landing Date:{i.landing_time}'
-    #     final_list.append((i.id, full_flight_details ))
+    # print(all_customer_tickets)
 
-    # form.flights_detailes.choices = final_list
+    final_list = [(0, 'Choose which ticket')]
+    print(len(all_customer_tickets))
+    for ticket in all_customer_tickets:   
+        full_tickets_details = f'ID:{ticket[0].id}, From:{ticket[1].name}, To:{ticket[2].name}, Departure Date:{ticket[0].departure_time}, Landing Date:{ticket[0].landing_time}'
+        final_list.append((ticket[0].id, full_tickets_details ))
+    
+    form.tickets_detailes.choices = final_list
 
-    # if form.validate_on_submit():
-    #     fac_obj = AirlineFacade(id=form.flights_detailes.data)
-    #     res = fac_obj.remove_flight()
-        
-    #     if res:
-    #         flash(f"Flight removed", "success")
-    #     return redirect(url_for('company_home',company_name=company_name))
-    return render_template("airline/remove_flight.html",
+    if form.validate_on_submit():
+        fac_obj = CustomerFacade(flight_id=form.tickets_detailes.data)
+        ticket = fac_obj.get_ticket_by_flight_id()
+        fac_obj = CustomerFacade(id=ticket.id)
+        res = fac_obj.remove_ticket()
+        if res:
+            flash(f"Ticket removed", "success")
+        return redirect(url_for('customer_home',customer_details=customer_details))
+
+    return render_template("customer/remove_ticket.html",
         customer_details = customer_details,
         form=form,
-        text="Remove flight",
-        title="Remove flight",
-        btn_action="Remove flight",
+        text="Remove ticket",
+        title="Remove ticket",
+        btn_action="Remove ticket",
         )
