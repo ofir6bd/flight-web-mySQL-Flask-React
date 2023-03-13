@@ -50,13 +50,8 @@ def update_customer(customer_details):
         else:
             flash("error occurred", "danger")
         form = search_flights_form()
-        return render_template("index.html",
-                form=form,
-                text="Book your next flight today with us!",
-                title="Home",
-                btn_action="Search",
-                customer_details=customer_details
-                )
+        return redirect(url_for('index',customer_details=customer_details))
+    
     return render_template("customer/update_customer.html",
         first_name = first_name,
         last_name = last_name,
@@ -89,14 +84,8 @@ def book_verification(flight_id,customer_details):
             
         else:
             flash("error occurred", "danger")
-        form = search_flights_form()
-        return render_template("index.html",
-                form=form,
-                text="Book your next flight today with us!",
-                title="Home",
-                btn_action="Search",
-                customer_details=customer_details
-                )
+        # form = search_flights_form()
+        return redirect(url_for('index',customer_details=customer_details))
     
 
 @login_required
