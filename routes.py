@@ -25,7 +25,7 @@ from sqlalchemy.exc import (
     InvalidRequestError,
 )
 from werkzeug.routing import BuildError
-from Forms_templates.general_forms import search_flights_form
+from Forms_templates.general_forms import search_flights_form,register_customer_form
 from per_req_Wrappers import *
 from Routes_files.customer_routes import update_customer,customer_home,book_verification,remove_ticket
 from Routes_files.airline_routes import add_flight,company_home,remove_flight,update_airline,update_flight,update_flight_fields
@@ -148,6 +148,30 @@ def logout():
     session.pop('user_role', None)
     return redirect(url_for('login'))    
 
+@app.route("/register_customer/", methods=("GET", "POST"), strict_slashes=False)
+@login_required
+def register_customer():
+    user_id = session['user_id']
+    form = register_customer_form() 
+    if form.validate_on_submit():
+        # fac_obj = AnonymousFacade(id=form.user.data)
+        # user = fac_obj.get_user_by_id()
+        fac_obj = AnonymousFacade(first_name=form.first_name.data,\
+                                      last_name=form.last_name.data,\
+                                         address=form.address.data,\
+                                             phone_no=form.phone_no.data,\
+                                                 credit_card_no=form.credit_card_no.data,user_id=user_id)
+        res = fac_obj.add_customer()
+        if res:
+            flash(f"Customer registered", "success")
+            session['user_role'] = 'customer'
+        return redirect(url_for('index'))
+    return render_template("register_customer.html",
+        form=form,
+        text="Register customer",
+        title="Register customer",
+        btn_action="Register customer",
+        )
 
 # Customer routes
 app.add_url_rule('/customer/<int:customer_details>/', view_func=customer_home,  methods=("GET", "POST"), strict_slashes=False)

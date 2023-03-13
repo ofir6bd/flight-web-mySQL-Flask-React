@@ -80,3 +80,38 @@ class search_flights_form(FlaskForm):
     #         ),
     #     ]
     # )
+
+
+def get_customer_user_list():
+    final_list = [(0, 'Choose which user')]
+    fac_obj = AnonymousFacade()
+    users = fac_obj.get_all_users()
+    #TODO create join table and not use 2 as filter to if 
+    for i in users:
+        if i.user_role == 3:
+            final_list.append((i.id, i.username))
+    return final_list
+
+class register_customer_form(FlaskForm):
+    first_name = StringField(validators=[DataRequired()])
+    last_name = StringField(validators=[DataRequired()])
+    address = StringField(validators=[DataRequired()])
+    phone_no = StringField(validators=[DataRequired()])
+    credit_card_no = StringField(validators=[DataRequired()])
+    # user = SelectField('Users', coerce=int, validators=[DataRequired()])
+
+    # submit = SubmitField('Add')
+
+    # def __init__(self, *args, **kwargs):
+    #     super(register_customer_form, self).__init__(*args, **kwargs)
+    #     self.user.choices = get_customer_user_list()
+        
+    def validate_phone_no(self, phone_no):
+        item = Customers.query.filter_by(phone_no=phone_no.data).first()
+        if item is not None:
+            raise ValidationError('Please use a different phone_no.')
+        
+    def validate_credit_card_no(self, credit_card_no):
+        item = Customers.query.filter_by(credit_card_no=credit_card_no.data).first()
+        if item is not None:
+            raise ValidationError('Please use a different credit_card_no.')
