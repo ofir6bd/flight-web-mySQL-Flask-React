@@ -30,13 +30,32 @@ class CustomerFacade(FacadeBase):
         dal_obj = DataLayer(table1=Customers,input_attribute='user_id', input_value=int(session['user_id']))
         user = dal_obj.get_one_by_param()
         ticket = Tickets(flight_id=self.flight_id,customer_id=user.id)
-        dal_obj = DataLayer()
-        return dal_obj.insert_obj(ticket)
 
+        # reduce ticket number from remainig tickets
+        dal_obj = DataLayer(table1=Flights,id=self.flight_id)
+        flight = dal_obj.get_by_id()
+        flight.remaining_tickets = flight.remaining_tickets - 1
+        res = dal_obj.update_item(flight)
+        if res:
+            dal_obj = DataLayer()
+            return dal_obj.insert_obj(ticket)
+        else:
+            return res
     def remove_ticket(self):
         dal_obj = DataLayer(id=self.id,table1=Tickets)
         ticket = dal_obj.get_by_id()
-        return dal_obj.delete_obj(ticket)
+        # adding ticket number to remainig tickets
+        dal_obj = DataLayer(table1=Flights,id=ticket.flight_id)
+        flight = dal_obj.get_by_id()
+        flight.remaining_tickets = flight.remaining_tickets + 1
+        res = dal_obj.update_item(flight)
+        if res:
+            dal_obj = DataLayer()
+            return dal_obj.delete_obj(ticket)
+        else:
+            return res
+        
+        
 
     def get_my_ticket(self):
         dal_obj = DataLayer(table1=Tickets,input_attribute='customer_id', input_value=self.customer_id)
@@ -46,7 +65,6 @@ class CustomerFacade(FacadeBase):
         all_flight_and_countries = dal_obj.join_flights_countries()
         final_list = [] 
         for ticket in all_my_tickets:
-            # print(ticket.flight_id)
             for i in range(len(all_flight_and_countries)):
                 if ticket.flight_id == all_flight_and_countries[i][0].id:
                     final_list.append(all_flight_and_countries[i])

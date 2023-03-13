@@ -19,6 +19,9 @@
               <b>Deparure time:</b> {{flight[0].departure_time}}
             <br>
               <b>Landing time:</b> {{flight[0].landing_time}}
+            <br>
+            <b>Remaining tickets:</b> {{flight[0].remaining_tickets}}
+            <br>
               <a class="active" href="{{ url_for('book_verification',customer_details=customer_details,flight_id=flight[0].id) }}">Book</a>
             <br><br>
             </p>

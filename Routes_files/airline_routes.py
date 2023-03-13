@@ -171,14 +171,9 @@ def update_flight_fields(company_name,flight_id):
     landing_time = flight.landing_time
     remaining_tickets = flight.remaining_tickets
 
-    
 
     if form.validate_on_submit():
-        print(form.origin_country_id.data)
-        print(form.destination_country_id.data)
-        print(form.departure_time.data)
-        print(form.landing_time.data)
-        print(form.remaining_tickets.data)
+
         fac_obj = AirlineFacade(name=company_name)
         airline = fac_obj.get_airline_by_name()
         fac_obj = AirlineFacade(id=flight_id,airline_company_id=airline.id,\
