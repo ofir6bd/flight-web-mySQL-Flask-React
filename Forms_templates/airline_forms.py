@@ -122,3 +122,15 @@ class remove_flight_form(FlaskForm):
     
 class update_airline_form(FlaskForm):
     name = StringField()
+
+class company_flights_form(FlaskForm):
+    flights_detailes = SelectField(validators=[DataRequired()], coerce=int)
+
+    # def validate(self, extra_validators=None):
+    #     if not FlaskForm.validate(self, extra_validators=extra_validators):
+    #         return False
+    #     print(self.flights_detailes.data)
+    #     if check_no_ticket(self.flights_detailes.data):
+    #         self.flights_detailes.errors.append('There are tickets for this flight, cannot be removed')
+    #         return False
+    #     return True

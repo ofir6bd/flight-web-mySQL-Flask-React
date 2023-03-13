@@ -8,7 +8,7 @@ current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 # adding the parent directory to the sys.path.
 sys.path.append(parent)
-from Forms_templates.airline_forms import add_flight_form,remove_flight_form,update_airline_form
+from Forms_templates.airline_forms import add_flight_form,remove_flight_form,update_airline_form,company_flights_form
 # from Facades.AnonymousFacade import AnonymousFacade
 # from Facades.CustomerFacade import CustomerFacade
 from flask import Flask, redirect, url_for,request, render_template, session, flash
@@ -111,8 +111,43 @@ def update_airline(company_name):
         return redirect(url_for('company_home',company_name=company_name))
     return render_template("airline/update_airline.html",
         name = name,
+        airline_name = company_name,
         form=form,
         text="Update airline",
         title="Update airline",
         btn_action="Update airline",
+        )
+
+
+@login_required
+@require_airline_role
+def update_flight(company_name):
+    form = company_flights_form() 
+    fac_obj = AirlineFacade(name=company_name)
+    all_company_flights = fac_obj.get_my_flights()
+
+    final_list = [(0, 'Choose which flight')]
+    for i in all_company_flights:
+        dal_obj1 = AirlineFacade(id=i.origin_country_id)
+        origin = dal_obj1.get_country_by_id()
+        dal_obj2 = AirlineFacade(id=i.destination_country_id)
+        destination = dal_obj2.get_country_by_id()
+        full_flight_details = f'{company_name}, From:{origin.name}, To:{destination.name}, Departure Date:{i.departure_time}, Landing Date:{i.landing_time}'
+        final_list.append((i.id, full_flight_details ))
+
+    form.flights_detailes.choices = final_list
+
+    if form.validate_on_submit():
+        # fac_obj = AirlineFacade(id=form.flights_detailes.data)
+        # res = fac_obj.remove_flight()
+        
+        # if res:
+        #     flash(f"Flight removed", "success")
+        return redirect(url_for('company_home',company_name=company_name))
+    return render_template("airline/choose_flight.html",
+        airline_name = company_name,
+        form=form,
+        text="Update flight",
+        title="Update flight",
+        btn_action="Update flight",
         )

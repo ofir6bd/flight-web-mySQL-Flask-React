@@ -28,7 +28,7 @@ from werkzeug.routing import BuildError
 from Forms_templates.general_forms import search_flights_form
 from per_req_Wrappers import *
 from Routes_files.customer_routes import update_customer,customer_home,book_verification,remove_ticket
-from Routes_files.airline_routes import add_flight,company_home,remove_flight,update_airline
+from Routes_files.airline_routes import add_flight,company_home,remove_flight,update_airline,update_flight
 from Routes_files.admin_routes import add_airline,add_customer,add_admin,remove_airline,remove_customer,remove_admin
 
 # from Routes_files.customer_routes import *
@@ -169,6 +169,7 @@ app.add_url_rule('/airline/<string:company_name>/', view_func=company_home,  met
 app.add_url_rule('/airline/<string:company_name>/add_flight', view_func=add_flight,  methods=("GET", "POST"), strict_slashes=False)
 app.add_url_rule('/airline/<string:company_name>/remove_flight', view_func=remove_flight,  methods=("GET", "POST"), strict_slashes=False)
 app.add_url_rule('/airline/<string:company_name>/update_airline', view_func=update_airline,  methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/airline/<string:company_name>/update_flight', view_func=update_flight,  methods=("GET", "POST"), strict_slashes=False)
 
 
 if __name__ == "__main__":
