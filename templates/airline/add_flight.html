@@ -75,6 +75,15 @@
                 </div>
                 {% endfor%}
 
+                <div class="form-group mb-3">
+                    {{ form.remaining_tickets(class_="form-control",placeholder="remaining_tickets")}}
+                </div>
+                {% for error in form.remaining_tickets.errors %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{ error }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor%}
 
                 <div class="text-center">
 

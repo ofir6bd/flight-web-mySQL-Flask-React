@@ -88,6 +88,7 @@ class add_flight_form(FlaskForm):
     destination_country_id = SelectField(coerce=int, validators=[DataRequired()])
     departure_time = DateTimeLocalField( validators=[InputRequired()],format='%Y-%m-%dT%H:%M')
     landing_time = DateTimeLocalField(validators=[InputRequired()],format='%Y-%m-%dT%H:%M')
+    remaining_tickets = IntegerField(validators=[DataRequired()])
     
     def __init__(self, *args, **kwargs):
         super(add_flight_form, self).__init__(*args, **kwargs)

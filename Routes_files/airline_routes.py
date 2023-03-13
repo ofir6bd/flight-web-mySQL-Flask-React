@@ -46,7 +46,7 @@ def add_flight(company_name):
                                 destination_country_id=destination_country_id.id,
                                 departure_time=form.departure_time.data,
                                 landing_time=form.landing_time.data,
-                                remaining_tickets=2)
+                                remaining_tickets=form.remaining_tickets.data)
         res = fac_obj.add_flight()
         if res:
             flash(f"Flight added", "success")

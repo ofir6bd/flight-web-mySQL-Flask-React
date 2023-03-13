@@ -106,6 +106,12 @@ class FacadeBase(object):
                 if not -1<=((request_date - flight_date).days)<=3:
                     all_flight_and_countries.pop(i)
 
+        # drop flights that no tickets available
+        for i in reversed(range(len(all_flight_and_countries))):
+            tickets = all_flight_and_countries[i][0].remaining_tickets
+            if tickets == 0:
+                all_flight_and_countries.pop(i)
+
         return all_flight_and_countries
 
     def get_all_airlines(self):

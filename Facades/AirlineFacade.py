@@ -22,7 +22,7 @@ class AirlineFacade(FacadeBase):
                                 destination_country_id=self.destination_country_id,
                                 departure_time=self.departure_time,
                                 landing_time=self.landing_time,
-                                remaining_tickets=2)
+                                remaining_tickets=self.remaining_tickets)
         dal_obj = DataLayer()
         return dal_obj.insert_obj(flight)
 
