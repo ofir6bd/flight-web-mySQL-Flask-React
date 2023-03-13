@@ -8,7 +8,7 @@ current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 # adding the parent directory to the sys.path.
 sys.path.append(parent)
-from Forms_templates.airline_forms import add_flight_form,remove_flight_form,update_airline_form,company_flights_form
+from Forms_templates.airline_forms import add_flight_form,remove_flight_form,update_airline_form,company_flights_form,update_flight_form
 # from Facades.AnonymousFacade import AnonymousFacade
 # from Facades.CustomerFacade import CustomerFacade
 from flask import Flask, redirect, url_for,request, render_template, session, flash
@@ -25,6 +25,7 @@ def company_home(company_name):
         text=company_name,
         title=company_name,
         )
+
 
 @login_required
 @require_airline_role
@@ -119,9 +120,12 @@ def update_airline(company_name):
         )
 
 
+
+
 @login_required
 @require_airline_role
 def update_flight(company_name):
+    
     form = company_flights_form() 
     fac_obj = AirlineFacade(name=company_name)
     all_company_flights = fac_obj.get_my_flights()
@@ -136,15 +140,66 @@ def update_flight(company_name):
         final_list.append((i.id, full_flight_details ))
 
     form.flights_detailes.choices = final_list
+    selected_flight_id = form.flights_detailes.data
 
     if form.validate_on_submit():
-        # fac_obj = AirlineFacade(id=form.flights_detailes.data)
-        # res = fac_obj.remove_flight()
+        return redirect(url_for('update_flight_fields',company_name=company_name,flight_id=selected_flight_id))
         
-        # if res:
-        #     flash(f"Flight removed", "success")
-        return redirect(url_for('company_home',company_name=company_name))
     return render_template("airline/choose_flight.html",
+        airline_name = company_name,
+        form=form,
+        text="Update flight",
+        title="Update flight",
+        btn_action="Update flight",
+        )
+    
+
+@login_required
+@require_airline_role
+def update_flight_fields(company_name,flight_id):
+    form = update_flight_form() 
+    fac_obj = AirlineFacade(id=flight_id)
+    flight = fac_obj.get_flight_by_id()
+    origin_country_id = flight.origin_country_id
+    dal_obj = AirlineFacade(id=origin_country_id)
+    origin_country = dal_obj.get_country_by_id()
+
+    destination_country_id = flight.destination_country_id
+    dal_obj = AirlineFacade(id=destination_country_id)
+    destination_country = dal_obj.get_country_by_id()
+    departure_time = flight.departure_time
+    landing_time = flight.landing_time
+    remaining_tickets = flight.remaining_tickets
+
+    
+
+    if form.validate_on_submit():
+        print(form.origin_country_id.data)
+        print(form.destination_country_id.data)
+        print(form.departure_time.data)
+        print(form.landing_time.data)
+        print(form.remaining_tickets.data)
+        fac_obj = AirlineFacade(name=company_name)
+        airline = fac_obj.get_airline_by_name()
+        fac_obj = AirlineFacade(id=flight_id,airline_company_id=airline.id,\
+                                origin_country_id=form.origin_country_id.data,\
+                                destination_country_id=form.destination_country_id.data,\
+                                departure_time=form.departure_time.data,\
+                                landing_time=form.landing_time.data,\
+                                remaining_tickets=form.remaining_tickets.data)
+        
+        res = fac_obj.update_flight()
+        if res:
+            flash(f"Airline detailes updated", "success")
+        else:
+            flash("error occurred", "danger")
+        return redirect(url_for('company_home',company_name=company_name))
+    return render_template("airline/update_flight.html",
+        origin_country=origin_country.name,
+        destination_country = destination_country.name,
+        departure_time = departure_time,
+        landing_time=landing_time,
+        remaining_tickets=remaining_tickets,
         airline_name = company_name,
         form=form,
         text="Update flight",

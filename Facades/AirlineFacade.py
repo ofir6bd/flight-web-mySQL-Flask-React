@@ -26,8 +26,22 @@ class AirlineFacade(FacadeBase):
         dal_obj = DataLayer()
         return dal_obj.insert_obj(flight)
 
-    def update_flight(flight):
-        pass
+    def update_flight(self):
+        dal_obj = DataLayer(id = self.id,table1=Flights)
+        flight = dal_obj.get_by_id()
+        if (self.origin_country_id != flight.origin_country_id) and self.origin_country_id:
+            flight.origin_country_id = self.origin_country_id
+        if (self.destination_country_id != flight.destination_country_id) and self.destination_country_id:
+            flight.destination_country_id = self.destination_country_id
+        if (self.departure_time != flight.departure_time) and self.departure_time:
+            flight.departure_time = self.departure_time
+        if (self.landing_time != flight.landing_time) and self.landing_time:
+            flight.landing_time = self.landing_time
+        if (self.remaining_tickets != flight.remaining_tickets) and self.remaining_tickets:
+            flight.remaining_tickets = self.remaining_tickets
+        
+        dal_obj = DataLayer()
+        return dal_obj.update_item(flight)
 
     def remove_flight(self):
         dal_obj = DataLayer(id=self.id,table1=Flights)

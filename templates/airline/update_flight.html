@@ -24,16 +24,61 @@
                     <h3 class="text-primary">{{ text }}</h3>
                 </div>
 
-                <label for="">Name:</label>
+                <label for="">Origin country:       "{{origin_country}}"</label>
                 <div class="form-group mb-3">
-                    {{ form.name(class_="form-control",placeholder=name)}}
+                    {{ form.origin_country_id(class_="form-control",placeholder=origin_country_id)}}
                 </div>
-                {% for error in form.name.errors %}
+                {% for error in form.origin_country_id.errors %}
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     {{ error }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 {% endfor%}
+
+                <label for="">Destination country:      "{{destination_country}}"</label>
+                <div class="form-group mb-3">
+                    {{ form.destination_country_id(class_="form-control",placeholder=destination_country_id)}}
+                </div>
+                {% for error in form.destination_country_id.errors %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{ error }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor%}
+
+                <label for="">Departure time:       "{{departure_time}}"</label>
+                <div class="form-group mb-3">
+                    {{ form.departure_time(class_="form-control",placeholder=departure_time)}}
+                </div>
+                {% for error in form.departure_time.errors %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{ error }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor%}
+
+                <label for="">Landing time:    "{{landing_time}}"</label>
+                <div class="form-group mb-3">
+                    {{ form.landing_time(class_="form-control",placeholder=landing_time)}}
+                </div>
+                {% for error in form.landing_time.errors %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{ error }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor%}
+
+                <label for="">remaining_tickets:      "{{remaining_tickets}}"</label>
+                <div class="form-group mb-3">
+                    {{ form.remaining_tickets(class_="form-control",placeholder=remaining_tickets)}}
+                </div>
+                {% for error in form.remaining_tickets.errors %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{ error }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor%}
+
 
 
                 <div class="text-center">

@@ -32,37 +32,37 @@ from Facades.AirlineFacade import AirlineFacade
 from DAL import DataLayer
 from wtforms.validators import DataRequired
 
-class add_airline_form(FlaskForm):
-    username = StringField(
-        validators=[
-            InputRequired(),
-            Length(3, 20, message="Please provide a valid name"),
-            Regexp(
-                "^[A-Za-z][A-Za-z0-9_.]*$",
-                0,
-                "Usernames must have only letters, " "numbers, dots or underscores",
-            ),
-        ]
-    )
-    email = StringField(validators=[InputRequired(), Email(), Length(1, 64)])
-    password = PasswordField(validators=[InputRequired(), Length(8, 72)])
-    cpassword = PasswordField(
-        validators=[
-            InputRequired(),
-            Length(8, 72),
-            EqualTo("password", message="Passwords must match !"),
-        ]
-    )
+# class add_airline_form(FlaskForm):
+#     username = StringField(
+#         validators=[
+#             InputRequired(),
+#             Length(3, 20, message="Please provide a valid name"),
+#             Regexp(
+#                 "^[A-Za-z][A-Za-z0-9_.]*$",
+#                 0,
+#                 "Usernames must have only letters, " "numbers, dots or underscores",
+#             ),
+#         ]
+#     )
+#     email = StringField(validators=[InputRequired(), Email(), Length(1, 64)])
+#     password = PasswordField(validators=[InputRequired(), Length(8, 72)])
+#     cpassword = PasswordField(
+#         validators=[
+#             InputRequired(),
+#             Length(8, 72),
+#             EqualTo("password", message="Passwords must match !"),
+#         ]
+#     )
 
-    def validate_email(self, email):
-        fac_obj = AnonymousFacade(email=email.data)
-        if fac_obj.get_user_by_email():
-            raise ValidationError("Email already registered!")
+#     def validate_email(self, email):
+#         fac_obj = AnonymousFacade(email=email.data)
+#         if fac_obj.get_user_by_email():
+#             raise ValidationError("Email already registered!")
 
-    def validate_username(self, username):
-        fac_obj = AnonymousFacade(username=username.data)
-        if fac_obj.get_user_by_username():
-            raise ValidationError("Username already taken!")
+#     def validate_username(self, username):
+#         fac_obj = AnonymousFacade(username=username.data)
+#         if fac_obj.get_user_by_username():
+#             raise ValidationError("Username already taken!")
         
 def get_all_airlines():
     final_list = [(0, 'Airline company')]
@@ -126,11 +126,16 @@ class update_airline_form(FlaskForm):
 class company_flights_form(FlaskForm):
     flights_detailes = SelectField(validators=[DataRequired()], coerce=int)
 
-    # def validate(self, extra_validators=None):
-    #     if not FlaskForm.validate(self, extra_validators=extra_validators):
-    #         return False
-    #     print(self.flights_detailes.data)
-    #     if check_no_ticket(self.flights_detailes.data):
-    #         self.flights_detailes.errors.append('There are tickets for this flight, cannot be removed')
-    #         return False
-    #     return True
+
+class update_flight_form(FlaskForm):
+
+    origin_country_id = SelectField(coerce=int)
+    destination_country_id = SelectField(coerce=int)
+    departure_time = DateTimeLocalField( format='%Y-%m-%dT%H:%M')
+    landing_time = DateTimeLocalField(format='%Y-%m-%dT%H:%M')
+    remaining_tickets = IntegerField()
+
+    def __init__(self, *args, **kwargs):
+        super(update_flight_form, self).__init__(*args, **kwargs)
+        self.origin_country_id.choices = get_all_countries()
+        self.destination_country_id.choices = get_all_countries()
