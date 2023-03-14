@@ -96,7 +96,6 @@ def remove_ticket(customer_details):
     customer = fac_obj.get_customer_by_user_id()
     fac_obj = CustomerFacade(customer_id=customer.id)
     all_customer_tickets = fac_obj.get_my_ticket()
-    # print(all_customer_tickets)
 
     final_list = [(0, 'Choose which ticket')]
     print(len(all_customer_tickets))
