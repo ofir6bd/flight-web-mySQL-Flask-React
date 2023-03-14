@@ -10,14 +10,16 @@ parent = os.path.dirname(current)
 sys.path.append(parent)
 from DAL import DataLayer
 from models import UserRoles,Users,Administrators,Customers, Countries,AirlineCompanies,Flights,Tickets
+import json
 
 class FacadeBase(object):
 
-    def __init__(self, id=0,name="", username="", password="", email="", role_name="",\
+    def __init__(self,api=False, id=0,name="", username="", password="", email="", role_name="",\
                  user_id="",user_role="", first_name="", last_name="", address="", phone_no="",\
                       credit_card_no="",origin_country="",origin_country_id="",\
                         destination_country="", destination_country_id="",\
                       departure_time=None,flight_id="",landing_time="",travelers="",remaining_tickets="",airline_company_id="",customer_id=""):
+        self.api = api
         self.id = id
         self.name = name
         self.username = username
@@ -43,8 +45,9 @@ class FacadeBase(object):
         self.airline_company_id = airline_company_id
         self.customer_id = customer_id
 
+    
     def get_all_flights(self):
-        dal_obj = DataLayer(table1=Flights)      
+        dal_obj = DataLayer(table1=Flights, api=self.api)      
         return dal_obj.get_all()
     
     def get_all_user_roles(self):
@@ -56,9 +59,9 @@ class FacadeBase(object):
         return dal_obj.get_all()
     
     def get_all_countries(self):
-        dal_obj = DataLayer(table1=Countries)      
-        return dal_obj.get_all()
-
+        dal_obj = DataLayer(table1=Countries, api=self.api)  
+        return dal_obj.get_all()   
+    
     def get_all_customers(self):
         dal_obj = DataLayer(table1=Customers)      
         return dal_obj.get_all()
@@ -129,9 +132,6 @@ class FacadeBase(object):
         dal_obj = DataLayer(table1=AirlineCompanies,input_attribute='name', input_value=self.name)
         return dal_obj.get_one_by_param()
 
-    def get_all_countries(self):
-        dal_obj = DataLayer(table1=Countries)      
-        return dal_obj.get_all()
 
     def get_country_by_id(self):
         dal_obj = DataLayer(table1=Countries,id=self.id)      

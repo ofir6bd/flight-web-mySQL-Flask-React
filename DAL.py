@@ -13,6 +13,7 @@ from sqlalchemy.exc import (
 )
 from werkzeug.routing import BuildError
 from sqlalchemy.orm import aliased
+from flask import jsonify
 
 app=create_app()
 
@@ -36,7 +37,8 @@ def customError(e):
 
 class DataLayer(object):
 
-    def __init__(self, id=0, table1="",table_column1="",table2="",table_column2="",input_attribute="",input_value="",username="",password=""):
+    def __init__(self,api=False, id=0, table1="",table_column1="",table2="",table_column2="",input_attribute="",input_value="",username="",password=""):
+        self.api = api
         self.id = id
         self.table1 = table1
         self.table_column1 = table_column1
@@ -67,10 +69,12 @@ class DataLayer(object):
     def get_all(self):
         try:
             with app.app_context():
-                item = self.table1.query.all()
+                items = self.table1.query.all()
+                if self.api:
+                    return jsonify([item.toJson() for item in items])    
         except Exception as e:
             print(f"Error: {e}")
-        return item
+        return items
     
     @staticmethod
     def insert_obj(obj):
@@ -120,15 +124,15 @@ class DataLayer(object):
         except Exception as e:
             print(f"Error: {e}")
 
-    @staticmethod
-    def join_flights_countries():
+    
+    def join_flights_countries(self):
         origin_country = aliased(Countries)
         dest_country = aliased(Countries)
-        flight_country_join = db.session.query(Flights, origin_country, dest_country)\
+        items = db.session.query(Flights, origin_country, dest_country)\
                         .join(origin_country, Flights.origin_country_id == origin_country.id)\
                         .join(dest_country, Flights.destination_country_id == dest_country.id)\
                         .all()
-        return flight_country_join
+        return items
     
     def get_all_by_filter(self):
         try:

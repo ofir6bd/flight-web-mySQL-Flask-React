@@ -1,37 +1,21 @@
 from flask import Flask, redirect, url_for,request, render_template, session, flash
-# from flask_mysqldb import MySQL
-# import mysql.connector
-# from flask_sqlalchemy import SQLAlchemy
+
 from flask_login import UserMixin, login_user, LoginManager,login_required, logout_user,current_user
 from Facades.AnonymousFacade import AnonymousFacade
 from Facades.CustomerFacade import CustomerFacade
-# from flask_wtf import FlaskForm
-# from wtforms import StringField, PasswordField,SubmitField
-# from wtforms.validators import DataRequired
-import hashlib
-from flask import Flask
+# import hashlib
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask_login import UserMixin
 from flask_bcrypt import Bcrypt,generate_password_hash, check_password_hash
 from auth_forms import login_form,register_form
 from app import create_app,db,login_manager,bcrypt
-from models import UserRoles,Users,Administrators,Customers, Countries,AirlineCompanies,Flights,Tickets
-from sqlalchemy.exc import (
-    IntegrityError,
-    DataError,
-    DatabaseError,
-    InterfaceError,
-    InvalidRequestError,
-)
-from werkzeug.routing import BuildError
 from Forms_templates.general_forms import search_flights_form,register_customer_form
 from per_req_Wrappers import *
 from Routes_files.customer_routes import update_customer,customer_home,book_verification,remove_ticket
 from Routes_files.airline_routes import add_flight,company_home,remove_flight,update_airline,update_flight,update_flight_fields
 from Routes_files.admin_routes import add_airline,add_customer,add_admin,remove_airline,remove_customer,remove_admin
-
-# from Routes_files.customer_routes import *
+from Routes_files.api_routes import *
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -194,6 +178,11 @@ app.add_url_rule('/airline/<string:company_name>/remove_flight', view_func=remov
 app.add_url_rule('/airline/<string:company_name>/update_airline', view_func=update_airline,  methods=("GET", "POST"), strict_slashes=False)
 app.add_url_rule('/airline/<string:company_name>/update_flight', view_func=update_flight,  methods=("GET", "POST"), strict_slashes=False)
 app.add_url_rule('/airline/<string:company_name>/<int:flight_id>/update_flight_fields', view_func=update_flight_fields,  methods=("GET", "POST"), strict_slashes=False)
+
+# API requests
+app.add_url_rule('/API/countries', view_func=api_get_all_countries, methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/API/flights', view_func=api_get_all_flights, methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/API/my_flights', view_func=api_get_my_flights, methods=("GET", "POST"), strict_slashes=False)
 
 
 if __name__ == "__main__":
