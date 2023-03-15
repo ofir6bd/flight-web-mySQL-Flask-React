@@ -73,13 +73,14 @@ class CustomerFacade(FacadeBase):
 
         if self.api:
             lst = []
-
-            for i in range(len(final_list)):
-                temp = [all_flight_and_countries[i][0].toJson(),\
-                        all_flight_and_countries[i][1].toJson(),\
-                            all_flight_and_countries[i][2].toJson()]
-                lst.append(temp)
-                # print(lst)
+            for ticket in all_my_tickets:
+                for i in range(len(final_list)):
+                    if ticket.flight_id == final_list[i][0].id:
+                        temp = [ticket.toJson(),\
+                                final_list[i][0].toJson(),\
+                                final_list[i][1].toJson(),\
+                                    final_list[i][2].toJson()]
+                        lst.append(temp)
             return jsonify(lst)    
 
         return final_list

@@ -1,4 +1,8 @@
-# Register route
+"""
+That data can be used to GET, PUT, POST and DELETE data types,
+ which refers to the reading, updating, creating and deleting
+ of operations concerning resources.
+"""# Register route
 import sys
 import os
  
@@ -70,7 +74,7 @@ def api_get_all_flights():
     dal_obj = AnonymousFacade(api=True)
     return dal_obj.get_all_flights()
 
-def api_get_my_tickets(email=None,password=None):
+def api_get_my_tickets():
     email = request.args.get('email')
     password = request.args.get('password')
     api_login(email,password)
@@ -80,5 +84,23 @@ def api_get_my_tickets(email=None,password=None):
         if session['user_role'] == 'customer':
             fac_obj = CustomerFacade(api=True,customer_id=session['customer_id'])
             return fac_obj.get_my_ticket()
+        
+def api_delete_my_ticket(ticket_id):
+    email = request.args.get('email')
+    password = request.args.get('password')
+    api_login(email,password)
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:
+        if session['user_role'] == 'customer':
+            fac_obj = CustomerFacade(api=True,id=ticket_id)
+            ticket = fac_obj.get_ticket_by_id()
+            if ticket.customer_id == session['customer_id']:
+                res = fac_obj.remove_ticket()
+                if res:
+                   return jsonify({ 'result': 'Ticket removed'}) 
+    
+        
+
             
 

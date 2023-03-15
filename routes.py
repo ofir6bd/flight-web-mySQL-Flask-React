@@ -183,9 +183,10 @@ app.add_url_rule('/airline/<string:company_name>/update_flight', view_func=updat
 app.add_url_rule('/airline/<string:company_name>/<int:flight_id>/update_flight_fields', view_func=update_flight_fields,  methods=("GET", "POST"), strict_slashes=False)
 
 # API requests
-app.add_url_rule('/API/countries', view_func=api_get_all_countries, methods=("GET", "POST"), strict_slashes=False)
-app.add_url_rule('/API/flights', view_func=api_get_all_flights, methods=("GET", "POST"), strict_slashes=False)
-app.add_url_rule('/API/my_flights', view_func=api_get_my_tickets, methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/API/countries', view_func=api_get_all_countries, methods=["GET"], strict_slashes=False)
+app.add_url_rule('/API/flights', view_func=api_get_all_flights, methods=["GET"], strict_slashes=False)
+app.add_url_rule('/API/my_flights', view_func=api_get_my_tickets, methods=["GET"], strict_slashes=False)
+app.add_url_rule('/API/delete_my_ticket/<int:ticket_id>/', view_func=api_delete_my_ticket, methods=["DELETE"], strict_slashes=False)
 
 
 if __name__ == "__main__":
