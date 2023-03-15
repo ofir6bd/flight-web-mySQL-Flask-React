@@ -1,11 +1,14 @@
 from flask import session
 from Facades.FacadeBase import *
+from flask import jsonify
+
+
 
 class CustomerFacade(FacadeBase):
 
-    def __init__(self, id=0,email="",user_id="",flight_id="",customer_id="",first_name=None\
+    def __init__(self,api=False, id=0,email="",user_id="",flight_id="",customer_id="",first_name=None\
                  ,last_name="",address="",phone_no="",credit_card_no=""):
-        super().__init__(id=id,email=email,user_id=user_id,flight_id=flight_id,customer_id=customer_id\
+        super().__init__(api=api,id=id,email=email,user_id=user_id,flight_id=flight_id,customer_id=customer_id\
                          ,first_name=first_name,last_name=last_name,address=address,\
                             phone_no=phone_no,credit_card_no=credit_card_no)
 
@@ -56,11 +59,10 @@ class CustomerFacade(FacadeBase):
             return res
         
         
-
     def get_my_ticket(self):
-        dal_obj = DataLayer(table1=Tickets,input_attribute='customer_id', input_value=self.customer_id)
+        dal_obj = DataLayer(api=self.api,table1=Tickets,input_attribute='customer_id', input_value=self.customer_id)
         all_my_tickets =  dal_obj.get_all_by_filter()
-
+        
         dal_obj = DataLayer() 
         all_flight_and_countries = dal_obj.join_flights_countries()
         final_list = [] 
@@ -68,6 +70,18 @@ class CustomerFacade(FacadeBase):
             for i in range(len(all_flight_and_countries)):
                 if ticket.flight_id == all_flight_and_countries[i][0].id:
                     final_list.append(all_flight_and_countries[i])
+
+        if self.api:
+            lst = []
+
+            for i in range(len(final_list)):
+                temp = [all_flight_and_countries[i][0].toJson(),\
+                        all_flight_and_countries[i][1].toJson(),\
+                            all_flight_and_countries[i][2].toJson()]
+                lst.append(temp)
+                # print(lst)
+            return jsonify(lst)    
+
         return final_list
 
 

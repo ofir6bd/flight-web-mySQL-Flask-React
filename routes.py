@@ -130,6 +130,9 @@ def logout():
     logout_user()
     session.pop('user_id', None)
     session.pop('user_role', None)
+    session.pop('admin_id', None)
+    session.pop('airline_id', None)
+    session.pop('customer_id', None)
     return redirect(url_for('login'))    
 
 @app.route("/register_customer/", methods=("GET", "POST"), strict_slashes=False)
@@ -182,7 +185,7 @@ app.add_url_rule('/airline/<string:company_name>/<int:flight_id>/update_flight_f
 # API requests
 app.add_url_rule('/API/countries', view_func=api_get_all_countries, methods=("GET", "POST"), strict_slashes=False)
 app.add_url_rule('/API/flights', view_func=api_get_all_flights, methods=("GET", "POST"), strict_slashes=False)
-app.add_url_rule('/API/my_flights', view_func=api_get_my_flights, methods=("GET", "POST"), strict_slashes=False)
+app.add_url_rule('/API/my_flights', view_func=api_get_my_tickets, methods=("GET", "POST"), strict_slashes=False)
 
 
 if __name__ == "__main__":
