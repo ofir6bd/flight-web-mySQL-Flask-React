@@ -35,11 +35,57 @@ from Facades.CustomerFacade import CustomerFacade
 #     flight_id    
 
 class update_customer_form(FlaskForm):
-    first_name = StringField()
-    last_name = StringField()
-    address = StringField()
-    phone_no = StringField()
-    credit_card_no = StringField()
+    first_name = StringField(validators=[Length(3, 20, message="Please provide a valid name"),
+            Regexp(
+                "^[A-Za-z][A-Za-z_.]*$",
+                0,
+                "first name must have only letters, " "dots or underscores",
+            ),
+        ])
+    last_name = StringField(validators=[Length(3, 20, message="Please provide a valid name"),
+            Regexp(
+                "^[A-Za-z][A-Za-z_.]*$",
+                0,
+                "last name must have only letters, " "dots or underscores",
+            ),
+        ])
+    address = StringField(validators=[Length(3, 20, message="Please provide a valid name"),
+            Regexp(
+                "^[A-Za-z][A-Za-z_.]*$",
+                0,
+                "address must have only letters, " "dots or underscores",
+            ),
+        ])
+    phone_no = StringField(validators=[Length(10,10, message="Please provide a valid phone number"),
+            Regexp(
+                "^[0-9]{10}$",
+                0,
+                "phone no must have 10 digits only",
+            ),
+        ])
+    credit_card_no = StringField(validators=[Length(16,16, message="Please provide a valid phone number"),
+            Regexp(
+                "^[0-9]{16}$",
+                0,
+                "credit card no must have 16 digits only",
+            ),
+        ])
+
+
+    def validate_phone_no(self, phone_no):
+        obj = AnonymousFacade(phone_no=phone_no.data)
+        item = obj.get_customer_by_phone_no()
+        if item is not None:
+            raise ValidationError('Please use a different phone_no.')
+
+    def validate_credit_card_no(self, credit_card_no):
+        obj = AnonymousFacade(credit_card_no=credit_card_no.data)
+        item = obj.get_customer_by_credit_card_no()
+        if item is not None:
+            raise ValidationError('Please use a different credit_card_no.')
+   
+    
+
     # email = StringField(validators=[InputRequired(), Email(), Length(1, 64)])
     # password = PasswordField(validators=[InputRequired(), Length(8, 72)])
     # cpassword = PasswordField(

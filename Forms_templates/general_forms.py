@@ -107,11 +107,13 @@ class register_customer_form(FlaskForm):
     #     self.user.choices = get_customer_user_list()
         
     def validate_phone_no(self, phone_no):
-        item = Customers.query.filter_by(phone_no=phone_no.data).first()
+        obj = AnonymousFacade(phone_no=phone_no.data)
+        item = obj.get_customer_by_phone_no()
         if item is not None:
             raise ValidationError('Please use a different phone_no.')
-        
+
     def validate_credit_card_no(self, credit_card_no):
-        item = Customers.query.filter_by(credit_card_no=credit_card_no.data).first()
+        obj = AnonymousFacade(credit_card_no=credit_card_no.data)
+        item = obj.get_customer_by_credit_card_no()
         if item is not None:
             raise ValidationError('Please use a different credit_card_no.')

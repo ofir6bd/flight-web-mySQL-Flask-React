@@ -38,9 +38,9 @@
             <a href="{{ url_for('update_customer',customer_details=customer_details) }}">Update customer</a>
         {% else: %}
             <a class="active" href="{{ url_for('index') }}">Home</a>
-            <a href="{{url_for('register_customer')}}">Add customer</a>
+            <a href="{{url_for('register_customer')}}">register as customer</a>
         {% endif %}
-        <a href="#about">About</a>
+        <!-- <a href="#about">About</a> -->
         {% if current_user.is_authenticated %}
             <h5>Welcome {{ current_user.username }}</h5>
             <a href="{{url_for('logout')}}">Logout</a>

@@ -36,9 +36,6 @@ def require_customer_role(func):
     return wrapper
 
 
-
-
-
 def api_login(email,password):
     fac_obj = AnonymousFacade(email=email)
     user = fac_obj.get_user_by_email()

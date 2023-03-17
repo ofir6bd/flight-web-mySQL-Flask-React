@@ -3,10 +3,10 @@ from Facades.FacadeBase import *
 
 class AnonymousFacade(FacadeBase):
 
-    def __init__(self,api=False,id="", username="", password="", email="",user_role="",user_id="",\
+    def __init__(self,api=False,id="",name="",username="", password="", email="",user_role="",user_id="",\
                 origin_country="",destination_country="",departure_time=None,\
                 landing_time="",travelers="",first_name="",last_name="",address="",phone_no="",credit_card_no=""):
-        super().__init__(api=api,id=id,username=username,password=password,email=email,\
+        super().__init__(api=api,id=id,name=name,username=username,password=password,email=email,\
                         user_role=user_role,user_id=user_id,origin_country=origin_country,\
                         destination_country=destination_country,departure_time=departure_time,\
                         landing_time=landing_time,travelers=travelers,first_name=first_name,last_name=last_name,address=address\

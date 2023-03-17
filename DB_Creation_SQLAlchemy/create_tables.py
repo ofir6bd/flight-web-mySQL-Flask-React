@@ -125,9 +125,6 @@ if __name__ == '__main__':
 
         for i in range(len(users_list)):
             try:
-                # usr_role = UserRoles.query.filter_by(role_name='Customer').first()
-                # print(usr_role.id)
-                # db.session.add(Users(username=users_list[i][0],password=users_list[i][1],email=users_list[i][2],user_role=usr_role.id))
                 user = Users(username=users_list[i][0],password=users_list[i][1],email=users_list[i][2],user_role=users_list[i][3])
                 db.session.add(user)
                 db.session.commit()
