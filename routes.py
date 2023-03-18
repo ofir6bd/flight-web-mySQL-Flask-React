@@ -15,7 +15,10 @@ from per_req_Wrappers import *
 from Routes_files.customer_routes import update_customer,customer_home,book_verification,remove_ticket
 from Routes_files.airline_routes import add_flight,company_home,remove_flight,update_airline,update_flight,update_flight_fields
 from Routes_files.admin_routes import add_airline,add_customer,add_admin,remove_airline,remove_customer,remove_admin
-from Routes_files.api_routes import *
+from API_routes.general_api import *
+from API_routes.customer_api import *
+from API_routes.airline_api import *
+from API_routes.admin_api import *
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -182,15 +185,22 @@ app.add_url_rule('/airline/<string:company_name>/update_airline', view_func=upda
 app.add_url_rule('/airline/<string:company_name>/update_flight', view_func=update_flight,  methods=("GET", "POST"), strict_slashes=False)
 app.add_url_rule('/airline/<string:company_name>/<int:flight_id>/update_flight_fields', view_func=update_flight_fields,  methods=("GET", "POST"), strict_slashes=False)
 
-# API requests
+############################ API requests ###################################
+# General API
 app.add_url_rule('/API/countries', view_func=api_get_all_countries, methods=["GET"], strict_slashes=False)
 app.add_url_rule('/API/flights', view_func=api_get_all_flights, methods=["GET"], strict_slashes=False)
-app.add_url_rule('/API/my_flights', view_func=api_get_my_tickets, methods=["GET"], strict_slashes=False)
-app.add_url_rule('/API/delete_my_ticket/<int:ticket_id>/', view_func=api_delete_my_ticket, methods=["DELETE"], strict_slashes=False)
-app.add_url_rule('/API/delete_my_flight/<int:flight_id>/', view_func=api_delete_my_flight, methods=["DELETE"], strict_slashes=False)
-app.add_url_rule('/API/delete_customer/<int:customer_id>/', view_func=api_delete_customer, methods=["DELETE"], strict_slashes=False)
-app.add_url_rule('/API/delete_airline/<int:airline_id>/', view_func=api_delete_airline, methods=["DELETE"], strict_slashes=False)
-app.add_url_rule('/API/delete_admin/<int:admin_id>/', view_func=api_delete_admin, methods=["DELETE"], strict_slashes=False)
+
+# Customer API
+app.add_url_rule('/API/customer/my_flights', view_func=api_get_my_tickets, methods=["GET"], strict_slashes=False)
+app.add_url_rule('/API/customer/delete_my_ticket/<int:ticket_id>/', view_func=api_delete_my_ticket, methods=["DELETE"], strict_slashes=False)
+
+# Admin API
+app.add_url_rule('/API/admin/delete_customer/<int:customer_id>/', view_func=api_delete_customer, methods=["DELETE"], strict_slashes=False)
+app.add_url_rule('/API/admin/delete_airline/<int:airline_id>/', view_func=api_delete_airline, methods=["DELETE"], strict_slashes=False)
+app.add_url_rule('/API/admin/delete_admin/<int:admin_id>/', view_func=api_delete_admin, methods=["DELETE"], strict_slashes=False)
+
+# Airline API
+app.add_url_rule('/API/airline/delete_my_flight/<int:flight_id>/', view_func=api_delete_my_flight, methods=["DELETE"], strict_slashes=False)
 
 
 if __name__ == "__main__":
