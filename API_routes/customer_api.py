@@ -13,8 +13,6 @@ parent = os.path.dirname(current)
 # adding the parent directory to the sys.path.
 sys.path.append(parent)
 from Forms_templates.customer_forms import update_customer_form,remove_ticket_form
-# from Facades.AnonymousFacade import AnonymousFacade
-# from Facades.CustomerFacade import CustomerFacade
 from flask import Flask, redirect, url_for,request, render_template, session, flash
 from flask_login import UserMixin, login_user, LoginManager,login_required, logout_user,current_user
 from per_req_Wrappers import require_customer_role

@@ -63,7 +63,7 @@ class FacadeBase(object):
         return dal_obj.get_all()   
     
     def get_all_customers(self):
-        dal_obj = DataLayer(table1=Customers)      
+        dal_obj = DataLayer(table1=Customers, api=self.api)      
         return dal_obj.get_all()
 
     def get_all_administrators(self):

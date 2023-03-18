@@ -25,6 +25,16 @@ from flask import jsonify
 from flask_bcrypt import Bcrypt,generate_password_hash, check_password_hash
 from per_req_Wrappers import require_api_auth
 
+@require_api_auth
+def api_get_all_customers():
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:
+        if session['user_role'] == 'admin':
+            dal_obj = AnonymousFacade(api=True)
+            return dal_obj.get_all_customers()
+        else:
+            return jsonify({ 'error': 'you do not have admin role'}) 
 
 @require_api_auth
 def api_delete_customer(customer_id):
