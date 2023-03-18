@@ -49,4 +49,4 @@ def api_delete_my_flight(flight_id):
             else:
                 return jsonify({ 'Error': 'flight not found'}) 
         else:
-            return jsonify({ 'error': 'you do not have airline role'})
+            return jsonify({ 'error': 'you do not have airline permissions'})

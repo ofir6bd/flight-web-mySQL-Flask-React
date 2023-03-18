@@ -57,4 +57,23 @@ def api_delete_my_ticket(ticket_id):
         else:
             return jsonify({ 'error': 'you do not have customer role'})
     
-   
+@require_api_auth
+def api_add_ticket():
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:
+        if session['user_role'] == 'customer':
+            flight_id = request.args.get('flight_id')
+            customer_id = session['customer_id']
+
+            if flight_id and customer_id:
+                fac_obj = CustomerFacade(api=True,flight_id=flight_id,customer_id=customer_id)
+                res = fac_obj.add_ticket()
+                if res: 
+                    return jsonify({ 'result': 'Ticket added'}) 
+                else:
+                    return jsonify({ 'error': 'error_occured'})
+            else:
+                return jsonify({ 'error': 'one of more parameters are missing'})
+        else:
+            return jsonify({ 'error': 'you do not have cutomer permissions'})  

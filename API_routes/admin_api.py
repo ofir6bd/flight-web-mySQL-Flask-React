@@ -34,7 +34,7 @@ def api_get_all_customers():
             dal_obj = AnonymousFacade(api=True)
             return dal_obj.get_all_customers()
         else:
-            return jsonify({ 'error': 'you do not have admin role'}) 
+            return jsonify({ 'error': 'you do not have admin permissions'}) 
 
 @require_api_auth
 def api_delete_customer(customer_id):
@@ -53,7 +53,7 @@ def api_delete_customer(customer_id):
             else:
                 return jsonify({ 'Error': 'Customer not found'}) 
         else:
-            return jsonify({ 'error': 'you do not have admin role'})            
+            return jsonify({ 'error': 'you do not have admin permissions'})            
 
 @require_api_auth
 def api_delete_airline(airline_id):
@@ -72,7 +72,7 @@ def api_delete_airline(airline_id):
             else:
                 return jsonify({ 'Error': 'Airline not found'}) 
         else:
-            return jsonify({ 'error': 'you do not have admin role'})  
+            return jsonify({ 'error': 'you do not have admin permissions'})  
 
 @require_api_auth
 def api_delete_admin(admin_id):
@@ -94,7 +94,7 @@ def api_delete_admin(admin_id):
             else:
                 return jsonify({ 'Error': 'Admin not found'}) 
         else:
-            return jsonify({ 'error': 'you do not have admin role'})  
+            return jsonify({ 'error': 'you do not have admin permissions'})  
         
 @require_api_auth
 def api_add_admin():
@@ -115,7 +115,7 @@ def api_add_admin():
             else:
                 return jsonify({ 'error': 'one of more parameters are missing'})
         else:
-            return jsonify({ 'error': 'you do not have admin role'})  
+            return jsonify({ 'error': 'you do not have admin permissions'})  
         
 @require_api_auth
 def api_add_customer():
@@ -141,7 +141,7 @@ def api_add_customer():
             else:
                 return jsonify({ 'error': 'one of more parameters are missing'})
         else:
-            return jsonify({ 'error': 'you do not have admin role'})  
+            return jsonify({ 'error': 'you do not have admin permissions'})  
         
 @require_api_auth
 def api_add_airline():
@@ -163,4 +163,4 @@ def api_add_airline():
             else:
                 return jsonify({ 'error': 'one of more parameters are missing'})
         else:
-            return jsonify({ 'error': 'you do not have admin role'})  
+            return jsonify({ 'error': 'you do not have admin permissions'})  
