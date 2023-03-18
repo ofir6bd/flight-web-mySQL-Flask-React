@@ -105,3 +105,41 @@ def api_update_airline():
                 return jsonify({ 'error': 'error_occured'})
         else:
             return jsonify({ 'error': 'you do not have airline permissions'})  
+        
+@require_api_auth
+def api_update_flight(flight_id):
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:
+        if session['user_role'] == 'airline':
+            fac_obj = AirlineFacade(id=flight_id)
+            flight = fac_obj.get_flight_by_id()
+            if flight:
+                if flight.airline_company_id == session['airline_id']:
+                    id = flight_id
+                    airline_company_id = session['airline_id']
+                    origin_country_id = request.args.get('origin_country_id')
+                    destination_country_id = request.args.get('destination_country_id')
+                    if request.args.get('departure_time'):
+                        departure_time = datetime.strptime(request.args.get('departure_time'), '%Y-%m-%dT%H:%M')
+                    else:
+                        departure_time = ""
+                    if request.args.get('landing_time'):
+                        landing_time = datetime.strptime(request.args.get('landing_time'), '%Y-%m-%dT%H:%M')
+                    else:
+                        landing_time = ""
+                    remaining_tickets = request.args.get('remaining_tickets')
+
+                    fac_obj = AirlineFacade(api=True,id=id,airline_company_id=airline_company_id,origin_country_id=origin_country_id,destination_country_id=destination_country_id,\
+                                                departure_time=departure_time,landing_time=landing_time,remaining_tickets=remaining_tickets)
+                    res = fac_obj.update_flight()
+                    if res: 
+                        return jsonify({ 'result': 'Flight updated'}) 
+                    else:
+                        return jsonify({ 'error': 'error_occured'})
+                else:
+                    return jsonify({ 'error': 'you cannot update flight that is not yours'})
+            else:
+                    return jsonify({ 'error': 'flight_not_found'})
+        else:
+            return jsonify({ 'error': 'you do not have airline permissions'})  

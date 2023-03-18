@@ -225,6 +225,7 @@ app.add_url_rule('/API/airline/my_flights', view_func=api_get_my_flights, method
 app.add_url_rule('/API/airline/delete_my_flight/<int:flight_id>/', view_func=api_delete_my_flight, methods=["DELETE"], strict_slashes=False)
 app.add_url_rule('/API/airline/add_flight/', view_func=api_add_flight, methods=["POST"], strict_slashes=False)
 app.add_url_rule('/API/airline/update_airline/', view_func=api_update_airline, methods=["PUT"], strict_slashes=False)
+app.add_url_rule('/API/airline/update_flight/<int:flight_id>/', view_func=api_update_flight, methods=["PUT"], strict_slashes=False)
 
 
 if __name__ == "__main__":
