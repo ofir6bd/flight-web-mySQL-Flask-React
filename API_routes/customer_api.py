@@ -77,3 +77,29 @@ def api_add_ticket():
                 return jsonify({ 'error': 'one of more parameters are missing'})
         else:
             return jsonify({ 'error': 'you do not have cutomer permissions'})  
+        
+
+@require_api_auth
+def api_update_customer():
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:
+        if session['user_role'] == 'customer':
+            id = session['customer_id']
+            first_name = request.args.get('first_name')
+            last_name = request.args.get('last_name')
+            address = request.args.get('address')
+            phone_no = request.args.get('phone_no')
+            credit_card_no = request.args.get('credit_card_no')
+            user_id = session['user_id'] 
+
+            fac_obj = CustomerFacade(api=True,id=id,first_name=first_name,last_name=last_name,address=address,\
+                                                phone_no=phone_no,credit_card_no=credit_card_no,user_id=user_id)
+            
+            res = fac_obj.update_customer()
+            if res: 
+                return jsonify({ 'result': 'Customer updated'}) 
+            else:
+                return jsonify({ 'error': 'error_occured'})
+        else:
+            return jsonify({ 'error': 'you do not have cutomer permissions'})  

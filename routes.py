@@ -190,6 +190,11 @@ app.add_url_rule('/airline/<string:company_name>/update_airline', view_func=upda
 app.add_url_rule('/airline/<string:company_name>/update_flight', view_func=update_flight,  methods=("GET", "POST"), strict_slashes=False)
 app.add_url_rule('/airline/<string:company_name>/<int:flight_id>/update_flight_fields', view_func=update_flight_fields,  methods=("GET", "POST"), strict_slashes=False)
 
+
+
+
+
+
 ############################ API requests ###################################
 # General API
 app.add_url_rule('/API/countries', view_func=api_get_all_countries, methods=["GET"], strict_slashes=False)
@@ -203,6 +208,7 @@ app.add_url_rule('/API/register_as_customer/', view_func=api_register_as_custome
 app.add_url_rule('/API/customer/my_tickets', view_func=api_get_my_tickets, methods=["GET"], strict_slashes=False)
 app.add_url_rule('/API/customer/delete_my_ticket/<int:ticket_id>/', view_func=api_delete_my_ticket, methods=["DELETE"], strict_slashes=False)
 app.add_url_rule('/API/customer/add_ticket/', view_func=api_add_ticket, methods=["POST"], strict_slashes=False)
+app.add_url_rule('/API/customer/update_customer/', view_func=api_update_customer, methods=["PUT"], strict_slashes=False)
 
 
 # Admin API
