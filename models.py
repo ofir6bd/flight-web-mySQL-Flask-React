@@ -21,6 +21,7 @@ class Users(db.Model,UserMixin):
     email = db.Column(db.String(50), nullable=False, unique=True)
     user_role = db.Column(db.Integer, db.ForeignKey('user_roles.id'))
     user_role_ = db.relationship('UserRoles')
+    
 
     def __repr__(self):
         return f'<Table: "Users", id:"{self.id}", username:"{self.username}", password:"{self.password}", email:"{self.email}", user_role:"{self.user_role}">'

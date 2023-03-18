@@ -2,7 +2,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
-
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:admin@localhost/flight_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -34,6 +33,7 @@ class Administrators(db.Model):
     last_name = db.Column(db.String(50), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship('Users')
+    
 
     def __repr__(self):
         return f'<Table: "Administrators",id:"{self.id}", first_name:"{self.first_name}, last_name:"{self.last_name}, user_id:"{self.user_id}">'

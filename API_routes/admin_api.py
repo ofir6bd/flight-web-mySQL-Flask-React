@@ -1,5 +1,5 @@
 """
-That data can be used to GET, PUT, POST and DELETE data types,
+That data can be used to GET, PUT (updade), POST (Add) and DELETE data types,
  which refers to the reading, updating, creating and deleting
  of operations concerning resources.
 """# Register route
@@ -93,5 +93,74 @@ def api_delete_admin(admin_id):
                     return jsonify({ 'error': 'You cannot remove yourself'})  
             else:
                 return jsonify({ 'Error': 'Admin not found'}) 
+        else:
+            return jsonify({ 'error': 'you do not have admin role'})  
+        
+@require_api_auth
+def api_add_admin():
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:
+        if session['user_role'] == 'admin':
+            first_name = request.args.get('first_name')
+            last_name = request.args.get('last_name')
+            user_id = request.args.get('user_id')
+            if first_name and last_name and user_id:
+                fac_obj = AdministratorFacade(api=True,first_name=first_name,last_name=last_name,user_id=user_id)
+                res = fac_obj.add_administrator()
+                if res: 
+                    return jsonify({ 'result': 'Admin added'}) 
+                else:
+                    return jsonify({ 'error': 'error_occured'})
+            else:
+                return jsonify({ 'error': 'one of more parameters are missing'})
+        else:
+            return jsonify({ 'error': 'you do not have admin role'})  
+        
+@require_api_auth
+def api_add_customer():
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:
+        if session['user_role'] == 'admin':
+            first_name = request.args.get('first_name')
+            last_name = request.args.get('last_name')
+            address = request.args.get('address')
+            phone_no = request.args.get('phone_no')
+            credit_card_no = request.args.get('credit_card_no')
+            user_id = request.args.get('user_id')
+
+            if first_name and last_name and user_id and address and phone_no and credit_card_no and user_id:
+                fac_obj = AdministratorFacade(api=True,first_name=first_name,last_name=last_name,address=address,\
+                                              phone_no=phone_no,credit_card_no=credit_card_no,user_id=user_id)
+                res = fac_obj.add_customer()
+                if res: 
+                    return jsonify({ 'result': 'Customer added'}) 
+                else:
+                    return jsonify({ 'error': 'error_occured'})
+            else:
+                return jsonify({ 'error': 'one of more parameters are missing'})
+        else:
+            return jsonify({ 'error': 'you do not have admin role'})  
+        
+@require_api_auth
+def api_add_airline():
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:
+        if session['user_role'] == 'admin':
+            name = request.args.get('name')
+            country_id = request.args.get('country_id')
+            user_id = request.args.get('user_id')
+
+            if name and country_id and user_id:
+                fac_obj = AdministratorFacade(api=True,name=name,country_id=country_id,user_id=user_id)
+                res = fac_obj.add_airline()
+                if res: 
+                    return jsonify({ 'result': 'Airline added'}) 
+                else:
+                    return jsonify({ 'error': 'error_occured'})
+            else:
+                return jsonify({ 'error': 'one of more parameters are missing'})
         else:
             return jsonify({ 'error': 'you do not have admin role'})  

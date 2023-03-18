@@ -80,7 +80,6 @@ class DataLayer(object):
     def insert_obj(obj):
         try:
             with app.app_context():
-                # print(obj)
                 db.session.add(obj)
                 db.session.commit()
             return True
@@ -90,7 +89,6 @@ class DataLayer(object):
             flash(f"An error occured !", "danger")
             return False
             
-
     def delete_obj(self, obj):
         try:
             with app.app_context():

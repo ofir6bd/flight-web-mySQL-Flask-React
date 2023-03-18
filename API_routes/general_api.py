@@ -1,5 +1,5 @@
 """
-That data can be used to GET, PUT, POST and DELETE data types,
+That data can be used to GET, PUT (updade), POST (Add) and DELETE data types,
  which refers to the reading, updating, creating and deleting
  of operations concerning resources.
 """# Register route

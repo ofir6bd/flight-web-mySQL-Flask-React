@@ -199,6 +199,9 @@ app.add_url_rule('/API/admin/get_all_customers/', view_func=api_get_all_customer
 app.add_url_rule('/API/admin/delete_customer/<int:customer_id>/', view_func=api_delete_customer, methods=["DELETE"], strict_slashes=False)
 app.add_url_rule('/API/admin/delete_airline/<int:airline_id>/', view_func=api_delete_airline, methods=["DELETE"], strict_slashes=False)
 app.add_url_rule('/API/admin/delete_admin/<int:admin_id>/', view_func=api_delete_admin, methods=["DELETE"], strict_slashes=False)
+app.add_url_rule('/API/admin/add_admin/', view_func=api_add_admin, methods=["POST"], strict_slashes=False)
+app.add_url_rule('/API/admin/add_customer/', view_func=api_add_customer, methods=["POST"], strict_slashes=False)
+app.add_url_rule('/API/admin/add_airline/', view_func=api_add_airline, methods=["POST"], strict_slashes=False)
 
 # Airline API
 app.add_url_rule('/API/airline/delete_my_flight/<int:flight_id>/', view_func=api_delete_my_flight, methods=["DELETE"], strict_slashes=False)
