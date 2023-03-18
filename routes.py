@@ -118,7 +118,12 @@ def register():
         res = fac_obj.create_new_user()
         if res:
             flash(f"Account Succesfully created", "success")
-            return redirect(url_for("login"))
+            fac_obj = CustomerFacade(email=email)
+            user = fac_obj.get_user_by_email()
+            login_user(user)
+            session['user_id'] = user.id
+            session['user_role'] = 'general_user'
+            return redirect(url_for('index'))
         
     return render_template("auth.html",
         form=form,
