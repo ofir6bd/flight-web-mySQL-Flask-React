@@ -5,7 +5,7 @@ That data can be used to GET, PUT (updade), POST (Add) and DELETE data types,
 """# Register route
 import sys
 import os
- 
+from app import create_app,db,login_manager,bcrypt
 # import a module in the parent
 current = os.path.dirname(os.path.realpath(__file__))
 # Getting the parent directory name
@@ -43,3 +43,21 @@ def api_get_flight_by_id(flight_id):
         return res
     else:
         return jsonify({ 'error': 'flight not found'})
+    
+def api_create_new_user():
+        username = request.args.get('username')
+        password = request.args.get('username')
+        password = bcrypt.generate_password_hash(password) # encrypt password
+        email = request.args.get('email')
+        user_role = request.args.get('user_role')
+    
+        if username and password and email and user_role:
+            fac_obj = AnonymousFacade(api=True,username=username,password=password,email=email,user_role=user_role)
+            res = fac_obj.create_new_user()
+            if res: 
+                return jsonify({ 'result': 'user added'}) 
+            else:
+                return jsonify({ 'error': 'error occured'})
+        else:
+            return jsonify({ 'error': 'one of more parameters are'})
+
