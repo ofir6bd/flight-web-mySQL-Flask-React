@@ -49,7 +49,7 @@ def api_delete_my_ticket(ticket_id):
                     if res:
                         return jsonify({ 'result': 'Ticket removed'}) 
                     else:
-                        return jsonify({ 'error': 'error occured'})
+                        return jsonify({ 'error': 'a customer already exists with that user id/phone no or creadit card number'})
                 else:
                     return jsonify({ 'error': 'Cannot delete ticket that is not yours'}) 
             else:

@@ -111,7 +111,7 @@ def api_add_admin():
                 if res: 
                     return jsonify({ 'result': 'Admin added'}) 
                 else:
-                    return jsonify({ 'error': 'error_occured'})
+                    return jsonify({ 'error': 'an admin already exists with that user id'})
             else:
                 return jsonify({ 'error': 'one of more parameters are missing'})
         else:
@@ -159,7 +159,7 @@ def api_add_airline():
                 if res: 
                     return jsonify({ 'result': 'Airline added'}) 
                 else:
-                    return jsonify({ 'error': 'error_occured'})
+                    return jsonify({ 'error': 'a airline already exists with that user id'})
             else:
                 return jsonify({ 'error': 'one of more parameters are missing'})
         else:

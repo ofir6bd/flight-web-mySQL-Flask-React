@@ -33,7 +33,7 @@ class Administrators(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'),unique=True)
     user = db.relationship('Users')
 
     def __repr__(self):
@@ -50,7 +50,7 @@ class Customers(db.Model):
     address = db.Column(db.String(50), nullable=False)
     phone_no = db.Column(db.String(50), nullable=False, unique=True)
     credit_card_no = db.Column(db.String(50), nullable=False, unique=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'),unique=True)
     user = db.relationship('Users')
 
     def __repr__(self):
@@ -76,7 +76,7 @@ class AirlineCompanies(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(50), nullable=False, unique=True)
     country_id = db.Column(db.Integer, db.ForeignKey('countries.id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'),unique=True)
     user = db.relationship('Users')
     
     def __repr__(self):
