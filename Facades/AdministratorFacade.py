@@ -2,8 +2,8 @@ from Facades.FacadeBase import *
 
 class AdministratorFacade(FacadeBase):
 
-    def __init__(self, id=0,name="",country_id="",user_id="",origin_country="",first_name="",last_name="",address="",phone_no="",credit_card_no=""):
-        super().__init__(id=id,user_id=user_id,origin_country=origin_country,first_name=first_name,last_name=last_name,address=address,phone_no=phone_no,credit_card_no=credit_card_no)
+    def __init__(self,api=False, id=0,name="",country_id="",user_id="",origin_country="",first_name="",last_name="",address="",phone_no="",credit_card_no=""):
+        super().__init__(api=api,id=id,user_id=user_id,origin_country=origin_country,first_name=first_name,last_name=last_name,address=address,phone_no=phone_no,credit_card_no=credit_card_no)
         self.country_id = country_id
         self.name = name
 

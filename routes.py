@@ -187,6 +187,9 @@ app.add_url_rule('/API/countries', view_func=api_get_all_countries, methods=["GE
 app.add_url_rule('/API/flights', view_func=api_get_all_flights, methods=["GET"], strict_slashes=False)
 app.add_url_rule('/API/my_flights', view_func=api_get_my_tickets, methods=["GET"], strict_slashes=False)
 app.add_url_rule('/API/delete_my_ticket/<int:ticket_id>/', view_func=api_delete_my_ticket, methods=["DELETE"], strict_slashes=False)
+app.add_url_rule('/API/delete_my_flight/<int:flight_id>/', view_func=api_delete_my_flight, methods=["DELETE"], strict_slashes=False)
+app.add_url_rule('/API/delete_customer/<int:customer_id>/', view_func=api_delete_customer, methods=["DELETE"], strict_slashes=False)
+app.add_url_rule('/API/delete_airline/<int:airline_id>/', view_func=api_delete_airline, methods=["DELETE"], strict_slashes=False)
 
 
 if __name__ == "__main__":

@@ -74,6 +74,10 @@ class FacadeBase(object):
         dal_obj = DataLayer(table1=Flights,id=self.id)      
         return dal_obj.get_by_id()
     
+    def get_customer_by_id(self):
+        dal_obj = DataLayer(table1=Customers,id=self.id)      
+        return dal_obj.get_by_id()
+    
     def get_ticket_by_id(self):
         dal_obj = DataLayer(table1=Tickets,id=self.id)      
         return dal_obj.get_by_id()

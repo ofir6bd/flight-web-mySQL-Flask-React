@@ -70,7 +70,6 @@ def api_get_all_flights():
 
 @require_api_auth
 def api_get_my_tickets():
-    print(current_user)
     if not current_user.is_authenticated:
         return jsonify({ 'error': 'email or password are incorrect'})
     else:
@@ -91,12 +90,72 @@ def api_delete_my_ticket(ticket_id):
                     res = fac_obj.remove_ticket()
                     if res:
                         return jsonify({ 'result': 'Ticket removed'}) 
+                    else:
+                        return jsonify({ 'error': 'error occured'})
+                else:
+                    return jsonify({ 'error': 'Cannot delete ticket that is not yours'}) 
+            else:
+                return jsonify({ 'Error': 'Ticket not found'}) 
+        else:
+            return jsonify({ 'error': 'you do not have customer role'})
+    
+        
+@require_api_auth
+def api_delete_my_flight(flight_id):
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:
+        if session['user_role'] == 'airline':
+            fac_obj = AirlineFacade(api=True,id=flight_id)
+            flight = fac_obj.get_flight_by_id()
+            if flight:
+                if flight.airline_company_id == session['airline_id']:
+                    res = fac_obj.remove_flight()
+                    if res:
+                        return jsonify({ 'result': 'Flight removed'}) 
+                    else:
+                        return jsonify({ 'error': 'Cannot delete flight, ticket is associated with'})
                 else:
                     return jsonify({ 'error': 'Cannot delete flight that is not yours'}) 
             else:
-                return jsonify({ 'Error': 'Ticket not found'}) 
-    
-        
+                return jsonify({ 'Error': 'flight not found'}) 
+        else:
+            return jsonify({ 'error': 'you do not have airline role'})
 
-            
+@require_api_auth
+def api_delete_customer(customer_id):
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:
+        if session['user_role'] == 'admin':
+            fac_obj = AdministratorFacade(api=True,id=customer_id)
+            customer = fac_obj.get_customer_by_id()
+            if customer: 
+                res = fac_obj.remove_customer()
+                if res:
+                    return jsonify({ 'result': 'Customer removed'}) 
+                else:
+                    return jsonify({ 'error': 'Cannot delete Customer, ticket is associated with'})  
+            else:
+                return jsonify({ 'Error': 'Customer not found'}) 
+        else:
+            return jsonify({ 'error': 'you do not have admin role'})            
 
+@require_api_auth
+def api_delete_airline(airline_id):
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:
+        if session['user_role'] == 'admin':
+            fac_obj = AdministratorFacade(api=True,id=airline_id)
+            airline = fac_obj.get_airline_by_id()
+            if airline: 
+                res = fac_obj.remove_airline()
+                if res:
+                    return jsonify({ 'result': 'Airline removed'}) 
+                else:
+                    return jsonify({ 'error': 'Cannot delete Airline, flight is associated with'})  
+            else:
+                return jsonify({ 'Error': 'Airline not found'}) 
+        else:
+            return jsonify({ 'error': 'you do not have admin role'})  
