@@ -35,3 +35,11 @@ def api_get_all_countries():
 def api_get_all_flights():
     dal_obj = AnonymousFacade(api=True)
     return dal_obj.get_all_flights()
+
+def api_get_flight_by_id(flight_id):
+    dal_obj = AnonymousFacade(api=True,id=flight_id)
+    res = dal_obj.get_flight_by_id()
+    if res:
+        return res
+    else:
+        return jsonify({ 'error': 'flight not found'})

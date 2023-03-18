@@ -62,6 +62,8 @@ class DataLayer(object):
         try:
             with app.app_context():
                 item = self.table1.query.filter_by(id=int(self.id)).first()
+                if self.api:
+                    return jsonify(item.toJson())
         except Exception as e:
             print(f"Error: {e}")
         return item
