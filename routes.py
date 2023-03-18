@@ -191,7 +191,7 @@ app.add_url_rule('/API/countries', view_func=api_get_all_countries, methods=["GE
 app.add_url_rule('/API/flights', view_func=api_get_all_flights, methods=["GET"], strict_slashes=False)
 
 # Customer API
-app.add_url_rule('/API/customer/my_flights', view_func=api_get_my_tickets, methods=["GET"], strict_slashes=False)
+app.add_url_rule('/API/customer/my_tickets', view_func=api_get_my_tickets, methods=["GET"], strict_slashes=False)
 app.add_url_rule('/API/customer/delete_my_ticket/<int:ticket_id>/', view_func=api_delete_my_ticket, methods=["DELETE"], strict_slashes=False)
 app.add_url_rule('/API/customer/add_ticket/', view_func=api_add_ticket, methods=["POST"], strict_slashes=False)
 
@@ -206,7 +206,9 @@ app.add_url_rule('/API/admin/add_customer/', view_func=api_add_customer, methods
 app.add_url_rule('/API/admin/add_airline/', view_func=api_add_airline, methods=["POST"], strict_slashes=False)
 
 # Airline API
+app.add_url_rule('/API/airline/my_flights', view_func=api_get_my_flights, methods=["GET"], strict_slashes=False)
 app.add_url_rule('/API/airline/delete_my_flight/<int:flight_id>/', view_func=api_delete_my_flight, methods=["DELETE"], strict_slashes=False)
+app.add_url_rule('/API/airline/add_flight/', view_func=api_add_flight, methods=["POST"], strict_slashes=False)
 
 
 if __name__ == "__main__":

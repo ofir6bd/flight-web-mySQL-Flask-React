@@ -1,4 +1,5 @@
 from Facades.FacadeBase import *
+from flask import jsonify
 
 class AirlineFacade(FacadeBase):
 
@@ -52,7 +53,23 @@ class AirlineFacade(FacadeBase):
         dal_obj = DataLayer(table1=AirlineCompanies,input_attribute='name', input_value=self.name)
         airline = dal_obj.get_one_by_param()
         dal_obj = DataLayer(table1=Flights,input_attribute='airline_company_id', input_value=int(airline.id))
-        return dal_obj.get_all_by_filter()
+        flights = dal_obj.get_all_by_filter()
+        
+        if self.api:
+            dal_obj = DataLayer()
+            all_flights_countries = dal_obj.join_flights_countries() 
+            lst = []
+            for flight in flights:
+                for i in range(len(all_flights_countries)):
+                    if flight.id == all_flights_countries[i][0].id:
+                        temp = [flight.toJson(),\
+                                all_flights_countries[i][0].toJson(),\
+                                all_flights_countries[i][1].toJson(),\
+                                    all_flights_countries[i][2].toJson()]
+                        lst.append(temp)
+            return jsonify(lst)    
+
+        return flights
 
     def get_airline_by_username(self):
         dal_obj = DataLayer(table1=AirlineCompanies,table_column1="user_id",\

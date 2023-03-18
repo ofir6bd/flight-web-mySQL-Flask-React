@@ -5,7 +5,7 @@ That data can be used to GET, PUT, POST and DELETE data types,
 """# Register route
 import sys
 import os
- 
+from datetime import datetime
 # import a module in the parent
 current = os.path.dirname(os.path.realpath(__file__))
 # Getting the parent directory name
@@ -27,6 +27,16 @@ from flask import jsonify
 from flask_bcrypt import Bcrypt,generate_password_hash, check_password_hash
 from per_req_Wrappers import require_api_auth
 
+@require_api_auth
+def api_get_my_flights():
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'email or password are incorrect'})
+    else:
+        if session['user_role'] == 'airline':
+            fac_obj = AirlineFacade(api=True,id=session['airline_id'])
+            airline = fac_obj.get_airline_by_id()
+            fac_obj.name = airline.name
+            return fac_obj.get_my_flights()
 
         
 @require_api_auth
@@ -50,3 +60,29 @@ def api_delete_my_flight(flight_id):
                 return jsonify({ 'Error': 'flight not found'}) 
         else:
             return jsonify({ 'error': 'you do not have airline permissions'})
+
+@require_api_auth
+def api_add_flight():
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:
+        if session['user_role'] == 'airline':
+            airline_company_id = session['airline_id']
+            origin_country_id = int(request.args.get('origin_country_id'))
+            destination_country_id = int(request.args.get('destination_country_id'))
+            departure_time = datetime.strptime(request.args.get('departure_time'), '%Y-%m-%dT%H:%M')
+            landing_time = datetime.strptime(request.args.get('landing_time'), '%Y-%m-%dT%H:%M')
+            remaining_tickets = int(request.args.get('remaining_tickets'))
+
+            if airline_company_id and origin_country_id and destination_country_id and departure_time and landing_time and remaining_tickets:
+                fac_obj = AirlineFacade(api=True,airline_company_id=airline_company_id,origin_country_id=origin_country_id,destination_country_id=destination_country_id,\
+                                        departure_time=departure_time,landing_time=landing_time,remaining_tickets=remaining_tickets)
+                res = fac_obj.add_flight()
+                if res: 
+                    return jsonify({ 'result': 'Flight added'}) 
+                else:
+                    return jsonify({ 'error': 'error occured'})
+            else:
+                return jsonify({ 'error': 'one of more parameters are missing'})
+        else:
+            return jsonify({ 'error': 'you do not have airline permissions'})  
