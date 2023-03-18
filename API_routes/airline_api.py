@@ -86,3 +86,22 @@ def api_add_flight():
                 return jsonify({ 'error': 'one of more parameters are missing'})
         else:
             return jsonify({ 'error': 'you do not have airline permissions'})  
+        
+
+@require_api_auth
+def api_update_airline():
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:
+        if session['user_role'] == 'airline':
+            id = session['airline_id']
+            name = request.args.get('name')
+            
+            fac_obj = AirlineFacade(api=True,id=id,name=name)
+            res = fac_obj.update_airline()
+            if res: 
+                return jsonify({ 'result': 'Airline updated'}) 
+            else:
+                return jsonify({ 'error': 'error_occured'})
+        else:
+            return jsonify({ 'error': 'you do not have airline permissions'})  
