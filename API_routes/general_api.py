@@ -43,7 +43,16 @@ def api_get_flight_by_id(flight_id):
         return res
     else:
         return jsonify({ 'error': 'flight not found'})
+
+def api_get_country_by_id(country_id):
+    dal_obj = AnonymousFacade(api=True,id=country_id)
+    res = dal_obj.get_country_by_id()
+    if res:
+        return res
+    else:
+        return jsonify({ 'error': 'country not found'})
     
+
 def api_create_new_user():
     username = request.args.get('username')
     password = request.args.get('username')

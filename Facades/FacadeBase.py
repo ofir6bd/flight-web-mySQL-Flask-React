@@ -146,7 +146,7 @@ class FacadeBase(object):
 
 
     def get_country_by_id(self):
-        dal_obj = DataLayer(table1=Countries,id=self.id)      
+        dal_obj = DataLayer(api=self.api,table1=Countries,id=self.id)      
         return dal_obj.get_by_id()
     
     def get_admin_by_id(self):

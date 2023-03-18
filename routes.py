@@ -202,6 +202,7 @@ app.add_url_rule('/API/flights', view_func=api_get_all_flights, methods=["GET"],
 app.add_url_rule('/API/flight/<int:flight_id>/', view_func=api_get_flight_by_id, methods=["GET"], strict_slashes=False)
 app.add_url_rule('/API/create_new_user/', view_func=api_create_new_user, methods=["POST"], strict_slashes=False)
 app.add_url_rule('/API/register_as_customer/', view_func=api_register_as_customer, methods=["POST"], strict_slashes=False)
+app.add_url_rule('/API/country/<int:country_id>/', view_func=api_get_country_by_id, methods=["GET"], strict_slashes=False)
 
 
 # Customer API
