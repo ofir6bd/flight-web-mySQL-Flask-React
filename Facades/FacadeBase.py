@@ -148,6 +148,10 @@ class FacadeBase(object):
     def get_country_by_id(self):
         dal_obj = DataLayer(table1=Countries,id=self.id)      
         return dal_obj.get_by_id()
+    
+    def get_admin_by_id(self):
+        dal_obj = DataLayer(table1=Administrators,id=self.id)      
+        return dal_obj.get_by_id()
 
     def create_new_user(self):
         user = Users(username=self.username,password=self.password,email=self.email,user_role=int(self.user_role))

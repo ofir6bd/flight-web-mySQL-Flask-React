@@ -159,3 +159,25 @@ def api_delete_airline(airline_id):
                 return jsonify({ 'Error': 'Airline not found'}) 
         else:
             return jsonify({ 'error': 'you do not have admin role'})  
+
+@require_api_auth
+def api_delete_admin(admin_id):
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:
+        if session['user_role'] == 'admin':
+            fac_obj = AdministratorFacade(api=True,id=admin_id)
+            admin = fac_obj.get_admin_by_id()
+            if admin: 
+                if admin.id != session['admin_id']:
+                    res = fac_obj.remove_administrator()
+                    if res:
+                        return jsonify({ 'result': 'Admin removed'}) 
+                    else:
+                        return jsonify({ 'error': 'error_occured'})
+                else:
+                    return jsonify({ 'error': 'You cannot remove yourself'})  
+            else:
+                return jsonify({ 'Error': 'Admin not found'}) 
+        else:
+            return jsonify({ 'error': 'you do not have admin role'})  
