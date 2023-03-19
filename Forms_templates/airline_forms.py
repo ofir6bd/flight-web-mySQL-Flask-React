@@ -88,7 +88,7 @@ class add_flight_form(FlaskForm):
     destination_country_id = SelectField(coerce=int, validators=[DataRequired()])
     departure_time = DateTimeLocalField( validators=[InputRequired()],format='%Y-%m-%dT%H:%M')
     landing_time = DateTimeLocalField(validators=[InputRequired()],format='%Y-%m-%dT%H:%M')
-    remaining_tickets = IntegerField(validators=[DataRequired()])
+    remaining_tickets = IntegerField(validators=[DataRequired(),validators.NumberRange(min=0, max=250)])
     
     def __init__(self, *args, **kwargs):
         super(add_flight_form, self).__init__(*args, **kwargs)
@@ -101,7 +101,11 @@ class add_flight_form(FlaskForm):
         if self.origin_country_id.data == self.destination_country_id.data:
             self.destination_country_id.errors.append('Origin and destination cannot be the same.')
             return False
+        if self.departure_time.data > self.landing_time.data:
+            self.landing_time.errors.append('Landing time must be later than the departure time.')
+            return False
         return True
+    
 
 def check_no_ticket(flight_id):
     fac_obj = AirlineFacade(flight_id = flight_id)
@@ -134,9 +138,20 @@ class update_flight_form(FlaskForm):
     destination_country_id = SelectField(coerce=int)
     departure_time = DateTimeLocalField( format='%Y-%m-%dT%H:%M')
     landing_time = DateTimeLocalField(format='%Y-%m-%dT%H:%M')
-    remaining_tickets = IntegerField()
+    remaining_tickets = IntegerField(validators=[validators.NumberRange(min=0, max=250)])
 
     def __init__(self, *args, **kwargs):
         super(update_flight_form, self).__init__(*args, **kwargs)
         self.origin_country_id.choices = get_all_countries()
         self.destination_country_id.choices = get_all_countries()
+
+    def validate(self, extra_validators=None):
+        if not FlaskForm.validate(self, extra_validators=extra_validators):
+            return False
+        if self.origin_country_id.data == self.destination_country_id.data:
+            self.destination_country_id.errors.append('Origin and destination cannot be the same.')
+            return False
+        if self.departure_time.data > self.landing_time.data:
+            self.landing_time.errors.append('Landing time must be later than the departure time.')
+            return False
+        return True

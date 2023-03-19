@@ -100,7 +100,6 @@ def update_airline(company_name):
     form = update_airline_form() 
     fac_obj = AirlineFacade(name=company_name)
     airline = fac_obj.get_airline_by_name()
-    name = airline.name
 
     if form.validate_on_submit():
         fac_obj = AirlineFacade(id=airline.id, name=form.name.data)
@@ -109,9 +108,10 @@ def update_airline(company_name):
             flash(f"Airline detailes updated", "success")
         else:
             flash("error occurred", "danger")
-        return redirect(url_for('company_home',company_name=company_name))
+        return redirect(url_for('company_home',company_name=form.name.data))
+    
     return render_template("airline/update_airline.html",
-        name = name,
+        name = airline.name,
         airline_name = company_name,
         form=form,
         text="Update airline",
@@ -171,24 +171,26 @@ def update_flight_fields(company_name,flight_id):
     landing_time = flight.landing_time
     remaining_tickets = flight.remaining_tickets
 
+    if form.destination_country_id.data == origin_country_id or form.origin_country_id.data == destination_country_id:
+        flash('Origin and destination cannot be the same.', "danger")
+    else: 
+        if form.validate_on_submit():
 
-    if form.validate_on_submit():
-
-        fac_obj = AirlineFacade(name=company_name)
-        airline = fac_obj.get_airline_by_name()
-        fac_obj = AirlineFacade(id=flight_id,airline_company_id=airline.id,\
-                                origin_country_id=form.origin_country_id.data,\
-                                destination_country_id=form.destination_country_id.data,\
-                                departure_time=form.departure_time.data,\
-                                landing_time=form.landing_time.data,\
-                                remaining_tickets=form.remaining_tickets.data)
-        
-        res = fac_obj.update_flight()
-        if res:
-            flash(f"Airline detailes updated", "success")
-        else:
-            flash("error occurred", "danger")
-        return redirect(url_for('company_home',company_name=company_name))
+            fac_obj = AirlineFacade(name=company_name)
+            airline = fac_obj.get_airline_by_name()
+            fac_obj = AirlineFacade(id=flight_id,airline_company_id=airline.id,\
+                                    origin_country_id=form.origin_country_id.data,\
+                                    destination_country_id=form.destination_country_id.data,\
+                                    departure_time=form.departure_time.data,\
+                                    landing_time=form.landing_time.data,\
+                                    remaining_tickets=form.remaining_tickets.data)
+            
+            res = fac_obj.update_flight()
+            if res:
+                flash(f"Airline detailes updated", "success")
+            else:
+                flash("error occurred", "danger")
+            return redirect(url_for('company_home',company_name=company_name))
     return render_template("airline/update_flight.html",
         origin_country=origin_country.name,
         destination_country = destination_country.name,
