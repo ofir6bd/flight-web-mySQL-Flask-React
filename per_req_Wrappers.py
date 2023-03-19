@@ -59,6 +59,8 @@ def api_login(email,password):
             session['customer_id'] = customer.id
         else:
             session['user_role'] = 'general_user'
+            if user.user_role == 3:
+                session['user_role_num'] = "pre_customer"
     return
 
 # api wrapper 
@@ -75,5 +77,6 @@ def require_api_auth(func):
         session.pop('admin_id', None)
         session.pop('airline_id', None)
         session.pop('customer_id', None)
+        session.pop('user_role_num', None)
         return res
     return wrapper

@@ -7,8 +7,6 @@ class AdministratorFacade(FacadeBase):
         self.country_id = country_id
         self.name = name
 
-    def get_all_customers():
-        pass
 
     def add_airline(self):
         new_airline = AirlineCompanies(name=self.name, country_id=self.country_id,user_id=int(self.user_id))

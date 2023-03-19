@@ -18,23 +18,6 @@ from flask import jsonify
 app=create_app()
 
 
-def customError(e):
-    if e == InvalidRequestError:
-        flash(f"Something went wrong!", "danger")
-    elif e == IntegrityError:
-        flash(f"User already exists!.", "warning")
-    elif e == DataError:
-        flash(f"Invalid Entry", "warning")
-    elif e == InterfaceError:
-        flash(f"Error connecting to the database", "danger")
-    elif e == DatabaseError:
-        flash(f"Error connecting to the database", "danger")
-    elif e == BuildError:
-        flash(f"An error occured !", "danger")
-    else:
-        flash(f"An error occured !", "danger")
-
-
 class DataLayer(object):
 
     def __init__(self,api=False, id=0, table1="",table_column1="",table2="",table_column2="",input_attribute="",input_value="",username="",password=""):
@@ -85,10 +68,10 @@ class DataLayer(object):
                 db.session.add(obj)
                 db.session.commit()
             return True
-        except (IntegrityError, DataError, DatabaseError, InterfaceError, InvalidRequestError, BuildError) as e:
+        except Exception as e:
             db.session.rollback()
             print(f"Error: {e}")
-            flash(f"An error occured !", "danger")
+            flash(f"Duplcation error in Database!", "danger")
             return False
             
     def delete_obj(self, obj):

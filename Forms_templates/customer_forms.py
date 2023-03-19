@@ -84,28 +84,6 @@ class update_customer_form(FlaskForm):
         if item is not None:
             raise ValidationError('Please use a different credit_card_no.')
    
-    
-
-    # email = StringField(validators=[InputRequired(), Email(), Length(1, 64)])
-    # password = PasswordField(validators=[InputRequired(), Length(8, 72)])
-    # cpassword = PasswordField(
-    #     validators=[
-    #         InputRequired(),
-    #         Length(8, 72),
-    #         EqualTo("password", message="Passwords must match !"),
-    #     ]
-    # )
-
-    # def validate_email(self, email):
-    #     fac_obj = AnonymousFacade(email=email.data)
-    #     if fac_obj.get_user_by_email():
-    #         raise ValidationError("Email already registered!")
-
-    # def validate_username(self, username):
-    #     fac_obj = AnonymousFacade(username=username.data)
-    #     if fac_obj.get_user_by_username():
-    #         raise ValidationError("Username already taken!")
-        
-
+ 
 class remove_ticket_form(FlaskForm):
     tickets_detailes = SelectField(validators=[DataRequired()], coerce=int)

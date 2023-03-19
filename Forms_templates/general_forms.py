@@ -50,37 +50,6 @@ class search_flights_form(FlaskForm):
         self.origin_country.choices = get_all_countries()
         self.destination_country.choices = get_all_countries()
 
-    # def validate_email(self, email):
-    #     fac_obj = AnonymousFacade(email=email.data)
-    #     if fac_obj.get_user_by_email():
-    #         raise ValidationError("Email already registered!")
-
-    # def validate_username(self, username):
-    #     fac_obj = AnonymousFacade(username=username.data)
-    #     if fac_obj.get_user_by_username():
-    #         raise ValidationError("Username already taken!")
-
-     # origin_country = StringField(validators=[
-    #         InputRequired(),
-    #         Length(3, 20, message="Please provide a valid name"),
-    #         Regexp(
-    #             "^[A-Za-z][A-Za-z0-9_.]*$",
-    #             0,
-    #             "Usernames must have only letters, " "numbers, dots or underscores",
-    #         ),
-    #     ]
-    # )
-    # destination_country = StringField(validators=[
-    #         InputRequired(),
-    #         Length(3, 20, message="Please provide a valid name"),
-    #         Regexp(
-    #             "^[A-Za-z][A-Za-z0-9_.]*$",
-    #             0,
-    #             "Usernames must have only letters, " "numbers, dots or underscores",
-    #         ),
-    #     ]
-    # )
-
 
 def get_customer_user_list():
     final_list = [(0, 'Choose which user')]
@@ -98,13 +67,6 @@ class register_customer_form(FlaskForm):
     address = StringField(validators=[DataRequired()])
     phone_no = StringField(validators=[DataRequired()])
     credit_card_no = StringField(validators=[DataRequired()])
-    # user = SelectField('Users', coerce=int, validators=[DataRequired()])
-
-    # submit = SubmitField('Add')
-
-    # def __init__(self, *args, **kwargs):
-    #     super(register_customer_form, self).__init__(*args, **kwargs)
-    #     self.user.choices = get_customer_user_list()
         
     def validate_phone_no(self, phone_no):
         obj = AnonymousFacade(phone_no=phone_no.data)

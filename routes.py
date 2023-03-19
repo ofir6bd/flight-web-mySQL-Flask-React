@@ -89,6 +89,10 @@ def login():
                     return redirect(url_for('customer_home',customer_details=customer.user_id))
                 else:
                     session['user_role'] = 'general_user'
+                    if user.user_role == 3:
+                        session['user_role_num'] = "pre_customer"
+
+                    
                 return redirect(url_for('index'))
             else:
                 flash("Invalid Username or password!", "danger")
@@ -123,6 +127,8 @@ def register():
             login_user(user)
             session['user_id'] = user.id
             session['user_role'] = 'general_user'
+            if user.user_role == 3:
+                session['user_role_num'] = "pre_customer"
             return redirect(url_for('index'))
         
     return render_template("auth.html",
@@ -141,6 +147,7 @@ def logout():
     session.pop('admin_id', None)
     session.pop('airline_id', None)
     session.pop('customer_id', None)
+    session.pop('user_role_num', None)
     return redirect(url_for('login'))    
 
 @app.route("/register_customer/", methods=("GET", "POST"), strict_slashes=False)

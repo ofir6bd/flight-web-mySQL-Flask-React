@@ -36,9 +36,12 @@
             <a class="active" href="{{ url_for('index',customer_details=customer_details) }}">Search Flight</a>
             <a href="{{ url_for('remove_ticket',customer_details=customer_details) }}">Remove ticket</a>
             <a href="{{ url_for('update_customer',customer_details=customer_details) }}">Update customer</a>
-        {% else: %}
+        {% elif session['user_role'] == 'general_user' and session['user_role_num'] == 'pre_customer' %}
             <a class="active" href="{{ url_for('index') }}">Home</a>
             <a href="{{url_for('register_customer')}}">register as customer</a>
+        {% else: %}
+            <a class="active" href="{{ url_for('index') }}">Home</a>
+            
         {% endif %}
         <!-- <a href="#about">About</a> -->
         {% if current_user.is_authenticated %}
