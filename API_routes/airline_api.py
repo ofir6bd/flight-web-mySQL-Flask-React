@@ -26,6 +26,8 @@ from Forms_templates.general_forms import search_flights_form
 from flask import jsonify
 from flask_bcrypt import Bcrypt,generate_password_hash, check_password_hash
 from per_req_Wrappers import require_api_auth
+from API_routes.api_validation import *
+
 
 @require_api_auth
 def api_get_my_flights():
@@ -81,7 +83,7 @@ def api_add_flight():
                 if res: 
                     return jsonify({ 'result': 'Flight added'}) 
                 else:
-                    return jsonify({ 'error': 'error occured'})
+                    return jsonify({ 'error': 'Duplication error in DB'})
             else:
                 return jsonify({ 'error': 'one of more parameters are missing'})
         else:
@@ -97,12 +99,16 @@ def api_update_airline():
             id = session['airline_id']
             name = request.args.get('name')
             
+            res = validate_airline(action="update", name=name)
+            if res:
+                return jsonify(res)
+            
             fac_obj = AirlineFacade(api=True,id=id,name=name)
             res = fac_obj.update_airline()
             if res: 
                 return jsonify({ 'result': 'Airline updated'}) 
             else:
-                return jsonify({ 'error': 'error_occured'})
+                return jsonify({ 'error': 'Duplication error in DB'})
         else:
             return jsonify({ 'error': 'you do not have airline permissions'})  
         
@@ -136,7 +142,7 @@ def api_update_flight(flight_id):
                     if res: 
                         return jsonify({ 'result': 'Flight updated'}) 
                     else:
-                        return jsonify({ 'error': 'error_occured'})
+                        return jsonify({ 'error': 'Duplication error in DB'})
                 else:
                     return jsonify({ 'error': 'you cannot update flight that is not yours'})
             else:

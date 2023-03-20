@@ -72,7 +72,7 @@ def api_add_ticket():
                 if res: 
                     return jsonify({ 'result': 'Ticket added'}) 
                 else:
-                    return jsonify({ 'error': 'error_occured'})
+                    return jsonify({ 'error': 'Duplication error in DB'})
             else:
                 return jsonify({ 'error': 'one of more parameters are missing'})
         else:
@@ -94,7 +94,7 @@ def api_update_customer():
             user_id = session['user_id'] 
 
             res = validate_customer(action="update",first_name=first_name,last_name=last_name,address=address,\
-                                              phone_no=phone_no,credit_card_no=credit_card_no,user_id=user_id)
+                                              phone_no=phone_no,credit_card_no=credit_card_no)
             if res:
                 return jsonify(res)
 
@@ -106,6 +106,6 @@ def api_update_customer():
             if res: 
                 return jsonify({ 'result': 'Customer updated'}) 
             else:
-                return jsonify({ 'error': 'error_occured'})
+                return jsonify({ 'error': 'Duplication error in DB'})
         else:
             return jsonify({ 'error': 'you do not have cutomer permissions'})  

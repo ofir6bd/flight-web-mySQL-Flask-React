@@ -159,6 +159,9 @@ def api_add_airline():
             user_id = request.args.get('user_id')
 
             if name and country_id and user_id:
+                res = validate_airline(name=name,country_id=country_id,user_id=user_id)
+                if res:
+                    return jsonify(res)
                 fac_obj = AdministratorFacade(api=True,name=name,country_id=country_id,user_id=user_id)
                 res = fac_obj.add_airline()
                 if res: 
