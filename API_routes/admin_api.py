@@ -24,6 +24,7 @@ from Forms_templates.general_forms import search_flights_form
 from flask import jsonify
 from flask_bcrypt import Bcrypt,generate_password_hash, check_password_hash
 from per_req_Wrappers import require_api_auth
+from API_routes.api_validation import *
 
 @require_api_auth
 def api_get_all_customers():
@@ -131,13 +132,17 @@ def api_add_customer():
             user_id = request.args.get('user_id')
 
             if first_name and last_name and user_id and address and phone_no and credit_card_no and user_id:
+                res = validate_customer(first_name=first_name,last_name=last_name,address=address,\
+                                              phone_no=phone_no,credit_card_no=credit_card_no,user_id=user_id)
+                if res:
+                    return jsonify(res)
                 fac_obj = AdministratorFacade(api=True,first_name=first_name,last_name=last_name,address=address,\
                                               phone_no=phone_no,credit_card_no=credit_card_no,user_id=user_id)
                 res = fac_obj.add_customer()
                 if res: 
                     return jsonify({ 'result': 'Customer added'}) 
                 else:
-                    return jsonify({ 'error': 'error_occured'})
+                    return jsonify({ 'error': 'duplication error in DB'})
             else:
                 return jsonify({ 'error': 'one of more parameters are missing'})
         else:
