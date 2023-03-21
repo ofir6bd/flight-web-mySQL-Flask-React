@@ -100,10 +100,10 @@ def validate_ticket(flight_id="",customer_id=""):
     fac_obj = CustomerFacade(id=flight_id,flight_id=flight_id,customer_id=customer_id)
     res = fac_obj.check_one_flight_customer_combination_on_ticket()
     if res:
-        final_error_lst.append({'error': 'the same customer cannot buy the same ticket'}) 
+        final_error_lst.append({'error': 'The same customer cannot buy the same ticket'}) 
     flight = fac_obj.get_flight_by_id()
     if not flight:
-        final_error_lst.append({'error': 'flight_id did not found'}) 
+        final_error_lst.append({'error': 'Flight_id did not found'}) 
 
     if len(final_error_lst) > 0:
        return final_error_lst

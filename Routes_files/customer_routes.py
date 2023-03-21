@@ -77,6 +77,14 @@ def book_verification(flight_id,customer_details):
             customer_details=customer_details
             )
     if request.method == "POST":
+        fac_obj = CustomerFacade(user_id=session['user_id'])
+        customer = fac_obj.get_customer_by_user_id()
+        fac_obj = CustomerFacade(flight_id=flight_id, customer_id=customer.id)
+        res = fac_obj.check_one_flight_customer_combination_on_ticket()
+        if res: 
+            flash("The same customer cannot buy the same ticket", "danger")
+            return redirect(url_for('index',customer_details=customer_details))
+
         fac_obj = CustomerFacade(flight_id=flight_id)
         res = fac_obj.add_ticket()
         if res:
