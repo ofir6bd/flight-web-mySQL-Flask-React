@@ -107,6 +107,10 @@ def api_add_admin():
             last_name = request.args.get('last_name')
             user_id = request.args.get('user_id')
             if first_name and last_name and user_id:
+                res = validate_admin(first_name=first_name,last_name=last_name,user_id=user_id)
+                if res:
+                    return jsonify(res)
+                
                 fac_obj = AdministratorFacade(api=True,first_name=first_name,last_name=last_name,user_id=user_id)
                 res = fac_obj.add_administrator()
                 if res: 

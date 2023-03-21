@@ -67,6 +67,9 @@ def api_add_ticket():
             customer_id = session['customer_id']
 
             if flight_id and customer_id:
+                res = validate_ticket(flight_id=flight_id,customer_id=customer_id)
+                if res:
+                    return jsonify(res)
                 fac_obj = CustomerFacade(api=True,flight_id=flight_id,customer_id=customer_id)
                 res = fac_obj.add_ticket()
                 if res: 

@@ -85,6 +85,15 @@ class CustomerFacade(FacadeBase):
 
         return final_list
 
+    def check_one_flight_customer_combination_on_ticket(self):
+        dal_obj = DataLayer(table1=Tickets)
+        all_my_tickets =  dal_obj.get_all()
+
+        for ticket in all_my_tickets:
+            if ticket.flight_id == int(self.flight_id) and ticket.customer_id == self.customer_id:
+                return True
+        return False
+
 
 
 
