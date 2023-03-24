@@ -77,6 +77,11 @@ def api_add_flight():
             remaining_tickets = int(request.args.get('remaining_tickets'))
 
             if airline_company_id and origin_country_id and destination_country_id and departure_time and landing_time and remaining_tickets:
+                res = validate_flight(action="",origin_country_id=origin_country_id,destination_country_id=destination_country_id,\
+                                        departure_time=departure_time,landing_time=landing_time,remaining_tickets=remaining_tickets)
+                if res:
+                    return jsonify(res)
+                
                 fac_obj = AirlineFacade(api=True,airline_company_id=airline_company_id,origin_country_id=origin_country_id,destination_country_id=destination_country_id,\
                                         departure_time=departure_time,landing_time=landing_time,remaining_tickets=remaining_tickets)
                 res = fac_obj.add_flight()

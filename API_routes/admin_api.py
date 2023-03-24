@@ -171,7 +171,7 @@ def api_add_airline():
                 if res: 
                     return jsonify({ 'result': 'Airline added'}) 
                 else:
-                    return jsonify({ 'error': 'a airline already exists with that user id'})
+                    return jsonify({ 'error': 'error occured'})
             else:
                 return jsonify({ 'error': 'one of more parameters are missing'})
         else:

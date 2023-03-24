@@ -24,15 +24,13 @@ import pytest
 from flask import Flask
 import json
 
-# from routes import index
-
 from routes import index 
 
 def test_assert():
     assert True
 
 def test_home_page(client):
-  response = client.get('/')
+  response = client.get('/API/countries')
   assert response.status_code == 200
 
 @pytest.fixture
