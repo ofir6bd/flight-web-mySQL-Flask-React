@@ -1,17 +1,9 @@
 """
 This data layer will be the only file that communicate with the DB, universal for all tables
 """
-from app import create_app,db,login_manager,bcrypt
-from models import UserRoles,Users,Administrators,Customers, Countries,AirlineCompanies,Flights,Tickets
+from app import create_app,db
+from models import Users, Countries,Flights
 from flask import flash
-from sqlalchemy.exc import (
-    IntegrityError,
-    DataError,
-    DatabaseError,
-    InterfaceError,
-    InvalidRequestError,
-)
-from werkzeug.routing import BuildError
 from sqlalchemy.orm import aliased
 from flask import jsonify
 
@@ -136,21 +128,3 @@ class DataLayer(object):
             return False
         return True
 
-
-
-# ######################### testing functions
-# with app.app_contex():
-# dal_obj = DataLayer()
-# dal_obj = DataLayer(table1=Flights,input_attribute='airline_company_id', input_value=1)
-# ans = dal_obj.get_all_by_filter()
-# # # # # #     dal_obj = DataLayer(table=AirlineCompanies,table2=Users,username="Ofir9bd",table_column="user_id")
-# # # # # #     final_table = dal_obj.join_tables()    
-# # # # # #     print(final_table[0].name)
-# # # # # #     print("Done")
-# # # # # # # #     # obj1 = FacadeBase() 
-# # # # # # # #     # ans = obj1.get_flight_by_id(1)
-# # # # # # # #     obj1 = DataLayer() 
-# # # # # # # #     ans = obj1.get_all(Flights)
-# # # # # #     ans = db.session.query(AirlineCompanies,Users ).filter(Users.username=='Ofir7bd').join(AirlineCompanies,AirlineCompanies.user_id==Users.id).first()
-# print(ans)
-# print("Done")

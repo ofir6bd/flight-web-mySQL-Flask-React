@@ -9,61 +9,15 @@ parent = os.path.dirname(current)
 # adding the parent directory to the sys.path.
 sys.path.append(parent)
 
-from wtforms import (
-    StringField,
-    PasswordField,
-    BooleanField,
-    IntegerField,
-    DateField,
-    TextAreaField,
-    DateTimeLocalField,
-    DateTimeField,
-)
-
-
+from wtforms import StringField, IntegerField, DateTimeLocalField
 from flask_wtf import FlaskForm
-from wtforms.validators import InputRequired, Length, EqualTo, Email, Regexp ,Optional
-import email_validator
-from flask_login import current_user
-from wtforms import ValidationError,validators,SelectField
+from wtforms.validators import InputRequired
+from wtforms import validators,SelectField
 from models import *
 from Facades.AnonymousFacade import AnonymousFacade
 from Facades.AirlineFacade import AirlineFacade
-from DAL import DataLayer
 from wtforms.validators import DataRequired
 
-# class add_airline_form(FlaskForm):
-#     username = StringField(
-#         validators=[
-#             InputRequired(),
-#             Length(3, 20, message="Please provide a valid name"),
-#             Regexp(
-#                 "^[A-Za-z][A-Za-z0-9_.]*$",
-#                 0,
-#                 "Usernames must have only letters, " "numbers, dots or underscores",
-#             ),
-#         ]
-#     )
-#     email = StringField(validators=[InputRequired(), Email(), Length(1, 64)])
-#     password = PasswordField(validators=[InputRequired(), Length(8, 72)])
-#     cpassword = PasswordField(
-#         validators=[
-#             InputRequired(),
-#             Length(8, 72),
-#             EqualTo("password", message="Passwords must match !"),
-#         ]
-#     )
-
-#     def validate_email(self, email):
-#         fac_obj = AnonymousFacade(email=email.data)
-#         if fac_obj.get_user_by_email():
-#             raise ValidationError("Email already registered!")
-
-#     def validate_username(self, username):
-#         fac_obj = AnonymousFacade(username=username.data)
-#         if fac_obj.get_user_by_username():
-#             raise ValidationError("Username already taken!")
-        
 def get_all_airlines():
     final_list = [(0, 'Airline company')]
     fac_obj = AnonymousFacade()
@@ -79,7 +33,6 @@ def get_all_countries():
     for i in items:
         final_list.append((i.id, i.name))
     return final_list
-
 
 
 class add_flight_form(FlaskForm):
@@ -110,7 +63,6 @@ class add_flight_form(FlaskForm):
 def check_no_ticket(flight_id):
     fac_obj = AirlineFacade(flight_id = flight_id)
     return fac_obj.get_ticket_by_flight_id()
-
 
 
 class remove_flight_form(FlaskForm):

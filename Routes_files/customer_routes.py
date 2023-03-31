@@ -8,11 +8,10 @@ current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 # adding the parent directory to the sys.path.
 sys.path.append(parent)
+
 from Forms_templates.customer_forms import update_customer_form,remove_ticket_form
-# from Facades.AnonymousFacade import AnonymousFacade
-# from Facades.CustomerFacade import CustomerFacade
 from flask import Flask, redirect, url_for,request, render_template, session, flash
-from flask_login import UserMixin, login_user, LoginManager,login_required, logout_user,current_user
+from flask_login import login_required
 from per_req_Wrappers import require_customer_role
 from Facades.CustomerFacade import CustomerFacade
 from Forms_templates.general_forms import search_flights_form
@@ -89,10 +88,8 @@ def book_verification(flight_id,customer_details):
         res = fac_obj.add_ticket()
         if res:
             flash(f"Book suscesfully generated", "success")
-            
         else:
             flash("error occurred", "danger")
-        # form = search_flights_form()
         return redirect(url_for('index',customer_details=customer_details))
     
 

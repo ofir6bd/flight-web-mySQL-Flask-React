@@ -1,27 +1,15 @@
-from wtforms import (
-    StringField,
-    PasswordField,
-    BooleanField,
-    IntegerField,
-    DateField,
-    TextAreaField,
-)
-
-
+from wtforms import StringField, PasswordField
 from flask_wtf import FlaskForm
 from wtforms.validators import InputRequired, Length, EqualTo, Email, Regexp ,Optional
-import email_validator
-from flask_login import current_user
-from wtforms import ValidationError,validators,SelectField
+
+from wtforms import ValidationError,SelectField
 from models import *
 from Facades.AnonymousFacade import AnonymousFacade
-from DAL import DataLayer
 from wtforms.validators import DataRequired
 
 class login_form(FlaskForm):
     email = StringField(validators=[InputRequired(), Email(), Length(1, 64)])
     password = PasswordField(validators=[InputRequired(), Length(min=8, max=72)])
-    # Placeholder labels to enable form rendering
     username = StringField(
         validators=[Optional()]
     )
@@ -73,11 +61,3 @@ class register_form(FlaskForm):
         fac_obj = AnonymousFacade(username=username.data)
         if fac_obj.get_user_by_username():
             raise ValidationError("Username already taken!")
-
-    # def validate_email(self, email):
-    #     if Users.query.filter_by(email=email.data).first():
-    #         raise ValidationError("Email already registered!")
-
-    # def validate_username(self, username):
-    #     if Users.query.filter_by(username=username.data).first():
-    #         raise ValidationError("Username already taken!")

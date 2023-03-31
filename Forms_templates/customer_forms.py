@@ -9,30 +9,13 @@ parent = os.path.dirname(current)
 # adding the parent directory to the sys.path.
 sys.path.append(parent)
 
-from wtforms import (
-    StringField,
-    PasswordField,
-    BooleanField,
-    IntegerField,
-    DateField,
-    TextAreaField,
-    DateTimeLocalField,
-)
-
-
+from wtforms import StringField
 from flask_wtf import FlaskForm
-from wtforms.validators import InputRequired, Length, EqualTo, Email, Regexp ,Optional
-import email_validator
-from flask_login import current_user
-from wtforms import ValidationError,validators,SelectField
+from wtforms.validators import Length, Regexp 
+from wtforms import ValidationError,SelectField
 from models import *
 from Facades.AnonymousFacade import AnonymousFacade
-from DAL import DataLayer
 from wtforms.validators import DataRequired
-from Facades.CustomerFacade import CustomerFacade
-
-# class add_ticket_form(FlaskForm):
-#     flight_id    
 
 class update_customer_form(FlaskForm):
     first_name = StringField(validators=[Length(3, 20, message="Please provide a valid name"),
@@ -44,7 +27,7 @@ class update_customer_form(FlaskForm):
         ])
     last_name = StringField(validators=[Length(3, 20, message="Please provide a valid name"),
             Regexp(
-                "^[A-Za-z][A-Za-z_.]*$",
+                "^[A-Za-z\s][A-Za-z_.]*$",
                 0,
                 "last name must have only letters, " "dots or underscores",
             ),

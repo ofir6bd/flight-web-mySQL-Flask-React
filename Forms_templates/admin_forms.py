@@ -9,24 +9,13 @@ parent = os.path.dirname(current)
 # adding the parent directory to the sys.path.
 sys.path.append(parent)
 
-from wtforms import (
-    StringField,
-    PasswordField,
-    BooleanField,
-    IntegerField,
-    DateField,
-    TextAreaField,
-)
-
+from wtforms import StringField
 
 from flask_wtf import FlaskForm
-from wtforms.validators import InputRequired, Length, EqualTo, Email, Regexp ,Optional
-import email_validator
-from flask_login import current_user
-from wtforms import ValidationError,validators,SelectField
+from wtforms.validators import Length, Regexp
+from wtforms import ValidationError,SelectField
 from models import *
 from Facades.AnonymousFacade import AnonymousFacade
-from DAL import DataLayer
 from wtforms.validators import DataRequired
 
 def get_all_countries():
@@ -41,7 +30,6 @@ def get_airline_user_list():
     final_list = [(0, 'Choose which user')]
     fac_obj = AnonymousFacade()
     users = fac_obj.get_all_users()
-    #TODO create join table and not use 2 as filter to if 
     for i in users:
         if i.user_role == 2:
             final_list.append((i.id, i.username))
@@ -50,8 +38,7 @@ def get_airline_user_list():
 def get_customer_user_list():
     final_list = [(0, 'Choose which user')]
     fac_obj = AnonymousFacade()
-    users = fac_obj.get_all_users()
-    #TODO create join table and not use 2 as filter to if 
+    users = fac_obj.get_all_users() 
     for i in users:
         if i.user_role == 3:
             final_list.append((i.id, i.username))
@@ -61,7 +48,6 @@ def get_admin_user_list():
     final_list = [(0, 'Choose which user')]
     fac_obj = AnonymousFacade()
     users = fac_obj.get_all_users()
-    #TODO create join table and not use 2 as filter to if 
     for i in users:
         if i.user_role == 1:
             final_list.append((i.id, i.username))
@@ -71,7 +57,6 @@ def get_all_airlines():
     final_list = [(0, 'Airline company')]
     fac_obj = AnonymousFacade()
     airlines = fac_obj.get_all_airlines() 
-    #TODO get the country name instead of country_id
     for i in airlines:
         full_details = f'{i.name},{i.country_id}'
         final_list.append((i.id, full_details))
@@ -81,7 +66,6 @@ def get_all_customers():
     final_list = [(0, 'Customers')]
     fac_obj = AnonymousFacade()
     customers = fac_obj.get_all_customers() 
-        # TODO add filter to show only if not FK to other table
     for i in customers:
         full_details = f'{i.first_name},{i.last_name},{i.address},{i.phone_no}'
         final_list.append((i.id,full_details))
@@ -91,7 +75,6 @@ def get_all_admins():
     final_list = [(0, 'Administrators')]
     fac_obj = AnonymousFacade()
     admins = fac_obj.get_all_administrators() 
-        # TODO add filter to show only if not FK to other table
     for i in admins:
         full_details = f'{i.first_name},{i.last_name}'
         final_list.append((i.id, full_details))
@@ -101,8 +84,7 @@ class add_airline_form(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     country = SelectField('Country', coerce=int, validators=[DataRequired()])
     user = SelectField('Users', coerce=int, validators=[DataRequired()])
-    # submit = SubmitField('Add')
-
+    
     def __init__(self, *args, **kwargs):
         super(add_airline_form, self).__init__(*args, **kwargs)
         self.country.choices = get_all_countries()
@@ -152,8 +134,6 @@ class add_customer_form(FlaskForm):
         ])
     user = SelectField('Users', coerce=int, validators=[DataRequired()])
 
-    # submit = SubmitField('Add')
-
     def __init__(self, *args, **kwargs):
         super(add_customer_form, self).__init__(*args, **kwargs)
         self.user.choices = get_customer_user_list()
@@ -178,7 +158,6 @@ class add_admin_form(FlaskForm):
     def __init__(self, *args, **kwargs):
         super(add_admin_form, self).__init__(*args, **kwargs)
         self.user.choices = get_admin_user_list()
-
 
 class remove_airline_form(FlaskForm):
     airline_company_id = SelectField('Airline Company', validators=[DataRequired()], coerce=int)

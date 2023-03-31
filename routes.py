@@ -1,15 +1,10 @@
 from flask import Flask, redirect, url_for,request, render_template, session, flash
-
-from flask_login import UserMixin, login_user, LoginManager,login_required, logout_user,current_user
+from flask_login import login_user,login_required, logout_user,current_user
 from Facades.AnonymousFacade import AnonymousFacade
 from Facades.CustomerFacade import CustomerFacade
-# import hashlib
-from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
-from flask_login import UserMixin
-from flask_bcrypt import Bcrypt,generate_password_hash, check_password_hash
+from flask_bcrypt import check_password_hash
 from auth_forms import login_form,register_form
-from app import create_app,db,login_manager,bcrypt
+from app import create_app,login_manager,bcrypt
 from Forms_templates.general_forms import search_flights_form,register_customer_form
 from per_req_Wrappers import *
 from Routes_files.customer_routes import update_customer,customer_home,book_verification,remove_ticket
@@ -50,7 +45,7 @@ def index():
         landing_time = form.landing_time.data
 
         fac_obj = AnonymousFacade(origin_country=origin_country,destination_country=destination_country,\
-                                  departure_time=departure_time,landing_time=landing_time)
+                                departure_time=departure_time,landing_time=landing_time)
         flights = fac_obj.get_flights_by_parameters()
         return render_template("flights.html",
             form=form,
@@ -156,8 +151,6 @@ def register_customer():
     user_id = session['user_id']
     form = register_customer_form() 
     if form.validate_on_submit():
-        # fac_obj = AnonymousFacade(id=form.user.data)
-        # user = fac_obj.get_user_by_id()
         fac_obj = AnonymousFacade(first_name=form.first_name.data,\
                                     last_name=form.last_name.data,\
                                         address=form.address.data,\

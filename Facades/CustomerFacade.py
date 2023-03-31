@@ -2,8 +2,6 @@ from flask import session
 from Facades.FacadeBase import *
 from flask import jsonify
 
-
-
 class CustomerFacade(FacadeBase):
 
     def __init__(self,api=False, id=0,email="",user_id="",flight_id="",customer_id="",first_name=None\
@@ -44,6 +42,7 @@ class CustomerFacade(FacadeBase):
             return dal_obj.insert_obj(ticket)
         else:
             return res
+        
     def remove_ticket(self):
         dal_obj = DataLayer(id=self.id,table1=Tickets)
         ticket = dal_obj.get_by_id()
@@ -57,7 +56,6 @@ class CustomerFacade(FacadeBase):
             return dal_obj.delete_obj(ticket)
         else:
             return res
-        
         
     def get_my_ticket(self):
         dal_obj = DataLayer(api=self.api,table1=Tickets,input_attribute='customer_id', input_value=self.customer_id)
@@ -82,7 +80,6 @@ class CustomerFacade(FacadeBase):
                                     final_list[i][2].toJson()]
                         lst.append(temp)
             return jsonify(lst)    
-
         return final_list
 
     def check_one_flight_customer_combination_on_ticket(self):

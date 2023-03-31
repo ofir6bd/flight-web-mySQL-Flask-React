@@ -8,15 +8,11 @@ current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 # adding the parent directory to the sys.path.
 sys.path.append(parent)
-from Forms_templates.customer_forms import update_customer_form
-# from Facades.AnonymousFacade import AnonymousFacade
-# from Facades.CustomerFacade import CustomerFacade
-from flask import Flask, redirect, url_for,request, render_template, session, flash
-from flask_login import UserMixin, login_user, LoginManager,login_required, logout_user,current_user
+
+from flask import Flask, redirect, url_for, render_template,  flash
+from flask_login import login_required
 from per_req_Wrappers import require_admin_role
 from Forms_templates.admin_forms import add_airline_form,add_customer_form,add_admin_form,remove_airline_form,remove_customer_form,remove_admin_form
-from models import UserRoles,Users,Administrators,Customers, Countries,AirlineCompanies,Flights,Tickets
-from app import db
 from Facades.AdministratorFacade import AdministratorFacade
 
 @login_required

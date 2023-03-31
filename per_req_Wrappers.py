@@ -1,9 +1,10 @@
 
 from functools import wraps
-from flask import Flask, redirect, url_for,request, render_template, session, flash
+from flask import Flask, redirect, url_for,request, session, flash
 from Facades.AnonymousFacade import AnonymousFacade
-from flask_bcrypt import Bcrypt,generate_password_hash, check_password_hash
+from flask_bcrypt import check_password_hash
 from flask_login import login_user,logout_user
+
 # admin wrapper 
 def require_admin_role(func):
     @wraps(func)

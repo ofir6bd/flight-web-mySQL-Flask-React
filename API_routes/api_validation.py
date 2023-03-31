@@ -5,7 +5,6 @@ from Facades.AnonymousFacade import AnonymousFacade
 from Facades.AdministratorFacade import AdministratorFacade
 from Facades.AirlineFacade import AirlineFacade
 from datetime import datetime
-from flask import session
  
 first_name_regex_pattern = re.compile(r"^[a-zA-Z\s]{1,50}$")
 last_name_regex_pattern = re.compile(r"^[A-Za-z\s]{1,50}$")

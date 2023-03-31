@@ -8,11 +8,11 @@ current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 # adding the parent directory to the sys.path.
 sys.path.append(parent)
+
 from Forms_templates.airline_forms import add_flight_form,remove_flight_form,update_airline_form,company_flights_form,update_flight_form
-# from Facades.AnonymousFacade import AnonymousFacade
-# from Facades.CustomerFacade import CustomerFacade
-from flask import Flask, redirect, url_for,request, render_template, session, flash
-from flask_login import UserMixin, login_user, LoginManager,login_required, logout_user,current_user
+
+from flask import Flask, redirect, url_for, render_template, flash
+from flask_login import login_required
 from per_req_Wrappers import require_airline_role
 from Facades.AirlineFacade import AirlineFacade
 
@@ -118,8 +118,6 @@ def update_airline(company_name):
         title="Update airline",
         btn_action="Update airline",
         )
-
-
 
 
 @login_required

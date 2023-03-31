@@ -22,10 +22,3 @@ class AnonymousFacade(FacadeBase):
         dal_obj = DataLayer()
         return dal_obj.insert_obj(new_customer)
 
-
-# with app.app_context():
-#     obj3 = AnonymousFacade(username="Ofir6bd",password="123456789") 
-#     ans = obj3.login()
-    
-#     print(ans)
-#     print("Done")

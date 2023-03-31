@@ -1,8 +1,8 @@
 """
 That data can be used to GET, PUT (updade), POST (Add) and DELETE data types,
- which refers to the reading, updating, creating and deleting
- of operations concerning resources.
-"""# Register route
+which refers to the reading, updating, creating and deleting
+of operations concerning resources.
+"""
 import sys
 import os
  
@@ -12,17 +12,11 @@ current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 # adding the parent directory to the sys.path.
 sys.path.append(parent)
-from Forms_templates.customer_forms import update_customer_form,remove_ticket_form
-from flask import Flask, redirect, url_for,request, render_template, session, flash
-from flask_login import UserMixin, login_user, LoginManager,login_required, logout_user,current_user
-from per_req_Wrappers import require_customer_role
-from Facades.CustomerFacade import CustomerFacade
-from Facades.AnonymousFacade import AnonymousFacade
+
+from flask import request, session
+from flask_login import current_user
 from Facades.AdministratorFacade import AdministratorFacade
-from Facades.AirlineFacade import AirlineFacade
-from Forms_templates.general_forms import search_flights_form
 from flask import jsonify
-from flask_bcrypt import Bcrypt,generate_password_hash, check_password_hash
 from per_req_Wrappers import require_api_auth
 from API_routes.api_validation import *
 
@@ -32,7 +26,7 @@ def api_get_all_customers():
         return jsonify({ 'error': 'Email or password are incorrect'})
     else:
         if session['user_role'] == 'admin':
-            dal_obj = AnonymousFacade(api=True)
+            dal_obj = AdministratorFacade(api=True)
             return dal_obj.get_all_customers()
         else:
             return jsonify({ 'error': 'you do not have admin permissions'}) 

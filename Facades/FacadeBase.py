@@ -10,7 +10,6 @@ parent = os.path.dirname(current)
 sys.path.append(parent)
 from DAL import DataLayer
 from models import UserRoles,Users,Administrators,Customers, Countries,AirlineCompanies,Flights,Tickets
-import json
 
 class FacadeBase(object):
 
@@ -45,7 +44,6 @@ class FacadeBase(object):
         self.airline_company_id = airline_company_id
         self.customer_id = customer_id
 
-    
     def get_all_flights(self):
         dal_obj = DataLayer(table1=Flights, api=self.api)      
         return dal_obj.get_all()
@@ -190,21 +188,3 @@ class FacadeBase(object):
         dal_obj = DataLayer(table1=Tickets,input_attribute='flight_id', input_value=self.flight_id)
         return dal_obj.get_one_by_param()
         
-
-
-
-
-######################### testing functions
-# with app.app_context():
-#     # obj1 = FacadeBase(id=1) 
-#     # ans = obj1.get_flight_by_id()
-#     # ans = obj1.get_all_flights()
-#     # ans = obj1.get_all_airlines()
-#     # ans = obj1.get_airline_by_id()
-#     # ans = obj1.get_all_countries()
-#     # ans = obj1.get_country_by_id()
-#     # obj2 = FacadeBase(username='Ofir',password='123456',email='q@q.com', user_role= 2 )
-#     # obj2.create_new_user()
-    
-#     # print(ans)
-#     print("Done")

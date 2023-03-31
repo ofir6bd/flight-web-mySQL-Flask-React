@@ -68,7 +68,6 @@ class AirlineFacade(FacadeBase):
                                     all_flights_countries[i][2].toJson()]
                         lst.append(temp)
             return jsonify(lst)    
-
         return flights
 
     def get_airline_by_username(self):
@@ -78,14 +77,3 @@ class AirlineFacade(FacadeBase):
         final_table = dal_obj.join_tables()
         # print(final_table)
         return final_table[0].name
-
-
-
-# # ######################### testing functions
-# with app.app_context():
-
-#     obj6 = AirlineFacade(username="Ofir7bd") 
-#     ans = obj6.get_airline_by_username()
-    
-#     print(ans)
-#     print("Done")

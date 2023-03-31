@@ -8,27 +8,15 @@ current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 # adding the parent directory to the sys.path.
 sys.path.append(parent)
+
 from wtforms import ValidationError,validators,SelectField
 from wtforms.validators import DataRequired
-from wtforms import (
-    StringField,
-    PasswordField,
-    BooleanField,
-    IntegerField,
-    DateField,
-    TextAreaField,
-    DateTimeLocalField,
-)
-
+from wtforms import StringField, DateTimeLocalField
 
 from flask_wtf import FlaskForm
-from wtforms.validators import InputRequired, Length, EqualTo, Email, Regexp ,Optional
-import email_validator
-from flask_login import current_user
-from wtforms import ValidationError,validators
+from wtforms import ValidationError
 from models import *
 from Facades.AnonymousFacade import AnonymousFacade
-from DAL import DataLayer
 
 def get_all_countries():
     final_list = [(0, 'Choose which Country')]
