@@ -55,11 +55,16 @@ def api_get_country_by_id(country_id):
 
 def api_create_new_user():
     username = request.args.get('username')
-    password = request.args.get('username')
-    password = bcrypt.generate_password_hash(password) # encrypt password
+    password = request.args.get('password')
     email = request.args.get('email')
     user_role = request.args.get('user_role')
 
+    res = validate_user(username=username,password=password,email=email,user_role=user_role)
+    if res:
+        return jsonify(res)
+    
+    password = bcrypt.generate_password_hash(password) # encrypt password
+    
     if username and password and email and user_role:
         fac_obj = AnonymousFacade(api=True,username=username,password=password,email=email,user_role=user_role)
         res = fac_obj.create_new_user()

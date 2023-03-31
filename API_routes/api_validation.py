@@ -198,3 +198,31 @@ def validate_dates(departure_time,landing_time):
       return final_error_lst
    else:
       return
+   
+username_regex_pattern = re.compile(r"^[a-zA-Z\s]{1,50}$")
+password_regex_pattern = re.compile(r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$")
+email_regex_pattern = re.compile(r"([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+")
+user_role_regex_pattern = re.compile(r"^[1-3]$")
+
+
+def validate_user(action="",username="",password="",email="",user_role=""):
+   final_error_lst = []  
+   if not username_regex_pattern.search(username) and username:
+      final_error_lst.append({'username error': 'username must contain characteres only 2 to 50'}) 
+   if not password_regex_pattern.search(password) and password:
+      final_error_lst.append({'password error': 'password rules-Minimum eight characters, at least one letter and one number'}) 
+   if not email_regex_pattern.search(email) and email:
+      final_error_lst.append({'email error': 'email not legal'}) 
+   if not user_role_regex_pattern.search(user_role) and user_role:
+      final_error_lst.append({'user_role error': 'user_role can be 1, 2 or 3'}) 
+   
+   fac_obj = AnonymousFacade(username=username,email=email)
+   if fac_obj.get_user_by_username():
+      final_error_lst.append({'username error': 'username already taken'}) 
+   if fac_obj.get_user_by_email():
+      final_error_lst.append({'email error': 'email already taken'}) 
+   
+   if len(final_error_lst) > 0:
+      return final_error_lst
+   else:
+      return

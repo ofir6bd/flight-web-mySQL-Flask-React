@@ -117,7 +117,7 @@ def register():
         password=bcrypt.generate_password_hash(password) # encrypt password
         email = form.email.data
         role = form.role.data
-               
+    
         fac_obj = AnonymousFacade(username=username,password=password,email=email,user_role=role)
         res = fac_obj.create_new_user()
         if res:
