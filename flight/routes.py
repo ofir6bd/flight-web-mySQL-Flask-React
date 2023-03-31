@@ -14,6 +14,16 @@ from API_routes.general_api import *
 from API_routes.customer_api import *
 from API_routes.airline_api import *
 from API_routes.admin_api import *
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO) 
+file_Handler = logging.FileHandler("log_main.log")
+file_Handler = logging.Formatter('%(levelname)s:%(name)s:%(message)s')
+file_Handler.setLevel(logging.ERROR)
+logger.addHandler(file_Handler)
+
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -26,6 +36,7 @@ app = create_app()
 @app.route("/", methods=("GET", "POST"), strict_slashes=False)
 def index():
     if current_user.is_authenticated:    #Do the authentication here
+        logger.info(f"User Authenticated: {current_user.id}")
         customer_details = session['user_id']
     else:
         customer_details=0
