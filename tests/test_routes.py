@@ -8,12 +8,9 @@ parent = os.path.dirname(current)
 # adding the parent directory to the sys.path.
 sys.path.append(parent)
 
-# from flask import Flask
-# import os
-# from models import UserRoles,Users,Administrators,Customers, Countries,AirlineCompanies,Flights,Tickets
-from secrets_keys import *
-from app import create_app
-# import unittest
+
+from flight.secrets_keys import *
+from flight.app import create_app
 
 app = create_app()
 app.secret_key = SECRET_KEY
@@ -21,16 +18,14 @@ app.config['TESTING'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://root:{PASSWORD}@localhost/test_db'
 
 import pytest
-from flask import Flask
-import json
 
-from routes import index 
+from flight.routes import index 
 
 def test_assert():
     assert True
 
 def test_home_page(client):
-  response = client.get('/API/countries')
+  response = client.get('/')
   assert response.status_code == 200
 
 @pytest.fixture
