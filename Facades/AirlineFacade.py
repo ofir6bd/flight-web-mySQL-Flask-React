@@ -5,7 +5,7 @@ class AirlineFacade(FacadeBase):
 
     def __init__(self,api=False, id=0,name="",flight_id="",username="",airline_company_id="",origin_country_id="",destination_country_id="",departure_time="",landing_time="",remaining_tickets=""):
         super().__init__(api=api,id=id,flight_id=flight_id,username=username,airline_company_id=airline_company_id,name=name,\
-                         origin_country_id=origin_country_id,destination_country_id=destination_country_id,departure_time=departure_time,landing_time=landing_time,remaining_tickets=remaining_tickets)
+                        origin_country_id=origin_country_id,destination_country_id=destination_country_id,departure_time=departure_time,landing_time=landing_time,remaining_tickets=remaining_tickets)
         
 
     def update_airline(self):

@@ -4,7 +4,9 @@ from Facades.CustomerFacade import CustomerFacade
 from Facades.AnonymousFacade import AnonymousFacade
 from Facades.AdministratorFacade import AdministratorFacade
 from Facades.AirlineFacade import AirlineFacade
-
+from datetime import datetime
+from flask import session
+ 
 first_name_regex_pattern = re.compile(r"^[a-zA-Z\s]{1,50}$")
 last_name_regex_pattern = re.compile(r"^[A-Za-z\s]{1,50}$")
 address_regex_pattern = re.compile(r"^[A-Za-z0-9]{1,50}$")
@@ -135,7 +137,7 @@ departure_time_regex_pattern = re.compile(r"\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}")
 landing_time_regex_pattern = re.compile(r"\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}")
 remaining_tickets_regex_pattern = re.compile(r"[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0]")
 
-def validate_flight(action="",origin_country_id="",destination_country_id="",departure_time="",landing_time="",remaining_tickets=""):
+def validate_flight(action="",id="",origin_country_id="",destination_country_id="",departure_time="",landing_time="",remaining_tickets=""):
    final_error_lst = []  
    if not flight_id_regex_pattern.search(str(origin_country_id)) and origin_country_id:
       final_error_lst.append({'origin_country_id error': 'origin_country_id must contain digits only'}) 
@@ -148,28 +150,51 @@ def validate_flight(action="",origin_country_id="",destination_country_id="",dep
    if not remaining_tickets_regex_pattern.search(str(remaining_tickets)) and remaining_tickets:
       final_error_lst.append({'remaining_tickets error': 'remaining_tickets must be between 0-250'}) 
    
-   # validate FK
-   fac_obj = AirlineFacade(id=origin_country_id)
-   if not fac_obj.get_country_by_id():
-      final_error_lst.append({'error': 'origin country id not found'}) 
-   fac_obj = AirlineFacade(id=destination_country_id)
-   if not fac_obj.get_country_by_id():
-      final_error_lst.append({'error': 'destination country id not found'}) 
    
-   if origin_country_id == destination_country_id:
-      final_error_lst.append({'error': 'origin and destination countries cannot be the same'}) 
+   # validate FK
+   if origin_country_id:
+      fac_obj = AirlineFacade(id=origin_country_id)
+      if not fac_obj.get_country_by_id():
+         final_error_lst.append({'error': 'origin country id not found'}) 
+   if destination_country_id:
+      fac_obj = AirlineFacade(id=destination_country_id)
+      if not fac_obj.get_country_by_id():
+         final_error_lst.append({'error': 'destination country id not found'}) 
+   
+   if action == 'update':
+      fac_obj = AirlineFacade(id=origin_country_id)
+      flight = fac_obj.get_flight_by_id()
+      origin_c_id = flight.origin_country_id
+      destination_c_id = flight.destination_country_id
+      if origin_country_id:
+         origin_c_id = origin_country_id
+      if destination_country_id:
+         destination_c_id = destination_country_id
+      if str(origin_c_id) == str(destination_c_id):
+         final_error_lst.append({'error': 'origin and destination countries cannot be the same'}) 
+   else:     
+      if origin_country_id == destination_country_id:
+         final_error_lst.append({'error': 'origin and destination countries cannot be the same'}) 
       
-   # if action != "update":
-   #    fac_obj = AdministratorFacade(id=user_id,user_id=user_id)
-   #    admin = fac_obj.get_admin_by_user_id()
-   #    if admin:
-   #       final_error_lst.append({'error': 'Admin already exists for that user_id'}) 
-   #    user = fac_obj.get_user_by_id()
-   #    if user.user_role != 1:
-   #       final_error_lst.append({'error': 'user role for this user is not admin'}) 
-
    if len(final_error_lst) > 0:
       return final_error_lst
    else:
       return
       
+def validate_dates(departure_time,landing_time):
+   final_error_lst = [] 
+   try:
+      departure_time = datetime.strptime(departure_time, '%Y-%m-%dT%H:%M')
+   except Exception as e:
+         print(f"Error: {e}")
+         final_error_lst.append({'departure_time error': 'departure_time must be in format: "%Y-%m-%dT%H:%M"'}) 
+   try:
+      landing_time = datetime.strptime(landing_time, '%Y-%m-%dT%H:%M')
+   except Exception as e:
+         print(f"Error: {e}")
+         final_error_lst.append({'landing_time error': 'landing_time must be in format: "%Y-%m-%dT%H:%M"'}) 
+         
+   if len(final_error_lst) > 0:
+      return final_error_lst
+   else:
+      return

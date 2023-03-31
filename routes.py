@@ -159,10 +159,10 @@ def register_customer():
         # fac_obj = AnonymousFacade(id=form.user.data)
         # user = fac_obj.get_user_by_id()
         fac_obj = AnonymousFacade(first_name=form.first_name.data,\
-                                      last_name=form.last_name.data,\
-                                         address=form.address.data,\
-                                             phone_no=form.phone_no.data,\
-                                                 credit_card_no=form.credit_card_no.data,user_id=user_id)
+                                    last_name=form.last_name.data,\
+                                        address=form.address.data,\
+                                            phone_no=form.phone_no.data,\
+                                                credit_card_no=form.credit_card_no.data,user_id=user_id)
         res = fac_obj.add_customer()
         if res:
             flash(f"Customer registered", "success")

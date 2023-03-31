@@ -69,6 +69,11 @@ def api_add_flight():
         return jsonify({ 'error': 'Email or password are incorrect'})
     else:
         if session['user_role'] == 'airline':
+            dep_time = request.args.get('departure_time')
+            lan_time = request.args.get('landing_time')
+            res = validate_dates(dep_time,lan_time)
+            if res:
+                return jsonify(res)
             airline_company_id = session['airline_id']
             origin_country_id = int(request.args.get('origin_country_id'))
             destination_country_id = int(request.args.get('destination_country_id'))
@@ -141,6 +146,11 @@ def api_update_flight(flight_id):
                         landing_time = ""
                     remaining_tickets = request.args.get('remaining_tickets')
 
+                    res = validate_flight(action="update",id=id,origin_country_id=origin_country_id,destination_country_id=destination_country_id,\
+                                        departure_time=departure_time,landing_time=landing_time,remaining_tickets=remaining_tickets)
+                    if res:
+                        return jsonify(res)
+            
                     fac_obj = AirlineFacade(api=True,id=id,airline_company_id=airline_company_id,origin_country_id=origin_country_id,destination_country_id=destination_country_id,\
                                                 departure_time=departure_time,landing_time=landing_time,remaining_tickets=remaining_tickets)
                     res = fac_obj.update_flight()
