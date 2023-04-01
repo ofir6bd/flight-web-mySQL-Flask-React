@@ -3,15 +3,16 @@ import TextField from "@mui/material/TextField";
 import { DateField } from "@mui/x-date-pickers/DateField";
 import "./SearchFlight.css";
 import { Button } from "@mui/material";
-import getFlights from "../../apiHandler/ApiHandler";
+import { getFlights } from "../../apiHandler/ApiHandler";
 import Flight from "../flight/flight";
 import { useNavigate } from "react-router";
 
 function SearchFlight() {
   let navigate = useNavigate();
 
-  function navigateToFlights() {
-    navigate("/flights");
+  function navigateToFlights(flights_list) {
+    console.log(flights_list);
+    navigate("/flights", { state: { flights: flights_list } });
   }
 
   return (
@@ -25,7 +26,9 @@ function SearchFlight() {
         <Button
           variant="contained"
           className="searchButton"
-          onClick={navigateToFlights}
+          onClick={() =>
+            getFlights().then((result) => navigateToFlights(result))
+          }
         >
           Search
         </Button>

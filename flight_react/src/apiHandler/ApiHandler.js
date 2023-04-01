@@ -1,4 +1,4 @@
-function getFlights() {
+export function getFlights() {
   var url = "http://127.0.0.1:5000/API/flights";
   console.log(url);
 
@@ -7,4 +7,20 @@ function getFlights() {
   return flights;
 }
 
-export default getFlights;
+export function createUser(username, password, email, user_role) {
+  console.log("first signup");
+  console.log(username);
+  const requestOptions = { method: "POST" };
+  var url =
+    "http://127.0.0.1:5000/API/create_new_user?username=" +
+    username +
+    "&password=" +
+    password +
+    "&email=" +
+    email +
+    "&user_role=" +
+    user_role;
+  var response = fetch(url, requestOptions).then((response) => response.json());
+  console.log(response);
+  return response;
+}
