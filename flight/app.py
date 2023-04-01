@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_migrate import Migrate
 from secrets_keys import *
+from flask_cors import CORS
 
 from flask_login import LoginManager
 
@@ -19,7 +20,8 @@ bcrypt = Bcrypt()
 
 def create_app():
     app = Flask(__name__, static_folder='static')
-    
+    CORS(app)
+
     app.secret_key = SECRET_KEY
     app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://root:{PASSWORD}@localhost/{DATABASE}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
