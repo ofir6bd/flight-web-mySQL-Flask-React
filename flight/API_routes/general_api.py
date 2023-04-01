@@ -19,6 +19,7 @@ from Facades.AnonymousFacade import AnonymousFacade
 from flask import jsonify
 from per_req_Wrappers import require_api_auth
 from API_routes.api_validation import *
+from flask_bcrypt import check_password_hash
 
 def api_get_all_countries():
     dal_obj = AnonymousFacade(api=True)
@@ -44,7 +45,16 @@ def api_get_country_by_id(country_id):
     else:
         return jsonify({ 'error': 'country not found'})
     
-
+def api_check_login():
+    email = request.args.get('email')
+    password = request.args.get('password')
+    fac_obj = AnonymousFacade(email=email)
+    user = fac_obj.get_user_by_email()
+    if check_password_hash(user.password, password):
+        return jsonify({ 'success': 'email and password are correct'})
+    else:
+        return jsonify({ 'error': 'one of the parameters failed'})
+    
 def api_create_new_user():
     username = request.args.get('username')
     password = request.args.get('password')
