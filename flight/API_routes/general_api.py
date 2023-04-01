@@ -53,7 +53,7 @@ def api_check_login():
     if check_password_hash(user.password, password):
         return jsonify({ 'success': 'email and password are correct'})
     else:
-        return jsonify({ 'error': 'one of the parameters failed'})
+        return jsonify({ 'error': 'one of the parameters are wrong'})
     
 def api_create_new_user():
     username = request.args.get('username')

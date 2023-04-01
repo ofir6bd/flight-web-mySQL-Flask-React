@@ -24,3 +24,18 @@ export function createUser(username, password, email, user_role) {
   console.log(response);
   return response;
 }
+
+export function checkLogin(email, password) {
+  console.log("first login");
+  console.log(email);
+  const requestOptions = { method: "GET" };
+  var url =
+    "http://127.0.0.1:5000/API/check_login/?email=" +
+    email +
+    "&password=" +
+    password;
+
+  var response = fetch(url, requestOptions).then((response) => response.json());
+  console.log(response);
+  return response;
+}
