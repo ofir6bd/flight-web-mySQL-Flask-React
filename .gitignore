@@ -24,4 +24,4 @@ htmlcov/
 .coverage.*
 *,cover
 secrets_keys*
-*LOG*
+*.log

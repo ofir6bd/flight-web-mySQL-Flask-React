@@ -20,8 +20,8 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO) 
 file_Handler = logging.FileHandler("log_main.log")
 file_Handler = logging.Formatter('%(levelname)s:%(name)s:%(message)s')
-file_Handler.setLevel(logging.ERROR)
-logger.addHandler(file_Handler)
+# file_Handler.setLevel(logging.ERROR)
+# logger.addHandler(file_Handler)
 
 
 
@@ -36,7 +36,6 @@ app = create_app()
 @app.route("/", methods=("GET", "POST"), strict_slashes=False)
 def index():
     if current_user.is_authenticated:    #Do the authentication here
-        logger.info(f"User Authenticated: {current_user.id}")
         customer_details = session['user_id']
     else:
         customer_details=0
@@ -78,6 +77,7 @@ def login():
             user = fac_obj.get_user_by_email()
             if check_password_hash(user.password, form.password.data):
                 login_user(user)
+            
                 session['user_id'] = user.id
 
                 fac_obj = AnonymousFacade(user_id=int(user.id))
