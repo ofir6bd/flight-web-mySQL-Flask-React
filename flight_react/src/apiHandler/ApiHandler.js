@@ -21,8 +21,8 @@ export function createUser(username, password, email, user_role) {
   return response;
 }
 
-export function checkLogin(email, password) {
-  console.log("start api checkLogin");
+export function apiCheckLogin(email, password) {
+  console.log("start api apiCheckLogin");
   const requestOptions = { method: "GET" };
   var url =
     "http://127.0.0.1:5000/API/check_login/?email=" +
@@ -33,11 +33,39 @@ export function checkLogin(email, password) {
   return response;
 }
 
-export function checkAdmin(email, password, user_id) {
-  console.log("start api checkAdmin");
+export function apiCheckAdmin(email, password, user_id) {
+  console.log("start api apiCheckAdmin");
   const requestOptions = { method: "GET" };
   var url =
     "http://127.0.0.1:5000/API/get_admin_by_user_id/?email=" +
+    email +
+    "&password=" +
+    password +
+    "&user_id=" +
+    user_id;
+  var response = fetch(url, requestOptions).then((response) => response.json());
+  return response;
+}
+
+export function apiCheckCustomer(email, password, user_id) {
+  console.log("start api apiCheckCustomer");
+  const requestOptions = { method: "GET" };
+  var url =
+    "http://127.0.0.1:5000/API/get_customer_by_user_id/?email=" +
+    email +
+    "&password=" +
+    password +
+    "&user_id=" +
+    user_id;
+  var response = fetch(url, requestOptions).then((response) => response.json());
+  return response;
+}
+
+export function apiCheckAirline(email, password, user_id) {
+  console.log("start api apiCheckAirline");
+  const requestOptions = { method: "GET" };
+  var url =
+    "http://127.0.0.1:5000/API/get_airline_by_user_id/?email=" +
     email +
     "&password=" +
     password +

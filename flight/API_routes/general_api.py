@@ -90,6 +90,31 @@ def api_get_admin_by_user_id():
         else:
             return jsonify({'error': "no user found"})
 
+@require_api_auth
+def api_get_customer_by_user_id():
+    user_id = request.args.get('user_id')
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:    
+        fac_obj = CustomerFacade(user_id=user_id)
+        customer = fac_obj.get_customer_by_user_id()
+        if customer:
+            return jsonify({'result': "user is customer",  'customer_id': customer.id})
+        else:
+            return jsonify({'error': "no user found"})
+
+@require_api_auth
+def api_get_airline_by_user_id():
+    user_id = request.args.get('user_id')
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:    
+        fac_obj = AirlineFacade(user_id=user_id)
+        airline = fac_obj.get_airline_by_user_id()
+        if airline:
+            return jsonify({'result': "user is airline",  'airline_id': airline.id})
+        else:
+            return jsonify({'error': "no user found"})
 
 @require_api_auth
 def api_register_as_customer():
