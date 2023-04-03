@@ -215,6 +215,7 @@ app.add_url_rule('/API/create_new_user/', view_func=api_create_new_user, methods
 app.add_url_rule('/API/register_as_customer/', view_func=api_register_as_customer, methods=["POST"], strict_slashes=False)
 app.add_url_rule('/API/country/<int:country_id>/', view_func=api_get_country_by_id, methods=["GET"], strict_slashes=False)
 app.add_url_rule('/API/check_login/', view_func=api_check_login, methods=["GET"], strict_slashes=False)
+app.add_url_rule('/API/get_admin_by_user_id/', view_func=api_get_admin_by_user_id, methods=["GET"], strict_slashes=False)
 
 
 # Customer API

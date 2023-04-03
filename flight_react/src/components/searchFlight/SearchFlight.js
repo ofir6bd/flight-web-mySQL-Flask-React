@@ -25,7 +25,7 @@ function SearchFlight() {
         <DateField label="Landing time" />
         <Button
           variant="contained"
-          className="searchButton"
+          className="Button"
           onClick={() =>
             getFlights().then((result) => navigateToFlights(result))
           }

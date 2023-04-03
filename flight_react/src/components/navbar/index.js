@@ -18,6 +18,12 @@ const Navbar = () => {
           <NavLink to="/" activeStyle>
             Search Flights
           </NavLink>
+          <NavLink to="/addAirline" activeStyle>
+            Add Airline
+          </NavLink>
+          <NavLink to="/addCustomer" activeStyle>
+            Add Customer
+          </NavLink>
         </NavMenu>
         {!logged_in ? (
           <div>

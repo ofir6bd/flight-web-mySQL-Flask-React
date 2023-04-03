@@ -51,6 +51,8 @@ function Signup() {
         onChange={handleUserRole}
       />
       <Button
+        variant="contained"
+        className="Button"
         onClick={() =>
           createUser(username, password, email, user_role).then((response) =>
             console.log(response)

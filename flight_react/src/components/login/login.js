@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import "./login.css";
-import { checkLogin } from "../../apiHandler/ApiHandler";
+import { Auth } from "../Auth/Auth";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -31,9 +31,9 @@ function Login() {
         onChange={handlePassword}
       />
       <Button
-        onClick={() =>
-          checkLogin(email, password).then((response) => console.log(response))
-        }
+        variant="contained"
+        className="Button"
+        onClick={() => Auth(email, password).then((res) => console.log(res))}
       >
         Log In
       </Button>

@@ -51,7 +51,7 @@ def api_check_login():
     fac_obj = AnonymousFacade(email=email)
     user = fac_obj.get_user_by_email()
     if check_password_hash(user.password, password):
-        return jsonify({ 'success': 'email and password are correct'})
+        return jsonify({ 'success': 'email and password are correct', 'user_id': user.id})
     else:
         return jsonify({ 'error': 'one of the parameters are wrong'})
     
@@ -76,6 +76,20 @@ def api_create_new_user():
             return jsonify({ 'error': 'error occured'})
     else:
         return jsonify({ 'error': 'one of more parameters are'})
+
+@require_api_auth
+def api_get_admin_by_user_id():
+    user_id = request.args.get('user_id')
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:    
+        fac_obj = AdministratorFacade(user_id=user_id)
+        admin = fac_obj.get_admin_by_user_id()
+        if admin:
+            return jsonify({'result': "user is admin",  'admin_id': admin.id})
+        else:
+            return jsonify({'error': "no user found"})
+
 
 @require_api_auth
 def api_register_as_customer():

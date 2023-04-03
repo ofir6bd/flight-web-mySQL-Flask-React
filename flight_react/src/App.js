@@ -9,6 +9,8 @@ import { Button } from "@mui/material";
 import Login from "./components/login/login";
 import Signup from "./components/signup/signup";
 import Navbar from "./components/navbar/index";
+import AddAirlineForm from "./components/Admin/addAirline/addAirline";
+import AddCustomerForm from "./components/Admin/addAirline/addCustomer";
 
 function App() {
   let navigate = useNavigate();
@@ -26,6 +28,8 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
           <Route path="flights" element={<Flights />} />
+          <Route path="addAirline" element={<AddAirlineForm />} />
+          <Route path="addCustomer" element={<AddCustomerForm />} />
         </Routes>
       </LocalizationProvider>
     </div>
