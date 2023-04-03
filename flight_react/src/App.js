@@ -12,6 +12,7 @@ import Navbar from "./components/navbar/index";
 import AddAirlineForm from "./components/Admin/addAirline/addAirline";
 import AddCustomerForm from "./components/Admin/addAirline/addCustomer";
 import AddAdminForm from "./components/Admin/addAirline/addAdmin";
+import AddFlightForm from "./components/Airline/addFlight";
 
 function App() {
   let navigate = useNavigate();
@@ -32,6 +33,8 @@ function App() {
           <Route path="addAirline" element={<AddAirlineForm />} />
           <Route path="addCustomer" element={<AddCustomerForm />} />
           <Route path="addAdmin" element={<AddAdminForm />} />
+
+          <Route path="addFlight" element={<AddFlightForm />} />
         </Routes>
       </LocalizationProvider>
     </div>

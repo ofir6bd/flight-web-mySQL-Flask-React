@@ -27,6 +27,11 @@ const Navbar = () => {
           <NavLink to="/addAdmin" activeStyle>
             Add Admin
           </NavLink>
+
+          <NavLink to="/addFlight" activeStyle>
+            Add Flight
+          </NavLink>
+
         </NavMenu>
         {!logged_in ? (
           <div>
