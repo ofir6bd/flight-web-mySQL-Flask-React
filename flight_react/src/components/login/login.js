@@ -33,7 +33,7 @@ function Login() {
       <Button
         variant="contained"
         className="Button"
-        onClick={() => Auth(email, password).then((res) => console.log(res))}
+        onClick={() => Auth(email, password)}
       >
         Log In
       </Button>
