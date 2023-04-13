@@ -13,6 +13,9 @@ import AddAirlineForm from "./components/Admin/addAirline/addAirline";
 import AddCustomerForm from "./components/Admin/addAirline/addCustomer";
 import AddAdminForm from "./components/Admin/addAirline/addAdmin";
 import AddFlightForm from "./components/Airline/addFlight";
+import { StoreProvider, createStore } from "easy-peasy";
+
+
 
 function App() {
   let navigate = useNavigate();
@@ -22,6 +25,7 @@ function App() {
   }
 
   return (
+    
     <div className="App">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Navbar />
@@ -38,6 +42,7 @@ function App() {
         </Routes>
       </LocalizationProvider>
     </div>
+
   );
 }
 
