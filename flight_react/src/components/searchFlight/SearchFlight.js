@@ -11,7 +11,6 @@ function SearchFlight() {
   let navigate = useNavigate();
 
   function navigateToFlights(flights_list) {
-    console.log(flights_list);
     navigate("/flights", { state: { flights: flights_list } });
   }
 

@@ -8,14 +8,12 @@ import { useNavigate } from "react-router";
 import { Button } from "@mui/material";
 import Login from "./components/login/login";
 import Signup from "./components/signup/signup";
+import CustomerPage from "./components/Customer/CustomerPage";
 import Navbar from "./components/navbar/index";
 import AddAirlineForm from "./components/Admin/addAirline/addAirline";
 import AddCustomerForm from "./components/Admin/addAirline/addCustomer";
 import AddAdminForm from "./components/Admin/addAirline/addAdmin";
 import AddFlightForm from "./components/Airline/addFlight";
-import { StoreProvider, createStore } from "easy-peasy";
-
-
 
 function App() {
   let navigate = useNavigate();
@@ -25,7 +23,6 @@ function App() {
   }
 
   return (
-    
     <div className="App">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Navbar />
@@ -33,6 +30,7 @@ function App() {
           <Route path="" element={<SearchFlight />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
+          <Route path="customerPage" element={<CustomerPage />} />
           <Route path="flights" element={<Flights />} />
           <Route path="addAirline" element={<AddAirlineForm />} />
           <Route path="addCustomer" element={<AddCustomerForm />} />
@@ -42,7 +40,6 @@ function App() {
         </Routes>
       </LocalizationProvider>
     </div>
-
   );
 }
 

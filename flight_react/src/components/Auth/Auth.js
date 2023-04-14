@@ -64,7 +64,8 @@ const checkIfUserAirline = (email, password, user_id) => {
 };
 
 export function Auth(email, password) {
-  console.log("start Auth");
+  
+
   apiCheckLogin(email, password)
     .then((response) => {
       if (response.user_id) {
@@ -76,10 +77,9 @@ export function Auth(email, password) {
         checkIfUserAirline(email, password, response.user_id);
       }
     })
-    .then(() => {
-      console.log("data");
-    })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    
+;
 
-  return null; // render the component to use the useGlobalState hook
+  // return null; // render the component to use the useGlobalState hook
 }

@@ -3,8 +3,16 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import "./login.css";
 import { Auth } from "../Auth/Auth";
+import { useNavigate } from "react-router";
 
 function Login() {
+  let navigate = useNavigate();
+
+  const handleClick = (e) => {
+    Auth(email, password);
+    console.log("The link was clicked.");
+    navigate("/customerPage");
+  };
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -30,11 +38,7 @@ function Login() {
         variant="outlined"
         onChange={handlePassword}
       />
-      <Button
-        variant="contained"
-        className="Button"
-        onClick={() => Auth(email, password)}
-      >
+      <Button variant="contained" className="Button" onClick={handleClick}>
         Log In
       </Button>
     </div>
