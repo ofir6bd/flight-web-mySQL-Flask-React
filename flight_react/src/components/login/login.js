@@ -8,14 +8,18 @@ import { useNavigate } from "react-router";
 function Login() {
   let navigate = useNavigate();
 
-  const handleClick = () => {
-    Auth(email, password);
+  const handleClick = async () => {
+    console.log("The link was clicked before");
+    setTimeout(Auth(email, password), 3000);
     console.log("The link was clicked.");
     if (localStorage.getItem("globalVarCustomerId")) {
+      console.log("globalVarCustomerId");
       navigate("/customerPage");
     } else if (localStorage.getItem("globalVarAdminId")) {
+      console.log("globalVarAdminId");
       navigate("/adminPage");
     } else if (localStorage.getItem("globalVarAirlineId")) {
+      console.log("globalVarAirlineId");
       navigate("/airlinePage");
     }
   };
@@ -42,6 +46,7 @@ function Login() {
         id="outlined-basic"
         label="Password:"
         variant="outlined"
+        type="password"
         onChange={handlePassword}
       />
       <Button variant="contained" className="Button" onClick={handleClick}>

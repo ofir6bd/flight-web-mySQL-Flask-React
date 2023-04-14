@@ -10,12 +10,8 @@ function Logout() {
 
   const handleClick = () => {
     localStorage.clear();
-    // localStorage.getItem("globalVarPassword").clear;
-    // localStorage.getItem("globalVarUserId").clear;
-    // localStorage.getItem("globalVarCustomerId").clear;
-    // localStorage.getItem("globalVarAdminId").clear;
-    // localStorage.getItem("globalVarAirlineId").clear;
-    console.log("The link was clicked logout");
+    console.log("logout done");
+    console.log(localStorage.getItem("globalVarCustomerId"));
     navigate("/");
   };
 

@@ -48,7 +48,7 @@ const checkIfUserAdmin = (email, password, user_id) => {
   apiCheckAdmin(email, password, user_id)
     .then((response) => {
       if (response.admin_id) {
-        setCustomerIdGlobalStorage(response.admin_id);
+        setAdminIdGlobalStorage(response.admin_id);
       }
     })
     .catch((err) => console.log(err));
@@ -57,15 +57,13 @@ const checkIfUserAirline = (email, password, user_id) => {
   apiCheckAirline(email, password, user_id)
     .then((response) => {
       if (response.airline_id) {
-        setCustomerIdGlobalStorage(response.airline_id);
+        setAirlineIdGlobalStorage(response.airline_id);
       }
     })
     .catch((err) => console.log(err));
 };
 
 export function Auth(email, password) {
-  
-
   apiCheckLogin(email, password)
     .then((response) => {
       if (response.user_id) {
@@ -77,9 +75,7 @@ export function Auth(email, password) {
         checkIfUserAirline(email, password, response.user_id);
       }
     })
-    .catch((err) => console.log(err))
-    
-;
+    .catch((err) => console.log(err));
 
   // return null; // render the component to use the useGlobalState hook
 }
