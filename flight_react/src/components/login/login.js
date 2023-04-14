@@ -8,10 +8,16 @@ import { useNavigate } from "react-router";
 function Login() {
   let navigate = useNavigate();
 
-  const handleClick = (e) => {
+  const handleClick = () => {
     Auth(email, password);
     console.log("The link was clicked.");
-    navigate("/customerPage");
+    if (localStorage.getItem("globalVarCustomerId")) {
+      navigate("/customerPage");
+    } else if (localStorage.getItem("globalVarAdminId")) {
+      navigate("/adminPage");
+    } else if (localStorage.getItem("globalVarAirlineId")) {
+      navigate("/airlinePage");
+    }
   };
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +31,7 @@ function Login() {
 
   return (
     <div className="container">
-      <h2> Sign In Page</h2>
+      <h2> LogIn Page</h2>
       <TextField
         id="outlined-basic"
         label="Email:"

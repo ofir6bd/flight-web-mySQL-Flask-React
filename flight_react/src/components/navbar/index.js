@@ -31,16 +31,24 @@ const Navbar = () => {
           <NavLink to="/addFlight" activeStyle>
             Add Flight
           </NavLink>
-
         </NavMenu>
         {!logged_in ? (
           <div>
-            <NavBtn>
-              <NavBtnLink to="/login">Sign In</NavBtnLink>
-            </NavBtn>
-            <NavBtn>
-              <NavBtnLink to="/signup">Sign Up</NavBtnLink>
-            </NavBtn>
+            <div>
+              <NavBtn>
+                <NavBtnLink to="/login">Sign In</NavBtnLink>
+              </NavBtn>
+            </div>
+            <div>
+              <NavBtn>
+                <NavBtnLink to="/signup">Sign Up</NavBtnLink>
+              </NavBtn>
+            </div>
+            <div>
+              <NavBtn>
+                <NavBtnLink to="/logout">Logout</NavBtnLink>
+              </NavBtn>
+            </div>
           </div>
         ) : (
           <h1> User Already logged in</h1>
