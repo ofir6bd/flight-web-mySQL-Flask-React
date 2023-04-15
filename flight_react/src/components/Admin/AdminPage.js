@@ -3,7 +3,7 @@ import React from "react";
 function adminPage({}) {
   return (
     <div>
-      <h3> Admin Page: </h3>
+      <h1> Admin Page </h1>
     </div>
   );
 }

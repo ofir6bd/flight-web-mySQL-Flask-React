@@ -16,7 +16,7 @@ import Navbar from "./components/navbar/index";
 import AddAirlineForm from "./components/Admin/addAirline/addAirline";
 import AddCustomerForm from "./components/Admin/addCustomer/addCustomer";
 import AddAdminForm from "./components/Admin/addAdmin/addAdmin";
-import AddFlightForm from "./components/Airline/addFlight";
+import AddFlightForm from "./components/Airline/addFlight/addFlight";
 
 function App() {
   let navigate = useNavigate();

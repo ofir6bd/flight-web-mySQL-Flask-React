@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import TextField from "@mui/material/TextField";
+import React from "react";
+
 import { Button } from "@mui/material";
 import "./logout.css";
-import { Auth } from "../Auth/Auth";
+
 import { useNavigate } from "react-router";
 
 function Logout() {

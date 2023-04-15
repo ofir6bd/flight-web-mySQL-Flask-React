@@ -9,7 +9,7 @@ import {
 } from "./NavbarElements";
 
 const Navbar = () => {
-  const [logged_in, set_logged_in] = useState(0);
+  // const [logged_in, set_logged_in] = useState(0);
 
   return (
     <>
@@ -27,12 +27,11 @@ const Navbar = () => {
           <NavLink to="/addAdmin" activeStyle>
             Add Admin
           </NavLink>
-
           <NavLink to="/addFlight" activeStyle>
             Add Flight
           </NavLink>
         </NavMenu>
-        {!logged_in ? (
+        {!localStorage.getItem("globalVarUserId") ? (
           <div>
             <div>
               <NavBtn>
@@ -44,14 +43,13 @@ const Navbar = () => {
                 <NavBtnLink to="/signup">Sign Up</NavBtnLink>
               </NavBtn>
             </div>
-            <div>
-              <NavBtn>
-                <NavBtnLink to="/logout">Logout</NavBtnLink>
-              </NavBtn>
-            </div>
           </div>
         ) : (
-          <h1> User Already logged in</h1>
+          <div>
+            <NavBtn>
+              <NavBtnLink to="/logout">Logout</NavBtnLink>
+            </NavBtn>
+          </div>
         )}
       </Nav>
     </>

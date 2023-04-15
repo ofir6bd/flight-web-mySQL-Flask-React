@@ -3,7 +3,7 @@ import React from "react";
 function airlinePage({  }) {
   return (
     <div>
-      <h3> Airline Page: </h3>
+      <h1> Airline Page </h1>
     </div>
   );
 }

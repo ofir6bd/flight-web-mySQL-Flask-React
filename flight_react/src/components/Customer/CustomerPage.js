@@ -1,9 +1,9 @@
 import React from "react";
 
-function customerPage({  }) {
+function customerPage({}) {
   return (
     <div>
-      <h3> Customer Page: </h3>
+      <h1> Customer Page </h1>
     </div>
   );
 }

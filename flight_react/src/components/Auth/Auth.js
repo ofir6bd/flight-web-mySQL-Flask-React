@@ -76,6 +76,4 @@ export function Auth(email, password) {
       }
     })
     .catch((err) => console.log(err));
-
-  // return null; // render the component to use the useGlobalState hook
 }

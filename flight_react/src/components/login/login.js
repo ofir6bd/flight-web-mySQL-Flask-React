@@ -8,21 +8,24 @@ import { useNavigate } from "react-router";
 function Login() {
   let navigate = useNavigate();
 
-  const handleClick = async () => {
+  const handleClick = () => {
     console.log("The link was clicked before");
-    setTimeout(Auth(email, password), 3000);
-    console.log("The link was clicked.");
-    if (localStorage.getItem("globalVarCustomerId")) {
-      console.log("globalVarCustomerId");
-      navigate("/customerPage");
-    } else if (localStorage.getItem("globalVarAdminId")) {
-      console.log("globalVarAdminId");
-      navigate("/adminPage");
-    } else if (localStorage.getItem("globalVarAirlineId")) {
-      console.log("globalVarAirlineId");
-      navigate("/airlinePage");
-    }
+    Auth(email, password);
+    setTimeout(() => {
+      if (localStorage.getItem("globalVarCustomerId")) {
+        navigate("/customerPage");
+      } else if (localStorage.getItem("globalVarAdminId")) {
+        navigate("/adminPage");
+      } else if (localStorage.getItem("globalVarAirlineId")) {
+        navigate("/airlinePage");
+      } else {
+        navigate("/");
+      }
+    }, 1000);
+
+    console.log("The link was clicked after");
   };
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
