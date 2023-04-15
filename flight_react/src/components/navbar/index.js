@@ -14,23 +14,38 @@ const Navbar = () => {
   return (
     <>
       <Nav>
-        <NavMenu>
-          <NavLink to="/" activeStyle>
-            Search Flights
-          </NavLink>
-          <NavLink to="/addAirline" activeStyle>
-            Add Airline
-          </NavLink>
-          <NavLink to="/addCustomer" activeStyle>
-            Add Customer
-          </NavLink>
-          <NavLink to="/addAdmin" activeStyle>
-            Add Admin
-          </NavLink>
-          <NavLink to="/addFlight" activeStyle>
-            Add Flight
-          </NavLink>
-        </NavMenu>
+        {localStorage.getItem("globalVarAdminId") ? (
+          <NavMenu>
+            <NavLink to="/addCustomer" activeStyle>
+              Add Customer
+            </NavLink>
+            <NavLink to="/addAdmin" activeStyle>
+              Add Admin
+            </NavLink>
+            <NavLink to="/addAirline" activeStyle>
+              Add Airline
+            </NavLink>
+          </NavMenu>
+        ) : localStorage.getItem("globalVarCustomerId") ? (
+          <NavMenu>
+            <NavLink to="/" activeStyle>
+              Search Flights
+            </NavLink>
+          </NavMenu>
+        ) : localStorage.getItem("globalVarAirlineId") ? (
+          <NavMenu>
+            <NavLink to="/addFlight" activeStyle>
+              Add Flight
+            </NavLink>
+          </NavMenu>
+        ) : (
+          <NavMenu>
+            <NavLink to="/" activeStyle>
+              Search Flights
+            </NavLink>
+          </NavMenu>
+        )}
+
         {!localStorage.getItem("globalVarUserId") ? (
           <div>
             <div>
