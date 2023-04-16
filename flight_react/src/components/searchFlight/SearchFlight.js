@@ -16,6 +16,11 @@ function SearchFlight() {
 
   return (
     <div>
+      <div class="messageContainer">
+        {localStorage.getItem("globalVarMessage")
+          ? localStorage.getItem("globalVarMessage")
+          : null}
+      </div>
       <h2> Search flight </h2>
       <div className="container">
         <TextField id="outlined-basic" label="From:" variant="outlined" />

@@ -21,7 +21,7 @@ function Login() {
       } else {
         navigate("/");
       }
-    }, 1000);
+    }, 800);
 
     console.log("The link was clicked after");
   };

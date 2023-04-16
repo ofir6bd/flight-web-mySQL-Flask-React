@@ -43,7 +43,6 @@ function App() {
           <Route path="addCustomer" element={<AddCustomerForm />} />
           <Route path="addAdmin" element={<AddAdminForm />} />
           <Route path="verification" element={<Verification />} />
-
           <Route path="addFlight" element={<AddFlightForm />} />
         </Routes>
       </LocalizationProvider>

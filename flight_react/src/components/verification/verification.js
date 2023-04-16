@@ -5,16 +5,25 @@ import "./verification.css";
 import { apiAddTicket } from "../../apiHandler/apiHandlerCustomer";
 import { useNavigate } from "react-router";
 
-function Verification(flightId) {
+function Verification() {
   let navigate = useNavigate();
 
   const handleClick = () => {
+    console.log("start Verification handleClick");
     apiAddTicket(
       localStorage.getItem("globalVarEmail"),
       localStorage.getItem("globalVarPassword"),
-      flightId
-    );
-    navigate("/");
+      3
+    ).then((response) => {
+      if (response.success) {
+        localStorage.setItem("globalVarMessage", response.success);
+      } else if (response.error) {
+        localStorage.setItem("globalVarMessage", response.error);
+      }
+    });
+    setTimeout(() => {
+      navigate("/");
+    }, 800);
   };
 
   return (

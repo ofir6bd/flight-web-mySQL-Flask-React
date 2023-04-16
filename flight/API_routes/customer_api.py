@@ -67,7 +67,7 @@ def api_add_ticket():
                 fac_obj = CustomerFacade(api=True,flight_id=flight_id,customer_id=customer_id)
                 res = fac_obj.add_ticket()
                 if res: 
-                    return jsonify({ 'result': 'Ticket added'}) 
+                    return jsonify({ 'success': 'Ticket added'}) 
                 else:
                     return jsonify({ 'error': 'Duplication error in DB'})
             else:
