@@ -5,7 +5,6 @@ import "./verification.css";
 import { apiAddTicket } from "../../apiHandler/apiHandlerCustomer";
 import { useNavigate } from "react-router";
 
-
 function Verification(flightId) {
   let navigate = useNavigate();
 

@@ -7,7 +7,7 @@ import { Routes, Route } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { Button } from "@mui/material";
 import Login from "./components/login/login";
-import Logout from "./components/logout/Logout";
+import Logout from "./components/logout/logout";
 import Signup from "./components/signup/signup";
 import CustomerPage from "./components/Customer/CustomerPage";
 import AdminPage from "./components/Admin/AdminPage";
@@ -17,6 +17,7 @@ import AddAirlineForm from "./components/Admin/addAirline/addAirline";
 import AddCustomerForm from "./components/Admin/addCustomer/addCustomer";
 import AddAdminForm from "./components/Admin/addAdmin/addAdmin";
 import AddFlightForm from "./components/Airline/addFlight/addFlight";
+import Verification from "./components/verification/verification";
 
 function App() {
   let navigate = useNavigate();
@@ -41,6 +42,7 @@ function App() {
           <Route path="addAirline" element={<AddAirlineForm />} />
           <Route path="addCustomer" element={<AddCustomerForm />} />
           <Route path="addAdmin" element={<AddAdminForm />} />
+          <Route path="verification" element={<Verification />} />
 
           <Route path="addFlight" element={<AddFlightForm />} />
         </Routes>

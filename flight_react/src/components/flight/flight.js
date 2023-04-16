@@ -1,8 +1,18 @@
 import React from "react";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router";
+
 
 function Flight({ flight }) {
+  let navigate = useNavigate();
 
+  const handleClick = () => {
+    if (localStorage.getItem("globalVarCustomerId")) {
+      navigate("/verification");
+    } else {
+      navigate("/");
+    }
+  };
   return (
     <div>
       <h3> Flight number: </h3>
@@ -13,7 +23,7 @@ function Flight({ flight }) {
       <h4> Departure time: {flight.departure_time}</h4>
       <h4> Landing time: {flight.landing_time}</h4>
       <h4> Remaining tickets: {flight.remaining_tickets}</h4>
-      <Button onClick> Book </Button>
+      <Button onClick={handleClick}> Book </Button>
     </div>
   );
 }
