@@ -40,6 +40,9 @@ const Navbar = () => {
             <NavLink to="/" activeStyle>
               Search Flights
             </NavLink>
+            <NavLink to="/removeTicket" activeStyle>
+              Remove Ticket
+            </NavLink>
           </NavMenu>
         ) : localStorage.getItem("globalVarAirlineId") ? (
           <NavMenu>

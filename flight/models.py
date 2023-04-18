@@ -12,7 +12,8 @@ class UserRoles(db.Model):
         return f'<Table: "UserRoles", role_name:"{self.role_name}">'
     
     def toJson(self):
-        return {'Table':'UserRoles','id': self.id, 'role_name': self.role_name}
+        return {'Table':'UserRoles','id': self.id, 'role_name': self.role_name,\
+                'summery': "ID: " + str(self.id) + " role_name: " + self.role_name}
 
 class Users(db.Model,UserMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -27,7 +28,8 @@ class Users(db.Model,UserMixin):
         return f'<Table: "Users", id:"{self.id}", username:"{self.username}", password:"{self.password}", email:"{self.email}", user_role:"{self.user_role}">'
     
     def toJson(self):
-        return {'Table':'Users','id': self.id, 'username': self.username,'password': self.password, 'email': self.email,'user_role': self.user_role}
+        return {'Table':'Users','id': self.id, 'username': self.username,'password': self.password, 'email': self.email,'user_role': self.user_role,\
+                'summery': "ID: " + str(self.id) + " username: " + self.username + " email: " + self.email + " user_role: " + self.user_role }
 
 class Administrators(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -71,7 +73,8 @@ class Countries(db.Model):
         return f'<Table: "Countries",id:"{self.id}", name:"{self.name}">'
     
     def toJson(self):
-        return {'Table':'Countries','id': self.id, 'name': self.name}
+        return {'Table':'Countries','id': self.id, 'name': self.name,\
+                'summery': "ID: " + str(self.id) + " name: " + self.name  }
 
 class AirlineCompanies(db.Model):
     __tablename__ = 'airline_companies'
@@ -85,7 +88,8 @@ class AirlineCompanies(db.Model):
         return f'<Table: "AirlineCompanies",id:"{self.id}", name:"{self.name}", country_id:"{self.country_id}", user_id:"{self.user_id}">'
 
     def toJson(self):
-        return {'Table':'AirlineCompanies','id': self.id, 'name': self.name,'country_id': self.country_id, 'user_id': self.user_id}
+        return {'Table':'AirlineCompanies','id': self.id, 'name': self.name,'country_id': self.country_id, 'user_id': self.user_id,\
+                'summery': "ID: " + str(self.id) +"name: " + self.name + ", country_id: " + self.country_id + ", user_id: " + str(self.user_id)  }
 
 
 class Flights(db.Model):
@@ -120,7 +124,8 @@ class Tickets(db.Model):
         return f'<Table: "Tickets",id:"{self.id}", flight_id:"{self.flight_id}",customer_id:"{self.customer_id}">'
 
     def toJson(self):
-        return {'Table':'Tickets','id': self.id, 'flight_id': self.flight_id,'customer_id': self.customer_id}
+        return {'Table':'Tickets','id': self.id, 'flight_id': self.flight_id,'customer_id': self.customer_id,\
+                'summery': "ID: " + str(self.id) +", flight_id: " + str(self.flight_id) }
 
 
 

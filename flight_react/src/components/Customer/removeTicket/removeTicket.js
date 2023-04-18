@@ -1,15 +1,12 @@
-import React, { useEffect } from "react";
-
+import React, { useState, useEffect } from "react";
+import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
-import {
-  apiGetAllAdmins,
-  apiRemoveAdmin,
-} from "../../../apiHandler/apiHandlerAdmin";
-
+import { apiGetMyTickets } from "../../../apiHandler/apiHandlerCustomer";
+import { apiRemoveTicket } from "../../../apiHandler/apiHandlerCustomer";
 import { useNavigate } from "react-router";
 import Select from "react-select";
 
-export default function RemoveAdminForm() {
+export default function RemoveTicketForm() {
   const [value, setValue] = React.useState(null);
   const [options, setOptions] = React.useState([]);
 
@@ -17,7 +14,7 @@ export default function RemoveAdminForm() {
 
   useEffect(() => {
     function fetchData() {
-      apiGetAllAdmins().then((response) => {
+      apiGetMyTickets().then((response) => {
         setOptions(response);
         console.log(response);
       });
@@ -27,7 +24,7 @@ export default function RemoveAdminForm() {
 
   const handleClick = () => {
     if (value !== null) {
-      apiRemoveAdmin(value.id)
+      apiRemoveTicket(value.id)
         .then((response) => {
           if (response.success) {
             console.log(response);
@@ -40,25 +37,34 @@ export default function RemoveAdminForm() {
           }
         })
         .then(() => {
-          navigate("/adminPage");
+          navigate("/customerPage");
         });
     }
   };
 
   return (
     <div className="container">
-      <h2> Remove Admin page</h2>
+      <h2> Remove Ticket page</h2>
       <Select
-        name="Admin"
+        name="ticket"
         options={options}
         value={value}
         onChange={setValue}
-        getOptionLabel={(option) => option.summery}
-        getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
+        getOptionLabel={(option) =>
+          "ID: " +
+          option[0].id +
+          ", Departure Time: " +
+          option[1].departure_time +
+          ", From: " +
+          option[2].name +
+          ", To: " +
+          option[3].name
+        }
+        getOptionValue={(option) => option[0].id} // It should be unique value in the options. E.g. ID
       />
 
       <Button variant="contained" className="Button" onClick={handleClick}>
-        Remove Admin
+        Remove Ticket
       </Button>
     </div>
   );

@@ -4,18 +4,13 @@ import { Button } from "@mui/material";
 import "./verification.css";
 import { apiAddTicket } from "../../apiHandler/apiHandlerCustomer";
 import { useNavigate } from "react-router";
-import SearchFlight from "../searchFlight/SearchFlight";
 
 function Verification() {
   let navigate = useNavigate();
 
   const handleClick = () => {
     console.log("start Verification handleClick");
-    apiAddTicket(
-      localStorage.getItem("globalVarEmail"),
-      localStorage.getItem("globalVarPassword"),
-      localStorage.getItem("globalVarFlightID")
-    )
+    apiAddTicket(localStorage.getItem("globalVarFlightID"))
       .then((response) => {
         if (response.success) {
           console.log(response);
