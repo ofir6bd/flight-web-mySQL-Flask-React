@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import "./signup.css";
-import {createUser} from "../../apiHandler/ApiHandler";
+import { createUser } from "../../apiHandler/apiHandler";
 
 function Signup() {
   const [username, setUsername] = useState("");

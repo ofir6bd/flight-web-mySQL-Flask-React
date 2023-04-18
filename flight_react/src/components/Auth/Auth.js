@@ -3,7 +3,7 @@ import {
   apiCheckAdmin,
   apiCheckCustomer,
   apiCheckAirline,
-} from "../../apiHandler/ApiHandler";
+} from "../../apiHandler/apiHandler";
 
 const setEmailGlobalStorage = (email) => {
   localStorage.setItem("globalVarEmail", email.toString());

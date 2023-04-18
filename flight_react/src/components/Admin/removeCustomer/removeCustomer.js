@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
-import { apiRemoveAirline } from "../../../apiHandler/apiHandlerAdmin";
-import { apiGetAllAirlines } from "../../../apiHandler/apiHandler";
+import { apiGetAllCustomers } from "../../../apiHandler/apiHandler";
+import { apiRemoveCustomer } from "../../../apiHandler/apiHandlerAdmin";
 import { useNavigate } from "react-router";
 import Select from "react-select";
 
-export default function RemoveAirlineForm() {
+export default function RemoveCustomerForm() {
   const [value, setValue] = React.useState(null);
   const [options, setOptions] = React.useState([]);
 
@@ -14,8 +14,9 @@ export default function RemoveAirlineForm() {
 
   useEffect(() => {
     function fetchData() {
-      apiGetAllAirlines().then((response) => {
+      apiGetAllCustomers().then((response) => {
         setOptions(response);
+        console.log(response);
       });
     }
     fetchData();
@@ -23,7 +24,7 @@ export default function RemoveAirlineForm() {
 
   const handleClick = () => {
     if (value !== null) {
-      apiRemoveAirline(value.id)
+      apiRemoveCustomer(value.id)
         .then((response) => {
           if (response.success) {
             console.log(response);
@@ -43,18 +44,18 @@ export default function RemoveAirlineForm() {
 
   return (
     <div className="container">
-      <h2> Remove Airline page</h2>
+      <h2> Remove Customer page</h2>
       <Select
-        name="Airlines"
+        name="Customers"
         options={options}
         value={value}
         onChange={setValue}
-        getOptionLabel={(option) => option.name}
+        getOptionLabel={(option) => option.summery}
         getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
       />
 
       <Button variant="contained" className="Button" onClick={handleClick}>
-        Remove Airline
+        Remove Customer
       </Button>
     </div>
   );

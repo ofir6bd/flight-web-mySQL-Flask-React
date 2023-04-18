@@ -74,3 +74,21 @@ export function apiCheckAirline(email, password, user_id) {
   var response = fetch(url, requestOptions).then((response) => response.json());
   return response;
 }
+
+export function apiGetAllAirlines() {
+  console.log("start api getAllAirlines");
+  var url = "http://127.0.0.1:5000/API/airlines";
+  var response = fetch(url).then((response) => response.json());
+  return response;
+}
+
+export function apiGetAllCustomers() {
+  console.log("start api apiGetAllCustomers");
+  var url =
+    "http://127.0.0.1:5000/API/admin/get_all_customers?email=" +
+    localStorage.getItem("globalVarEmail") +
+    "&password=" +
+    localStorage.getItem("globalVarPassword");
+  var response = fetch(url).then((response) => response.json());
+  return response;
+}

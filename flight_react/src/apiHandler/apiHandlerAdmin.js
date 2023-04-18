@@ -65,13 +65,6 @@ export function apiAddAdmin(firstName, lastName, user_id) {
   return response;
 }
 
-export function getAllAirlines() {
-  console.log("start api getAllAirlines");
-  var url = "http://127.0.0.1:5000/API/airlines";
-  var items = fetch(url).then((response) => response.json());
-  return items;
-}
-
 export function apiRemoveAirline(airline_id) {
   console.log("start api apiRemoveAirline");
   console.log(airline_id);
@@ -79,6 +72,21 @@ export function apiRemoveAirline(airline_id) {
   var url =
     "http://127.0.0.1:5000/API/admin/delete_airline/" +
     airline_id +
+    "/?email=" +
+    localStorage.getItem("globalVarEmail") +
+    "&password=" +
+    localStorage.getItem("globalVarPassword");
+  var response = fetch(url, requestOptions).then((response) => response.json());
+  return response;
+}
+
+export function apiRemoveCustomer(customer_id) {
+  console.log("start api apiRemoveCustomer");
+  console.log(customer_id);
+  const requestOptions = { method: "DELETE" };
+  var url =
+    "http://127.0.0.1:5000/API/admin/delete_customer/" +
+    customer_id +
     "/?email=" +
     localStorage.getItem("globalVarEmail") +
     "&password=" +

@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import { DateField } from "@mui/x-date-pickers/DateField";
 import "./SearchFlight.css";
 import { Button } from "@mui/material";
-import { getFlights } from "../../apiHandler/ApiHandler";
+import { getFlights } from "../../apiHandler/apiHandler";
 import Flight from "../flight/flight";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
@@ -21,7 +21,7 @@ function SearchFlight() {
     localStorage.removeItem("globalVarMessage");
     localStorage.removeItem("globalVarMessageType");
     if (!message) {
-      return null; 
+      return null;
     }
     if (messageType == "success") {
       return <div className="messageContainerSuccess"> {message}</div>;
