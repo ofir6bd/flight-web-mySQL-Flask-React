@@ -47,14 +47,14 @@ export function apiAddCustomer(
   return response;
 }
 
-export function apiAddAdmin(email, password, firstName, lastName, user_id) {
+export function apiAddAdmin(firstName, lastName, user_id) {
   console.log("start api apiAddAdmin");
   const requestOptions = { method: "POST" };
   var url =
     "http://127.0.0.1:5000/API/admin/add_admin?email=" +
-    email +
+    localStorage.getItem("globalVarEmail") +
     "&password=" +
-    password +
+    localStorage.getItem("globalVarPassword") +
     "&first_name=" +
     firstName +
     "&last_name=" +

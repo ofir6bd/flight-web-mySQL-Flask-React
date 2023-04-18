@@ -4,8 +4,10 @@ import { Button } from "@mui/material";
 // import "./login.css";
 // import { UseAuth } from "../useAuth/useAuth";
 import { apiAddAdmin } from "../../../apiHandler/apiHandlerAdmin";
+import { useNavigate } from "react-router";
 
 export default function AddAdminForm() {
+  let navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [userID, setUserID] = useState("");
@@ -18,6 +20,24 @@ export default function AddAdminForm() {
   };
   const handleUserID = (event) => {
     setUserID(event.target.value);
+  };
+  const handleClick = () => {
+    console.log("start add customer handleClick");
+    apiAddAdmin(firstName, lastName, userID)
+      .then((response) => {
+        if (response.success) {
+          console.log(response);
+          localStorage.setItem("globalVarMessage", response.success);
+          localStorage.setItem("globalVarMessageType", "success");
+        } else {
+          console.log(response);
+          localStorage.setItem("globalVarMessage", JSON.stringify(response));
+          localStorage.setItem("globalVarMessageType", "error");
+        }
+      })
+      .then(() => {
+        navigate("/adminPage");
+      });
   };
   return (
     <div className="container">
@@ -43,11 +63,12 @@ export default function AddAdminForm() {
       <Button
         variant="contained"
         className="Button"
-        onClick={() =>
-          apiAddAdmin(firstName, lastName, userID).then((response) =>
-            console.log(response)
-          )
-        }
+        onClick={handleClick}
+        // onClick={() =>
+        //   apiAddAdmin(firstName, lastName, userID).then((response) =>
+        //     console.log(response)
+        //   )
+        // }
       >
         Add Admin
       </Button>
