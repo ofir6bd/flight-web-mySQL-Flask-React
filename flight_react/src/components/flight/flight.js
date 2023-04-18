@@ -2,7 +2,6 @@ import React from "react";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router";
 
-
 function Flight({ flight }) {
   let navigate = useNavigate();
 
@@ -11,6 +10,11 @@ function Flight({ flight }) {
       localStorage.setItem("globalVarFlightID", flight.id);
       navigate("/verification");
     } else {
+      localStorage.setItem(
+        "globalVarMessage",
+        "You must log in before booking flights"
+      );
+      localStorage.setItem("globalVarMessageType", "error");
       navigate("/");
     }
   };
