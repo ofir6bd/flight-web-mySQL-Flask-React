@@ -64,11 +64,6 @@ export default function AddAdminForm() {
         variant="contained"
         className="Button"
         onClick={handleClick}
-        // onClick={() =>
-        //   apiAddAdmin(firstName, lastName, userID).then((response) =>
-        //     console.log(response)
-        //   )
-        // }
       >
         Add Admin
       </Button>

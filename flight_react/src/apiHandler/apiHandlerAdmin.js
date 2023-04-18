@@ -1,11 +1,11 @@
-export function apiAddAirline(email, password, name, country_id, user_id) {
+export function apiAddAirline(name, country_id, user_id) {
   console.log("start api apiAddAirline");
   const requestOptions = { method: "POST" };
   var url =
     "http://127.0.0.1:5000/API/admin/add_airline?email=" +
-    email +
+    localStorage.getItem("globalVarEmail") +
     "&password=" +
-    password +
+    localStorage.getItem("globalVarPassword") +
     "&name=" +
     name +
     "&country_id=" +
