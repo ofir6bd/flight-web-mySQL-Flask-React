@@ -64,3 +64,17 @@ export function apiAddAdmin(firstName, lastName, user_id) {
   var response = fetch(url, requestOptions).then((response) => response.json());
   return response;
 }
+
+export function apiRemoveAirline(airline_id) {
+  console.log("start api apiRemoveAirline");
+  const requestOptions = { method: "DELETE" };
+  var url =
+    "http://127.0.0.1:5000/API/admin/delete_airline/" +
+    airline_id +
+    "/?email=" +
+    localStorage.getItem("globalVarEmail") +
+    "&password=" +
+    localStorage.getItem("globalVarPassword");
+  var response = fetch(url, requestOptions).then((response) => response.json());
+  return response;
+}

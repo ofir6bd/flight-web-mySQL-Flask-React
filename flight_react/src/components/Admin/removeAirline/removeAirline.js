@@ -6,7 +6,7 @@ import { Button } from "@mui/material";
 import { apiAddAirline } from "../../../apiHandler/apiHandlerAdmin";
 import { useNavigate } from "react-router";
 
-export default function AddAirlineForm() {
+export default function RemoveAirlineForm() {
   let navigate = useNavigate();
   const [name, setName] = useState("");
   const [countryID, setCountryID] = useState("");
@@ -42,7 +42,7 @@ export default function AddAirlineForm() {
   };
   return (
     <div className="container">
-      <h2> Add Airline page</h2>
+      <h2> Remove Airline page</h2>
       <TextField
         id="outlined-basic"
         label="Name:"
@@ -62,7 +62,7 @@ export default function AddAirlineForm() {
         onChange={handleUserID}
       />
       <Button variant="contained" className="Button" onClick={handleClick}>
-        Add Airline
+        Remove Airline
       </Button>
     </div>
   );
