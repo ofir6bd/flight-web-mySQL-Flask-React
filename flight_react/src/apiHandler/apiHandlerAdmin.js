@@ -65,8 +65,16 @@ export function apiAddAdmin(firstName, lastName, user_id) {
   return response;
 }
 
+export function getAllAirlines() {
+  console.log("start api getAllAirlines");
+  var url = "http://127.0.0.1:5000/API/airlines";
+  var items = fetch(url).then((response) => response.json());
+  return items;
+}
+
 export function apiRemoveAirline(airline_id) {
   console.log("start api apiRemoveAirline");
+  console.log(airline_id);
   const requestOptions = { method: "DELETE" };
   var url =
     "http://127.0.0.1:5000/API/admin/delete_airline/" +

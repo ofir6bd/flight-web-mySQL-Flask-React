@@ -128,7 +128,7 @@ class FacadeBase(object):
         return all_flight_and_countries
 
     def get_all_airlines(self):
-        dal_obj = DataLayer(table1=AirlineCompanies)      
+        dal_obj = DataLayer(table1=AirlineCompanies, api=self.api)       
         return dal_obj.get_all()
 
     def get_airline_by_id(self):

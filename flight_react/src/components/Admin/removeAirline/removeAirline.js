@@ -1,66 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
-// import "./login.css";
-// import { UseAuth } from "../useAuth/useAuth";
-import { apiAddAirline } from "../../../apiHandler/apiHandlerAdmin";
+import {
+  apiRemoveAirline,
+  getAllAirlines,
+} from "../../../apiHandler/apiHandlerAdmin";
 import { useNavigate } from "react-router";
+import Select from "react-select";
 
 export default function RemoveAirlineForm() {
-  let navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [countryID, setCountryID] = useState("");
-  const [userID, setUserID] = useState("");
+  const [value, setValue] = React.useState(null);
+  const [options, setOptions] = React.useState([]);
 
-  const handleName = (event) => {
-    setName(event.target.value);
-  };
-  const handleCountryID = (event) => {
-    setCountryID(event.target.value);
-  };
-  const handleUserID = (event) => {
-    setUserID(event.target.value);
-  };
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    function fetchData() {
+      getAllAirlines().then((response) => {
+        setOptions(response);
+      });
+    }
+    fetchData();
+  }, []);
 
   const handleClick = () => {
-    console.log("start add customer handleClick");
-    apiAddAirline(name, countryID, userID)
-      .then((response) => {
-        if (response.success) {
-          console.log(response);
-          localStorage.setItem("globalVarMessage", response.success);
-          localStorage.setItem("globalVarMessageType", "success");
-        } else {
-          console.log(response);
-          localStorage.setItem("globalVarMessage", JSON.stringify(response));
-          localStorage.setItem("globalVarMessageType", "error");
-        }
-      })
-      .then(() => {
-        navigate("/adminPage");
-      });
+    if (value !== null) {
+      apiRemoveAirline(value.id)
+        .then((response) => {
+          if (response.success) {
+            console.log(response);
+            localStorage.setItem("globalVarMessage", response.success);
+            localStorage.setItem("globalVarMessageType", "success");
+          } else {
+            console.log(response);
+            localStorage.setItem("globalVarMessage", JSON.stringify(response));
+            localStorage.setItem("globalVarMessageType", "error");
+          }
+        })
+        .then(() => {
+          navigate("/adminPage");
+        });
+    }
   };
+
   return (
     <div className="container">
       <h2> Remove Airline page</h2>
-      <TextField
-        id="outlined-basic"
-        label="Name:"
-        variant="outlined"
-        onChange={handleName}
+      <Select
+        name="Airlines"
+        options={options}
+        value={value}
+        onChange={setValue}
+        getOptionLabel={(option) => option.name}
+        getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
       />
-      <TextField
-        id="outlined-basic"
-        label="CountryID:"
-        variant="outlined"
-        onChange={handleCountryID}
-      />
-      <TextField
-        id="outlined-basic"
-        label="UserID:"
-        variant="outlined"
-        onChange={handleUserID}
-      />
+
       <Button variant="contained" className="Button" onClick={handleClick}>
         Remove Airline
       </Button>
