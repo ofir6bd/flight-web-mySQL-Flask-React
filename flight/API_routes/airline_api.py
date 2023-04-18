@@ -45,13 +45,13 @@ def api_delete_my_flight(flight_id):
                 if flight.airline_company_id == session['airline_id']:
                     res = fac_obj.remove_flight()
                     if res:
-                        return jsonify({ 'result': 'Flight removed'}) 
+                        return jsonify({ 'success': 'Flight removed'}) 
                     else:
                         return jsonify({ 'error': 'Cannot delete flight, ticket is associated with'})
                 else:
                     return jsonify({ 'error': 'Cannot delete flight that is not yours'}) 
             else:
-                return jsonify({ 'Error': 'flight not found'}) 
+                return jsonify({ 'error': 'flight not found'}) 
         else:
             return jsonify({ 'error': 'you do not have airline permissions'})
 
@@ -83,7 +83,7 @@ def api_add_flight():
                                         departure_time=departure_time,landing_time=landing_time,remaining_tickets=remaining_tickets)
                 res = fac_obj.add_flight()
                 if res: 
-                    return jsonify({ 'result': 'Flight added'}) 
+                    return jsonify({ 'success': 'Flight added'}) 
                 else:
                     return jsonify({ 'error': 'Duplication error in DB'})
             else:
@@ -108,7 +108,7 @@ def api_update_airline():
             fac_obj = AirlineFacade(api=True,id=id,name=name)
             res = fac_obj.update_airline()
             if res: 
-                return jsonify({ 'result': 'Airline updated'}) 
+                return jsonify({ 'success': 'Airline updated'}) 
             else:
                 return jsonify({ 'error': 'Duplication error in DB'})
         else:
@@ -147,7 +147,7 @@ def api_update_flight(flight_id):
                                                 departure_time=departure_time,landing_time=landing_time,remaining_tickets=remaining_tickets)
                     res = fac_obj.update_flight()
                     if res: 
-                        return jsonify({ 'result': 'Flight updated'}) 
+                        return jsonify({ 'success': 'Flight updated'}) 
                     else:
                         return jsonify({ 'error': 'Duplication error in DB'})
                 else:

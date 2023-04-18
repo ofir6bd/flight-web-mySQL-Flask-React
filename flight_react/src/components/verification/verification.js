@@ -14,7 +14,7 @@ function Verification() {
     apiAddTicket(
       localStorage.getItem("globalVarEmail"),
       localStorage.getItem("globalVarPassword"),
-      3
+      localStorage.getItem("globalVarFlightID")
     )
       .then((response) => {
         if (response.success) {
@@ -22,7 +22,6 @@ function Verification() {
           localStorage.setItem("globalVarMessage", response.success);
           localStorage.setItem("globalVarMessageType", "success");
         } else if (response[0].error) {
-          console.log(response);
           localStorage.setItem(
             "globalVarMessage",
             JSON.stringify(response[0].error)
@@ -30,7 +29,10 @@ function Verification() {
           localStorage.setItem("globalVarMessageType", "error");
         }
       })
-      .then(() => navigate("/"));
+      .then(() => {
+        localStorage.removeItem("globalVarFlightID");
+        navigate("/");
+      });
   };
 
   return (

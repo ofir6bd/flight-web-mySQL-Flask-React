@@ -8,6 +8,7 @@ function Flight({ flight }) {
 
   const handleClick = () => {
     if (localStorage.getItem("globalVarCustomerId")) {
+      localStorage.setItem("globalVarFlightID", flight.id);
       navigate("/verification");
     } else {
       navigate("/");

@@ -17,8 +17,6 @@ export function apiAddAirline(email, password, name, country_id, user_id) {
 }
 
 export function apiAddCustomer(
-  email,
-  password,
   firstName,
   lastName,
   address,
@@ -30,9 +28,9 @@ export function apiAddCustomer(
   const requestOptions = { method: "POST" };
   var url =
     "http://127.0.0.1:5000/API/admin/add_customer?email=" +
-    email +
+    localStorage.getItem("globalVarEmail") +
     "&password=" +
-    password +
+    localStorage.getItem("globalVarPassword") +
     "&first_name=" +
     firstName +
     "&last_name=" +

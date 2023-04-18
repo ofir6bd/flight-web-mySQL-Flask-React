@@ -42,11 +42,11 @@ def api_delete_customer(customer_id):
             if customer: 
                 res = fac_obj.remove_customer()
                 if res:
-                    return jsonify({ 'result': 'Customer removed'}) 
+                    return jsonify({ 'success': 'Customer removed'}) 
                 else:
                     return jsonify({ 'error': 'Cannot delete Customer, ticket is associated with'})  
             else:
-                return jsonify({ 'Error': 'Customer not found'}) 
+                return jsonify({ 'error': 'Customer not found'}) 
         else:
             return jsonify({ 'error': 'you do not have admin permissions'})            
 
@@ -61,11 +61,11 @@ def api_delete_airline(airline_id):
             if airline: 
                 res = fac_obj.remove_airline()
                 if res:
-                    return jsonify({ 'result': 'Airline removed'}) 
+                    return jsonify({ 'success': 'Airline removed'}) 
                 else:
                     return jsonify({ 'error': 'Cannot delete Airline, flight is associated with'})  
             else:
-                return jsonify({ 'Error': 'Airline not found'}) 
+                return jsonify({ 'error': 'Airline not found'}) 
         else:
             return jsonify({ 'error': 'you do not have admin permissions'})  
 
@@ -81,13 +81,13 @@ def api_delete_admin(admin_id):
                 if admin.id != session['admin_id']:
                     res = fac_obj.remove_administrator()
                     if res:
-                        return jsonify({ 'result': 'Admin removed'}) 
+                        return jsonify({ 'success': 'Admin removed'}) 
                     else:
                         return jsonify({ 'error': 'error_occured'})
                 else:
                     return jsonify({ 'error': 'You cannot remove yourself'})  
             else:
-                return jsonify({ 'Error': 'Admin not found'}) 
+                return jsonify({ 'error': 'Admin not found'}) 
         else:
             return jsonify({ 'error': 'you do not have admin permissions'})  
         
@@ -108,7 +108,7 @@ def api_add_admin():
                 fac_obj = AdministratorFacade(api=True,first_name=first_name,last_name=last_name,user_id=user_id)
                 res = fac_obj.add_administrator()
                 if res: 
-                    return jsonify({ 'result': 'Admin added'}) 
+                    return jsonify({ 'success': 'Admin added'}) 
                 else:
                     return jsonify({ 'error': 'an admin already exists with that user id'})
             else:
@@ -138,7 +138,7 @@ def api_add_customer():
                                               phone_no=phone_no,credit_card_no=credit_card_no,user_id=user_id)
                 res = fac_obj.add_customer()
                 if res: 
-                    return jsonify({ 'result': 'Customer added'}) 
+                    return jsonify({ 'success': 'Customer added'}) 
                 else:
                     return jsonify({ 'error': 'duplication error in DB'})
             else:
@@ -163,7 +163,7 @@ def api_add_airline():
                 fac_obj = AdministratorFacade(api=True,name=name,country_id=country_id,user_id=user_id)
                 res = fac_obj.add_airline()
                 if res: 
-                    return jsonify({ 'result': 'Airline added'}) 
+                    return jsonify({ 'success': 'Airline added'}) 
                 else:
                     return jsonify({ 'error': 'error occured'})
             else:

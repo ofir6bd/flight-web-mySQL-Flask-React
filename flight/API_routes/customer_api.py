@@ -41,13 +41,13 @@ def api_delete_my_ticket(ticket_id):
                 if ticket.customer_id == session['customer_id']:
                     res = fac_obj.remove_ticket()
                     if res:
-                        return jsonify({ 'result': 'Ticket removed'}) 
+                        return jsonify({ 'success': 'Ticket removed'}) 
                     else:
                         return jsonify({ 'error': 'a customer already exists with that user id/phone no or creadit card number'})
                 else:
                     return jsonify({ 'error': 'Cannot delete ticket that is not yours'}) 
             else:
-                return jsonify({ 'Error': 'Ticket not found'}) 
+                return jsonify({ 'error': 'Ticket not found'}) 
         else:
             return jsonify({ 'error': 'you do not have customer role'})
     
@@ -101,8 +101,8 @@ def api_update_customer():
             
             res = fac_obj.update_customer()
             if res: 
-                return jsonify({ 'result': 'Customer updated'}) 
+                return jsonify({ 'success': 'Customer updated'}) 
             else:
                 return jsonify({ 'error': 'Duplication error in DB'})
         else:
-            return jsonify({ 'error': 'you do not have cutomer permissions'})  
+            return jsonify({ 'error': 'you do not have customer permissions'})  

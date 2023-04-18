@@ -71,7 +71,7 @@ def api_create_new_user():
         fac_obj = AnonymousFacade(api=True,username=username,password=password,email=email,user_role=user_role)
         res = fac_obj.create_new_user()
         if res: 
-            return jsonify({ 'result': 'user added'}) 
+            return jsonify({ 'success': 'user added'}) 
         else:
             return jsonify({ 'error': 'error occured'})
     else:
@@ -86,7 +86,7 @@ def api_get_admin_by_user_id():
         fac_obj = AdministratorFacade(user_id=user_id)
         admin = fac_obj.get_admin_by_user_id()
         if admin:
-            return jsonify({'result': "user is admin",  'admin_id': admin.id})
+            return jsonify({'success': "user is admin",  'admin_id': admin.id})
         else:
             return jsonify({'error': "no user found"})
 
@@ -99,7 +99,7 @@ def api_get_customer_by_user_id():
         fac_obj = CustomerFacade(user_id=user_id)
         customer = fac_obj.get_customer_by_user_id()
         if customer:
-            return jsonify({'result': "user is customer",  'customer_id': customer.id})
+            return jsonify({'success': "user is customer",  'customer_id': customer.id})
         else:
             return jsonify({'error': "no user found"})
 
@@ -112,7 +112,7 @@ def api_get_airline_by_user_id():
         fac_obj = AirlineFacade(user_id=user_id)
         airline = fac_obj.get_airline_by_user_id()
         if airline:
-            return jsonify({'result': "user is airline",  'airline_id': airline.id})
+            return jsonify({'success': "user is airline",  'airline_id': airline.id})
         else:
             return jsonify({'error': "no user found"})
 
@@ -138,7 +138,7 @@ def api_register_as_customer():
                                             phone_no=phone_no,credit_card_no=credit_card_no,user_id=user_id)
             res = fac_obj.add_customer()
             if res: 
-                return jsonify({ 'result': 'Customer added'}) 
+                return jsonify({ 'success': 'Customer added'}) 
             else:
                 return jsonify({ 'error': 'error_occured'})
         else:

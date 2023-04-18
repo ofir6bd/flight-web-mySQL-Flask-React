@@ -4,8 +4,11 @@ import { Button } from "@mui/material";
 // import "./login.css";
 // import { UseAuth } from "../useAuth/useAuth";
 import { apiAddCustomer } from "../../../apiHandler/apiHandlerAdmin";
+import { useNavigate } from "react-router";
 
 export default function AddCustomerForm() {
+  let navigate = useNavigate();
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
@@ -30,6 +33,25 @@ export default function AddCustomerForm() {
   };
   const handleUserID = (event) => {
     setUserID(event.target.value);
+  };
+
+  const handleClick = () => {
+    console.log("start add customer handleClick");
+    apiAddCustomer(firstName, lastName, address, phoneNo, creditCardNo, userID)
+      .then((response) => {
+        if (response.success) {
+          console.log(response);
+          localStorage.setItem("globalVarMessage", response.success);
+          localStorage.setItem("globalVarMessageType", "success");
+        } else {
+          console.log(response);
+          localStorage.setItem("globalVarMessage", JSON.stringify(response));
+          localStorage.setItem("globalVarMessageType", "error");
+        }
+      })
+      .then(() => {
+        navigate("/adminPage");
+      });
   };
   return (
     <div className="container">
@@ -73,16 +95,17 @@ export default function AddCustomerForm() {
       <Button
         variant="contained"
         className="Button"
-        onClick={() =>
-          apiAddCustomer(
-            firstName,
-            lastName,
-            address,
-            phoneNo,
-            creditCardNo,
-            userID
-          ).then((response) => console.log(response))
-        }
+        onClick={handleClick}
+        // onClick={() =>
+        //   apiAddCustomer(
+        //     firstName,
+        //     lastName,
+        //     address,
+        //     phoneNo,
+        //     creditCardNo,
+        //     userID
+        //   ).then((response) => console.log(response))
+        // }
       >
         Add Customer
       </Button>
