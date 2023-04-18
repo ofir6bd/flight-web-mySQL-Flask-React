@@ -3,6 +3,10 @@
     top: 10px;
 }
 
-.messageContainer {
+.messageContainerSuccess {
     background-color: aqua;
+}
+
+.messageContainerError {
+    background-color: red;
 }

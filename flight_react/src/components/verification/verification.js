@@ -4,6 +4,7 @@ import { Button } from "@mui/material";
 import "./verification.css";
 import { apiAddTicket } from "../../apiHandler/apiHandlerCustomer";
 import { useNavigate } from "react-router";
+import SearchFlight from "../searchFlight/SearchFlight";
 
 function Verification() {
   let navigate = useNavigate();
@@ -14,16 +15,22 @@ function Verification() {
       localStorage.getItem("globalVarEmail"),
       localStorage.getItem("globalVarPassword"),
       3
-    ).then((response) => {
-      if (response.success) {
-        localStorage.setItem("globalVarMessage", response.success);
-      } else if (response.error) {
-        localStorage.setItem("globalVarMessage", response.error);
-      }
-    });
-    setTimeout(() => {
-      navigate("/");
-    }, 800);
+    )
+      .then((response) => {
+        if (response.success) {
+          console.log(response);
+          localStorage.setItem("globalVarMessage", response.success);
+          localStorage.setItem("globalVarMessageType", "success");
+        } else if (response[0].error) {
+          console.log(response);
+          localStorage.setItem(
+            "globalVarMessage",
+            JSON.stringify(response[0].error)
+          );
+          localStorage.setItem("globalVarMessageType", "error");
+        }
+      })
+      .then(() => navigate("/"));
   };
 
   return (
