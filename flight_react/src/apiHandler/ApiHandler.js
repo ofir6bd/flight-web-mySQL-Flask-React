@@ -92,3 +92,5 @@ export function apiGetAllCustomers() {
   var response = fetch(url).then((response) => response.json());
   return response;
 }
+
+

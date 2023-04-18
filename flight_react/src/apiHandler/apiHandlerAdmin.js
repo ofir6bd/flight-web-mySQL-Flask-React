@@ -94,3 +94,29 @@ export function apiRemoveCustomer(customer_id) {
   var response = fetch(url, requestOptions).then((response) => response.json());
   return response;
 }
+
+export function apiGetAllAdmins() {
+  console.log("start api apiGetAllAdmins");
+  var url =
+    "http://127.0.0.1:5000/API/admin/get_all_customers?email=" +
+    localStorage.getItem("globalVarEmail") +
+    "&password=" +
+    localStorage.getItem("globalVarPassword");
+  var response = fetch(url).then((response) => response.json());
+  return response;
+}
+
+export function apiRemoveAdmin(customer_id) {
+  console.log("start api apiRemoveAdmin");
+  console.log(customer_id);
+  const requestOptions = { method: "DELETE" };
+  var url =
+    "http://127.0.0.1:5000/API/admin/delete_admin/" +
+    customer_id +
+    "/?email=" +
+    localStorage.getItem("globalVarEmail") +
+    "&password=" +
+    localStorage.getItem("globalVarPassword");
+  var response = fetch(url, requestOptions).then((response) => response.json());
+  return response;
+}

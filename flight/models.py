@@ -40,7 +40,8 @@ class Administrators(db.Model):
         return f'<Table: "Administrators",id:"{self.id}", first_name:"{self.first_name}, last_name:"{self.last_name}, user_id:"{self.user_id}">'
 
     def toJson(self):
-        return {'Table':'Administrators','id': self.id, 'first_name': self.first_name,'last_name': self.last_name, 'user_id': self.user_id}
+        return {'Table':'Administrators','id': self.id, 'first_name': self.first_name,'last_name': self.last_name, 'user_id': self.user_id,\
+                'summery': "ID: " + str(self.id) + " first_name: " + self.first_name + ", last_name: " + self.last_name +", user_id: " + str(self.user_id) }
 
 
 class Customers(db.Model):
@@ -59,7 +60,7 @@ class Customers(db.Model):
     def toJson(self):
         return {'Table':'Customers','id': self.id, 'first_name': self.first_name,'last_name': self.last_name, 'address': self.address,\
                 'phone_no': self.phone_no,'credit_card_no': self.credit_card_no, 'user_id': self.user_id,\
-                'summery': "first_name: " + self.first_name + ", last_name: " + self.last_name + ", address: " + self.address + ",phone_no: " + self.phone_no + ", credit_card_no: " + self.credit_card_no }
+                'summery': "ID: " + str(self.id) +"first_name: " + self.first_name + ", last_name: " + self.last_name + ", address: " + self.address + ",phone_no: " + self.phone_no + ", credit_card_no: " + self.credit_card_no }
 
 
 class Countries(db.Model):

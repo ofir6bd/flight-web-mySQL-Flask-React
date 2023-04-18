@@ -31,6 +31,9 @@ const Navbar = () => {
             <NavLink to="/removeCustomer" activeStyle>
               Remove Customer
             </NavLink>
+            <NavLink to="/removeAdmin" activeStyle>
+              Remove Admin
+            </NavLink>
           </NavMenu>
         ) : localStorage.getItem("globalVarCustomerId") ? (
           <NavMenu>

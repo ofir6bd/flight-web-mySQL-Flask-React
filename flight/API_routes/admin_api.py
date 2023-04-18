@@ -30,6 +30,17 @@ def api_get_all_customers():
             return dal_obj.get_all_customers()
         else:
             return jsonify({ 'error': 'you do not have admin permissions'}) 
+        
+@require_api_auth
+def api_get_all_admins():
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:
+        if session['user_role'] == 'admin':
+            dal_obj = AdministratorFacade(api=True)
+            return dal_obj.get_all_administrators()
+        else:
+            return jsonify({ 'error': 'you do not have admin permissions'}) 
 
 @require_api_auth
 def api_delete_customer(customer_id):
