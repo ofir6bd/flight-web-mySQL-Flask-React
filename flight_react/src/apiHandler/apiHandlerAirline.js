@@ -27,3 +27,30 @@ export function apiAddFlight(
   var response = fetch(url, requestOptions).then((response) => response.json());
   return response;
 }
+
+export function apiRemoveFlight(flight_id) {
+  console.log("start api apiRemoveFlight");
+  console.log(flight_id);
+  const requestOptions = { method: "DELETE" };
+  var url =
+    "http://127.0.0.1:5000/API/airline/delete_my_flight/" +
+    flight_id +
+    "/?email=" +
+    localStorage.getItem("globalVarEmail") +
+    "&password=" +
+    localStorage.getItem("globalVarPassword");
+  var response = fetch(url, requestOptions).then((response) => response.json());
+  return response;
+}
+
+export function apiGetMyFlights() {
+  console.log("start api apiGetMyFlights");
+  const requestOptions = { method: "GET" };
+  var url =
+    "http://127.0.0.1:5000/API/airline/my_flights/?email=" +
+    localStorage.getItem("globalVarEmail") +
+    "&password=" +
+    localStorage.getItem("globalVarPassword");
+  var response = fetch(url, requestOptions).then((response) => response.json());
+  return response;
+}
