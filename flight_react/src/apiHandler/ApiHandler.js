@@ -1,9 +1,44 @@
-export function getFlights() {
-  console.log("start api getFlights");
-  var url = "http://127.0.0.1:5000/API/flights";
+// export function apiGetAllFlights() {
+//   console.log("start api apiGetAllFlights");
+//   var url = "http://127.0.0.1:5000/API/flights";
+//   var flights = fetch(url).then((response) => response.json());
+//   return flights;
+// }
+
+export function apiGetAllFCountries() {
+  console.log("start api apiGetAllFCountries");
+  var url = "http://127.0.0.1:5000/API/countries";
   var flights = fetch(url).then((response) => response.json());
   return flights;
 }
+
+export function apiGetFlightsByParameters(
+  origin_country,
+  destination_country,
+  departure_time,
+  landing_time
+) {
+  // var departure_time = "";
+  // var landing_time = "";
+  console.log("start api apiGetFlightsByParameters");
+  console.log(origin_country);
+  console.log(destination_country);
+  console.log(departure_time);
+  console.log(landing_time);
+  const requestOptions = { method: "GET" };
+  var url =
+    "http://127.0.0.1:5000/API/flights_by_param?origin_country_id=" +
+    origin_country +
+    "&destination_country_id=" +
+    destination_country +
+    "&departure_time=" +
+    departure_time +
+    "&landing_time=" +
+    landing_time;
+  var response = fetch(url, requestOptions).then((response) => response.json());
+  return response;
+}
+
 export function apiGetUserRoles() {
   console.log("start api apiGetUserRoles");
   var url = "http://127.0.0.1:5000/API/user_roles";
