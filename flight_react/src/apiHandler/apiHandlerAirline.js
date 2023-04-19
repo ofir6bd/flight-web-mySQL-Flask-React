@@ -1,6 +1,4 @@
 export function apiAddFlight(
-  email,
-  password,
   origin_country_id,
   destination_country_id,
   departure_time,
@@ -11,9 +9,9 @@ export function apiAddFlight(
   const requestOptions = { method: "POST" };
   var url =
     "http://127.0.0.1:5000/API/airline/add_flight?email=" +
-    email +
+    localStorage.getItem("globalVarEmail") +
     "&password=" +
-    password +
+    localStorage.getItem("globalVarPassword") +
     "&origin_country_id=" +
     origin_country_id +
     "&destination_country_id=" +

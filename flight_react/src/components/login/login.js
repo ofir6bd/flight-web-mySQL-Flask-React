@@ -19,6 +19,11 @@ function Login() {
       } else if (localStorage.getItem("globalVarAirlineId")) {
         navigate("/airlinePage");
       } else {
+        localStorage.setItem(
+          "globalVarMessage",
+          "Email or password are incorrect"
+        );
+        localStorage.setItem("globalVarMessageType", "error");
         navigate("/");
       }
     }, 800);
