@@ -212,6 +212,7 @@ app.add_url_rule('/API/countries', view_func=api_get_all_countries, methods=["GE
 app.add_url_rule('/API/user_roles', view_func=api_get_all_user_roles, methods=["GET"], strict_slashes=False)
 app.add_url_rule('/API/airlines', view_func=api_get_all_airlines, methods=["GET"], strict_slashes=False)
 app.add_url_rule('/API/flights', view_func=api_get_all_flights, methods=["GET"], strict_slashes=False)
+app.add_url_rule('/API/flights_by_param', view_func=api_get_flights_by_param, methods=["GET"], strict_slashes=False)
 app.add_url_rule('/API/flight/<int:flight_id>/', view_func=api_get_flight_by_id, methods=["GET"], strict_slashes=False)
 app.add_url_rule('/API/create_new_user/', view_func=api_create_new_user, methods=["POST"], strict_slashes=False)
 app.add_url_rule('/API/register_as_customer/', view_func=api_register_as_customer, methods=["POST"], strict_slashes=False)

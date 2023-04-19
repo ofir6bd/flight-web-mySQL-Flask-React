@@ -89,7 +89,7 @@ class AirlineCompanies(db.Model):
 
     def toJson(self):
         return {'Table':'AirlineCompanies','id': self.id, 'name': self.name,'country_id': self.country_id, 'user_id': self.user_id,\
-                'summery': "ID: " + str(self.id) +"name: " + self.name + ", country_id: " + self.country_id + ", user_id: " + str(self.user_id)  }
+                'summery': "ID: " + str(self.id) +"name: " + self.name + ", country_id: " + str(self.country_id) + ", user_id: " + str(self.user_id)  }
 
 
 class Flights(db.Model):

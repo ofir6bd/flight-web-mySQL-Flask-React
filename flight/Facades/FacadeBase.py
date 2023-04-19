@@ -10,6 +10,7 @@ parent = os.path.dirname(current)
 sys.path.append(parent)
 from DAL import DataLayer
 from models import UserRoles,Users,Administrators,Customers, Countries,AirlineCompanies,Flights,Tickets
+from flask import jsonify
 
 class FacadeBase(object):
 
@@ -92,7 +93,7 @@ class FacadeBase(object):
         dal_obj = DataLayer() 
         all_flight_and_countries = dal_obj.join_flights_countries()
 
-        # drop flights that not match to the otigin country
+        # drop flights that not match to the origin country
         for i in reversed(range(len(all_flight_and_countries))):
             if self.origin_country != "0":
                 if int(self.origin_country) != int(all_flight_and_countries[i][1].id):
@@ -125,6 +126,15 @@ class FacadeBase(object):
             if tickets == 0:
                 all_flight_and_countries.pop(i)
 
+        if self.api:
+            lst = []
+            for item in all_flight_and_countries:
+                temp = [item[0].toJson(),\
+                        item[1].toJson(),\
+                        item[2].toJson()]
+                lst.append(temp)
+            return jsonify(lst)     
+            
         return all_flight_and_countries
 
     def get_all_airlines(self):
@@ -135,8 +145,8 @@ class FacadeBase(object):
         dal_obj = DataLayer(table1=AirlineCompanies,id=self.id)      
         return dal_obj.get_by_id()
 
-    def get_airline_by_parameteres(self,origin_country_id,destination_country_id, date):
-        pass
+    # def get_airline_by_parameteres(self,origin_country_id,destination_country_id, date):
+    #     pass
 
     def get_airline_by_name(self):
         dal_obj = DataLayer(table1=AirlineCompanies,input_attribute='name', input_value=self.name)

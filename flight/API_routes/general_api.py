@@ -21,33 +21,54 @@ from per_req_Wrappers import require_api_auth
 from API_routes.api_validation import *
 from flask_bcrypt import check_password_hash
 
+def api_get_flights_by_param():
+    if request.args.get('origin_country_id'):
+        origin_country_id = int(request.args.get('origin_country_id'))
+    else: 
+        origin_country_id = "0"
+    if request.args.get('destination_country_id'):
+        destination_country_id = int(request.args.get('destination_country_id'))
+    else: 
+        destination_country_id = "0"
+    if request.args.get('departure_time'):
+        departure_time = datetime.strptime(request.args.get('departure_time'), '%Y-%m-%dT%H:%M')
+    else: 
+        departure_time = None
+    if request.args.get('landing_time'):
+        landing_time = datetime.strptime(request.args.get('landing_time'), '%Y-%m-%dT%H:%M')
+    else: 
+        landing_time = None
+    fac_obj = AnonymousFacade(api=True,origin_country=origin_country_id,destination_country=destination_country_id,\
+                                departure_time=departure_time,landing_time=landing_time)
+    return fac_obj.get_flights_by_parameters()
+
 def api_get_all_countries():
-    dal_obj = AnonymousFacade(api=True)
-    return dal_obj.get_all_countries()
+    fac_obj = AnonymousFacade(api=True)
+    return fac_obj.get_all_countries()
 
 def api_get_all_user_roles():
-    dal_obj = AnonymousFacade(api=True)
-    return dal_obj.get_all_user_roles()
+    fac_obj = AnonymousFacade(api=True)
+    return fac_obj.get_all_user_roles()
 
 def api_get_all_airlines():
-    dal_obj = AnonymousFacade(api=True)
-    return dal_obj.get_all_airlines()
+    fac_obj = AnonymousFacade(api=True)
+    return fac_obj.get_all_airlines()
 
 def api_get_all_flights():
-    dal_obj = AnonymousFacade(api=True)
-    return dal_obj.get_all_flights()
+    fac_obj = AnonymousFacade(api=True)
+    return fac_obj.get_all_flights()
 
 def api_get_flight_by_id(flight_id):
-    dal_obj = AnonymousFacade(api=True,id=flight_id)
-    res = dal_obj.get_flight_by_id()
+    fac_obj = AnonymousFacade(api=True,id=flight_id)
+    res = fac_obj.get_flight_by_id()
     if res:
         return res
     else:
         return jsonify({ 'error': 'flight not found'})
 
 def api_get_country_by_id(country_id):
-    dal_obj = AnonymousFacade(api=True,id=country_id)
-    res = dal_obj.get_country_by_id()
+    fac_obj = AnonymousFacade(api=True,id=country_id)
+    res = fac_obj.get_country_by_id()
     if res:
         return res
     else:
