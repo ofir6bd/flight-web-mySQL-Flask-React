@@ -25,6 +25,10 @@ def api_get_all_countries():
     dal_obj = AnonymousFacade(api=True)
     return dal_obj.get_all_countries()
 
+def api_get_all_user_roles():
+    dal_obj = AnonymousFacade(api=True)
+    return dal_obj.get_all_user_roles()
+
 def api_get_all_airlines():
     dal_obj = AnonymousFacade(api=True)
     return dal_obj.get_all_airlines()

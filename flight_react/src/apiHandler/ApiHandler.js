@@ -4,8 +4,14 @@ export function getFlights() {
   var flights = fetch(url).then((response) => response.json());
   return flights;
 }
+export function apiGetUserRoles() {
+  console.log("start api apiGetUserRoles");
+  var url = "http://127.0.0.1:5000/API/user_roles";
+  var flights = fetch(url).then((response) => response.json());
+  return flights;
+}
 
-export function createUser(username, password, email, user_role) {
+export function apiCreateUser(username, password, email, user_role) {
   console.log("start api createUser");
   const requestOptions = { method: "POST" };
   var url =
@@ -92,5 +98,3 @@ export function apiGetAllCustomers() {
   var response = fetch(url).then((response) => response.json());
   return response;
 }
-
-

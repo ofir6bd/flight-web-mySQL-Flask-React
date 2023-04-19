@@ -40,14 +40,31 @@ function Login() {
   const handlePassword = (event) => {
     setPassword(event.target.value);
   };
-
+  function Messages(props) {
+    const { message, messageType } = props;
+    localStorage.removeItem("globalVarMessage");
+    localStorage.removeItem("globalVarMessageType");
+    if (!message) {
+      return null;
+    }
+    if (messageType == "success") {
+      return <div className="messageContainerSuccess"> {message}</div>;
+    } else {
+      return <div className="messageContainerError"> {message}</div>;
+    }
+  }
   return (
     <div className="container">
+      <Messages
+        message={localStorage.getItem("globalVarMessage")}
+        messageType={localStorage.getItem("globalVarMessageType")}
+      />
       <h2> LogIn Page</h2>
       <TextField
         id="outlined-basic"
         label="Email:"
         variant="outlined"
+        type={"email"}
         onChange={handleEmail}
       />
       <TextField

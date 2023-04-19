@@ -209,6 +209,7 @@ app.add_url_rule('/airline/<string:company_name>/<int:flight_id>/update_flight_f
 ############################ API requests ###################################
 # General API
 app.add_url_rule('/API/countries', view_func=api_get_all_countries, methods=["GET"], strict_slashes=False)
+app.add_url_rule('/API/user_roles', view_func=api_get_all_user_roles, methods=["GET"], strict_slashes=False)
 app.add_url_rule('/API/airlines', view_func=api_get_all_airlines, methods=["GET"], strict_slashes=False)
 app.add_url_rule('/API/flights', view_func=api_get_all_flights, methods=["GET"], strict_slashes=False)
 app.add_url_rule('/API/flight/<int:flight_id>/', view_func=api_get_flight_by_id, methods=["GET"], strict_slashes=False)
