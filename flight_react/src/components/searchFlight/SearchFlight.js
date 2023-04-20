@@ -5,7 +5,6 @@ import "./SearchFlight.css";
 import { Button } from "@mui/material";
 import { apiGetAllFCountries } from "../../apiHandler/apiHandler";
 import { apiGetFlightsByParameters } from "../../apiHandler/apiHandler";
-import Flight from "../flight/flight";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
 import Select from "react-select";
@@ -16,10 +15,6 @@ function SearchFlight() {
   const [fromValue, setFromValue] = useState(null);
   const [toValue, setToValue] = useState(null);
   const [options, setOptions] = React.useState([]);
-
-  // function navigateToFlights(flights_list) {
-  //   navigate("/flights", { state: { flights: flights_list } });
-  // }
 
   useEffect(() => {
     function fetchData() {
@@ -44,24 +39,23 @@ function SearchFlight() {
       to = toValue.id;
     }
 
-    apiGetFlightsByParameters(from, to, departure_time, landing_time)
-      .then((response) => {
+    apiGetFlightsByParameters(from, to, departure_time, landing_time).then(
+      (response) => {
         if (response) {
-          console.log(response);
+          console.log("flight found", response);
           navigate("/flights", { state: { flights: response } });
         } else {
           console.log(response);
-          // localStorage.setItem("globalVarMessage", JSON.stringify(response));
-          // localStorage.setItem("globalVarMessageType", "error");
         }
-      })
-      .then(() => {
-        navigate("/");
-      });
+      }
+    );
   };
 
   function Messages(props) {
-    const { message, messageType } = props;
+    const message = props.message;
+    const messageType = props.messageType;
+
+    console.log(message);
     localStorage.removeItem("globalVarMessage");
     localStorage.removeItem("globalVarMessageType");
     if (!message) {
@@ -100,8 +94,6 @@ function SearchFlight() {
           getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
           placeholder="To:"
         />
-        {/* <TextField id="outlined-basic" label="From:" variant="outlined" />
-        <TextField id="outlined-basic" label="To:" variant="outlined" /> */}
         <DateField label="Departure time" />
         <DateField label="Landing time" />
         <Button variant="contained" className="Button" onClick={handleClick}>

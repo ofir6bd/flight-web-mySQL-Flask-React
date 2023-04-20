@@ -63,7 +63,7 @@ const checkIfUserAirline = (email, password, user_id) => {
     .catch((err) => console.log(err));
 };
 
-export function Auth(email, password) {
+export function auth(email, password) {
   apiCheckLogin(email, password)
     .then((response) => {
       if (response.user_id) {

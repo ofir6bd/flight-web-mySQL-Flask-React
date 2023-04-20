@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 import Select from "react-select";
 
 export default function RemoveTicketForm() {
-  const [value, setValue] = React.useState(null);
+  const [value, setValue] = React.useState();
   const [options, setOptions] = React.useState([]);
 
   let navigate = useNavigate();
@@ -24,7 +24,7 @@ export default function RemoveTicketForm() {
 
   const handleClick = () => {
     if (value !== null) {
-      apiRemoveTicket(value.id)
+      apiRemoveTicket(value.ticket_id)
         .then((response) => {
           if (response.success) {
             console.log(response);
@@ -42,6 +42,12 @@ export default function RemoveTicketForm() {
     }
   };
 
+  // const handleChange = (selectedOption) => {
+  //   setValue(selectedOption);
+  //   console.log(`Option selected:`, selectedOption);
+  //   console.log(`value:`, value);
+  // };
+
   return (
     <div className="container">
       <h2> Remove Ticket page</h2>
@@ -52,15 +58,17 @@ export default function RemoveTicketForm() {
         onChange={setValue}
         getOptionLabel={(option) =>
           "ID: " +
-          option[0].id +
-          ", Departure Time: " +
-          option[1].departure_time +
+          option.ticket_id +
           ", From: " +
-          option[2].name +
+          option.origin_country +
           ", To: " +
-          option[3].name
+          option.destination_country +
+          ", Departure Time: " +
+          option.departure_time +
+          ", Landing Time: " +
+          option.landing_time
         }
-        getOptionValue={(option) => option[0].id} // It should be unique value in the options. E.g. ID
+        getOptionValue={(option) => option.ticket_id} // It should be unique value in the options. E.g. ID
       />
 
       <Button variant="contained" className="Button" onClick={handleClick}>

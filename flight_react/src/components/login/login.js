@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import "./login.css";
-import { Auth } from "../Auth/Auth";
+import { auth } from "../auth/auth";
 import { useNavigate } from "react-router";
 
 function Login() {
@@ -10,7 +10,7 @@ function Login() {
 
   const handleClick = () => {
     console.log("The link was clicked before");
-    Auth(email, password);
+    auth(email, password);
     setTimeout(() => {
       if (localStorage.getItem("globalVarCustomerId")) {
         navigate("/customerPage");
@@ -26,7 +26,7 @@ function Login() {
         localStorage.setItem("globalVarMessageType", "error");
         navigate("/");
       }
-    }, 800);
+    }, 1000);
 
     console.log("The link was clicked after");
   };

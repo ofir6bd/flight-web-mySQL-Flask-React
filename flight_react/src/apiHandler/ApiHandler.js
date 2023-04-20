@@ -18,8 +18,6 @@ export function apiGetFlightsByParameters(
   departure_time,
   landing_time
 ) {
-  // var departure_time = "";
-  // var landing_time = "";
   console.log("start api apiGetFlightsByParameters");
   console.log(origin_country);
   console.log(destination_country);

@@ -128,10 +128,13 @@ class FacadeBase(object):
 
         if self.api:
             lst = []
-            for item in all_flight_and_countries:
-                temp = [item[0].toJson(),\
-                        item[1].toJson(),\
-                        item[2].toJson()]
+            for i in range(len(all_flight_and_countries)):
+                flight_id = all_flight_and_countries[i][0].id
+                departure_time = all_flight_and_countries[i][0].departure_time
+                landing_time = all_flight_and_countries[i][0].landing_time
+                origin_country = all_flight_and_countries[i][1].name
+                destination_country = all_flight_and_countries[i][2].name
+                temp = {"flight_id": flight_id,"departure_time": departure_time,"landing_time": landing_time, "origin_country":origin_country,"destination_country":destination_country }
                 lst.append(temp)
             return jsonify(lst)     
             

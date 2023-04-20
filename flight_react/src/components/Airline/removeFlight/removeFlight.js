@@ -52,15 +52,15 @@ export default function RemoveFlightForm() {
         onChange={setValue}
         getOptionLabel={(option) =>
           "ID: " +
-          option[0].id +
+          option.flight_id +
           ", Departure Time: " +
-          option[0].departure_time +
+          option.departure_time +
           ", From: " +
-          option[1].name +
+          option.from +
           ", To: " +
-          option[2].name
+          option.to
         }
-        getOptionValue={(option) => option[0].id} // It should be unique value in the options. E.g. ID
+        getOptionValue={(option) => option.flight_id} // It should be unique value in the options. E.g. ID
       />
 
       <Button variant="contained" className="Button" onClick={handleClick}>

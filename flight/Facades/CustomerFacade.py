@@ -74,12 +74,23 @@ class CustomerFacade(FacadeBase):
             for ticket in all_my_tickets:
                 for i in range(len(final_list)):
                     if ticket.flight_id == final_list[i][0].id:
-                        temp = [ticket.toJson(),\
-                                final_list[i][0].toJson(),\
-                                final_list[i][1].toJson(),\
-                                    final_list[i][2].toJson()]
+                        ticket_id = ticket.id
+                        departure_time = final_list[i][0].departure_time
+                        landing_time = final_list[i][0].landing_time
+                        origin_country = final_list[i][1].name
+                        destination_country = final_list[i][2].name
+                        temp = {"ticket_id": ticket_id,"departure_time": departure_time,"landing_time": landing_time, "origin_country":origin_country,"destination_country":destination_country }
                         lst.append(temp)
-            return jsonify(lst)    
+            return jsonify(lst)
+            # for ticket in all_my_tickets:
+            #     for i in range(len(final_list)):
+            #         if ticket.flight_id == final_list[i][0].id:
+            #             temp = [ticket.toJson(),\
+            #                     final_list[i][0].toJson(),\
+            #                     final_list[i][1].toJson(),\
+            #                         final_list[i][2].toJson()]
+            #             lst.append(temp)
+            #     
         return final_list
 
     def check_one_flight_customer_combination_on_ticket(self):
