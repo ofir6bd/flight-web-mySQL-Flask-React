@@ -38,3 +38,15 @@ export function apiGetMyTickets() {
   var response = fetch(url, requestOptions).then((response) => response.json());
   return response;
 }
+
+export function apiGetCustomerDetails() {
+  console.log("start api apiGetCustomerDetails");
+  const requestOptions = { method: "GET" };
+  var url =
+    "http://127.0.0.1:5000/API/customer/get_customer_details/?email=" +
+    localStorage.getItem("globalVarEmail") +
+    "&password=" +
+    localStorage.getItem("globalVarPassword");
+  var response = fetch(url, requestOptions).then((response) => response.json());
+  return response;
+}

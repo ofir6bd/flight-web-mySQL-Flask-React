@@ -228,6 +228,7 @@ app.add_url_rule('/API/customer/my_tickets', view_func=api_get_my_tickets, metho
 app.add_url_rule('/API/customer/delete_my_ticket/<int:ticket_id>/', view_func=api_delete_my_ticket, methods=["DELETE"], strict_slashes=False)
 app.add_url_rule('/API/customer/add_ticket/', view_func=api_add_ticket, methods=["POST"], strict_slashes=False)
 app.add_url_rule('/API/customer/update_customer/', view_func=api_update_customer, methods=["PUT"], strict_slashes=False)
+app.add_url_rule('/API/customer/get_customer_details/', view_func=api_get_customer_details, methods=["GET"], strict_slashes=False)
 
 
 # Admin API

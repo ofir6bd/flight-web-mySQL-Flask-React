@@ -95,7 +95,6 @@ def api_update_customer():
             if res:
                 return jsonify(res)
 
-
             fac_obj = CustomerFacade(api=True,id=id,first_name=first_name,last_name=last_name,address=address,\
                                                 phone_no=phone_no,credit_card_no=credit_card_no,user_id=user_id)
             
@@ -104,5 +103,23 @@ def api_update_customer():
                 return jsonify({ 'success': 'Customer updated'}) 
             else:
                 return jsonify({ 'error': 'Duplication error in DB'})
+        else:
+            return jsonify({ 'error': 'you do not have customer permissions'})  
+        
+@require_api_auth
+def api_get_customer_details():
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:
+        if session['user_role'] == 'customer':
+            id = session['customer_id']
+            
+            fac_obj = CustomerFacade(api=True,id=id)
+            
+            res = fac_obj.get_customer_by_id()
+            if res: 
+                return jsonify(res.toJson()) 
+            else:
+                return jsonify({ 'error': 'error'})
         else:
             return jsonify({ 'error': 'you do not have customer permissions'})  

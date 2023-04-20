@@ -23,6 +23,7 @@ import RemoveCustomerForm from "./components/Admin/removeCustomer/removeCustomer
 import RemoveAdminForm from "./components/Admin/removeAdmin/removeAdmin";
 import RemoveTicketForm from "./components/Customer/removeTicket/removeTicket";
 import RemoveFlightForm from "./components/Airline/removeFlight/removeFlight";
+import UpdateCustomerForm from "./components/Customer/updateCustomer/updateCustomer";
 
 function App() {
   let navigate = useNavigate();
@@ -54,6 +55,7 @@ function App() {
           <Route path="removeAdmin" element={<RemoveAdminForm />} />
           <Route path="removeTicket" element={<RemoveTicketForm />} />
           <Route path="removeFlight" element={<RemoveFlightForm />} />
+          <Route path="updateCustomer" element={<UpdateCustomerForm />} />
         </Routes>
       </LocalizationProvider>
     </div>

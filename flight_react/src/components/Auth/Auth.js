@@ -38,6 +38,7 @@ const setAirlineIdGlobalStorage = (airlineID) => {
 const checkIfUserCustomer = (email, password, user_id) => {
   apiCheckCustomer(email, password, user_id)
     .then((response) => {
+      // console.log(response.customer_id);
       if (response.customer_id) {
         setCustomerIdGlobalStorage(response.customer_id);
       }
@@ -67,6 +68,7 @@ export function auth(email, password) {
   apiCheckLogin(email, password)
     .then((response) => {
       if (response.user_id) {
+        // console.log(response.user_id);
         setEmailGlobalStorage(email);
         setPasswordGlobalStorage(password);
         setUserIdGlobalStorage(response.user_id);

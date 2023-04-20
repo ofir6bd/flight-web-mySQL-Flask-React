@@ -1,0 +1,103 @@
+import React, { useState, useEffect } from "react";
+import TextField from "@mui/material/TextField";
+import { Button } from "@mui/material";
+// import "./login.css";
+// import { UseAuth } from "../useAuth/useAuth";
+import { apiAddCustomer } from "../../../apiHandler/apiHandlerAdmin";
+import { useNavigate } from "react-router";
+import { apiGetCustomerDetails } from "../../../apiHandler/apiHandlerCustomer";
+
+export default function AddCustomerForm() {
+  let navigate = useNavigate();
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [address, setAddress] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
+  const [creditCardNo, setCreditCardNo] = useState("");
+  const [options, setOptions] = React.useState([]);
+
+  const handleFirstName = (event) => {
+    setFirstName(event.target.value);
+  };
+  const handleLastName = (event) => {
+    setLastName(event.target.value);
+  };
+  const handleAddress = (event) => {
+    setAddress(event.target.value);
+  };
+  const handlePhoneNo = (event) => {
+    setPhoneNo(event.target.value);
+  };
+  const handleCreditCardNo = (event) => {
+    setCreditCardNo(event.target.value);
+  };
+
+  const handleClick = () => {
+    console.log("start add customer handleClick");
+    const userID = 1;
+    apiAddCustomer(firstName, lastName, address, phoneNo, creditCardNo, userID)
+      .then((response) => {
+        if (response.success) {
+          console.log(response);
+          localStorage.setItem("globalVarMessage", response.success);
+          localStorage.setItem("globalVarMessageType", "success");
+        } else {
+          console.log(response);
+          localStorage.setItem("globalVarMessage", JSON.stringify(response));
+          localStorage.setItem("globalVarMessageType", "error");
+        }
+      })
+      .then(() => {
+        navigate("/adminPage");
+      });
+  };
+
+  useEffect(() => {
+    function fetchData() {
+      apiGetCustomerDetails().then((response) => {
+        setOptions(response);
+      });
+    }
+    fetchData();
+  }, []);
+
+  return (
+    <div className="container">
+      <h2> Update Customer page</h2>
+      <TextField
+        id="outlined-basic"
+        label={"First Name: " + options.first_name}
+        variant="outlined"
+        onChange={handleFirstName}
+      />
+      <TextField
+        id="outlined-basic"
+        label={"Last Name: " + options.last_name}
+        variant="outlined"
+        onChange={handleLastName}
+      />
+      <TextField
+        id="outlined-basic"
+        label={"Address: " + options.address}
+        variant="outlined"
+        onChange={handleAddress}
+      />
+      <TextField
+        id="outlined-basic"
+        label={"Phone No: " + options.phone_no}
+        variant="outlined"
+        onChange={handlePhoneNo}
+      />
+      <TextField
+        id="outlined-basic"
+        label={"Credit Card No: " + options.credit_card_no}
+        variant="outlined"
+        onChange={handleCreditCardNo}
+      />
+      <Button variant="contained" className="Button" onClick={handleClick}>
+        Update Customer
+      </Button>
+    </div>
+  );
+}
