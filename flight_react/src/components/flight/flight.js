@@ -15,7 +15,7 @@ function Flight({ flight, key }) {
         "You must log in before booking flights"
       );
       localStorage.setItem("globalVarMessageType", "error");
-      navigate("/");
+      navigate("/login");
     }
   };
   return (
