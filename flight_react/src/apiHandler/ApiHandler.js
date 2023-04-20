@@ -19,10 +19,10 @@ export function apiGetFlightsByParameters(
   landing_time
 ) {
   console.log("start api apiGetFlightsByParameters");
-  console.log(origin_country);
-  console.log(destination_country);
-  console.log(departure_time);
-  console.log(landing_time);
+  // console.log(origin_country);
+  // console.log(destination_country);
+  // console.log(departure_time);
+  // console.log(landing_time);
   const requestOptions = { method: "GET" };
   var url =
     "http://127.0.0.1:5000/API/flights_by_param?origin_country_id=" +

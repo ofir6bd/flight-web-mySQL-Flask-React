@@ -8,6 +8,7 @@ import { apiGetFlightsByParameters } from "../../apiHandler/apiHandler";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
 import Select from "react-select";
+import Messages from "../../messages";
 
 function SearchFlight() {
   let navigate = useNavigate();
@@ -20,7 +21,7 @@ function SearchFlight() {
     function fetchData() {
       apiGetAllFCountries().then((response) => {
         setOptions(response);
-        console.log(response);
+        // console.log(response);
       });
     }
     fetchData();
@@ -53,24 +54,6 @@ function SearchFlight() {
     );
   };
 
-  function Messages(props) {
-    const message = props.message;
-    const messageType = props.messageType;
-
-    console.log(message);
-    localStorage.removeItem("globalVarMessage");
-    localStorage.removeItem("globalVarMessageType");
-    if (!message) {
-      return null;
-    }
-    if (messageType == "success") {
-      return <div className="messageContainerSuccess"> {message}</div>;
-    } else if (messageType == "error") {
-      return <div className="messageContainerError"> {message}</div>;
-    } else if (messageType == "warning") {
-      return <div className="messageContainerWarning"> {message}</div>;
-    }
-  }
 
   return (
     <div>
@@ -78,6 +61,7 @@ function SearchFlight() {
         message={localStorage.getItem("globalVarMessage")}
         messageType={localStorage.getItem("globalVarMessageType")}
       />
+      {/* <Messages/> */}
       <h2> Search flight </h2>
       <div className="container">
         <Select

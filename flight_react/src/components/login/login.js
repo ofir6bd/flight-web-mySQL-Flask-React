@@ -4,6 +4,7 @@ import { Button } from "@mui/material";
 import "./login.css";
 import { auth } from "../auth/auth";
 import { useNavigate } from "react-router";
+import Messages from "../../messages";
 
 function Login() {
   let navigate = useNavigate();
@@ -40,19 +41,7 @@ function Login() {
   const handlePassword = (event) => {
     setPassword(event.target.value);
   };
-  function Messages(props) {
-    const { message, messageType } = props;
-    localStorage.removeItem("globalVarMessage");
-    localStorage.removeItem("globalVarMessageType");
-    if (!message) {
-      return null;
-    }
-    if (messageType == "success") {
-      return <div className="messageContainerSuccess"> {message}</div>;
-    } else {
-      return <div className="messageContainerError"> {message}</div>;
-    }
-  }
+
   return (
     <div className="container">
       <Messages
@@ -61,14 +50,14 @@ function Login() {
       />
       <h2> LogIn Page</h2>
       <TextField
-        id="outlined-basic"
+        id="email"
         label="Email:"
         variant="outlined"
         type={"email"}
         onChange={handleEmail}
       />
       <TextField
-        id="outlined-basic"
+        id="Passwordc"
         label="Password:"
         variant="outlined"
         type="password"

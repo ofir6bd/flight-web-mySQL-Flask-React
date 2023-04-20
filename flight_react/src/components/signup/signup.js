@@ -6,6 +6,7 @@ import { apiCreateUser } from "../../apiHandler/apiHandler";
 import { apiGetUserRoles } from "../../apiHandler/apiHandler";
 import Select from "react-select";
 import { useNavigate } from "react-router";
+import Messages from "../../messages";
 
 function Signup() {
   let navigate = useNavigate();
@@ -60,19 +61,7 @@ function Signup() {
     }
   };
 
-  function Messages(props) {
-    const { message, messageType } = props;
-    localStorage.removeItem("globalVarMessage");
-    localStorage.removeItem("globalVarMessageType");
-    if (!message) {
-      return null;
-    }
-    if (messageType == "success") {
-      return <div className="messageContainerSuccess"> {message}</div>;
-    } else {
-      return <div className="messageContainerError"> {message}</div>;
-    }
-  }
+
   return (
     <div className="container">
       <Messages
@@ -81,31 +70,25 @@ function Signup() {
       />
       <h2> Sign Up Page</h2>
       <TextField
-        id="outlined-basic"
+        id="Username"
         label="Username:"
         variant="outlined"
         onChange={handleUsername}
       />
       <TextField
-        id="outlined-basic"
+        id="Password"
         label="Password:"
         variant="outlined"
         type="password"
         onChange={handlePassword}
       />
       <TextField
-        id="outlined-basic"
+        id="Email"
         label="Email:"
         variant="outlined"
         type={"email"}
         onChange={handleEmail}
       />
-      {/* <TextField
-        id="outlined-basic"
-        label="User Role:"
-        variant="outlined"
-        onChange={handleUserRole}
-      /> */}
       <Select
         name="User Role:"
         options={options}

@@ -98,7 +98,7 @@ export function apiRemoveCustomer(customer_id) {
 export function apiGetAllAdmins() {
   console.log("start api apiGetAllAdmins");
   var url =
-    "http://127.0.0.1:5000/API/admin/get_all_customers?email=" +
+    "http://127.0.0.1:5000/API/admin/get_all_admins?email=" +
     localStorage.getItem("globalVarEmail") +
     "&password=" +
     localStorage.getItem("globalVarPassword");
