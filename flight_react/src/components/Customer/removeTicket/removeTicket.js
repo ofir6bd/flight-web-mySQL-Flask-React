@@ -42,11 +42,6 @@ export default function RemoveTicketForm() {
     }
   };
 
-  // const handleChange = (selectedOption) => {
-  //   setValue(selectedOption);
-  //   console.log(`Option selected:`, selectedOption);
-  //   console.log(`value:`, value);
-  // };
 
   return (
     <div className="container">

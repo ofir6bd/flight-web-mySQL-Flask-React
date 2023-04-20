@@ -41,11 +41,13 @@ function SearchFlight() {
 
     apiGetFlightsByParameters(from, to, departure_time, landing_time).then(
       (response) => {
-        if (response) {
+        if (response.length > 0) {
           console.log("flight found", response);
           navigate("/flights", { state: { flights: response } });
         } else {
-          console.log(response);
+          localStorage.setItem("globalVarMessage", "no flights found");
+          localStorage.setItem("globalVarMessageType", "warning");
+          navigate("/");
         }
       }
     );
@@ -63,8 +65,10 @@ function SearchFlight() {
     }
     if (messageType == "success") {
       return <div className="messageContainerSuccess"> {message}</div>;
-    } else {
+    } else if (messageType == "error") {
       return <div className="messageContainerError"> {message}</div>;
+    } else if (messageType == "warning") {
+      return <div className="messageContainerWarning"> {message}</div>;
     }
   }
 

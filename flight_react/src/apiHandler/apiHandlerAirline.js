@@ -28,7 +28,6 @@ export function apiAddFlight(
 
 export function apiRemoveFlight(flight_id) {
   console.log("start api apiRemoveFlight");
-  console.log(flight_id);
   const requestOptions = { method: "DELETE" };
   var url =
     "http://127.0.0.1:5000/API/airline/delete_my_flight/" +

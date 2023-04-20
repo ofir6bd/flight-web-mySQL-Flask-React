@@ -24,7 +24,7 @@ export default function RemoveFlightForm() {
 
   const handleClick = () => {
     if (value !== null) {
-      apiRemoveFlight(value.id)
+      apiRemoveFlight(value.flight_id)
         .then((response) => {
           if (response.success) {
             console.log(response);
@@ -37,7 +37,7 @@ export default function RemoveFlightForm() {
           }
         })
         .then(() => {
-          navigate("/customerPage");
+          navigate("/airlinePage");
         });
     }
   };
@@ -53,12 +53,14 @@ export default function RemoveFlightForm() {
         getOptionLabel={(option) =>
           "ID: " +
           option.flight_id +
+          ", From: " +
+          option.origin_country +
+          ", To: " +
+          option.destination_country +
           ", Departure Time: " +
           option.departure_time +
-          ", From: " +
-          option.from +
-          ", To: " +
-          option.to
+          ", Landing Time: " +
+          option.landing_time
         }
         getOptionValue={(option) => option.flight_id} // It should be unique value in the options. E.g. ID
       />

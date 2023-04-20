@@ -41,6 +41,7 @@ def api_delete_my_flight(flight_id):
         if session['user_role'] == 'airline':
             fac_obj = AirlineFacade(api=True,id=flight_id)
             flight = fac_obj.get_flight_by_id()
+            print(type(flight))
             if flight:
                 if flight.airline_company_id == session['airline_id']:
                     res = fac_obj.remove_flight()

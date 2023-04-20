@@ -62,11 +62,12 @@ class AirlineFacade(FacadeBase):
             for flight in flights:
                 for i in range(len(all_flights_countries)):
                     if flight.id == all_flights_countries[i][0].id:
-                        temp = [\
-                            # flight.toJson(),\
-                                all_flights_countries[i][0].toJson(),\
-                                all_flights_countries[i][1].toJson(),\
-                                    all_flights_countries[i][2].toJson()]
+                        flight_id = all_flights_countries[i][0].id
+                        departure_time = all_flights_countries[i][0].departure_time
+                        landing_time = all_flights_countries[i][0].landing_time
+                        origin_country = all_flights_countries[i][1].name
+                        destination_country = all_flights_countries[i][2].name
+                        temp = {"flight_id": flight_id,"departure_time": departure_time,"landing_time": landing_time, "origin_country":origin_country,"destination_country":destination_country }
                         lst.append(temp)
             return jsonify(lst)    
         return flights
