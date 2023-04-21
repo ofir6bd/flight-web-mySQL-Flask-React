@@ -77,3 +77,29 @@ export function apiUpdateAirline(name) {
   var response = fetch(url, requestOptions).then((response) => response.json());
   return response;
 }
+
+export function apiGetFlightDetails() {
+  console.log("start api apiGetFlightDetails");
+  const requestOptions = { method: "GET" };
+  var url =
+    "http://127.0.0.1:5000/API/airline/get_airline_details/?email=" +
+    localStorage.getItem("globalVarEmail") +
+    "&password=" +
+    localStorage.getItem("globalVarPassword");
+  var response = fetch(url, requestOptions).then((response) => response.json());
+  return response;
+}
+
+export function apiUpdateFlight(name) {
+  console.log("start api apiUpdateFlight");
+  const requestOptions = { method: "PUT" };
+  var url =
+    "http://127.0.0.1:5000/API/airline/update_airline?email=" +
+    localStorage.getItem("globalVarEmail") +
+    "&password=" +
+    localStorage.getItem("globalVarPassword") +
+    "&name=" +
+    name;
+  var response = fetch(url, requestOptions).then((response) => response.json());
+  return response;
+}

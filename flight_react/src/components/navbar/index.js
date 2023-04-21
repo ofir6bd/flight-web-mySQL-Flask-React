@@ -58,6 +58,9 @@ const Navbar = () => {
             <NavLink to="/updateAirline" activeStyle>
               Update Airline
             </NavLink>
+            <NavLink to="/chooseFlight" activeStyle>
+              Update Flight
+            </NavLink>
           </NavMenu>
         ) : (
           <NavMenu>
