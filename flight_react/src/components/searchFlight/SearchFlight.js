@@ -9,6 +9,7 @@ import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
 import Select from "react-select";
 import Messages from "../../messages";
+import { DateTimePicker } from "@mui/x-date-pickers";
 
 function SearchFlight() {
   let navigate = useNavigate();
@@ -16,6 +17,8 @@ function SearchFlight() {
   const [fromValue, setFromValue] = useState(null);
   const [toValue, setToValue] = useState(null);
   const [options, setOptions] = React.useState([]);
+  const [depTime, setDepTime] = useState(null);
+  const [lanTime, setLanTime] = useState(null);
 
   useEffect(() => {
     function fetchData() {
@@ -54,7 +57,6 @@ function SearchFlight() {
     );
   };
 
-
   return (
     <div>
       <Messages
@@ -82,8 +84,18 @@ function SearchFlight() {
           getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
           placeholder="To:"
         />
-        <DateField label="Departure time" />
-        <DateField label="Landing time" />
+        <DateTimePicker
+          id="outlined-basic"
+          label={"Departure time" }
+          variant="outlined"
+          onChange={setDepTime}
+        />
+        <DateTimePicker
+          id="outlined-basic"
+          label={"Landing time"}
+          variant="outlined"
+          onChange={setLanTime}
+        />
         <Button variant="contained" className="Button" onClick={handleClick}>
           Submit
         </Button>
