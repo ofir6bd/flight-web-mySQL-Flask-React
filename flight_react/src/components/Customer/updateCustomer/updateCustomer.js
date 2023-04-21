@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 // import "./login.css";
 // import { UseAuth } from "../useAuth/useAuth";
-import { apiAddCustomer } from "../../../apiHandler/apiHandlerAdmin";
+import { apiUpdateCustomer } from "../../../apiHandler/apiHandlerCustomer";
 import { useNavigate } from "react-router";
 import { apiGetCustomerDetails } from "../../../apiHandler/apiHandlerCustomer";
 
@@ -34,9 +34,9 @@ export default function AddCustomerForm() {
   };
 
   const handleClick = () => {
-    console.log("start add customer handleClick");
+    console.log("start update customer handleClick");
     const userID = 1;
-    apiAddCustomer(firstName, lastName, address, phoneNo, creditCardNo, userID)
+    apiUpdateCustomer(firstName, lastName, address, phoneNo, creditCardNo, userID)
       .then((response) => {
         if (response.success) {
           console.log(response);
@@ -49,7 +49,7 @@ export default function AddCustomerForm() {
         }
       })
       .then(() => {
-        navigate("/adminPage");
+        navigate("/customerPage");
       });
   };
 

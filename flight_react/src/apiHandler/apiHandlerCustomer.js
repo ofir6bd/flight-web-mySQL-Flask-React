@@ -50,3 +50,34 @@ export function apiGetCustomerDetails() {
   var response = fetch(url, requestOptions).then((response) => response.json());
   return response;
 }
+
+export function apiUpdateCustomer(
+  firstName,
+  lastName,
+  address,
+  phoneNo,
+  creditCardNo,
+  user_id
+) {
+  console.log("start api apiUpdateCustomer");
+  const requestOptions = { method: "PUT" };
+  var url =
+    "http://127.0.0.1:5000/API/customer/update_customer?email=" +
+    localStorage.getItem("globalVarEmail") +
+    "&password=" +
+    localStorage.getItem("globalVarPassword") +
+    "&first_name=" +
+    firstName +
+    "&last_name=" +
+    lastName +
+    "&address=" +
+    address +
+    "&phone_no=" +
+    phoneNo +
+    "&credit_card_no=" +
+    creditCardNo +
+    "&user_id=" +
+    user_id;
+  var response = fetch(url, requestOptions).then((response) => response.json());
+  return response;
+}

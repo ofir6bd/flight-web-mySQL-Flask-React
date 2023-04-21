@@ -91,7 +91,7 @@ def api_update_customer():
             user_id = session['user_id'] 
 
             res = validate_customer(action="update",first_name=first_name,last_name=last_name,address=address,\
-                                              phone_no=phone_no,credit_card_no=credit_card_no)
+                                              phone_no=phone_no,credit_card_no=credit_card_no,user_id=user_id)
             if res:
                 return jsonify(res)
 
