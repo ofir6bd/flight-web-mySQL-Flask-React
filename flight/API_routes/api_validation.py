@@ -53,7 +53,7 @@ country_id_regex_pattern = re.compile(r"^[0-9]{0,50}$")
 def validate_airline(action="",name="",country_id="",user_id=""):
    final_error_lst = []  
    if not name_regex_pattern.search(name) and name:
-      final_error_lst.append({'name error': 'name must contain characteres only 2 - 50'}) 
+      final_error_lst.append({'name error': 'name must contain characters only 2 - 50'}) 
    if not country_id_regex_pattern.search(str(country_id)) and country_id:
       final_error_lst.append({'country_id error': 'country_id must contain digits only'}) 
    if not user_id_regex_pattern.search(str(user_id)) and user_id:

@@ -101,8 +101,11 @@ def api_update_airline():
         if session['user_role'] == 'airline':
             id = session['airline_id']
             name = request.args.get('name')
-            
-            res = validate_airline(action="update", name=name)
+            user_id = session['user_id']
+            fac_obj = AirlineFacade(api=True,id=id)
+            airline = fac_obj.get_airline_by_id()
+            country_id = airline.country_id
+            res = validate_airline(action="update", name=name,country_id=country_id,user_id=user_id)
             if res:
                 return jsonify(res)
             
@@ -155,5 +158,23 @@ def api_update_flight(flight_id):
                     return jsonify({ 'error': 'you cannot update flight that is not yours'})
             else:
                     return jsonify({ 'error': 'flight_not_found'})
+        else:
+            return jsonify({ 'error': 'you do not have airline permissions'})  
+        
+        
+@require_api_auth
+def api_get_airline_details():
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:
+        if session['user_role'] == 'airline':
+            id = session['airline_id']
+            fac_obj = AirlineFacade(api=True,id=id)
+            
+            res = fac_obj.get_airline_by_id()
+            if res: 
+                return jsonify(res.toJson()) 
+            else:
+                return jsonify({ 'error': 'error'})
         else:
             return jsonify({ 'error': 'you do not have airline permissions'})  

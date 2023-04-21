@@ -141,7 +141,7 @@ def api_get_airline_by_user_id():
         fac_obj = AirlineFacade(user_id=user_id)
         airline = fac_obj.get_airline_by_user_id()
         if airline:
-            return jsonify({'success': "user is airline",  'airline_id': airline.id})
+            return jsonify({'success': "user is airline",  'airline_id': airline.id, "name": airline.name})
         else:
             return jsonify({'error': "no user found"})
 

@@ -55,6 +55,9 @@ const Navbar = () => {
             <NavLink to="/removeFlight" activeStyle>
               Remove Flight
             </NavLink>
+            <NavLink to="/updateAirline" activeStyle>
+              Update Airline
+            </NavLink>
           </NavMenu>
         ) : (
           <NavMenu>
