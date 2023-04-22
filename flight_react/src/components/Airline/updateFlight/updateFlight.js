@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom";
 import { DateTimePicker } from "@mui/x-date-pickers";
 import { apiGetAllFCountries } from "../../../apiHandler/apiHandler";
 import Select from "react-select";
+// import NumberField from "react-number-field";
 
 export default function UpdateFlightForm() {
   let navigate = useNavigate();
@@ -16,6 +17,9 @@ export default function UpdateFlightForm() {
   const [toValue, setToValue] = useState(null);
   const [depTime, setDepTime] = useState(null);
   const [lanTime, setLanTime] = useState(null);
+  const [remainingTickets, setRemainingTickets] = useState("");
+  const [value, setValue] = useState("");
+
   const [name, setName] = useState("");
   // const [options, setOptions] = React.useState([]);
 
@@ -31,9 +35,28 @@ export default function UpdateFlightForm() {
     }
     fetchData();
   }, []);
+
   const handleClick = () => {
     console.log("start update Flight handleClick");
-    apiUpdateFlight(name)
+    console.log(remainingTickets);
+    if (fromValue) {
+      state.flight.origin_country_id = fromValue.id;
+    }
+    if (toValue) {
+      state.flight.destination_country_id = toValue.id;
+    }
+    if (depTime) {
+      // state.flight.origin_country_id = depTime.id;
+    }
+    if (lanTime) {
+      // state.flight.destination_country_id = toValue.id;
+    }
+    // if (remainingTickets) {
+    //   console.log("remainingTickets" + remainingTickets);
+    //   state.flight.remainingTickets = remainingTickets;
+    // }
+    console.log("remainingTiddddckets" + remainingTickets);
+    apiUpdateFlight(state.flight)
       .then((response) => {
         if (response.success) {
           console.log(response);
@@ -49,64 +72,38 @@ export default function UpdateFlightForm() {
         navigate("/airlinePage");
       });
   };
+  const handleRemainingTickets = (event) => {
+    const result = event.target.value.replace(/\D/g, "");
+    state.flight.remaining_tickets = result;
+  };
 
-  const theme = (theme) => ({
-    ...theme,
-    colors: {
-      ...theme.colors,
-      // primary25: "blue",
-      primary: "green",
-
-      // All possible overrides
-      // primary: '#2684FF',
-      // primary75: '#4C9AFF',
-      // primary50: '#B2D4FF',
-      primary25: "#DEEBFF",
-
-      // danger: '#DE350B',
-      // dangerLight: '#FFBDAD',
-
-      // neutral0: 'hsl(0, 0%, 100%)',
-      // neutral5: 'hsl(0, 0%, 95%)',
-      // neutral10: 'hsl(0, 0%, 90%)',
-      // neutral20: 'hsl(0, 0%, 80%)',
-      neutral30: "hsl(0, 0%, 70%)",
-      // neutral40: 'hsl(0, 0%, 60%)',
-      // neutral50: 'hsl(0, 0%, 50%)',
-      // neutral60: 'hsl(0, 0%, 40%)',
-      // neutral70: 'hsl(0, 0%, 30%)',
-      // neutral80: 'hsl(0, 0%, 20%)',
-      // neutral90: 'hsl(0, 0%, 10%)',
-    },
-    // Other options you can use
-    borderRadius: 4,
-    baseUnit: 4,
-    controlHeight: 38,
-    // menuGutter: baseUnit * 2
-  });
   return (
     <div className="container">
       <h2> Update Flight page</h2>
-      <Select
-        // theme={theme}
-        name="outlined-From"
-        options={options}
-        value={fromValue}
-        onChange={setFromValue}
-        getOptionLabel={(option) => option.name}
-        getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
-        placeholder={"From: " + state.flight.origin_country}
-      />
-      <Select
-        name="outlined-From"
-        options={options}
-        value={toValue}
-        onChange={setToValue}
-        getOptionLabel={(option) => option.name}
-        getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
-        placeholder={"From: " + state.flight.destination_country}
-      />
-
+      <div class="float-container">
+        <div style={{ width: "300px" }}>
+          <Select
+            name="outlined-From"
+            options={options}
+            value={fromValue}
+            onChange={setFromValue}
+            getOptionLabel={(option) => option.name}
+            getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
+            placeholder={"From: " + state.flight.origin_country}
+          />
+        </div>
+        <div style={{ width: "300px" }}>
+          <Select
+            name="outlined-From"
+            options={options}
+            value={toValue}
+            onChange={setToValue}
+            getOptionLabel={(option) => option.name}
+            getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
+            placeholder={"From: " + state.flight.destination_country}
+          />
+        </div>
+      </div>
       <DateTimePicker
         id="outlined-basic"
         label={"Departure time: " + state.flight.departure_time}
@@ -118,6 +115,11 @@ export default function UpdateFlightForm() {
         label={"Landing time: " + state.flight.landing_time}
         variant="outlined"
         onChange={setLanTime}
+      />
+      <input
+        type="number"
+        placeholder={"Remaining tickets: " + state.flight.remaining_tickets}
+        onChange={(e) => handleRemainingTickets(e)}
       />
       <Button variant="contained" className="Button" onClick={handleClick}>
         Update Flight

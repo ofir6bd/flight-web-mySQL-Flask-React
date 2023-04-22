@@ -18,7 +18,6 @@ export default function ChooseFlightForm() {
 
   const handleClick = () => {
     console.log("value is: ", value);
-
     navigate("/updateFlight", { state: { flight: value } });
   };
 

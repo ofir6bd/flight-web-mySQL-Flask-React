@@ -65,9 +65,13 @@ class AirlineFacade(FacadeBase):
                         flight_id = all_flights_countries[i][0].id
                         departure_time = all_flights_countries[i][0].departure_time
                         landing_time = all_flights_countries[i][0].landing_time
+                        remaining_tickets = all_flights_countries[i][0].remaining_tickets
+                        origin_country_id = all_flights_countries[i][0].origin_country_id
                         origin_country = all_flights_countries[i][1].name
+                        destination_country_id = all_flights_countries[i][0].destination_country_id
                         destination_country = all_flights_countries[i][2].name
-                        temp = {"flight_id": flight_id,"departure_time": departure_time,"landing_time": landing_time, "origin_country":origin_country,"destination_country":destination_country }
+                        
+                        temp = {"flight_id": flight_id,"departure_time": departure_time,"landing_time": landing_time, "remaining_tickets":remaining_tickets,"origin_country_id":origin_country_id, "origin_country":origin_country,"destination_country_id":destination_country_id,"destination_country":destination_country }
                         lst.append(temp)
             return jsonify(lst)    
         return flights
