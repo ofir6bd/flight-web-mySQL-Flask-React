@@ -30,9 +30,6 @@ export default function AddFlightForm() {
   const handleClick = () => {
     var departure_time = DateFormat(depTime);
     var landing_time = DateFormat(lanTime);
-    console.log(departure_time);
-    console.log(landing_time);
-
     apiAddFlight(
       fromValue.id,
       toValue.id,
@@ -94,7 +91,7 @@ export default function AddFlightForm() {
         label={"Departure time: "}
         variant="outlined"
         onChange={setDepTime}
-        is24Hour
+        // is24Hour
       />
       <DateTimePicker
         id="outlined-Landing"

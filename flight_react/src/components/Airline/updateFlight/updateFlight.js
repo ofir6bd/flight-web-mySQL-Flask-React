@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 import { DateTimePicker } from "@mui/x-date-pickers";
 import { apiGetAllFCountries } from "../../../apiHandler/apiHandler";
 import Select from "react-select";
-// import NumberField from "react-number-field";
+import DateFormat from "../../../dateFormat";
 
 export default function UpdateFlightForm() {
   let navigate = useNavigate();
@@ -36,7 +36,6 @@ export default function UpdateFlightForm() {
 
   const handleClick = () => {
     console.log("start update Flight handleClick");
-    console.log(remainingTickets);
     if (fromValue) {
       state.flight.origin_country_id = fromValue.id;
     }
@@ -44,13 +43,16 @@ export default function UpdateFlightForm() {
       state.flight.destination_country_id = toValue.id;
     }
     if (depTime) {
-      // state.flight.origin_country_id = depTime.id;
+      state.flight.departure_time = DateFormat(depTime);
+    } else {
+      state.flight.departure_time = "";
     }
     if (lanTime) {
-      // state.flight.destination_country_id = toValue.id;
+      state.flight.landing_time = DateFormat(lanTime);
+    } else {
+      state.flight.landing_time = "";
     }
 
-    // console.log("remainingTiddddckets" + remainingTickets);
     apiUpdateFlight(state.flight)
       .then((response) => {
         if (response.success) {

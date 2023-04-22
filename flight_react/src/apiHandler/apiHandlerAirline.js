@@ -79,21 +79,8 @@ export function apiUpdateAirline(name) {
   return response;
 }
 
-// export function apiGetFlightDetails() {
-//   console.log("start api apiGetFlightDetails");
-//   const requestOptions = { method: "GET" };
-//   var url =
-//     "http://127.0.0.1:5000/API/airline/get_airline_details/?email=" +
-//     localStorage.getItem("globalVarEmail") +
-//     "&password=" +
-//     localStorage.getItem("globalVarPassword");
-//   var response = fetch(url, requestOptions).then((response) => response.json());
-//   return response;
-// }
-
 export function apiUpdateFlight(flight) {
   console.log("start api apiUpdateFlight");
-  // console.log(flight);
   const requestOptions = { method: "PUT" };
   var url =
     "http://127.0.0.1:5000/API/airline/update_flight/" +
@@ -107,9 +94,9 @@ export function apiUpdateFlight(flight) {
     "&destination_country_id=" +
     flight.destination_country_id +
     "&departure_time=" +
-    // flight.departure_time +
+    flight.departure_time +
     "&landing_time=" +
-    // flight.landing_time +
+    flight.landing_time +
     "&remaining_tickets=" +
     flight.remaining_tickets;
 

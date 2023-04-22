@@ -10,6 +10,7 @@ import { useLocation } from "react-router-dom";
 import Select from "react-select";
 import Messages from "../../messages";
 import { DateTimePicker } from "@mui/x-date-pickers";
+import DateFormat from "../../dateFormat";
 
 function SearchFlight() {
   let navigate = useNavigate();
@@ -42,6 +43,12 @@ function SearchFlight() {
     if (toValue) {
       to = toValue.id;
     }
+    if (depTime) {
+      departure_time = DateFormat(depTime);
+    }
+    if (lanTime) {
+      landing_time = DateFormat(lanTime);
+    }
 
     apiGetFlightsByParameters(from, to, departure_time, landing_time).then(
       (response) => {
@@ -66,32 +73,38 @@ function SearchFlight() {
       {/* <Messages/> */}
       <h2> Search flight </h2>
       <div className="container">
-        <Select
-          name="From"
-          options={options}
-          value={fromValue}
-          onChange={setFromValue}
-          getOptionLabel={(option) => option.name}
-          getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
-          placeholder="From:"
-        />
-        <Select
-          name="To"
-          options={options}
-          value={toValue}
-          onChange={setToValue}
-          getOptionLabel={(option) => option.name}
-          getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
-          placeholder="To:"
-        />
+        <div style={{ width: "300px" }}>
+          <Select
+            name="From"
+            options={options}
+            value={fromValue}
+            onChange={setFromValue}
+            getOptionLabel={(option) => option.name}
+            getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
+            placeholder="From:"
+          />
+        </div>
+        <div style={{ width: "300px" }}>
+          <Select
+            name="To"
+            options={options}
+            value={toValue}
+            onChange={setToValue}
+            getOptionLabel={(option) => option.name}
+            getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
+            placeholder="To:"
+          />
+        </div>
         <DateTimePicker
           id="outlined-basic"
-          label={"Departure time" }
+          value={depTime}
+          label={"Departure time"}
           variant="outlined"
           onChange={setDepTime}
         />
         <DateTimePicker
           id="outlined-basic"
+          value={lanTime}
           label={"Landing time"}
           variant="outlined"
           onChange={setLanTime}
