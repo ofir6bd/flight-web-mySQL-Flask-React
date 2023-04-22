@@ -49,7 +49,9 @@ export default function ChooseFlightForm() {
           ", Departure Time: " +
           option.departure_time +
           ", Landing Time: " +
-          option.landing_time
+          option.landing_time +
+          ", Remaining tickets: " +
+          option.remaining_tickets
         }
         getOptionValue={(option) => option.flight_id} // It should be unique value in the options. E.g. ID
       />

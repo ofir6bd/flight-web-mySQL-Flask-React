@@ -6,6 +6,7 @@ export function apiAddFlight(
   remaining_tickets
 ) {
   console.log("start api apiAddFlight");
+  console.log(remaining_tickets);
   const requestOptions = { method: "POST" };
   var url =
     "http://127.0.0.1:5000/API/airline/add_flight?email=" +

@@ -21,8 +21,6 @@ export default function UpdateFlightForm() {
   const [value, setValue] = useState("");
 
   const [name, setName] = useState("");
-  // const [options, setOptions] = React.useState([]);
-
   const handle = (event) => {
     setName(event.target.value);
   };
@@ -51,11 +49,8 @@ export default function UpdateFlightForm() {
     if (lanTime) {
       // state.flight.destination_country_id = toValue.id;
     }
-    // if (remainingTickets) {
-    //   console.log("remainingTickets" + remainingTickets);
-    //   state.flight.remainingTickets = remainingTickets;
-    // }
-    console.log("remainingTiddddckets" + remainingTickets);
+
+    // console.log("remainingTiddddckets" + remainingTickets);
     apiUpdateFlight(state.flight)
       .then((response) => {
         if (response.success) {
@@ -94,7 +89,7 @@ export default function UpdateFlightForm() {
         </div>
         <div style={{ width: "300px" }}>
           <Select
-            name="outlined-From"
+            name="outlined-to"
             options={options}
             value={toValue}
             onChange={setToValue}
@@ -105,18 +100,23 @@ export default function UpdateFlightForm() {
         </div>
       </div>
       <DateTimePicker
-        id="outlined-basic"
+        id="outlined-Departure"
+        value={depTime}
         label={"Departure time: " + state.flight.departure_time}
         variant="outlined"
         onChange={setDepTime}
       />
       <DateTimePicker
-        id="outlined-basic"
+        id="outlined-Landing"
+        value={lanTime}
         label={"Landing time: " + state.flight.landing_time}
         variant="outlined"
         onChange={setLanTime}
       />
-      <input
+      <TextField
+        inputProps={{
+          min: "0",
+        }}
         type="number"
         placeholder={"Remaining tickets: " + state.flight.remaining_tickets}
         onChange={(e) => handleRemainingTickets(e)}

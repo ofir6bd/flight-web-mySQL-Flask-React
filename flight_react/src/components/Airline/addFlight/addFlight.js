@@ -1,77 +1,129 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { apiAddFlight } from "../../../apiHandler/apiHandlerAirline";
-// import "./login.css";
-// import { UseAuth } from "../useAuth/useAuth";
+import { apiGetAllFCountries } from "../../../apiHandler/apiHandler";
+import { DateTimePicker } from "@mui/x-date-pickers";
+import Select from "react-select";
+import DateFormat from "../../../dateFormat";
+import { useNavigate } from "react-router";
 
 export default function AddFlightForm() {
-  const [originCountryID, setOriginCountryID] = useState("");
-  const [destinationCountryID, setDestinationCountryID] = useState("");
-  const [departureTime, setDepartureTime] = useState("");
-  const [landingTime, setLandingTime] = useState("");
+  let navigate = useNavigate();
+  const [fromValue, setFromValue] = useState(null);
+  const [toValue, setToValue] = useState(null);
+  const [depTime, setDepTime] = useState(null);
+  const [lanTime, setLanTime] = useState(null);
   const [remainingTickets, setRemainingTickets] = useState("");
+  const [options, setOptions] = React.useState([]);
 
-  const handleOriginCountryID = (event) => {
-    setOriginCountryID(event.target.value);
+  useEffect(() => {
+    function fetchData() {
+      apiGetAllFCountries().then((response) => {
+        setOptions(response);
+        // console.log(response);
+      });
+    }
+    fetchData();
+  }, []);
+
+  const handleClick = () => {
+    var departure_time = DateFormat(depTime);
+    var landing_time = DateFormat(lanTime);
+    console.log(departure_time);
+    console.log(landing_time);
+
+    apiAddFlight(
+      fromValue.id,
+      toValue.id,
+      departure_time,
+      landing_time,
+      remainingTickets
+    )
+      .then((response) => {
+        if (response.success) {
+          console.log(response);
+          localStorage.setItem("globalVarMessage", response.success);
+          localStorage.setItem("globalVarMessageType", "success");
+        } else {
+          console.log(response);
+          localStorage.setItem("globalVarMessage", JSON.stringify(response));
+          localStorage.setItem("globalVarMessageType", "error");
+        }
+      })
+      .then(() => {
+        navigate("/airlinePage");
+      });
   };
-  const handleDestinationCountryID = (event) => {
-    setDestinationCountryID(event.target.value);
-  };
-  const handleDepartureTime = (event) => {
-    setDepartureTime(event.target.value);
-  };
-  const handleLandingTime = (event) => {
-    setLandingTime(event.target.value);
-  };
+
   const handleRemainingTickets = (event) => {
-    setRemainingTickets(event.target.value);
+    const result = event.target.value.replace(/\D/g, "");
+    setRemainingTickets(result);
   };
+
   return (
     <div className="container">
       <h2> Add Flight page</h2>
-      <TextField
-        id="outlined-basic"
-        label="Origin Country:"
+      <div class="float-container">
+        <div style={{ width: "300px" }}>
+          <Select
+            name="outlined-From"
+            options={options}
+            value={fromValue}
+            onChange={setFromValue}
+            getOptionLabel={(option) => option.name}
+            getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
+            placeholder={"From: "}
+          />
+        </div>
+        <div style={{ width: "300px" }}>
+          <Select
+            name="outlined-to"
+            options={options}
+            value={toValue}
+            onChange={setToValue}
+            getOptionLabel={(option) => option.name}
+            getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
+            placeholder={"From: "}
+          />
+        </div>
+      </div>
+      <DateTimePicker
+        id="outlined-Departure"
+        value={depTime}
+        label={"Departure time: "}
         variant="outlined"
-        onChange={handleOriginCountryID}
+        onChange={setDepTime}
+        is24Hour
+      />
+      <DateTimePicker
+        id="outlined-Landing"
+        value={lanTime}
+        label={"Landing time: "}
+        variant="outlined"
+        onChange={setLanTime}
       />
       <TextField
-        id="outlined-basic"
-        label="Destination Country:"
-        variant="outlined"
-        onChange={handleDestinationCountryID}
-      />
-      <TextField
-        id="outlined-basic"
-        label="Departure time:"
-        variant="outlined"
-        onChange={handleDepartureTime}
-      />
-      <TextField
-        id="outlined-basic"
-        label="Landing time:"
-        variant="outlined"
-        onChange={handleLandingTime}
-      />
-      <TextField
-        id="outlined-basic"
-        label="Remaining tickets:"
-        variant="outlined"
+        inputProps={{
+          min: "0",
+        }}
+        type="number"
+        placeholder={"Remaining tickets: "}
+        value={remainingTickets}
         onChange={handleRemainingTickets}
       />
       <Button
         variant="contained"
         className="Button"
-        onClick={() =>
-          apiAddFlight(
-            originCountryID,
-            destinationCountryID,
-            departureTime,
-            landingTime,
-            remainingTickets
-          ).then((response) => console.log(response))
-        }
+        onClick={handleClick}
+        // apiAddFlight(
+        //   originCountryID,
+        //   destinationCountryID,
+        //   departureTime,
+        //   landingTime,
+        //   remainingTickets
+        // ).then((response) => console.log(response))
+        // }
       >
         Add Flight
       </Button>
