@@ -7,9 +7,10 @@
 
 export function apiGetAllCountries() {
   console.log("start api apiGetAllCountries");
+  const requestOptions = { method: "GET" };
   var url = "http://127.0.0.1:5000/API/countries";
-  var flights = fetch(url).then((response) => response.json());
-  return flights;
+  var response = fetch(url, requestOptions).then((response) => response.json());
+  return response;
 }
 
 export function apiGetFlightsByParameters(

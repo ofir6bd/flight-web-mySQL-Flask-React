@@ -43,8 +43,6 @@ def api_delete_my_flight(flight_id):
             flight = fac_obj.get_flight_by_id()
             print(type(flight))
             if flight:
-                print(flight)
-                print(session['airline_id'])
                 if flight.airline_company_id == session['airline_id']:
                     res = fac_obj.remove_flight()
                     if res:
