@@ -19,6 +19,10 @@ const setUserIdGlobalStorage = (userID) => {
   localStorage.setItem("globalVarUserId", userID.toString());
   console.log(localStorage.getItem("globalVarUserId"));
 };
+const setUserRoleIdGlobalStorage = (userRole) => {
+  localStorage.setItem("globalVarUserRole", userRole.toString());
+  console.log(localStorage.getItem("globalVarUserRole"));
+};
 
 const setCustomerIdGlobalStorage = (customerID) => {
   localStorage.setItem("globalVarCustomerId", customerID.toString());
@@ -68,10 +72,11 @@ export function auth(email, password) {
   apiCheckLogin(email, password)
     .then((response) => {
       if (response.user_id) {
-        // console.log(response.user_id);
+        console.log("response",response);
         setEmailGlobalStorage(email);
         setPasswordGlobalStorage(password);
         setUserIdGlobalStorage(response.user_id);
+        setUserRoleIdGlobalStorage(response.user_role);
         checkIfUserCustomer(email, password, response.user_id);
         checkIfUserAdmin(email, password, response.user_id);
         checkIfUserAirline(email, password, response.user_id);

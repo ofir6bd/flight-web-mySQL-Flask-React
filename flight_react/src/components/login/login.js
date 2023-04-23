@@ -19,6 +19,16 @@ function Login() {
         navigate("/adminPage");
       } else if (localStorage.getItem("globalVarAirlineId")) {
         navigate("/airlinePage");
+      } else if (
+        localStorage.getItem("globalVarUserId") &&
+        localStorage.getItem("globalVarUserRole") == 3
+      ) {
+        navigate("/registerAsCustomer");
+      } else if (
+        localStorage.getItem("globalVarUserId") &&
+        localStorage.getItem("globalVarUserRole") == 2
+      ) {
+        navigate("/registerAsAirline");
       } else {
         localStorage.setItem(
           "globalVarMessage",

@@ -62,6 +62,23 @@ const Navbar = () => {
               Update Flight
             </NavLink>
           </NavMenu>
+        ) : localStorage.getItem("globalVarUserId") &&
+          localStorage.getItem("globalVarUserRole") == 3 ? (
+          <NavMenu>
+            <NavLink to="/registerAsCustomer" activeStyle>
+              Register as Customer
+            </NavLink>
+          </NavMenu>
+          ) : localStorage.getItem("globalVarUserId") &&
+          localStorage.getItem("globalVarUserRole") == 2 ? (
+          <NavMenu>
+            <NavLink to="/" activeStyle>
+              Search Flights
+            </NavLink>
+            <NavLink to="/registerAsAirline" activeStyle>
+              Register as Airline
+            </NavLink>
+          </NavMenu>
         ) : (
           <NavMenu>
             <NavLink to="/" activeStyle>

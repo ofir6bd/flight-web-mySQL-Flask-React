@@ -80,7 +80,7 @@ def api_check_login():
     fac_obj = AnonymousFacade(email=email)
     user = fac_obj.get_user_by_email()
     if check_password_hash(user.password, password):
-        return jsonify({ 'success': 'email and password are correct', 'user_id': user.id})
+        return jsonify({ 'success': 'email and password are correct', 'user_id': user.id,'user_role': user.user_role})
     else:
         return jsonify({ 'error': 'one of the parameters are wrong'})
     
@@ -169,7 +169,7 @@ def api_register_as_customer():
             if res: 
                 return jsonify({ 'success': 'Customer added'}) 
             else:
-                return jsonify({ 'error': 'error_occured'})
+                return jsonify({ 'error': 'phone number or credit card number already exists in the database'})
         else:
             return jsonify({ 'error': 'one of more parameters are missing'})
         

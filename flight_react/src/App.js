@@ -27,6 +27,8 @@ import UpdateCustomerForm from "./components/Customer/updateCustomer/updateCusto
 import UpdateAirlineForm from "./components/Airline/updateAirline/updateAirline";
 import UpdateFlightForm from "./components/Airline/updateFlight/updateFlight";
 import ChooseFlightForm from "./components/Airline/chooseFlight/chooseFlight";
+import RegisterAsCustomerForm from "./components/registerAsCustomer/registerAsCustomer";
+import RegisterAsAirlineForm from "./components/registerAsAirline/registerAsAirline";
 
 function App() {
   let navigate = useNavigate();
@@ -62,6 +64,11 @@ function App() {
           <Route path="updateAirline" element={<UpdateAirlineForm />} />
           <Route path="chooseFlight" element={<ChooseFlightForm />} />
           <Route path="updateFlight" element={<UpdateFlightForm />} />
+          <Route
+            path="registerAsCustomer"
+            element={<RegisterAsCustomerForm />}
+          />
+          <Route path="registerAsAirline" element={<RegisterAsAirlineForm />} />
         </Routes>
       </LocalizationProvider>
     </div>
