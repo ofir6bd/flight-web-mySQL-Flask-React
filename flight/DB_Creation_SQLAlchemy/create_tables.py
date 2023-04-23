@@ -152,7 +152,7 @@ users_list = [['admin1234','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJ
                                 ['ofir_user_only','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','ofir_user_only@gmail.com',3],
                                 ['user_pre_admin','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','admin123467@gmail.com',1]]
 administrators_list = [['Ofir8','Ben David8', 1 ],['Kobe','Bryant', 6 ]]
-customers_list = [['Ofir','Ben David','Atlit',"972548105702", "5465877654767643", 3],['Ofir66','Ben David66','Atlit66',"97254810570266", "5465877666767643", 4],['Ofir_cus','Ben Davidd','Atlitt',"972548105703", "5465877634767643", 11]]
+customers_list = [['Ofir','Ben David','Atlit',"0548105444", "5465877654767643", 3],['Ofir66','Ben David66','Atlit66',"0548105999", "5465877666767643", 4],['Ofir_cus','Ben Davidd','Atlitt',"0548105666", "5465877634767643", 11]]
 countries_list = ['Israel', 'Marocco', 'USA', 'Lebanon']
 airlines_list = [['El-Al', 1, 7], ['Ryanair',2,8], ['Lufthansa',3,9], ['United_airlines',4,10]]
 flights_list = [[1,1,2,2023,3,11,3,50,2023,3,12,4,30,100],[1,1,2,2023,4,11,3,50,2023,4,14,4,30,100],[1,1,3,2023,3,12,3,50,2023,3,13,4,30,100],[2,2,3,2023,4,21,5,45,2023,4,22,4,30,100]]

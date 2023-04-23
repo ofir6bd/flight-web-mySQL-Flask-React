@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { apiAddFlight } from "../../../apiHandler/apiHandlerAirline";
-import { apiGetAllFCountries } from "../../../apiHandler/apiHandler";
+import { apiGetAllCountries } from "../../../apiHandler/apiHandler";
 import { DateTimePicker } from "@mui/x-date-pickers";
 import Select from "react-select";
 import DateFormat from "../../../dateFormat";
@@ -19,7 +19,7 @@ export default function AddFlightForm() {
 
   useEffect(() => {
     function fetchData() {
-      apiGetAllFCountries().then((response) => {
+      apiGetAllCountries().then((response) => {
         setOptions(response);
         // console.log(response);
       });

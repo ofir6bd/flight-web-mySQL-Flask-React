@@ -233,6 +233,7 @@ app.add_url_rule('/API/customer/get_customer_details/', view_func=api_get_custom
 
 # Admin API
 app.add_url_rule('/API/admin/get_all_customers/', view_func=api_get_all_customers, methods=["GET"], strict_slashes=False)
+app.add_url_rule('/API/admin/get_all_pre_customers/', view_func=api_get_all_pre_customers, methods=["GET"], strict_slashes=False)
 app.add_url_rule('/API/admin/get_all_admins/', view_func=api_get_all_admins, methods=["GET"], strict_slashes=False)
 app.add_url_rule('/API/admin/delete_customer/<int:customer_id>/', view_func=api_delete_customer, methods=["DELETE"], strict_slashes=False)
 app.add_url_rule('/API/admin/delete_airline/<int:airline_id>/', view_func=api_delete_airline, methods=["DELETE"], strict_slashes=False)

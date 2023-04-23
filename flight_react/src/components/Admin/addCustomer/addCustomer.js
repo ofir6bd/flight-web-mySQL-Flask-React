@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 // import "./login.css";
 // import { UseAuth } from "../useAuth/useAuth";
 import { apiAddCustomer } from "../../../apiHandler/apiHandlerAdmin";
 import { useNavigate } from "react-router";
+import { apiGetAllUsersPreCustomer } from "../../../apiHandler/apiHandlerAdmin";
+import Select from "react-select";
 
 export default function AddCustomerForm() {
   let navigate = useNavigate();
-
+  const [options, setOptions] = React.useState([]);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
@@ -31,12 +33,19 @@ export default function AddCustomerForm() {
   const handleCreditCardNo = (event) => {
     setCreditCardNo(event.target.value);
   };
-  const handleUserID = (event) => {
-    setUserID(event.target.value);
-  };
 
+  useEffect(() => {
+    function fetchData() {
+      apiGetAllUsersPreCustomer().then((response) => {
+        setOptions(response);
+        // console.log(response);
+      });
+    }
+    fetchData();
+  }, []);
   const handleClick = () => {
     console.log("start add customer handleClick");
+
     apiAddCustomer(firstName, lastName, address, phoneNo, creditCardNo, userID)
       .then((response) => {
         if (response.success) {
@@ -86,27 +95,25 @@ export default function AddCustomerForm() {
         variant="outlined"
         onChange={handleCreditCardNo}
       />
-      <TextField
-        id="outlined-basic"
-        label="User ID:"
-        variant="outlined"
-        onChange={handleUserID}
-      />
-      <Button
-        variant="contained"
-        className="Button"
-        onClick={handleClick}
-        // onClick={() =>
-        //   apiAddCustomer(
-        //     firstName,
-        //     lastName,
-        //     address,
-        //     phoneNo,
-        //     creditCardNo,
-        //     userID
-        //   ).then((response) => console.log(response))
-        // }
-      >
+      <div style={{ width: "800px" }}>
+        <Select
+          name="From"
+          options={options}
+          value={userID.id}
+          onChange={setUserID}
+          getOptionLabel={(option) =>
+            "ID: " +
+            option.id +
+            ", Username: " +
+            option.username +
+            ", Email: " +
+            option.email
+          }
+          getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
+          placeholder="Connect to user:"
+        />
+      </div>
+      <Button variant="contained" className="Button" onClick={handleClick}>
         Add Customer
       </Button>
     </div>

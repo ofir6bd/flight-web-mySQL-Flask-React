@@ -5,7 +5,7 @@ import { apiUpdateFlight } from "../../../apiHandler/apiHandlerAirline";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
 import { DateTimePicker } from "@mui/x-date-pickers";
-import { apiGetAllFCountries } from "../../../apiHandler/apiHandler";
+import { apiGetAllCountries } from "../../../apiHandler/apiHandler";
 import Select from "react-select";
 import DateFormat from "../../../dateFormat";
 
@@ -26,7 +26,7 @@ export default function UpdateFlightForm() {
   };
   useEffect(() => {
     function fetchData() {
-      apiGetAllFCountries().then((response) => {
+      apiGetAllCountries().then((response) => {
         setOptions(response);
         // console.log(response);
       });

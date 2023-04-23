@@ -28,8 +28,7 @@ class Users(db.Model,UserMixin):
         return f'<Table: "Users", id:"{self.id}", username:"{self.username}", password:"{self.password}", email:"{self.email}", user_role:"{self.user_role}">'
     
     def toJson(self):
-        return {'Table':'Users','id': self.id, 'username': self.username,'password': self.password, 'email': self.email,'user_role': self.user_role,\
-                'summery': "ID: " + str(self.id) + " username: " + self.username + " email: " + self.email + " user_role: " + self.user_role }
+        return {'Table':'Users','id': self.id, 'username': self.username,'password': self.password, 'email': self.email,'user_role': self.user_role}
 
 class Administrators(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)

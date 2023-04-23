@@ -5,8 +5,8 @@
 //   return flights;
 // }
 
-export function apiGetAllFCountries() {
-  console.log("start api apiGetAllFCountries");
+export function apiGetAllCountries() {
+  console.log("start api apiGetAllCountries");
   var url = "http://127.0.0.1:5000/API/countries";
   var flights = fetch(url).then((response) => response.json());
   return flights;

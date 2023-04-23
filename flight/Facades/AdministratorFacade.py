@@ -13,7 +13,6 @@ class AdministratorFacade(FacadeBase):
         dal_obj = DataLayer()
         return dal_obj.insert_obj(new_airline)
 
-
     def add_customer(self):
         new_customer = Customers(first_name=self.first_name,last_name=self.last_name,address=self.address,phone_no=self.phone_no,credit_card_no=self.credit_card_no,user_id=int(self.user_id))
         dal_obj = DataLayer()
@@ -38,3 +37,18 @@ class AdministratorFacade(FacadeBase):
         dal_obj = DataLayer(id=self.id,table1=Administrators)
         admin = dal_obj.get_by_id()
         return dal_obj.delete_obj(admin)
+    
+    def get_all_users_pre_customer(self):
+        dal_obj = DataLayer(id=self.id,table1=Customers)
+        customers = dal_obj.get_all()
+        dal_obj = DataLayer(id=self.id,table1=Users,input_attribute='user_role', input_value=int(3))
+        users = dal_obj.get_all_by_filter()
+        
+        if self.api:
+            for i in reversed(range(len(users))):
+                for customer in customers:
+                    if customer.user_id == users[i].id:
+                        users.pop(i)
+                        break
+                          
+            return jsonify([user.toJson() for user in users])

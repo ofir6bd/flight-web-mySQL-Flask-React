@@ -88,7 +88,7 @@ def api_add_flight():
                 else:
                     return jsonify({ 'error': 'Duplication error in DB'})
             else:
-                return jsonify({ 'error': 'one of more parameters are missing'})
+                return jsonify({ 'error': 'one or more parameters are missing'})
         else:
             return jsonify({ 'error': 'you do not have airline permissions'})  
         
@@ -178,3 +178,4 @@ def api_get_airline_details():
                 return jsonify({ 'error': 'error'})
         else:
             return jsonify({ 'error': 'you do not have airline permissions'})  
+        

@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import { DateField } from "@mui/x-date-pickers/DateField";
 import "./SearchFlight.css";
 import { Button } from "@mui/material";
-import { apiGetAllFCountries } from "../../apiHandler/apiHandler";
+import { apiGetAllCountries } from "../../apiHandler/apiHandler";
 import { apiGetFlightsByParameters } from "../../apiHandler/apiHandler";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
@@ -23,7 +23,7 @@ function SearchFlight() {
 
   useEffect(() => {
     function fetchData() {
-      apiGetAllFCountries().then((response) => {
+      apiGetAllCountries().then((response) => {
         setOptions(response);
         // console.log(response);
       });

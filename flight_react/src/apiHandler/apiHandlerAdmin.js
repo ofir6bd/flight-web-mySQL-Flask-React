@@ -120,3 +120,15 @@ export function apiRemoveAdmin(customer_id) {
   var response = fetch(url, requestOptions).then((response) => response.json());
   return response;
 }
+
+export function apiGetAllUsersPreCustomer() {
+  console.log("start api apiGetAllUsersPreCustomer");
+  const requestOptions = { method: "GET" };
+  var url =
+    "http://127.0.0.1:5000/API/admin/get_all_pre_customers/?email=" +
+    localStorage.getItem("globalVarEmail") +
+    "&password=" +
+    localStorage.getItem("globalVarPassword");
+  var response = fetch(url, requestOptions).then((response) => response.json());
+  return response;
+}

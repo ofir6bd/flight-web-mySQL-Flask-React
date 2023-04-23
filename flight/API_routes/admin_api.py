@@ -123,7 +123,7 @@ def api_add_admin():
                 else:
                     return jsonify({ 'error': 'an admin already exists with that user id'})
             else:
-                return jsonify({ 'error': 'one of more parameters are missing'})
+                return jsonify({ 'error': 'one or more parameters are missing'})
         else:
             return jsonify({ 'error': 'you do not have admin permissions'})  
         
@@ -153,7 +153,7 @@ def api_add_customer():
                 else:
                     return jsonify({ 'error': 'duplication error in DB'})
             else:
-                return jsonify({ 'error': 'one of more parameters are missing'})
+                return jsonify({ 'error': 'one or more parameters are missing'})
         else:
             return jsonify({ 'error': 'you do not have admin permissions'})  
         
@@ -178,6 +178,23 @@ def api_add_airline():
                 else:
                     return jsonify({ 'error': 'error occured'})
             else:
-                return jsonify({ 'error': 'one of more parameters are missing'})
+                return jsonify({ 'error': 'one or more parameters are missing'})
         else:
             return jsonify({ 'error': 'you do not have admin permissions'})  
+        
+        
+@require_api_auth
+def api_get_all_pre_customers():
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:
+        if session['user_role'] == 'admin':  
+            fac_obj = AdministratorFacade(api=True)
+            res = fac_obj.get_all_users_pre_customer()
+            if res: 
+                return res 
+            else:
+                return jsonify({ 'empty': 'empty list'})
+        else:
+            return jsonify({ 'error': 'you do not have admin permissions'})  
+        
