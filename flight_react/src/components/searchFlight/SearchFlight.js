@@ -21,7 +21,6 @@ function SearchFlight() {
     function fetchData() {
       apiGetAllCountries().then((response) => {
         setOptions(response);
-        // console.log(response);
       });
     }
     fetchData();
@@ -69,28 +68,32 @@ function SearchFlight() {
       {/* <Messages/> */}
       <h2> Search flight </h2>
       <h4>The best flight deals to everywhere, from anywhere</h4>
-      <div className="container">
-        <div style={{ width: "300px" }}>
-          <Select
-            name="From"
-            options={options}
-            value={fromValue}
-            onChange={setFromValue}
-            getOptionLabel={(option) => option.name}
-            getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
-            placeholder="From:"
-          />
+      <div className="container-all">
+        <div className="container-select-first">
+          <div style={{ width: "300px" }}>
+            <Select
+              name="From"
+              options={options}
+              value={fromValue}
+              onChange={setFromValue}
+              getOptionLabel={(option) => option.name}
+              getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
+              placeholder="From:"
+            />
+          </div>
         </div>
-        <div style={{ width: "300px" }}>
-          <Select
-            name="To"
-            options={options}
-            value={toValue}
-            onChange={setToValue}
-            getOptionLabel={(option) => option.name}
-            getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
-            placeholder="To:"
-          />
+        <div className="container-select-second">
+          <div style={{ width: "300px" }}>
+            <Select
+              name="To"
+              options={options}
+              value={toValue}
+              onChange={setToValue}
+              getOptionLabel={(option) => option.name}
+              getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
+              placeholder="To:"
+            />
+          </div>
         </div>
         <DateTimePicker
           id="outlined-basic"

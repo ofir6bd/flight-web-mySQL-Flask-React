@@ -81,7 +81,7 @@ export default function AddFlightForm() {
             onChange={setToValue}
             getOptionLabel={(option) => option.name}
             getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
-            placeholder={"From: "}
+            placeholder={"To: "}
           />
         </div>
       </div>

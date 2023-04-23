@@ -14,3 +14,12 @@
 .messageContainerWarning {
     background-color: orange;
 }
+
+.container-select-first {
+    background-color: aqua;
+    margin: auto 80% auto 5% ;
+}
+.container-select-second {
+    background-color: aqua;
+    margin: auto 80% auto 20%;
+}
