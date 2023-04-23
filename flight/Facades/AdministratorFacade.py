@@ -52,3 +52,33 @@ class AdministratorFacade(FacadeBase):
                         break
                           
             return jsonify([user.toJson() for user in users])
+
+    def get_all_users_pre_admin(self):
+        dal_obj = DataLayer(id=self.id,table1=Administrators)
+        admins = dal_obj.get_all()
+        dal_obj = DataLayer(id=self.id,table1=Users,input_attribute='user_role', input_value=int(1))
+        users = dal_obj.get_all_by_filter()
+        
+        if self.api:
+            for i in reversed(range(len(users))):
+                for admin in admins:
+                    if admin.user_id == users[i].id:
+                        users.pop(i)
+                        break
+                          
+            return jsonify([user.toJson() for user in users])
+
+    def get_all_users_pre_airline(self):
+        dal_obj = DataLayer(id=self.id,table1=AirlineCompanies)
+        airlines = dal_obj.get_all()
+        dal_obj = DataLayer(id=self.id,table1=Users,input_attribute='user_role', input_value=int(2))
+        users = dal_obj.get_all_by_filter()
+        
+        if self.api:
+            for i in reversed(range(len(users))):
+                for airline in airlines:
+                    if airline.user_id == users[i].id:
+                        users.pop(i)
+                        break
+                          
+            return jsonify([user.toJson() for user in users])

@@ -43,10 +43,14 @@ export default function AddCustomerForm() {
     }
     fetchData();
   }, []);
+  
   const handleClick = () => {
     console.log("start add customer handleClick");
-
-    apiAddCustomer(firstName, lastName, address, phoneNo, creditCardNo, userID)
+    var user_id = "";
+    if (userID) {
+      user_id = userID.id;
+    }
+    apiAddCustomer(firstName, lastName, address, phoneNo, creditCardNo, user_id)
       .then((response) => {
         if (response.success) {
           console.log(response);
@@ -97,9 +101,9 @@ export default function AddCustomerForm() {
       />
       <div style={{ width: "800px" }}>
         <Select
-          name="From"
+          name="user_id"
           options={options}
-          value={userID.id}
+          value={userID}
           onChange={setUserID}
           getOptionLabel={(option) =>
             "ID: " +

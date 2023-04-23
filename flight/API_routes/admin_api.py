@@ -198,3 +198,35 @@ def api_get_all_pre_customers():
         else:
             return jsonify({ 'error': 'you do not have admin permissions'})  
         
+
+@require_api_auth
+def api_get_all_pre_admin():
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:
+        if session['user_role'] == 'admin':  
+            fac_obj = AdministratorFacade(api=True)
+            res = fac_obj.get_all_users_pre_admin()
+            if res: 
+                return res 
+            else:
+                return jsonify({ 'empty': 'empty list'})
+        else:
+            return jsonify({ 'error': 'you do not have admin permissions'})  
+        
+
+@require_api_auth
+def api_get_all_pre_airline():
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:
+        if session['user_role'] == 'admin':  
+            fac_obj = AdministratorFacade(api=True)
+            res = fac_obj.get_all_users_pre_airline()
+            if res: 
+                return res 
+            else:
+                return jsonify({ 'empty': 'empty list'})
+        else:
+            return jsonify({ 'error': 'you do not have admin permissions'})  
+        

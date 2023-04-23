@@ -132,3 +132,27 @@ export function apiGetAllUsersPreCustomer() {
   var response = fetch(url, requestOptions).then((response) => response.json());
   return response;
 }
+
+export function apiGetAllUsersPreAdmin() {
+  console.log("start api apiGetAllUsersPreAdmin");
+  const requestOptions = { method: "GET" };
+  var url =
+    "http://127.0.0.1:5000/API/admin/get_all_pre_admin/?email=" +
+    localStorage.getItem("globalVarEmail") +
+    "&password=" +
+    localStorage.getItem("globalVarPassword");
+  var response = fetch(url, requestOptions).then((response) => response.json());
+  return response;
+}
+
+export function apiGetAllUsersPreAirline() {
+  console.log("start api apiGetAllUsersPreAirline");
+  const requestOptions = { method: "GET" };
+  var url =
+    "http://127.0.0.1:5000/API/admin/get_all_pre_airline/?email=" +
+    localStorage.getItem("globalVarEmail") +
+    "&password=" +
+    localStorage.getItem("globalVarPassword");
+  var response = fetch(url, requestOptions).then((response) => response.json());
+  return response;
+}
