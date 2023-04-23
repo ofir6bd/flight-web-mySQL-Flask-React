@@ -173,4 +173,28 @@ def api_register_as_customer():
         else:
             return jsonify({ 'error': 'one of more parameters are missing'})
         
+@require_api_auth
+def api_register_as_airline():
+    if not current_user.is_authenticated:
+        return jsonify({ 'error': 'Email or password are incorrect'})
+    else:    
+        name = request.args.get('name')
+        country_id = request.args.get('country_id')
+        user_id = session['user_id'] 
+
+        if name and country_id and user_id:
+            res = validate_airline(name=name,country_id=country_id,user_id=user_id)
+            if res:
+                return jsonify(res)
+            
+            fac_obj = AdministratorFacade(api=True,name=name,country_id=country_id,user_id=user_id)
+            res = fac_obj.add_airline()
+            if res: 
+                return jsonify({ 'success': 'Airline added'}) 
+            else:
+                return jsonify({ 'error': 'you already registered'})
+        else:
+            return jsonify({ 'error': 'one of more parameters are missing'})
+        
+
 

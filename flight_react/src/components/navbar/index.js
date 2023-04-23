@@ -72,9 +72,6 @@ const Navbar = () => {
           ) : localStorage.getItem("globalVarUserId") &&
           localStorage.getItem("globalVarUserRole") == 2 ? (
           <NavMenu>
-            <NavLink to="/" activeStyle>
-              Search Flights
-            </NavLink>
             <NavLink to="/registerAsAirline" activeStyle>
               Register as Airline
             </NavLink>

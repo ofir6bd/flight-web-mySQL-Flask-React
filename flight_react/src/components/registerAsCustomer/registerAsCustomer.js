@@ -10,8 +10,6 @@ import Messages from "../../messages";
 
 function RegisterAsCustomerForm() {
   let navigate = useNavigate();
-  // const [value, setValue] = React.useState(null);
-  //  const [options, setOptions] = React.useState([]);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
@@ -45,7 +43,7 @@ function RegisterAsCustomerForm() {
       localStorage.getItem("globalVarUserId")
     ).then((response) => {
       if (response.success) {
-        console.log(response);
+        // console.log(response);
         localStorage.setItem("globalVarMessage", response.success);
         localStorage.setItem("globalVarMessageType", "success");
         apiGetCustomerDetails()
@@ -54,12 +52,8 @@ function RegisterAsCustomerForm() {
           })
           .then(() => {
             navigate("/customerPage");
-            // setTimeout(() => {
-
-            // }, 1000);
           });
       } else {
-        console.log(response);
         localStorage.setItem("globalVarMessage", JSON.stringify(response));
         localStorage.setItem("globalVarMessageType", "error");
         navigate("/registerAsCustomer");

@@ -149,8 +149,9 @@ users_list = [['admin1234','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJ
                             ['Lufthansa_company','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','Lufthansa_company@gmail.com',2],\
                         ['United_airlines_company','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','United_airlines_company@gmail.com',2],\
                             ['cus_w_o_ticket','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','cus_w_o_ticket@gmail.com',3],\
-                                ['ofir_user_only','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','ofir_user_only@gmail.com',3],
-                                ['user_pre_admin','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','admin123467@gmail.com',1]]
+                                ['user_pre_customer','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','user_pre_customer@gmail.com',3],
+                                ['user_pre_admin','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','user_pre_admin@gmail.com',1],
+                                ['user_pre_airline','$2b$12$ejViK4qoZ411O1lHXbWefek099yTMIvrFQ.gCWwCHttEJs8aws1N.','user_pre_airline@gmail.com',2]]
 administrators_list = [['Ofir8','Ben David8', 1 ],['Kobe','Bryant', 6 ]]
 customers_list = [['Ofir','Ben David','Atlit',"0548105444", "5465877654767643", 3],['Ofir66','Ben David66','Atlit66',"0548105999", "5465877666767643", 4],['Ofir_cus','Ben Davidd','Atlitt',"0548105666", "5465877634767643", 11]]
 countries_list = ['Israel', 'Marocco', 'USA', 'Lebanon']

@@ -103,3 +103,33 @@ export function apiUpdateFlight(flight) {
   var response = fetch(url, requestOptions).then((response) => response.json());
   return response;
 }
+
+// export function apiGetCustomerDetails() {
+//   console.log("start api apiGetCustomerDetails");
+//   const requestOptions = { method: "GET" };
+//   var url =
+//     "http://127.0.0.1:5000/API/airline/get_airline_details/?email=" +
+//     localStorage.getItem("globalVarEmail") +
+//     "&password=" +
+//     localStorage.getItem("globalVarPassword");
+//   var response = fetch(url, requestOptions).then((response) => response.json());
+//   return response;
+// }
+
+export function apiRegisterAsAirline(name, country_id, user_id) {
+  console.log("start api apiRegisterAsAirline");
+  const requestOptions = { method: "POST" };
+  var url =
+    "http://127.0.0.1:5000/API/register_as_airline?email=" +
+    localStorage.getItem("globalVarEmail") +
+    "&password=" +
+    localStorage.getItem("globalVarPassword") +
+    "&name=" +
+    name +
+    "&country_id=" +
+    country_id +
+    "&user_id=" +
+    user_id;
+  var response = fetch(url, requestOptions).then((response) => response.json());
+  return response;
+}

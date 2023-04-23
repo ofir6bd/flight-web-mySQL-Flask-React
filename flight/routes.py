@@ -221,7 +221,7 @@ app.add_url_rule('/API/check_login/', view_func=api_check_login, methods=["GET"]
 app.add_url_rule('/API/get_admin_by_user_id/', view_func=api_get_admin_by_user_id, methods=["GET"], strict_slashes=False)
 app.add_url_rule('/API/get_customer_by_user_id/', view_func=api_get_customer_by_user_id, methods=["GET"], strict_slashes=False)
 app.add_url_rule('/API/get_airline_by_user_id/', view_func=api_get_airline_by_user_id, methods=["GET"], strict_slashes=False)
-
+app.add_url_rule('/API/register_as_airline/', view_func=api_register_as_airline, methods=["POST"], strict_slashes=False)
 
 # Customer API
 app.add_url_rule('/API/customer/my_tickets', view_func=api_get_my_tickets, methods=["GET"], strict_slashes=False)
