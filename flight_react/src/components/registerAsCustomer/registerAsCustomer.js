@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import {
@@ -15,8 +15,7 @@ function RegisterAsCustomerForm() {
   const [address, setAddress] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
   const [creditCardNo, setCreditCardNo] = useState("");
-  //  const [userID, setUserID] = useState("");
-
+  
   const handleFirstName = (event) => {
     setFirstName(event.target.value);
   };

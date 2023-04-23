@@ -17,13 +17,7 @@ export default function UpdateFlightForm() {
   const [toValue, setToValue] = useState(null);
   const [depTime, setDepTime] = useState(null);
   const [lanTime, setLanTime] = useState(null);
-  const [remainingTickets, setRemainingTickets] = useState("");
-  const [value, setValue] = useState("");
 
-  const [name, setName] = useState("");
-  const handle = (event) => {
-    setName(event.target.value);
-  };
   useEffect(() => {
     function fetchData() {
       apiGetAllCountries().then((response) => {

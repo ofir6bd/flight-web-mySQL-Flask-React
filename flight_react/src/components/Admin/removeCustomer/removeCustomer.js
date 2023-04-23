@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import TextField from "@mui/material/TextField";
+import React, { useEffect } from "react";
+
 import { Button } from "@mui/material";
 import { apiGetAllCustomers } from "../../../apiHandler/apiHandler";
 import { apiRemoveCustomer } from "../../../apiHandler/apiHandlerAdmin";

@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
-import TextField from "@mui/material/TextField";
-import { DateField } from "@mui/x-date-pickers/DateField";
 import "./SearchFlight.css";
 import { Button } from "@mui/material";
 import { apiGetAllCountries } from "../../apiHandler/apiHandler";
 import { apiGetFlightsByParameters } from "../../apiHandler/apiHandler";
 import { useNavigate } from "react-router";
-import { useLocation } from "react-router-dom";
 import Select from "react-select";
 import Messages from "../../messages";
 import { DateTimePicker } from "@mui/x-date-pickers";
@@ -14,7 +11,6 @@ import DateFormat from "../../dateFormat";
 
 function SearchFlight() {
   let navigate = useNavigate();
-  const { state } = useLocation();
   const [fromValue, setFromValue] = useState(null);
   const [toValue, setToValue] = useState(null);
   const [options, setOptions] = React.useState([]);

@@ -18,9 +18,7 @@ export default function AddAirlineForm() {
   const handleName = (event) => {
     setName(event.target.value);
   };
-  const handleCountryID = (event) => {
-    setCountryID(event.target.value);
-  };
+
 
   useEffect(() => {
     function fetchData() {

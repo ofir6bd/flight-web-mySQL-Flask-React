@@ -26,16 +26,11 @@ function Signup() {
   const handleEmail = (event) => {
     setEmail(event.target.value);
   };
-  // const handleUserRole = (event) => {
-  //   setUserRole(event.target.value);
-  // };
 
   useEffect(() => {
     function fetchData() {
-      console.log(value);
       apiGetUserRoles().then((response) => {
         setOptions(response);
-        console.log(response);
       });
     }
     fetchData();
@@ -46,11 +41,11 @@ function Signup() {
       apiCreateUser(username, password, email, value.id)
         .then((response) => {
           if (response.success) {
-            console.log(response);
+            // console.log(response);
             localStorage.setItem("globalVarMessage", response.success);
             localStorage.setItem("globalVarMessageType", "success");
           } else {
-            console.log(response);
+            // console.log(response);
             localStorage.setItem("globalVarMessage", JSON.stringify(response));
             localStorage.setItem("globalVarMessageType", "error");
           }
@@ -60,7 +55,6 @@ function Signup() {
         });
     }
   };
-
 
   return (
     <div className="container">
@@ -89,14 +83,17 @@ function Signup() {
         type={"email"}
         onChange={handleEmail}
       />
-      <Select
-        name="User Role:"
-        options={options}
-        value={value}
-        onChange={setValue}
-        getOptionLabel={(option) => option.role_name}
-        getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
-      />
+      <div style={{ width: "300px" }}>
+        <Select
+          name="User Role:"
+          options={options}
+          value={value}
+          onChange={setValue}
+          getOptionLabel={(option) => option.role_name}
+          getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
+          placeholder="User Role"
+        />
+      </div>
       <Button variant="contained" className="Button" onClick={handleClick}>
         Sign Up
       </Button>

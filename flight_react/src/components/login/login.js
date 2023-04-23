@@ -35,7 +35,7 @@ function Login() {
           "Email or password are incorrect"
         );
         localStorage.setItem("globalVarMessageType", "error");
-        navigate("/");
+        navigate("/login");
       }
     }, 1000);
 

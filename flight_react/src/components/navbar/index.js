@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import logo from "../../images/logo.PNG";
 import {
   Nav,
   NavLink,
-  Bars,
+  // Bars,
   NavMenu,
   NavBtn,
   NavBtnLink,
