@@ -8,6 +8,7 @@ import Select from "react-select";
 import Messages from "../../messages";
 import { DateTimePicker } from "@mui/x-date-pickers";
 import DateFormat from "../../dateFormat";
+import HelloSlider from "./HelloSlider";
 
 function SearchFlight() {
   let navigate = useNavigate();
@@ -65,7 +66,6 @@ function SearchFlight() {
         message={localStorage.getItem("globalVarMessage")}
         messageType={localStorage.getItem("globalVarMessageType")}
       />
-      {/* <Messages/> */}
       <h2> Search flight </h2>
       <h4>The best flight deals to everywhere, from anywhere</h4>
       <div className="container-all">
@@ -112,6 +112,8 @@ function SearchFlight() {
         <Button variant="contained" className="Button" onClick={handleClick}>
           Submit
         </Button>
+
+        <HelloSlider/>
       </div>
     </div>
   );

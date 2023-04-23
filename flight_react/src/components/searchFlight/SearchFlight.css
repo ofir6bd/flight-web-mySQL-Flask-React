@@ -23,3 +23,7 @@
     background-color: aqua;
     margin: auto 80% auto 20%;
 }
+
+.slideImages {
+    height: 650px!important;
+}
