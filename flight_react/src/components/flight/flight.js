@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router";
-
+import "./flight.css";
 function Flight({ flight, key }) {
   let navigate = useNavigate();
 
@@ -19,7 +19,7 @@ function Flight({ flight, key }) {
     }
   };
   return (
-    <div>
+    <div className="containerFlight">
       <h4> From: {flight.origin_country}</h4>
       <h4> To: {flight.destination_country}</h4>
       <h4> Departure time: {flight.departure_time}</h4>

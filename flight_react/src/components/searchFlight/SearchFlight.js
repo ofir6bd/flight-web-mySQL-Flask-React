@@ -72,6 +72,7 @@ function SearchFlight() {
       />
       {/* <Messages/> */}
       <h2> Search flight </h2>
+      <h4>The best flight deals to everywhere, from anywhere</h4>
       <div className="container">
         <div style={{ width: "300px" }}>
           <Select

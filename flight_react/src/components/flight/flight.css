@@ -1,3 +1,8 @@
 .containerFlight {
-    background-color:cyan
+    background-color:cyan;
+    border-radius: 25px;
+    padding: 20px;
+    width: 500px;
+    height: 210px;
+    margin: auto auto 20px auto;
 }

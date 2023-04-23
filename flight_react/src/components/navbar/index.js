@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import logo from "../../images/logo.PNG";
 import {
   Nav,
   NavLink,
@@ -7,13 +8,15 @@ import {
   NavBtn,
   NavBtnLink,
 } from "./NavbarElements";
+import "./index.css";
 
 const Navbar = () => {
-  // const [logged_in, set_logged_in] = useState(0);
-
   return (
     <>
       <Nav>
+        <div>
+          <img className="logo" src={logo} alt="Logo" />
+        </div>
         {localStorage.getItem("globalVarAdminId") ? (
           <NavMenu>
             <NavLink to="/addCustomer" activeStyle>
@@ -69,7 +72,7 @@ const Navbar = () => {
               Register as Customer
             </NavLink>
           </NavMenu>
-          ) : localStorage.getItem("globalVarUserId") &&
+        ) : localStorage.getItem("globalVarUserId") &&
           localStorage.getItem("globalVarUserRole") == 2 ? (
           <NavMenu>
             <NavLink to="/registerAsAirline" activeStyle>
