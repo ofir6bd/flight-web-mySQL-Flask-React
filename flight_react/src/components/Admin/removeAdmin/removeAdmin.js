@@ -53,7 +53,16 @@ export default function RemoveAdminForm() {
         options={options}
         value={value}
         onChange={setValue}
-        getOptionLabel={(option) => option.summery}
+        getOptionLabel={(option) =>
+          "ID: " +
+          option.id +
+          ", First Name: " +
+          option.first_name +
+          ", Last Name: " +
+          option.last_name +
+          ", User ID: " +
+          option.user_id
+        }
         getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
       />
 

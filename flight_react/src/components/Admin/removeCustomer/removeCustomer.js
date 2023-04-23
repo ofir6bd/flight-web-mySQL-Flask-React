@@ -50,7 +50,22 @@ export default function RemoveCustomerForm() {
         options={options}
         value={value}
         onChange={setValue}
-        getOptionLabel={(option) => option.summery}
+        getOptionLabel={(option) =>
+          "ID: " +
+          option.id +
+          ", First Name: " +
+          option.first_name +
+          ", Last Name: " +
+          option.last_name +
+          ", Address: " +
+          option.address +
+          ", Phone Number: " +
+          option.pgone_no +
+          ", Credit Card Number: " +
+          option.credit_card_no +
+          ", User ID: " +
+          option.user_id
+        }
         getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
       />
 
