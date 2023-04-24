@@ -12,9 +12,9 @@ function Signup() {
   let navigate = useNavigate();
   const [value, setValue] = React.useState(null);
   const [options, setOptions] = React.useState([]);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [email, setEmail] = useState(null);
   // const [user_role, setUserRole] = useState("");
 
   const handleUsername = (event) => {
@@ -37,22 +37,31 @@ function Signup() {
   }, []);
 
   const handleClick = () => {
-    if (value !== null) {
-      apiCreateUser(username, password, email, value.id)
-        .then((response) => {
-          if (response.success) {
-            // console.log(response);
-            localStorage.setItem("globalVarMessage", response.success);
-            localStorage.setItem("globalVarMessageType", "success");
-          } else {
-            // console.log(response);
-            localStorage.setItem("globalVarMessage", JSON.stringify(response));
-            localStorage.setItem("globalVarMessageType", "error");
-          }
-        })
-        .then(() => {
+    console.log("username", username);
+    if (
+      value !== null &&
+      username !== null &&
+      password !== null &&
+      email !== null
+    ) {
+      apiCreateUser(username, password, email, value.id).then((response) => {
+        if (response.success) {
+          localStorage.setItem("globalVarMessage", response.success);
+          localStorage.setItem("globalVarMessageType", "success");
           navigate("/login");
-        });
+        } else {
+          localStorage.setItem("globalVarMessage", JSON.stringify(response));
+          localStorage.setItem("globalVarMessageType", "error");
+          navigate("/signup");
+        }
+      });
+    } else {
+      localStorage.setItem(
+        "globalVarMessage",
+        "one or more of the fields are missing"
+      );
+      localStorage.setItem("globalVarMessageType", "error");
+      navigate("/signup");
     }
   };
 

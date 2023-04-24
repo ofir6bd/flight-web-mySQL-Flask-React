@@ -1,0 +1,1319 @@
+{
+	"info": {
+		"_postman_id": "d55e86ce-a66f-413b-9e98-c4b68202c3b9",
+		"name": "Flight-project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24991644"
+	},
+	"item": [
+		{
+			"name": "GET",
+			"item": [
+				{
+					"name": "get my tickets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/customer/my_tickets?email=ofir6bd@gmail.com&password=1qaz2wsx",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"customer",
+								"my_tickets"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "ofir6bd@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get my flights",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/airline/my_flights?email=El_Al_company@gmail.com&password=1qaz2wsx",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"airline",
+								"my_flights"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "El_Al_company@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all countries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/countries",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"countries"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get alll User Roles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/user_roles",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"user_roles"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all airlines",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/airlines",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"airlines"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/admin/get_all_customers?email=admin1234@gmail.com&password=1qaz2wsx",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"admin",
+								"get_all_customers"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "admin1234@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all users pre customer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/admin/get_all_pre_customers?email=admin1234@gmail.com&password=1qaz2wsx",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"admin",
+								"get_all_pre_customers"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "admin1234@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all users pre admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/admin/get_all_pre_admin?email=admin1234@gmail.com&password=1qaz2wsx",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"admin",
+								"get_all_pre_admin"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "admin1234@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all users pre airline",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/admin/get_all_pre_airline?email=admin1234@gmail.com&password=1qaz2wsx",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"admin",
+								"get_all_pre_airline"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "admin1234@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/admin/get_all_admins?email=admin1234@gmail.com&password=1qaz2wsx",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"admin",
+								"get_all_admins"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "admin1234@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all flights",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/flights",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"flights"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check_login",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/check_login/?email=ofir6bd@gmail.com&password=1qaz2wsx",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"check_login",
+								""
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "ofir6bd@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get admin by user_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/get_admin_by_user_id/?email=ofir6bd@gmail.com&password=1qaz2wsx&user_id=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"get_admin_by_user_id",
+								""
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "ofir6bd@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								},
+								{
+									"key": "user_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get customer details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/customer/get_customer_details/?email=ofir6bd@gmail.com&password=1qaz2wsx",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"customer",
+								"get_customer_details",
+								""
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "ofir6bd@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get airline details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/airline/get_airline_details/?email=El_al_company@gmail.com&password=1qaz2wsx",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"airline",
+								"get_airline_details",
+								""
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "El_al_company@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get airline by user_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/get_airline_by_user_id/?email=ofir6bd@gmail.com&password=1qaz2wsx&user_id=7",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"get_airline_by_user_id",
+								""
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "ofir6bd@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								},
+								{
+									"key": "user_id",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get flights By parameters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/flights_by_param?origin_country_id=1&destination_country_id=&departure_time=&landing_time=",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"flights_by_param"
+							],
+							"query": [
+								{
+									"key": "origin_country_id",
+									"value": "1"
+								},
+								{
+									"key": "destination_country_id",
+									"value": ""
+								},
+								{
+									"key": "departure_time",
+									"value": ""
+								},
+								{
+									"key": "landing_time",
+									"value": "",
+									"description": "2024-04-27T22:00"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DELETE",
+			"item": [
+				{
+					"name": "delete my ticket",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/customer/delete_my_ticket/1/?email=ofir6bd@gmail.com&password=1qaz2wsx",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"customer",
+								"delete_my_ticket",
+								"1",
+								""
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "ofir6bd@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete my flight",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/airline/delete_my_flight/2/?email=El_Al_company@gmail.com&password=1qaz2wsx",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"airline",
+								"delete_my_flight",
+								"2",
+								""
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "El_Al_company@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_customer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/admin/delete_customer/1/?email=admin1234@gmail.com&password=1qaz2wsx",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"admin",
+								"delete_customer",
+								"1",
+								""
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "admin1234@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_airline",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/admin/delete_airline/4/?email=admin1234@gmail.com&password=1qaz2wsx",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"admin",
+								"delete_airline",
+								"4",
+								""
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "admin1234@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_admin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/admin/delete_admin/2/?email=admin1234@gmail.com&password=1qaz2wsx",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"admin",
+								"delete_admin",
+								"2",
+								""
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "admin1234@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "POST",
+			"item": [
+				{
+					"name": "add_admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/admin/add_admin?email=admin1234@gmail.com&password=1qaz2wsx&first_name=admin&last_name=ad&user_id=6",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"admin",
+								"add_admin"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "admin1234@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								},
+								{
+									"key": "first_name",
+									"value": "admin"
+								},
+								{
+									"key": "last_name",
+									"value": "ad"
+								},
+								{
+									"key": "user_id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/create_new_user?username=usertest&password=1qaz2waq&email=ofir6bd@gmail.com&user_role=3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"create_new_user"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "usertest"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2waq"
+								},
+								{
+									"key": "email",
+									"value": "ofir6bd@gmail.com"
+								},
+								{
+									"key": "user_role",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register_as_customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/register_as_customer?email=user_pre_customer@gmail.com&password=1qaz2wsx&first_name=ofir&last_name=Ben dad&address=Atlitttt&phone_no=0548105709&credit_card_no=1234567891234956",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"register_as_customer"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "user_pre_customer@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								},
+								{
+									"key": "first_name",
+									"value": "ofir"
+								},
+								{
+									"key": "last_name",
+									"value": "Ben dad"
+								},
+								{
+									"key": "address",
+									"value": "Atlitttt"
+								},
+								{
+									"key": "phone_no",
+									"value": "0548105709"
+								},
+								{
+									"key": "credit_card_no",
+									"value": "1234567891234956"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register_as_airline",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/register_as_airline?email=user_pre_airline@gmail.com&password=1qaz2wsx&name=ofir&country_id=1&user_id=14",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"register_as_airline"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "user_pre_airline@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								},
+								{
+									"key": "name",
+									"value": "ofir"
+								},
+								{
+									"key": "country_id",
+									"value": "1"
+								},
+								{
+									"key": "user_id",
+									"value": "14"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add_customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/admin/add_customer?email=admin1234@gmail.com&password=1qaz2wsx&first_name=Ofir&last_name=Ben David&address=Atlittt&phone_no=0544105705&credit_card_no=1249568978895644&user_id=12",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"admin",
+								"add_customer"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "admin1234@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								},
+								{
+									"key": "first_name",
+									"value": "Ofir"
+								},
+								{
+									"key": "last_name",
+									"value": "Ben David"
+								},
+								{
+									"key": "address",
+									"value": "Atlittt"
+								},
+								{
+									"key": "phone_no",
+									"value": "0544105705"
+								},
+								{
+									"key": "credit_card_no",
+									"value": "1249568978895644"
+								},
+								{
+									"key": "user_id",
+									"value": "12"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add_airline",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/admin/add_airline?email=admin1234@gmail.com&password=1qaz2wsx&name=Egypt&country_id=2&user_id=2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"admin",
+								"add_airline"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "admin1234@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								},
+								{
+									"key": "name",
+									"value": "Egypt"
+								},
+								{
+									"key": "country_id",
+									"value": "2"
+								},
+								{
+									"key": "user_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add_flight",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/airline/add_flight?email=El_Al_company@gmail.com&password=1qaz2wsx&origin_country_id=2&destination_country_id=4&departure_time=2024-04-25T22:00&landing_time=2024-04-27T22:00&remaining_tickets=10",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"airline",
+								"add_flight"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "El_Al_company@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								},
+								{
+									"key": "origin_country_id",
+									"value": "2"
+								},
+								{
+									"key": "destination_country_id",
+									"value": "4"
+								},
+								{
+									"key": "departure_time",
+									"value": "2024-04-25T22:00",
+									"description": "2024-04-25T22:00"
+								},
+								{
+									"key": "landing_time",
+									"value": "2024-04-27T22:00"
+								},
+								{
+									"key": "remaining_tickets",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add_ticket",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/customer/add_ticket?email=ofir6bd@gmail.com&password=1qaz2wsx&flight_id=3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"customer",
+								"add_ticket"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "ofir6bd@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								},
+								{
+									"key": "flight_id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PUT-update",
+			"item": [
+				{
+					"name": "update_customer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/customer/update_customer?email=ofir6bd@gmail.com&password=1qaz2wsx&first_name=ofird&last_name=&address=&phone_no=&credit_card_no=",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"customer",
+								"update_customer"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "ofir6bd@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								},
+								{
+									"key": "first_name",
+									"value": "ofird"
+								},
+								{
+									"key": "last_name",
+									"value": ""
+								},
+								{
+									"key": "address",
+									"value": ""
+								},
+								{
+									"key": "phone_no",
+									"value": ""
+								},
+								{
+									"key": "credit_card_no",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_airline",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/airline/update_airline?email=El_Al_company@gmail.com&password=1qaz2wsx&name=ELALlffdd",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"airline",
+								"update_airline"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "El_Al_company@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								},
+								{
+									"key": "name",
+									"value": "ELALlffdd"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_flight",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/API/airline/update_flight/3?email=El_Al_company@gmail.com&password=1qaz2wsx&origin_country_id=&destination_country_id=2&departure_time&landing_time&remaining_tickets=",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"API",
+								"airline",
+								"update_flight",
+								"3"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "El_Al_company@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "1qaz2wsx"
+								},
+								{
+									"key": "origin_country_id",
+									"value": ""
+								},
+								{
+									"key": "destination_country_id",
+									"value": "2"
+								},
+								{
+									"key": "departure_time",
+									"value": null,
+									"description": "2024-04-25T22:00"
+								},
+								{
+									"key": "landing_time",
+									"value": null
+								},
+								{
+									"key": "remaining_tickets",
+									"value": "",
+									"description": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

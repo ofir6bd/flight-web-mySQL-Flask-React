@@ -58,21 +58,21 @@ def api_get_all_flights():
     fac_obj = AnonymousFacade(api=True)
     return fac_obj.get_all_flights()
 
-def api_get_flight_by_id(flight_id):
-    fac_obj = AnonymousFacade(api=True,id=flight_id)
-    res = fac_obj.get_flight_by_id()
-    if res:
-        return res
-    else:
-        return jsonify({ 'error': 'flight not found'})
+# def api_get_flight_by_id(flight_id):
+#     fac_obj = AnonymousFacade(api=True,id=flight_id)
+#     res = fac_obj.get_flight_by_id()
+#     if res:
+#         return jsonify(res.toJSON())
+#     else:
+#         return jsonify({ 'error': 'flight not found'})
 
-def api_get_country_by_id(country_id):
-    fac_obj = AnonymousFacade(api=True,id=country_id)
-    res = fac_obj.get_country_by_id()
-    if res:
-        return res
-    else:
-        return jsonify({ 'error': 'country not found'})
+# def api_get_country_by_id(country_id):
+#     fac_obj = AnonymousFacade(api=True,id=country_id)
+#     res = fac_obj.get_country_by_id()
+#     if res:
+#         return res
+#     else:
+#         return jsonify({ 'error': 'country not found'})
     
 def api_check_login():
     email = request.args.get('email')
