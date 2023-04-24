@@ -21,69 +21,69 @@ const Navbar = () => {
         </div>
         {localStorage.getItem("globalVarAdminId") ? (
           <NavMenu>
-            <NavLink to="/addCustomer" activeStyle>
+            <NavLink to="/addCustomer" activestyle={"true"}>
               Add Customer
             </NavLink>
-            <NavLink to="/addAdmin" activeStyle>
+            <NavLink to="/addAdmin" activestyle={"true"}>
               Add Admin
             </NavLink>
-            <NavLink to="/addAirline" activeStyle>
+            <NavLink to="/addAirline" activestyle={"true"}>
               Add Airline
             </NavLink>
-            <NavLink to="/removeAirline" activeStyle>
+            <NavLink to="/removeAirline" activestyle={"true"}>
               Remove Airline
             </NavLink>
-            <NavLink to="/removeCustomer" activeStyle>
+            <NavLink to="/removeCustomer" activestyle={"true"}>
               Remove Customer
             </NavLink>
-            <NavLink to="/removeAdmin" activeStyle>
+            <NavLink to="/removeAdmin" activestyle={"true"}>
               Remove Admin
             </NavLink>
           </NavMenu>
         ) : localStorage.getItem("globalVarCustomerId") ? (
           <NavMenu>
-            <NavLink to="/searchFlight" activeStyle>
+            <NavLink to="/searchFlight" activestyle={"true"}>
               Search Flights
             </NavLink>
-            <NavLink to="/removeTicket" activeStyle>
+            <NavLink to="/removeTicket" activestyle={"true"}>
               Remove Ticket
             </NavLink>
-            <NavLink to="/updateCustomer" activeStyle>
+            <NavLink to="/updateCustomer" activestyle={"true"}>
               Update Customer
             </NavLink>
           </NavMenu>
         ) : localStorage.getItem("globalVarAirlineId") ? (
           <NavMenu>
-            <NavLink to="/addFlight" activeStyle>
+            <NavLink to="/addFlight" activestyle={"true"}>
               Add Flight
             </NavLink>
-            <NavLink to="/removeFlight" activeStyle>
+            <NavLink to="/removeFlight" activestyle={"true"}>
               Remove Flight
             </NavLink>
-            <NavLink to="/updateAirline" activeStyle>
+            <NavLink to="/updateAirline" activestyle={"true"}>
               Update Airline
             </NavLink>
-            <NavLink to="/chooseFlight" activeStyle>
+            <NavLink to="/chooseFlight" activestyle={"true"}>
               Update Flight
             </NavLink>
           </NavMenu>
         ) : localStorage.getItem("globalVarUserId") &&
           localStorage.getItem("globalVarUserRole") == 3 ? (
           <NavMenu>
-            <NavLink to="/registerAsCustomer" activeStyle>
+            <NavLink to="/registerAsCustomer" activestyle={"true"}>
               Register as Customer
             </NavLink>
           </NavMenu>
         ) : localStorage.getItem("globalVarUserId") &&
           localStorage.getItem("globalVarUserRole") == 2 ? (
           <NavMenu>
-            <NavLink to="/registerAsAirline" activeStyle>
+            <NavLink to="/registerAsAirline" activestyle={"true"}>
               Register as Airline
             </NavLink>
           </NavMenu>
         ) : (
           <NavMenu>
-            <NavLink to="/searchFlight" activeStyle>
+            <NavLink to="/searchFlight" activestyle={"true"}>
               Search Flights
             </NavLink>
           </NavMenu>
