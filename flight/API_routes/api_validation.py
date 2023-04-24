@@ -161,7 +161,7 @@ def validate_flight(action="",id="",origin_country_id="",destination_country_id=
          final_error_lst.append({'error': 'destination country id not found'}) 
    
    if action == 'update':
-      fac_obj = AirlineFacade(id=origin_country_id)
+      fac_obj = AirlineFacade(id=id)
       flight = fac_obj.get_flight_by_id()
       origin_c_id = flight.origin_country_id
       destination_c_id = flight.destination_country_id

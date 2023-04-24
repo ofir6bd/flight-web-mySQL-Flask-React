@@ -7,6 +7,7 @@ import { DateTimePicker } from "@mui/x-date-pickers";
 import Select from "react-select";
 import DateFormat from "../../../dateFormat";
 import { useNavigate } from "react-router";
+import Messages from "../../../messages";
 
 export default function AddFlightForm() {
   let navigate = useNavigate();
@@ -28,29 +29,44 @@ export default function AddFlightForm() {
   }, []);
 
   const handleClick = () => {
-    var departure_time = DateFormat(depTime);
-    var landing_time = DateFormat(lanTime);
-    apiAddFlight(
-      fromValue.id,
-      toValue.id,
-      departure_time,
-      landing_time,
-      remainingTickets
-    )
-      .then((response) => {
-        if (response.success) {
-          console.log(response);
-          localStorage.setItem("globalVarMessage", response.success);
-          localStorage.setItem("globalVarMessageType", "success");
-        } else {
-          console.log(response);
-          localStorage.setItem("globalVarMessage", JSON.stringify(response));
-          localStorage.setItem("globalVarMessageType", "error");
-        }
-      })
-      .then(() => {
-        navigate("/airlinePage");
-      });
+    if (
+      fromValue !== null &&
+      toValue !== null &&
+      depTime !== null &&
+      lanTime !== null &&
+      remainingTickets !== null
+    ) {
+      var departure_time = DateFormat(depTime);
+      var landing_time = DateFormat(lanTime);
+      apiAddFlight(
+        fromValue.id,
+        toValue.id,
+        departure_time,
+        landing_time,
+        remainingTickets
+      )
+        .then((response) => {
+          if (response.success) {
+            console.log(response);
+            localStorage.setItem("globalVarMessage", response.success);
+            localStorage.setItem("globalVarMessageType", "success");
+          } else {
+            console.log(response);
+            localStorage.setItem("globalVarMessage", JSON.stringify(response));
+            localStorage.setItem("globalVarMessageType", "error");
+          }
+        })
+        .then(() => {
+          navigate("/airlinePage");
+        });
+    } else {
+      localStorage.setItem(
+        "globalVarMessage",
+        "one or more of the items are missing"
+      );
+      localStorage.setItem("globalVarMessageType", "error");
+      navigate("/addFlight");
+    }
   };
 
   const handleRemainingTickets = (event) => {
@@ -60,6 +76,10 @@ export default function AddFlightForm() {
 
   return (
     <div className="container">
+      <Messages
+        message={localStorage.getItem("globalVarMessage")}
+        messageType={localStorage.getItem("globalVarMessageType")}
+      />
       <h2> Add Flight page</h2>
       <div class="float-container">
         <div style={{ width: "300px" }}>

@@ -6,6 +6,7 @@ import { Button } from "@mui/material";
 import { apiUpdateAirline } from "../../../apiHandler/apiHandlerAirline";
 import { useNavigate } from "react-router";
 import { apiGetAirlineDetails } from "../../../apiHandler/apiHandlerAirline";
+import Messages from "../../../messages";
 
 export default function UpdateAirlineForm() {
   let navigate = useNavigate();
@@ -25,14 +26,13 @@ export default function UpdateAirlineForm() {
           console.log(response);
           localStorage.setItem("globalVarMessage", response.success);
           localStorage.setItem("globalVarMessageType", "success");
+          navigate("/airlinePage");
         } else {
           console.log(response);
           localStorage.setItem("globalVarMessage", JSON.stringify(response));
           localStorage.setItem("globalVarMessageType", "error");
+          navigate("/updateAirline");
         }
-      })
-      .then(() => {
-        navigate("/airlinePage");
       });
   };
 
@@ -47,6 +47,10 @@ export default function UpdateAirlineForm() {
 
   return (
     <div className="container">
+      <Messages
+        message={localStorage.getItem("globalVarMessage")}
+        messageType={localStorage.getItem("globalVarMessageType")}
+      />
       <h2> Update Airline page</h2>
       <TextField
         id="outlined-basic"

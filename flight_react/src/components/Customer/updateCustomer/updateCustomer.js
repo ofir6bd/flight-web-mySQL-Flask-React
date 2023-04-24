@@ -6,6 +6,7 @@ import { Button } from "@mui/material";
 import { apiUpdateCustomer } from "../../../apiHandler/apiHandlerCustomer";
 import { useNavigate } from "react-router";
 import { apiGetCustomerDetails } from "../../../apiHandler/apiHandlerCustomer";
+import Messages from "../../../messages";
 
 export default function AddCustomerForm() {
   let navigate = useNavigate();
@@ -36,21 +37,26 @@ export default function AddCustomerForm() {
   const handleClick = () => {
     console.log("start update customer handleClick");
     const userID = 1;
-    apiUpdateCustomer(firstName, lastName, address, phoneNo, creditCardNo, userID)
-      .then((response) => {
-        if (response.success) {
-          console.log(response);
-          localStorage.setItem("globalVarMessage", response.success);
-          localStorage.setItem("globalVarMessageType", "success");
-        } else {
-          console.log(response);
-          localStorage.setItem("globalVarMessage", JSON.stringify(response));
-          localStorage.setItem("globalVarMessageType", "error");
-        }
-      })
-      .then(() => {
+    apiUpdateCustomer(
+      firstName,
+      lastName,
+      address,
+      phoneNo,
+      creditCardNo,
+      userID
+    ).then((response) => {
+      if (response.success) {
+        console.log(response);
+        localStorage.setItem("globalVarMessage", response.success);
+        localStorage.setItem("globalVarMessageType", "success");
         navigate("/customerPage");
-      });
+      } else {
+        console.log(response);
+        localStorage.setItem("globalVarMessage", JSON.stringify(response));
+        localStorage.setItem("globalVarMessageType", "error");
+        navigate("/updateCustomer");
+      }
+    });
   };
 
   useEffect(() => {
@@ -64,6 +70,10 @@ export default function AddCustomerForm() {
 
   return (
     <div className="container">
+      <Messages
+        message={localStorage.getItem("globalVarMessage")}
+        messageType={localStorage.getItem("globalVarMessageType")}
+      />
       <h2> Update Customer page</h2>
       <TextField
         id="outlined-basic"

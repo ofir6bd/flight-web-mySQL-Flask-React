@@ -5,6 +5,7 @@ import { apiGetMyFlights } from "../../../apiHandler/apiHandlerAirline";
 import { apiRemoveFlight } from "../../../apiHandler/apiHandlerAirline";
 import { useNavigate } from "react-router";
 import Select from "react-select";
+import Messages from "../../../messages";
 
 export default function RemoveFlightForm() {
   const [value, setValue] = React.useState(null);
@@ -30,20 +31,23 @@ export default function RemoveFlightForm() {
             console.log(response);
             localStorage.setItem("globalVarMessage", response.success);
             localStorage.setItem("globalVarMessageType", "success");
+            navigate("/airlinePage");
           } else {
             console.log(response);
             localStorage.setItem("globalVarMessage", JSON.stringify(response));
             localStorage.setItem("globalVarMessageType", "error");
+            navigate("/removeFlight");
           }
-        })
-        .then(() => {
-          navigate("/airlinePage");
         });
     }
   };
 
   return (
     <div className="container">
+      <Messages
+        message={localStorage.getItem("globalVarMessage")}
+        messageType={localStorage.getItem("globalVarMessageType")}
+      />
       <h2> Remove Flight page</h2>
       <Select
         name="Flight"

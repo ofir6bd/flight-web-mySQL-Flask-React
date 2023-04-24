@@ -28,6 +28,7 @@ import UpdateFlightForm from "./components/Airline/updateFlight/updateFlight";
 import ChooseFlightForm from "./components/Airline/chooseFlight/chooseFlight";
 import RegisterAsCustomerForm from "./components/registerAsCustomer/registerAsCustomer";
 import RegisterAsAirlineForm from "./components/registerAsAirline/registerAsAirline";
+import HomePage from "./components/HomePage/HomePage";
 
 function App() {
   let navigate = useNavigate();
@@ -41,7 +42,8 @@ function App() {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Navbar />
         <Routes>
-          <Route path="" element={<SearchFlight />} />
+          <Route path="" element={<HomePage />} />
+          <Route path="searchFlight" element={<SearchFlight />} />
           <Route path="login" element={<Login />} />
           <Route path="logout" element={<Logout />} />
           <Route path="signup" element={<Signup />} />

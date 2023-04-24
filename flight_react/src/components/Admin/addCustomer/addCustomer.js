@@ -71,9 +71,6 @@ export default function AddCustomerForm() {
         navigate("/addCustomer");
       }
     });
-    // .then(() => {
-    //   navigate("/adminPage");
-    // });
   };
   return (
     <div className="container">

@@ -8,6 +8,7 @@ import { DateTimePicker } from "@mui/x-date-pickers";
 import { apiGetAllCountries } from "../../../apiHandler/apiHandler";
 import Select from "react-select";
 import DateFormat from "../../../dateFormat";
+import Messages from "../../../messages";
 
 export default function UpdateFlightForm() {
   let navigate = useNavigate();
@@ -47,21 +48,19 @@ export default function UpdateFlightForm() {
       state.flight.landing_time = "";
     }
 
-    apiUpdateFlight(state.flight)
-      .then((response) => {
-        if (response.success) {
-          console.log(response);
-          localStorage.setItem("globalVarMessage", response.success);
-          localStorage.setItem("globalVarMessageType", "success");
-        } else {
-          console.log(response);
-          localStorage.setItem("globalVarMessage", JSON.stringify(response));
-          localStorage.setItem("globalVarMessageType", "error");
-        }
-      })
-      .then(() => {
+    apiUpdateFlight(state.flight).then((response) => {
+      if (response.success) {
+        console.log(response);
+        localStorage.setItem("globalVarMessage", response.success);
+        localStorage.setItem("globalVarMessageType", "success");
         navigate("/airlinePage");
-      });
+      } else {
+        console.log(response);
+        localStorage.setItem("globalVarMessage", JSON.stringify(response));
+        localStorage.setItem("globalVarMessageType", "error");
+        navigate("/airlinePage");
+      }
+    });
   };
   const handleRemainingTickets = (event) => {
     const result = event.target.value.replace(/\D/g, "");
@@ -70,6 +69,10 @@ export default function UpdateFlightForm() {
 
   return (
     <div className="container">
+      <Messages
+        message={localStorage.getItem("globalVarMessage")}
+        messageType={localStorage.getItem("globalVarMessageType")}
+      />
       <h2> Update Flight page</h2>
       <div class="float-container">
         <div style={{ width: "300px" }}>
