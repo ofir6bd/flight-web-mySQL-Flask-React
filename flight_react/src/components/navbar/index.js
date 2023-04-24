@@ -9,13 +9,16 @@ import {
   NavBtnLink,
 } from "./NavbarElements";
 import "./index.css";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <>
       <Nav>
         <div>
-          <img className="logo" src={logo} alt="Logo" />
+          <Link to="/">
+            <img className="logo" src={logo} alt="Logo" />
+          </Link>
         </div>
         {localStorage.getItem("globalVarAdminId") ? (
           <NavMenu>
