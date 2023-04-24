@@ -14,6 +14,7 @@ function Signup() {
   const [options, setOptions] = React.useState([]);
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
+  const [rpassword, setRpassword] = useState(null);
   const [email, setEmail] = useState(null);
 
   const handleUsername = (event) => {
@@ -21,6 +22,9 @@ function Signup() {
   };
   const handlePassword = (event) => {
     setPassword(event.target.value);
+  };
+  const handleRpassword = (event) => {
+    setRpassword(event.target.value);
   };
   const handleEmail = (event) => {
     setEmail(event.target.value);
@@ -42,19 +46,26 @@ function Signup() {
       value !== null &&
       username !== null &&
       password !== null &&
+      rpassword !== null &&
       email !== null
     ) {
-      apiCreateUser(username, password, email, value.id).then((response) => {
-        if (response.success) {
-          localStorage.setItem("globalVarMessage", response.success);
-          localStorage.setItem("globalVarMessageType", "success");
-          navigate("/login");
-        } else {
-          localStorage.setItem("globalVarMessage", JSON.stringify(response));
-          localStorage.setItem("globalVarMessageType", "error");
-          navigate("/signup");
-        }
-      });
+      if (password === rpassword) {
+        apiCreateUser(username, password, email, value.id).then((response) => {
+          if (response.success) {
+            localStorage.setItem("globalVarMessage", response.success);
+            localStorage.setItem("globalVarMessageType", "success");
+            navigate("/login");
+          } else {
+            localStorage.setItem("globalVarMessage", JSON.stringify(response));
+            localStorage.setItem("globalVarMessageType", "error");
+            navigate("/signup");
+          }
+        });
+      } else {
+        localStorage.setItem("globalVarMessage", "Passwords not match");
+        localStorage.setItem("globalVarMessageType", "error");
+        navigate("/signup");
+      }
     } else {
       localStorage.setItem(
         "globalVarMessage",
@@ -84,6 +95,13 @@ function Signup() {
         variant="outlined"
         type="password"
         onChange={handlePassword}
+      />
+      <TextField
+        id="rPassword"
+        label="Repeat Password:"
+        variant="outlined"
+        type="password"
+        onChange={handleRpassword}
       />
       <TextField
         id="Email"
