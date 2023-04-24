@@ -31,6 +31,7 @@ export function apiGetFlightsByParameters(
     "&landing_time=" +
     landing_time;
   var response = fetch(url, requestOptions).then((response) => response.json());
+  console.log(response);
   return response;
 }
 

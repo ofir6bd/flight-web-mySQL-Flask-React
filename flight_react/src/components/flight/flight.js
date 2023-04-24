@@ -24,7 +24,7 @@ function Flight({ flight, key }) {
       <h4> To: {flight.destination_country}</h4>
       <h4> Departure time: {flight.departure_time}</h4>
       <h4> Landing time: {flight.landing_time}</h4>
-      {/* <h4> Remaining tickets: {flight.remaining_tickets}</h4> */}
+      <h4> Remaining tickets: {flight.remaining_tickets}</h4>
       <Button onClick={handleClick}> Book </Button>
     </div>
   );

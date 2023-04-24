@@ -16,8 +16,7 @@ const HelloSlider = () => {
             alt="First slide"
           />
           <Carousel.Caption>
-            <h3>First slide label</h3>
-            <h4>Book your flight early for the best deals</h4>
+            <h2>Book your flight early for the best deals</h2>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -28,8 +27,7 @@ const HelloSlider = () => {
           />
 
           <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <h4>Compare prices and airlines before booking</h4>
+            <h2>Compare prices and airlines before booking</h2>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -40,8 +38,7 @@ const HelloSlider = () => {
           />
 
           <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <h4>Book a flexible ticket in case your plans change</h4>
+            <h2>Book a flexible ticket in case your plans change</h2>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -52,8 +49,7 @@ const HelloSlider = () => {
           />
 
           <Carousel.Caption>
-            <h3>fourth slide label</h3>
-            <h4>Double-check your flight details before departure</h4>
+            <h2>Double-check your flight details before departure</h2>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
