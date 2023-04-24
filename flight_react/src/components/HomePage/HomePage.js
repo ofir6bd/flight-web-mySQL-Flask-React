@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./SearchFlight.css";
+import "./HomePage.css";
 import { Button } from "@mui/material";
 import { apiGetAllCountries } from "../../apiHandler/apiHandler";
 import { apiGetFlightsByParameters } from "../../apiHandler/apiHandler";
@@ -8,57 +8,57 @@ import Select from "react-select";
 import Messages from "../../messages";
 import { DateTimePicker } from "@mui/x-date-pickers";
 import DateFormat from "../../dateFormat";
-// import HelloSlider from "../HomePage/HelloSlider";
+import HelloSlider from "./HelloSlider";
 
-function SearchFlight() {
+function HomePage() {
   let navigate = useNavigate();
-  const [fromValue, setFromValue] = useState(null);
-  const [toValue, setToValue] = useState(null);
-  const [options, setOptions] = React.useState([]);
-  const [depTime, setDepTime] = useState(null);
-  const [lanTime, setLanTime] = useState(null);
+  // const [fromValue, setFromValue] = useState(null);
+  // const [toValue, setToValue] = useState(null);
+  // const [options, setOptions] = React.useState([]);
+  // const [depTime, setDepTime] = useState(null);
+  // const [lanTime, setLanTime] = useState(null);
 
-  useEffect(() => {
-    function fetchData() {
-      apiGetAllCountries().then((response) => {
-        setOptions(response);
-      });
-    }
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   function fetchData() {
+  //     apiGetAllCountries().then((response) => {
+  //       setOptions(response);
+  //     });
+  //   }
+  //   fetchData();
+  // }, []);
 
-  var from = "";
-  var to = "";
-  var departure_time = "";
-  var landing_time = "";
+  // var from = "";
+  // var to = "";
+  // var departure_time = "";
+  // var landing_time = "";
 
-  const handleClick = () => {
-    if (fromValue) {
-      from = fromValue.id;
-    }
-    if (toValue) {
-      to = toValue.id;
-    }
-    if (depTime) {
-      departure_time = DateFormat(depTime);
-    }
-    if (lanTime) {
-      landing_time = DateFormat(lanTime);
-    }
+  // const handleClick = () => {
+  //   if (fromValue) {
+  //     from = fromValue.id;
+  //   }
+  //   if (toValue) {
+  //     to = toValue.id;
+  //   }
+  //   if (depTime) {
+  //     departure_time = DateFormat(depTime);
+  //   }
+  //   if (lanTime) {
+  //     landing_time = DateFormat(lanTime);
+  //   }
 
-    apiGetFlightsByParameters(from, to, departure_time, landing_time).then(
-      (response) => {
-        if (response.length > 0) {
-          console.log("flight found", response);
-          navigate("/flights", { state: { flights: response } });
-        } else {
-          localStorage.setItem("globalVarMessage", "no flights found");
-          localStorage.setItem("globalVarMessageType", "warning");
-          navigate("/searchFlight");
-        }
-      }
-    );
-  };
+  //   apiGetFlightsByParameters(from, to, departure_time, landing_time).then(
+  //     (response) => {
+  //       if (response.length > 0) {
+  //         console.log("flight found", response);
+  //         navigate("/flights", { state: { flights: response } });
+  //       } else {
+  //         localStorage.setItem("globalVarMessage", "no flights found");
+  //         localStorage.setItem("globalVarMessageType", "warning");
+  //         navigate("/");
+  //       }
+  //     }
+  //   );
+  // };
 
   return (
     <div>
@@ -66,9 +66,9 @@ function SearchFlight() {
         message={localStorage.getItem("globalVarMessage")}
         messageType={localStorage.getItem("globalVarMessageType")}
       />
-      <h2> Search flight </h2>
+      <h2> Home Page </h2>
       <h4>The best flight deals to everywhere, from anywhere</h4>
-      <div className="container-all">
+      {/* <div className="container-all">
         <div className="container-select-first">
           <div style={{ width: "300px" }}>
             <Select
@@ -111,12 +111,12 @@ function SearchFlight() {
         />
         <Button variant="contained" className="Button" onClick={handleClick}>
           Submit
-        </Button>
+        </Button> */}
 
-        {/* <HelloSlider/> */}
-      </div>
+      {/* </div> */}
+      <HelloSlider />
     </div>
   );
 }
 
-export default SearchFlight;
+export default HomePage;

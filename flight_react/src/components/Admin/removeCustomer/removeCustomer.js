@@ -5,6 +5,7 @@ import { apiGetAllCustomers } from "../../../apiHandler/apiHandler";
 import { apiRemoveCustomer } from "../../../apiHandler/apiHandlerAdmin";
 import { useNavigate } from "react-router";
 import Select from "react-select";
+import Messages from "../../../messages";
 
 export default function RemoveCustomerForm() {
   const [value, setValue] = React.useState(null);
@@ -30,20 +31,23 @@ export default function RemoveCustomerForm() {
             console.log(response);
             localStorage.setItem("globalVarMessage", response.success);
             localStorage.setItem("globalVarMessageType", "success");
+             navigate("/adminPage");
           } else {
             console.log(response);
             localStorage.setItem("globalVarMessage", JSON.stringify(response));
             localStorage.setItem("globalVarMessageType", "error");
+             navigate("/removeCustomer");
           }
-        })
-        .then(() => {
-          navigate("/adminPage");
         });
     }
   };
 
   return (
     <div className="container">
+      <Messages
+        message={localStorage.getItem("globalVarMessage")}
+        messageType={localStorage.getItem("globalVarMessageType")}
+      />
       <h2> Remove Customer page</h2>
       <Select
         name="Customers"

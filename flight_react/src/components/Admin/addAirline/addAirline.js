@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import Select from "react-select";
 import { apiGetAllUsersPreAirline } from "../../../apiHandler/apiHandlerAdmin";
 import { apiGetAllCountries } from "../../../apiHandler/apiHandler";
+import Messages from "../../../messages";
 
 export default function AddAirlineForm() {
   let navigate = useNavigate();
@@ -18,7 +19,6 @@ export default function AddAirlineForm() {
   const handleName = (event) => {
     setName(event.target.value);
   };
-
 
   useEffect(() => {
     function fetchData() {
@@ -43,24 +43,26 @@ export default function AddAirlineForm() {
     if (userID) {
       user_id = userID.id;
     }
-    apiAddAirline(name, country_id, user_id)
-      .then((response) => {
-        if (response.success) {
-          console.log(response);
-          localStorage.setItem("globalVarMessage", response.success);
-          localStorage.setItem("globalVarMessageType", "success");
-        } else {
-          console.log(response);
-          localStorage.setItem("globalVarMessage", JSON.stringify(response));
-          localStorage.setItem("globalVarMessageType", "error");
-        }
-      })
-      .then(() => {
+    apiAddAirline(name, country_id, user_id).then((response) => {
+      if (response.success) {
+        console.log(response);
+        localStorage.setItem("globalVarMessage", response.success);
+        localStorage.setItem("globalVarMessageType", "success");
         navigate("/adminPage");
-      });
+      } else {
+        console.log(response);
+        localStorage.setItem("globalVarMessage", JSON.stringify(response));
+        localStorage.setItem("globalVarMessageType", "error");
+        navigate("/addAirline");
+      }
+    });
   };
   return (
     <div className="container">
+      <Messages
+        message={localStorage.getItem("globalVarMessage")}
+        messageType={localStorage.getItem("globalVarMessageType")}
+      />
       <h2> Add Airline page</h2>
       <TextField
         id="outlined-basic"

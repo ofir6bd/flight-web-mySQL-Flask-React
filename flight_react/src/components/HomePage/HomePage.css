@@ -1,0 +1,30 @@
+.Button {
+    left: 20px;
+    top: 10px;
+}
+
+.messageContainerSuccess {
+    background-color: aqua;
+}
+
+.messageContainerError {
+    background-color: red;
+}
+
+.messageContainerWarning {
+    background-color: orange;
+}
+
+.container-select-first {
+    background-color: aqua;
+    margin: auto 80% auto 5% ;
+}
+.container-select-second {
+    background-color: aqua;
+    margin: auto 80% auto 20%;
+}
+
+.slideImages {
+    margin-top: 20px;
+    height: 600px!important;
+}

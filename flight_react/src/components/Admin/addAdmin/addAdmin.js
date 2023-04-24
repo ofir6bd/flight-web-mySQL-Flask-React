@@ -7,6 +7,7 @@ import { apiAddAdmin } from "../../../apiHandler/apiHandlerAdmin";
 import { useNavigate } from "react-router";
 import Select from "react-select";
 import { apiGetAllUsersPreAdmin } from "../../../apiHandler/apiHandlerAdmin";
+import Messages from "../../../messages";
 
 export default function AddAdminForm() {
   let navigate = useNavigate();
@@ -41,24 +42,26 @@ export default function AddAdminForm() {
     if (userID) {
       user_id = userID.id;
     }
-    apiAddAdmin(firstName, lastName, user_id)
-      .then((response) => {
-        if (response.success) {
-          console.log(response);
-          localStorage.setItem("globalVarMessage", response.success);
-          localStorage.setItem("globalVarMessageType", "success");
-        } else {
-          console.log(response);
-          localStorage.setItem("globalVarMessage", JSON.stringify(response));
-          localStorage.setItem("globalVarMessageType", "error");
-        }
-      })
-      .then(() => {
+    apiAddAdmin(firstName, lastName, user_id).then((response) => {
+      if (response.success) {
+        console.log(response);
+        localStorage.setItem("globalVarMessage", response.success);
+        localStorage.setItem("globalVarMessageType", "success");
         navigate("/adminPage");
-      });
+      } else {
+        console.log(response);
+        localStorage.setItem("globalVarMessage", JSON.stringify(response));
+        localStorage.setItem("globalVarMessageType", "error");
+        navigate("/addAdmin");
+      }
+    });
   };
   return (
     <div className="container">
+      <Messages
+        message={localStorage.getItem("globalVarMessage")}
+        messageType={localStorage.getItem("globalVarMessageType")}
+      />
       <h2> Add Admin page</h2>
       <TextField
         id="outlined-basic"

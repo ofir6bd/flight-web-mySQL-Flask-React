@@ -5,7 +5,7 @@ import {
   apiGetAllAdmins,
   apiRemoveAdmin,
 } from "../../../apiHandler/apiHandlerAdmin";
-
+import Messages from "../../../messages";
 import { useNavigate } from "react-router";
 import Select from "react-select";
 
@@ -27,26 +27,28 @@ export default function RemoveAdminForm() {
 
   const handleClick = () => {
     if (value !== null) {
-      apiRemoveAdmin(value.id)
-        .then((response) => {
-          if (response.success) {
-            console.log(response);
-            localStorage.setItem("globalVarMessage", response.success);
-            localStorage.setItem("globalVarMessageType", "success");
-          } else {
-            console.log(response);
-            localStorage.setItem("globalVarMessage", JSON.stringify(response));
-            localStorage.setItem("globalVarMessageType", "error");
-          }
-        })
-        .then(() => {
+      apiRemoveAdmin(value.id).then((response) => {
+        if (response.success) {
+          console.log(response);
+          localStorage.setItem("globalVarMessage", response.success);
+          localStorage.setItem("globalVarMessageType", "success");
           navigate("/adminPage");
-        });
+        } else {
+          console.log(response);
+          localStorage.setItem("globalVarMessage", JSON.stringify(response));
+          localStorage.setItem("globalVarMessageType", "error");
+          navigate("/removeAdmin");
+        }
+      });
     }
   };
 
   return (
     <div className="container">
+      <Messages
+        message={localStorage.getItem("globalVarMessage")}
+        messageType={localStorage.getItem("globalVarMessageType")}
+      />
       <h2> Remove Admin page</h2>
       <Select
         name="Admin"

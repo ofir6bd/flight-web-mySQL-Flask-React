@@ -7,6 +7,7 @@ import { apiAddCustomer } from "../../../apiHandler/apiHandlerAdmin";
 import { useNavigate } from "react-router";
 import { apiGetAllUsersPreCustomer } from "../../../apiHandler/apiHandlerAdmin";
 import Select from "react-select";
+import Messages from "../../../messages";
 
 export default function AddCustomerForm() {
   let navigate = useNavigate();
@@ -43,31 +44,43 @@ export default function AddCustomerForm() {
     }
     fetchData();
   }, []);
-  
+
   const handleClick = () => {
     console.log("start add customer handleClick");
     var user_id = "";
     if (userID) {
       user_id = userID.id;
     }
-    apiAddCustomer(firstName, lastName, address, phoneNo, creditCardNo, user_id)
-      .then((response) => {
-        if (response.success) {
-          console.log(response);
-          localStorage.setItem("globalVarMessage", response.success);
-          localStorage.setItem("globalVarMessageType", "success");
-        } else {
-          console.log(response);
-          localStorage.setItem("globalVarMessage", JSON.stringify(response));
-          localStorage.setItem("globalVarMessageType", "error");
-        }
-      })
-      .then(() => {
+    apiAddCustomer(
+      firstName,
+      lastName,
+      address,
+      phoneNo,
+      creditCardNo,
+      user_id
+    ).then((response) => {
+      if (response.success) {
+        console.log(response);
+        localStorage.setItem("globalVarMessage", response.success);
+        localStorage.setItem("globalVarMessageType", "success");
         navigate("/adminPage");
-      });
+      } else {
+        console.log(response);
+        localStorage.setItem("globalVarMessage", JSON.stringify(response));
+        localStorage.setItem("globalVarMessageType", "error");
+        navigate("/addCustomer");
+      }
+    });
+    // .then(() => {
+    //   navigate("/adminPage");
+    // });
   };
   return (
     <div className="container">
+      <Messages
+        message={localStorage.getItem("globalVarMessage")}
+        messageType={localStorage.getItem("globalVarMessageType")}
+      />
       <h2> Add Customer page</h2>
       <TextField
         id="outlined-basic"
