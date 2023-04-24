@@ -23,12 +23,15 @@ function Flight({ flight }) {
 
   return (
     <div className="containerFlight">
+      <h4> Fly with: {flight.airline_company_name}</h4>
       <h4> From: {flight.origin_country}</h4>
       <h4> To: {flight.destination_country}</h4>
       <h4> Departure time: {flight.departure_time}</h4>
       <h4> Landing time: {flight.landing_time}</h4>
       <h4> Remaining tickets: {flight.remaining_tickets}</h4>
-      <Button onClick={handleClick}> Book </Button>
+      <Button variant="contained" className="Button" onClick={handleClick}>
+        Book
+      </Button>
     </div>
   );
 }

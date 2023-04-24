@@ -144,12 +144,16 @@ class FacadeBase(object):
             lst = []
             for i in range(len(all_flight_and_countries)):
                 flight_id = all_flight_and_countries[i][0].id
+                airline_company_id = all_flight_and_countries[i][0].airline_company_id
+                dal_obj = DataLayer(table1=AirlineCompanies,input_attribute='id', input_value=airline_company_id)  
+                airline = dal_obj.get_one_by_param()
+                airline_company_name = airline.name 
                 departure_time = all_flight_and_countries[i][0].departure_time
                 landing_time = all_flight_and_countries[i][0].landing_time
                 remaining_tickets = all_flight_and_countries[i][0].remaining_tickets
                 origin_country = all_flight_and_countries[i][1].name
                 destination_country = all_flight_and_countries[i][2].name
-                temp = {"flight_id": flight_id,"departure_time": departure_time,"landing_time": landing_time, "origin_country":origin_country,"destination_country":destination_country,"remaining_tickets":remaining_tickets }
+                temp = {"flight_id": flight_id,"departure_time": departure_time,"landing_time": landing_time, "origin_country":origin_country,"destination_country":destination_country,"remaining_tickets":remaining_tickets,"airline_company_name":airline_company_name }
                 lst.append(temp)
             return jsonify(lst)     
             
