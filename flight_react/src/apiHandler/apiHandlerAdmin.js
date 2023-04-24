@@ -67,7 +67,6 @@ export function apiAddAdmin(firstName, lastName, user_id) {
 
 export function apiRemoveAirline(airline_id) {
   console.log("start api apiRemoveAirline");
-  console.log(airline_id);
   const requestOptions = { method: "DELETE" };
   var url =
     "http://127.0.0.1:5000/API/admin/delete_airline/" +
@@ -82,7 +81,6 @@ export function apiRemoveAirline(airline_id) {
 
 export function apiRemoveCustomer(customer_id) {
   console.log("start api apiRemoveCustomer");
-  console.log(customer_id);
   const requestOptions = { method: "DELETE" };
   var url =
     "http://127.0.0.1:5000/API/admin/delete_customer/" +
@@ -108,7 +106,6 @@ export function apiGetAllAdmins() {
 
 export function apiRemoveAdmin(customer_id) {
   console.log("start api apiRemoveAdmin");
-  console.log(customer_id);
   const requestOptions = { method: "DELETE" };
   var url =
     "http://127.0.0.1:5000/API/admin/delete_admin/" +

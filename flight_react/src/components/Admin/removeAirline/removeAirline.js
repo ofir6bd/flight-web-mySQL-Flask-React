@@ -8,11 +8,11 @@ import Select from "react-select";
 import Messages from "../../../messages";
 
 export default function RemoveAirlineForm() {
+  let navigate = useNavigate();
   const [value, setValue] = React.useState(null);
   const [options, setOptions] = React.useState([]);
 
-  let navigate = useNavigate();
-
+  //to load the options for the dropdown
   useEffect(() => {
     function fetchData() {
       apiGetAllAirlines().then((response) => {
@@ -26,12 +26,10 @@ export default function RemoveAirlineForm() {
     if (value !== null) {
       apiRemoveAirline(value.id).then((response) => {
         if (response.success) {
-          console.log(response);
           localStorage.setItem("globalVarMessage", response.success);
           localStorage.setItem("globalVarMessageType", "success");
           navigate("/adminPage");
         } else {
-          console.log(response);
           localStorage.setItem("globalVarMessage", JSON.stringify(response));
           localStorage.setItem("globalVarMessageType", "error");
           navigate("/removeAirline");
@@ -53,9 +51,8 @@ export default function RemoveAirlineForm() {
         value={value}
         onChange={setValue}
         getOptionLabel={(option) => option.name}
-        getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
+        getOptionValue={(option) => option.id}
       />
-
       <Button variant="contained" className="Button" onClick={handleClick}>
         Remove Airline
       </Button>

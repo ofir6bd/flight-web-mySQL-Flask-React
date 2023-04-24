@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Button } from "@mui/material";
 import "./verification.css";
 import { apiAddTicket } from "../../apiHandler/apiHandlerCustomer";
@@ -8,12 +7,11 @@ import { useNavigate } from "react-router";
 function Verification() {
   let navigate = useNavigate();
 
+  //the action post button submit
   const handleClick = () => {
-    console.log("start Verification handleClick");
     apiAddTicket(localStorage.getItem("globalVarFlightID"))
       .then((response) => {
         if (response.success) {
-          console.log(response);
           localStorage.setItem("globalVarMessage", response.success);
           localStorage.setItem("globalVarMessageType", "success");
         } else if (response[0].error) {

@@ -1,7 +1,7 @@
 import React from "react";
 import Messages from "../../messages";
 
-function airlinePage({  }) {
+function airlinePage({}) {
   return (
     <div>
       <Messages

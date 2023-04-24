@@ -15,7 +15,6 @@ function Signup() {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
   const [email, setEmail] = useState(null);
-  // const [user_role, setUserRole] = useState("");
 
   const handleUsername = (event) => {
     setUsername(event.target.value);
@@ -27,6 +26,7 @@ function Signup() {
     setEmail(event.target.value);
   };
 
+  //to load the options for the button submit
   useEffect(() => {
     function fetchData() {
       apiGetUserRoles().then((response) => {
@@ -36,8 +36,8 @@ function Signup() {
     fetchData();
   }, []);
 
+  //the action post button submit
   const handleClick = () => {
-    console.log("username", username);
     if (
       value !== null &&
       username !== null &&

@@ -9,7 +9,7 @@ function Flights() {
     <div>
       <h1>The best flights are here </h1>
       
-        {state.flights.map((flight, i) => (
+        {state.flights.map((flight) => (
           <Flight flight={flight}></Flight>
         ))}
     </div>

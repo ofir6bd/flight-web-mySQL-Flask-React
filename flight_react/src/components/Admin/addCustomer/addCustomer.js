@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
-// import "./login.css";
-// import { UseAuth } from "../useAuth/useAuth";
 import { apiAddCustomer } from "../../../apiHandler/apiHandlerAdmin";
 import { useNavigate } from "react-router";
 import { apiGetAllUsersPreCustomer } from "../../../apiHandler/apiHandlerAdmin";
@@ -35,11 +33,11 @@ export default function AddCustomerForm() {
     setCreditCardNo(event.target.value);
   };
 
+  //to load the ptions for the dropdown
   useEffect(() => {
     function fetchData() {
       apiGetAllUsersPreCustomer().then((response) => {
         setOptions(response);
-        // console.log(response);
       });
     }
     fetchData();
@@ -72,6 +70,7 @@ export default function AddCustomerForm() {
       }
     });
   };
+  
   return (
     <div className="container">
       <Messages

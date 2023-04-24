@@ -7,48 +7,41 @@ import {
 
 const setEmailGlobalStorage = (email) => {
   localStorage.setItem("globalVarEmail", email.toString());
-  console.log(localStorage.getItem("globalVarEmail"));
 };
 
 const setPasswordGlobalStorage = (password) => {
   localStorage.setItem("globalVarPassword", password.toString());
-  console.log(localStorage.getItem("globalVarPassword"));
 };
 
 const setUserIdGlobalStorage = (userID) => {
   localStorage.setItem("globalVarUserId", userID.toString());
-  console.log(localStorage.getItem("globalVarUserId"));
 };
 const setUserRoleIdGlobalStorage = (userRole) => {
   localStorage.setItem("globalVarUserRole", userRole.toString());
-  console.log(localStorage.getItem("globalVarUserRole"));
 };
 
 const setCustomerIdGlobalStorage = (customerID) => {
   localStorage.setItem("globalVarCustomerId", customerID.toString());
-  console.log(localStorage.getItem("globalVarCustomerId"));
 };
 
 const setAdminIdGlobalStorage = (adminID) => {
   localStorage.setItem("globalVarAdminId", adminID.toString());
-  console.log(localStorage.getItem("globalVarAdminId"));
 };
 
 const setAirlineIdGlobalStorage = (airlineID) => {
   localStorage.setItem("globalVarAirlineId", airlineID.toString());
-  console.log(localStorage.getItem("globalVarAirlineId"));
 };
 
 const checkIfUserCustomer = (email, password, user_id) => {
   apiCheckCustomer(email, password, user_id)
     .then((response) => {
-      // console.log(response.customer_id);
       if (response.customer_id) {
         setCustomerIdGlobalStorage(response.customer_id);
       }
     })
     .catch((err) => console.log(err));
 };
+
 const checkIfUserAdmin = (email, password, user_id) => {
   apiCheckAdmin(email, password, user_id)
     .then((response) => {
@@ -58,6 +51,7 @@ const checkIfUserAdmin = (email, password, user_id) => {
     })
     .catch((err) => console.log(err));
 };
+
 const checkIfUserAirline = (email, password, user_id) => {
   apiCheckAirline(email, password, user_id)
     .then((response) => {
@@ -68,11 +62,11 @@ const checkIfUserAirline = (email, password, user_id) => {
     .catch((err) => console.log(err));
 };
 
+//saving all the user data in the global storage
 export function auth(email, password) {
   apiCheckLogin(email, password)
     .then((response) => {
       if (response.user_id) {
-        console.log("response",response);
         setEmailGlobalStorage(email);
         setPasswordGlobalStorage(password);
         setUserIdGlobalStorage(response.user_id);

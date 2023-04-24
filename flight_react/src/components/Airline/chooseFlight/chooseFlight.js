@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
-import { apiUpdateFlight } from "../../../apiHandler/apiHandlerAirline";
+
 import { useNavigate } from "react-router";
 import { apiGetMyFlights } from "../../../apiHandler/apiHandlerAirline";
 import Select from "react-select";
@@ -12,20 +11,15 @@ export default function ChooseFlightForm() {
   const [value, setValue] = React.useState(null);
   const [options, setOptions] = React.useState([]);
 
-  // const handleName = (event) => {
-  //   // setName(event.target.value);
-  // };
-
   const handleClick = () => {
-    console.log("value is: ", value);
     navigate("/updateFlight", { state: { flight: value } });
   };
 
+  //to load the options for the dropdown
   useEffect(() => {
     function fetchData() {
       apiGetMyFlights().then((response) => {
         setOptions(response);
-        console.log(response);
       });
     }
     fetchData();
@@ -53,7 +47,7 @@ export default function ChooseFlightForm() {
           ", Remaining tickets: " +
           option.remaining_tickets
         }
-        getOptionValue={(option) => option.flight_id} // It should be unique value in the options. E.g. ID
+        getOptionValue={(option) => option.flight_id} 
       />
       <Button variant="contained" className="Button" onClick={handleClick}>
         Submit

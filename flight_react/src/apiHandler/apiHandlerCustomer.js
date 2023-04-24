@@ -14,7 +14,6 @@ export function apiAddTicket(flight_id) {
 
 export function apiRemoveTicket(ticket_id) {
   console.log("start api apiRemoveTicket");
-  console.log(ticket_id);
   const requestOptions = { method: "DELETE" };
   var url =
     "http://127.0.0.1:5000/API/customer/delete_my_ticket/" +
@@ -60,7 +59,6 @@ export function apiUpdateCustomer(
   user_id
 ) {
   console.log("start api apiUpdateCustomer");
-
   const requestOptions = { method: "PUT" };
   var url =
     "http://127.0.0.1:5000/API/customer/update_customer?email=" +

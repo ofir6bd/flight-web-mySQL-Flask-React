@@ -2,9 +2,11 @@ import React from "react";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router";
 import "./flight.css";
-function Flight({ flight, key }) {
+
+function Flight({ flight }) {
   let navigate = useNavigate();
 
+  //the actions post button submit
   const handleClick = () => {
     if (localStorage.getItem("globalVarCustomerId")) {
       localStorage.setItem("globalVarFlightID", flight.flight_id);
@@ -18,6 +20,7 @@ function Flight({ flight, key }) {
       navigate("/login");
     }
   };
+
   return (
     <div className="containerFlight">
       <h4> From: {flight.origin_country}</h4>

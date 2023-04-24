@@ -18,11 +18,16 @@ export default function AddFlightForm() {
   const [remainingTickets, setRemainingTickets] = useState("");
   const [options, setOptions] = React.useState([]);
 
+  const handleRemainingTickets = (event) => {
+    const result = event.target.value.replace(/\D/g, "");
+    setRemainingTickets(result);
+  };
+
+  //to load the options for the dropdown
   useEffect(() => {
     function fetchData() {
       apiGetAllCountries().then((response) => {
         setOptions(response);
-        // console.log(response);
       });
     }
     fetchData();
@@ -47,11 +52,9 @@ export default function AddFlightForm() {
       )
         .then((response) => {
           if (response.success) {
-            console.log(response);
             localStorage.setItem("globalVarMessage", response.success);
             localStorage.setItem("globalVarMessageType", "success");
           } else {
-            console.log(response);
             localStorage.setItem("globalVarMessage", JSON.stringify(response));
             localStorage.setItem("globalVarMessageType", "error");
           }
@@ -69,11 +72,6 @@ export default function AddFlightForm() {
     }
   };
 
-  const handleRemainingTickets = (event) => {
-    const result = event.target.value.replace(/\D/g, "");
-    setRemainingTickets(result);
-  };
-
   return (
     <div className="container">
       <Messages
@@ -89,7 +87,7 @@ export default function AddFlightForm() {
             value={fromValue}
             onChange={setFromValue}
             getOptionLabel={(option) => option.name}
-            getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
+            getOptionValue={(option) => option.id}
             placeholder={"From: "}
           />
         </div>
@@ -100,7 +98,7 @@ export default function AddFlightForm() {
             value={toValue}
             onChange={setToValue}
             getOptionLabel={(option) => option.name}
-            getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
+            getOptionValue={(option) => option.id}
             placeholder={"To: "}
           />
         </div>
@@ -111,7 +109,6 @@ export default function AddFlightForm() {
         label={"Departure time: "}
         variant="outlined"
         onChange={setDepTime}
-        // is24Hour
       />
       <DateTimePicker
         id="outlined-Landing"
@@ -129,19 +126,7 @@ export default function AddFlightForm() {
         value={remainingTickets}
         onChange={handleRemainingTickets}
       />
-      <Button
-        variant="contained"
-        className="Button"
-        onClick={handleClick}
-        // apiAddFlight(
-        //   originCountryID,
-        //   destinationCountryID,
-        //   departureTime,
-        //   landingTime,
-        //   remainingTickets
-        // ).then((response) => console.log(response))
-        // }
-      >
+      <Button variant="contained" className="Button" onClick={handleClick}>
         Add Flight
       </Button>
     </div>

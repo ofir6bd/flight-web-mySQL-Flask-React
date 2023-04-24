@@ -3,7 +3,6 @@ import logo from "../../images/logo.PNG";
 import {
   Nav,
   NavLink,
-  // Bars,
   NavMenu,
   NavBtn,
   NavBtnLink,
@@ -89,7 +88,6 @@ const Navbar = () => {
             </NavLink>
           </NavMenu>
         )}
-
         {!localStorage.getItem("globalVarUserId") ? (
           <div>
             <div>

@@ -4,7 +4,6 @@ import { Button } from "@mui/material";
 import { apiRegisterAsAirline } from "../../apiHandler/apiHandlerAirline";
 import { apiGetAllCountries } from "../../apiHandler/apiHandler";
 import { apiGetAirlineDetails } from "../../apiHandler/apiHandlerAirline";
-
 import Select from "react-select";
 import { useNavigate } from "react-router";
 import Messages from "../../messages";
@@ -19,6 +18,7 @@ function RegisterAsAirlineForm() {
     setName(event.target.value);
   };
 
+  //to load the options for the dropdown
   useEffect(() => {
     function fetchData() {
       apiGetAllCountries().then((response) => {
@@ -28,6 +28,7 @@ function RegisterAsAirlineForm() {
     fetchData();
   }, []);
 
+  //the actions post button submit
   const handleClick = () => {
     if (value !== null) {
       apiRegisterAsAirline(
@@ -36,7 +37,6 @@ function RegisterAsAirlineForm() {
         localStorage.getItem("globalVarUserId")
       ).then((response) => {
         if (response.success) {
-          // console.log(response);
           localStorage.setItem("globalVarMessage", response.success);
           localStorage.setItem("globalVarMessageType", "success");
           apiGetAirlineDetails()
@@ -68,7 +68,6 @@ function RegisterAsAirlineForm() {
         variant="outlined"
         onChange={handleName}
       />
-
       <Select
         name="User Role:"
         options={options}

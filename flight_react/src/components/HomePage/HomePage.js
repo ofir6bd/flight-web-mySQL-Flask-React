@@ -1,11 +1,9 @@
 import React from "react";
 import "./HomePage.css";
-import { useNavigate } from "react-router";
 import Messages from "../../messages";
 import HelloSlider from "./HelloSlider";
 
 function HomePage() {
-  let navigate = useNavigate();
 
   return (
     <div>

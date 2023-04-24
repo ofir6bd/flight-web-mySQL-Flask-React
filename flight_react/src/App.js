@@ -37,6 +37,7 @@ function App() {
     navigate(path);
   }
 
+  //here I configured all the components with the name of it
   return (
     <div className="App">
       <LocalizationProvider dateAdapter={AdapterDayjs}>

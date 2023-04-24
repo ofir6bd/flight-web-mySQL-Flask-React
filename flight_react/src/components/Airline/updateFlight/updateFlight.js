@@ -19,18 +19,23 @@ export default function UpdateFlightForm() {
   const [depTime, setDepTime] = useState(null);
   const [lanTime, setLanTime] = useState(null);
 
+  //to load the options for the dropdown
   useEffect(() => {
     function fetchData() {
       apiGetAllCountries().then((response) => {
         setOptions(response);
-        // console.log(response);
       });
     }
     fetchData();
   }, []);
 
+  const handleRemainingTickets = (event) => {
+    const result = event.target.value.replace(/\D/g, "");
+    state.flight.remaining_tickets = result;
+  };
+
+  //the actions post button submit
   const handleClick = () => {
-    console.log("start update Flight handleClick");
     if (fromValue) {
       state.flight.origin_country_id = fromValue.id;
     }
@@ -50,21 +55,15 @@ export default function UpdateFlightForm() {
 
     apiUpdateFlight(state.flight).then((response) => {
       if (response.success) {
-        console.log(response);
         localStorage.setItem("globalVarMessage", response.success);
         localStorage.setItem("globalVarMessageType", "success");
         navigate("/airlinePage");
       } else {
-        console.log(response);
         localStorage.setItem("globalVarMessage", JSON.stringify(response));
         localStorage.setItem("globalVarMessageType", "error");
         navigate("/airlinePage");
       }
     });
-  };
-  const handleRemainingTickets = (event) => {
-    const result = event.target.value.replace(/\D/g, "");
-    state.flight.remaining_tickets = result;
   };
 
   return (

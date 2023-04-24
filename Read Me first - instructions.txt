@@ -14,5 +14,6 @@ steps:
 
 
 -------------------------general info-------------------------
+I didn't gave comments for every function since the name of the function is self explenatory
 Postman queries exported to the main folder as "Postman-Flight-project.postman_collection.json"
 - The date range search for a specific date it's 3 days forward and one day before

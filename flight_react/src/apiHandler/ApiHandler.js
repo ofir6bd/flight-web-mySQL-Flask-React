@@ -1,10 +1,3 @@
-// export function apiGetAllFlights() {
-//   console.log("start api apiGetAllFlights");
-//   var url = "http://127.0.0.1:5000/API/flights";
-//   var flights = fetch(url).then((response) => response.json());
-//   return flights;
-// }
-
 export function apiGetAllCountries() {
   console.log("start api apiGetAllCountries");
   const requestOptions = { method: "GET" };

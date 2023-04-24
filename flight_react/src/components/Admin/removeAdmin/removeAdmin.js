@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-
 import { Button } from "@mui/material";
 import {
   apiGetAllAdmins,
@@ -10,31 +9,29 @@ import { useNavigate } from "react-router";
 import Select from "react-select";
 
 export default function RemoveAdminForm() {
+  let navigate = useNavigate();
   const [value, setValue] = React.useState(null);
   const [options, setOptions] = React.useState([]);
 
-  let navigate = useNavigate();
-
+  //to load the options for the dropdown
   useEffect(() => {
     function fetchData() {
       apiGetAllAdmins().then((response) => {
         setOptions(response);
-        console.log(response);
       });
     }
     fetchData();
   }, []);
 
+  //the actions for the button submit
   const handleClick = () => {
     if (value !== null) {
       apiRemoveAdmin(value.id).then((response) => {
         if (response.success) {
-          console.log(response);
           localStorage.setItem("globalVarMessage", response.success);
           localStorage.setItem("globalVarMessageType", "success");
           navigate("/adminPage");
         } else {
-          console.log(response);
           localStorage.setItem("globalVarMessage", JSON.stringify(response));
           localStorage.setItem("globalVarMessageType", "error");
           navigate("/removeAdmin");
@@ -65,9 +62,8 @@ export default function RemoveAdminForm() {
           ", User ID: " +
           option.user_id
         }
-        getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
+        getOptionValue={(option) => option.id}
       />
-
       <Button variant="contained" className="Button" onClick={handleClick}>
         Remove Admin
       </Button>

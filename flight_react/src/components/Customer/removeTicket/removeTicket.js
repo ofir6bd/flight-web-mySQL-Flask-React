@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { apiGetMyTickets } from "../../../apiHandler/apiHandlerCustomer";
 import { apiRemoveTicket } from "../../../apiHandler/apiHandlerCustomer";
@@ -7,31 +6,29 @@ import { useNavigate } from "react-router";
 import Select from "react-select";
 
 export default function RemoveTicketForm() {
+  let navigate = useNavigate();
   const [value, setValue] = React.useState();
   const [options, setOptions] = React.useState([]);
 
-  let navigate = useNavigate();
-
+  //to load the options for the dropdown
   useEffect(() => {
     function fetchData() {
       apiGetMyTickets().then((response) => {
         setOptions(response);
-        console.log(response);
       });
     }
     fetchData();
   }, []);
 
+  //the actions post button submit
   const handleClick = () => {
     if (value !== null) {
       apiRemoveTicket(value.ticket_id)
         .then((response) => {
           if (response.success) {
-            console.log(response);
             localStorage.setItem("globalVarMessage", response.success);
             localStorage.setItem("globalVarMessageType", "success");
           } else {
-            console.log(response);
             localStorage.setItem("globalVarMessage", JSON.stringify(response));
             localStorage.setItem("globalVarMessageType", "error");
           }
@@ -41,7 +38,6 @@ export default function RemoveTicketForm() {
         });
     }
   };
-
 
   return (
     <div className="container">
@@ -65,7 +61,6 @@ export default function RemoveTicketForm() {
         }
         getOptionValue={(option) => option.ticket_id} // It should be unique value in the options. E.g. ID
       />
-
       <Button variant="contained" className="Button" onClick={handleClick}>
         Remove Ticket
       </Button>

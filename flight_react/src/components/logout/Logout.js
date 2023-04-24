@@ -1,8 +1,6 @@
 import React from "react";
-
 import { Button } from "@mui/material";
 import "./logout.css";
-
 import { useNavigate } from "react-router";
 
 function Logout() {
@@ -10,8 +8,6 @@ function Logout() {
 
   const handleClick = () => {
     localStorage.clear();
-    console.log("logout done");
-    console.log(localStorage.getItem("globalVarCustomerId"));
     navigate("/");
   };
 

@@ -8,7 +8,6 @@ import Select from "react-select";
 import Messages from "../../messages";
 import { DateTimePicker } from "@mui/x-date-pickers";
 import DateFormat from "../../dateFormat";
-// import HelloSlider from "../HomePage/HelloSlider";
 
 function SearchFlight() {
   let navigate = useNavigate();
@@ -18,6 +17,7 @@ function SearchFlight() {
   const [depTime, setDepTime] = useState(null);
   const [lanTime, setLanTime] = useState(null);
 
+  //to load the options for the dropdown
   useEffect(() => {
     function fetchData() {
       apiGetAllCountries().then((response) => {
@@ -32,6 +32,7 @@ function SearchFlight() {
   var departure_time = "";
   var landing_time = "";
 
+  //the actions post button submit
   const handleClick = () => {
     if (fromValue) {
       from = fromValue.id;
@@ -49,7 +50,6 @@ function SearchFlight() {
     apiGetFlightsByParameters(from, to, departure_time, landing_time).then(
       (response) => {
         if (response.length > 0) {
-          console.log("flight found", response);
           navigate("/flights", { state: { flights: response } });
         } else {
           localStorage.setItem("globalVarMessage", "no flights found");
@@ -112,8 +112,6 @@ function SearchFlight() {
         <Button variant="contained" className="Button" onClick={handleClick}>
           Submit
         </Button>
-
-        {/* <HelloSlider/> */}
       </div>
     </div>
   );

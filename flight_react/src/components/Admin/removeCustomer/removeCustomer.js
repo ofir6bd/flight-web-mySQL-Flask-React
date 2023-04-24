@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-
 import { Button } from "@mui/material";
 import { apiGetAllCustomers } from "../../../apiHandler/apiHandler";
 import { apiRemoveCustomer } from "../../../apiHandler/apiHandlerAdmin";
@@ -8,32 +7,30 @@ import Select from "react-select";
 import Messages from "../../../messages";
 
 export default function RemoveCustomerForm() {
+  let navigate = useNavigate();
   const [value, setValue] = React.useState(null);
   const [options, setOptions] = React.useState([]);
 
-  let navigate = useNavigate();
-
+//to load the options for the dropdown
   useEffect(() => {
     function fetchData() {
       apiGetAllCustomers().then((response) => {
         setOptions(response);
-        console.log(response);
       });
     }
     fetchData();
   }, []);
 
+  //for the actions post button submit
   const handleClick = () => {
     if (value !== null) {
       apiRemoveCustomer(value.id)
         .then((response) => {
           if (response.success) {
-            console.log(response);
             localStorage.setItem("globalVarMessage", response.success);
             localStorage.setItem("globalVarMessageType", "success");
              navigate("/adminPage");
           } else {
-            console.log(response);
             localStorage.setItem("globalVarMessage", JSON.stringify(response));
             localStorage.setItem("globalVarMessageType", "error");
              navigate("/removeCustomer");
@@ -70,9 +67,8 @@ export default function RemoveCustomerForm() {
           ", User ID: " +
           option.user_id
         }
-        getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
+        getOptionValue={(option) => option.id} 
       />
-
       <Button variant="contained" className="Button" onClick={handleClick}>
         Remove Customer
       </Button>

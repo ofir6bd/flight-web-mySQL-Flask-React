@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { apiGetMyFlights } from "../../../apiHandler/apiHandlerAirline";
 import { apiRemoveFlight } from "../../../apiHandler/apiHandlerAirline";
@@ -8,37 +7,34 @@ import Select from "react-select";
 import Messages from "../../../messages";
 
 export default function RemoveFlightForm() {
+  let navigate = useNavigate();
   const [value, setValue] = React.useState(null);
   const [options, setOptions] = React.useState([]);
 
-  let navigate = useNavigate();
-
+  //to load the options for the dropdown
   useEffect(() => {
     function fetchData() {
       apiGetMyFlights().then((response) => {
         setOptions(response);
-        console.log(response);
       });
     }
     fetchData();
   }, []);
 
+  //the actions for the button submit
   const handleClick = () => {
     if (value !== null) {
-      apiRemoveFlight(value.flight_id)
-        .then((response) => {
-          if (response.success) {
-            console.log(response);
-            localStorage.setItem("globalVarMessage", response.success);
-            localStorage.setItem("globalVarMessageType", "success");
-            navigate("/airlinePage");
-          } else {
-            console.log(response);
-            localStorage.setItem("globalVarMessage", JSON.stringify(response));
-            localStorage.setItem("globalVarMessageType", "error");
-            navigate("/removeFlight");
-          }
-        });
+      apiRemoveFlight(value.flight_id).then((response) => {
+        if (response.success) {
+          localStorage.setItem("globalVarMessage", response.success);
+          localStorage.setItem("globalVarMessageType", "success");
+          navigate("/airlinePage");
+        } else {
+          localStorage.setItem("globalVarMessage", JSON.stringify(response));
+          localStorage.setItem("globalVarMessageType", "error");
+          navigate("/removeFlight");
+        }
+      });
     }
   };
 
@@ -68,7 +64,6 @@ export default function RemoveFlightForm() {
         }
         getOptionValue={(option) => option.flight_id} // It should be unique value in the options. E.g. ID
       />
-
       <Button variant="contained" className="Button" onClick={handleClick}>
         Remove Flight
       </Button>

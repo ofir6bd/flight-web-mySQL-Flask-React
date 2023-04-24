@@ -8,9 +8,19 @@ import Messages from "../../messages";
 
 function Login() {
   let navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
+  const handleEmail = (event) => {
+    setEmail(event.target.value);
+  };
+  const handlePassword = (event) => {
+    setPassword(event.target.value);
+  };
+
+  //actions post button submit
   const handleClick = () => {
-    console.log("The link was clicked before");
+    //auth function checks the authentication and saves the basic data in the local storage
     auth(email, password);
     setTimeout(() => {
       if (localStorage.getItem("globalVarCustomerId")) {
@@ -38,18 +48,6 @@ function Login() {
         navigate("/login");
       }
     }, 1000);
-
-    console.log("The link was clicked after");
-  };
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleEmail = (event) => {
-    setEmail(event.target.value);
-  };
-  const handlePassword = (event) => {
-    setPassword(event.target.value);
   };
 
   return (

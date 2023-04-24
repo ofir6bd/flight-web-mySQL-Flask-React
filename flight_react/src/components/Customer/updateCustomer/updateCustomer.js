@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
-// import "./login.css";
-// import { UseAuth } from "../useAuth/useAuth";
 import { apiUpdateCustomer } from "../../../apiHandler/apiHandlerCustomer";
 import { useNavigate } from "react-router";
 import { apiGetCustomerDetails } from "../../../apiHandler/apiHandlerCustomer";
@@ -10,7 +8,6 @@ import Messages from "../../../messages";
 
 export default function AddCustomerForm() {
   let navigate = useNavigate();
-
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
@@ -34,8 +31,18 @@ export default function AddCustomerForm() {
     setCreditCardNo(event.target.value);
   };
 
+  //to load the options for the button submit
+  useEffect(() => {
+    function fetchData() {
+      apiGetCustomerDetails().then((response) => {
+        setOptions(response);
+      });
+    }
+    fetchData();
+  }, []);
+
+  //the actions post button submit
   const handleClick = () => {
-    console.log("start update customer handleClick");
     const userID = 1;
     apiUpdateCustomer(
       firstName,
@@ -46,27 +53,16 @@ export default function AddCustomerForm() {
       userID
     ).then((response) => {
       if (response.success) {
-        console.log(response);
         localStorage.setItem("globalVarMessage", response.success);
         localStorage.setItem("globalVarMessageType", "success");
         navigate("/customerPage");
       } else {
-        console.log(response);
         localStorage.setItem("globalVarMessage", JSON.stringify(response));
         localStorage.setItem("globalVarMessageType", "error");
         navigate("/updateCustomer");
       }
     });
   };
-
-  useEffect(() => {
-    function fetchData() {
-      apiGetCustomerDetails().then((response) => {
-        setOptions(response);
-      });
-    }
-    fetchData();
-  }, []);
 
   return (
     <div className="container">

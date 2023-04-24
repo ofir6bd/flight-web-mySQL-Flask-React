@@ -19,12 +19,11 @@ export default function AddAirlineForm() {
   const handleName = (event) => {
     setName(event.target.value);
   };
-
+// to load the options to the dropdown
   useEffect(() => {
     function fetchData() {
       apiGetAllUsersPreAirline().then((response) => {
         setOptions(response);
-        // console.log(response);
       });
       apiGetAllCountries().then((response) => {
         setOptionsCountry(response);
@@ -45,12 +44,10 @@ export default function AddAirlineForm() {
     }
     apiAddAirline(name, country_id, user_id).then((response) => {
       if (response.success) {
-        console.log(response);
         localStorage.setItem("globalVarMessage", response.success);
         localStorage.setItem("globalVarMessageType", "success");
         navigate("/adminPage");
       } else {
-        console.log(response);
         localStorage.setItem("globalVarMessage", JSON.stringify(response));
         localStorage.setItem("globalVarMessageType", "error");
         navigate("/addAirline");
@@ -77,7 +74,7 @@ export default function AddAirlineForm() {
           value={countryID}
           onChange={setCountryID}
           getOptionLabel={(option) => option.name}
-          getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
+          getOptionValue={(option) => option.id} 
           placeholder="Country:"
         />
       </div>
@@ -95,7 +92,7 @@ export default function AddAirlineForm() {
             ", Email: " +
             option.email
           }
-          getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
+          getOptionValue={(option) => option.id} 
           placeholder="Connect to user:"
         />
       </div>

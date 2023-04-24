@@ -32,6 +32,7 @@ function RegisterAsCustomerForm() {
     setCreditCardNo(event.target.value);
   };
 
+  //the action post button submit
   const handleClick = () => {
     apiRegisterAsCustomer(
       firstName,
@@ -42,7 +43,6 @@ function RegisterAsCustomerForm() {
       localStorage.getItem("globalVarUserId")
     ).then((response) => {
       if (response.success) {
-        // console.log(response);
         localStorage.setItem("globalVarMessage", response.success);
         localStorage.setItem("globalVarMessageType", "success");
         apiGetCustomerDetails()

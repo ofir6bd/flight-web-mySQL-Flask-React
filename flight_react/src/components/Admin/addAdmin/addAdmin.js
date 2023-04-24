@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
-// import "./login.css";
-// import { UseAuth } from "../useAuth/useAuth";
 import { apiAddAdmin } from "../../../apiHandler/apiHandlerAdmin";
 import { useNavigate } from "react-router";
 import Select from "react-select";
@@ -22,40 +20,36 @@ export default function AddAdminForm() {
   const handleLastName = (event) => {
     setLastName(event.target.value);
   };
-  // const handleUserID = (event) => {
-  //   setUserID(event.target.value);
-  // };
 
+// to load the options for the dropdown
   useEffect(() => {
     function fetchData() {
       apiGetAllUsersPreAdmin().then((response) => {
         setOptions(response);
-        // console.log(response);
       });
     }
     fetchData();
   }, []);
 
+  //the actions post button submit
   const handleClick = () => {
-    console.log("start add admin handleClick");
     var user_id = "";
     if (userID) {
       user_id = userID.id;
     }
     apiAddAdmin(firstName, lastName, user_id).then((response) => {
       if (response.success) {
-        console.log(response);
         localStorage.setItem("globalVarMessage", response.success);
         localStorage.setItem("globalVarMessageType", "success");
         navigate("/adminPage");
       } else {
-        console.log(response);
         localStorage.setItem("globalVarMessage", JSON.stringify(response));
         localStorage.setItem("globalVarMessageType", "error");
         navigate("/addAdmin");
       }
     });
   };
+
   return (
     <div className="container">
       <Messages
@@ -89,7 +83,7 @@ export default function AddAdminForm() {
             ", Email: " +
             option.email
           }
-          getOptionValue={(option) => option.id} // It should be unique value in the options. E.g. ID
+          getOptionValue={(option) => option.id} 
           placeholder="Connect to user:"
         />
       </div>
