@@ -1,5 +1,5 @@
 
--------------------------information how to upload the server / website-------------------------
+-------------------------information how to upload the servers / website-------------------------
 steps:
 - install all requirements for the enviroment
 - create db in mySQL as "flight_db"
