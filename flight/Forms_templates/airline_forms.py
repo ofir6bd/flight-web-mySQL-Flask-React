@@ -18,6 +18,7 @@ from Facades.AnonymousFacade import AnonymousFacade
 from Facades.AirlineFacade import AirlineFacade
 from wtforms.validators import DataRequired
 
+
 def get_all_airlines():
     final_list = [(0, 'Airline company')]
     fac_obj = AnonymousFacade()
@@ -25,6 +26,7 @@ def get_all_airlines():
     for i in airlines:
         final_list.append((i.id, i.name))
     return final_list
+
 
 def get_all_countries():
     final_list = [(0, 'Choose which Country')]
@@ -77,8 +79,10 @@ class remove_flight_form(FlaskForm):
             return False
         return True
     
+    
 class update_airline_form(FlaskForm):
     name = StringField()
+
 
 class company_flights_form(FlaskForm):
     flights_detailes = SelectField(validators=[DataRequired()], coerce=int)

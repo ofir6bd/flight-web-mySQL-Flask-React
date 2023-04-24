@@ -10,7 +10,6 @@ parent = os.path.dirname(current)
 sys.path.append(parent)
 
 from Forms_templates.airline_forms import add_flight_form,remove_flight_form,update_airline_form,company_flights_form,update_flight_form
-
 from flask import Flask, redirect, url_for, render_template, flash
 from flask_login import login_required
 from per_req_Wrappers import require_airline_role
@@ -65,7 +64,6 @@ def remove_flight(company_name):
     form = remove_flight_form() 
     fac_obj = AirlineFacade(name=company_name)
     all_company_flights = fac_obj.get_my_flights()
-
     final_list = [(0, 'Choose which flight')]
     for i in all_company_flights:
         dal_obj1 = AirlineFacade(id=i.origin_country_id)
@@ -74,13 +72,11 @@ def remove_flight(company_name):
         destination = dal_obj2.get_country_by_id()
         full_flight_details = f'{company_name}, From:{origin.name}, To:{destination.name}, Departure Date:{i.departure_time}, Landing Date:{i.landing_time}'
         final_list.append((i.id, full_flight_details ))
-
     form.flights_detailes.choices = final_list
-
     if form.validate_on_submit():
         fac_obj = AirlineFacade(id=form.flights_detailes.data)
         res = fac_obj.remove_flight()
-        
+    
         if res:
             flash(f"Flight removed", "success")
         return redirect(url_for('company_home',company_name=company_name))
@@ -93,14 +89,12 @@ def remove_flight(company_name):
         )
 
 
-
 @login_required
 @require_airline_role
 def update_airline(company_name):
     form = update_airline_form() 
     fac_obj = AirlineFacade(name=company_name)
     airline = fac_obj.get_airline_by_name()
-
     if form.validate_on_submit():
         fac_obj = AirlineFacade(id=airline.id, name=form.name.data)
         res = fac_obj.update_airline()
@@ -139,7 +133,6 @@ def update_flight(company_name):
 
     form.flights_detailes.choices = final_list
     selected_flight_id = form.flights_detailes.data
-
     if form.validate_on_submit():
         return redirect(url_for('update_flight_fields',company_name=company_name,flight_id=selected_flight_id))
         

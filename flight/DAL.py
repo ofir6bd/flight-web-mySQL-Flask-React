@@ -1,5 +1,5 @@
 """
-This data layer will be the only file that communicate with the DB, universal for all tables
+This data layer will be the only file that communicate with the DB, universal as it can be
 """
 from app import create_app,db
 from models import Users, Countries,Flights

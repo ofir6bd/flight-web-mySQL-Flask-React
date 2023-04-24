@@ -1,4 +1,6 @@
-
+"""
+This file configure the data base and the relationship between the tables.
+"""
 from app import db
 from flask_login import UserMixin
 

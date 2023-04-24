@@ -1,9 +1,12 @@
-
+"""
+This file contains wrappers/ decorators in order to check authentication privileges before every every api request
+"""
 from functools import wraps
 from flask import Flask, redirect, url_for,request, session, flash
 from Facades.AnonymousFacade import AnonymousFacade
 from flask_bcrypt import check_password_hash
 from flask_login import login_user,logout_user
+
 
 # admin wrapper 
 def require_admin_role(func):
@@ -26,6 +29,7 @@ def require_airline_role(func):
         return func(*args, **kwargs)
     return wrapper
 
+
 # customer wrapper 
 def require_customer_role(func):
     @wraps(func)
@@ -43,12 +47,10 @@ def api_login(email,password):
     if check_password_hash(user.password, password):
         login_user(user)
         session['user_id'] = user.id
-
         fac_obj = AnonymousFacade(user_id=int(user.id))
         admin = fac_obj.get_admin_by_user_id()
         airline = fac_obj.get_airline_by_user_id()
         customer = fac_obj.get_customer_by_user_id()
-
         if admin:
             session['user_role'] = 'admin'
             session['admin_id'] = admin.id
@@ -63,6 +65,7 @@ def api_login(email,password):
             if user.user_role == 3:
                 session['user_role_num'] = "pre_customer"
     return
+
 
 # api wrapper 
 def require_api_auth(func):

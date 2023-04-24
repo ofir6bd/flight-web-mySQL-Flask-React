@@ -1,8 +1,7 @@
 """
-That data can be used to GET, PUT (updade), POST (Add) and DELETE data types,
- which refers to the reading, updating, creating and deleting
- of operations concerning resources.
+The following code refering to API, will be used to GET, PUT (updade), POST (Add) and DELETE data types
 """
+
 import sys
 import os
 from app import bcrypt
@@ -20,6 +19,7 @@ from flask import jsonify
 from per_req_Wrappers import require_api_auth
 from API_routes.api_validation import *
 from flask_bcrypt import check_password_hash
+
 
 def api_get_flights_by_param():
     if request.args.get('origin_country_id'):
@@ -42,21 +42,26 @@ def api_get_flights_by_param():
                                 departure_time=departure_time,landing_time=landing_time)
     return fac_obj.get_flights_by_parameters()
 
+
 def api_get_all_countries():
     fac_obj = AnonymousFacade(api=True)
     return fac_obj.get_all_countries()
+
 
 def api_get_all_user_roles():
     fac_obj = AnonymousFacade(api=True)
     return fac_obj.get_all_user_roles()
 
+
 def api_get_all_airlines():
     fac_obj = AnonymousFacade(api=True)
     return fac_obj.get_all_airlines()
 
+
 def api_get_all_flights():
     fac_obj = AnonymousFacade(api=True)
     return fac_obj.get_all_flights()
+
 
 # def api_get_flight_by_id(flight_id):
 #     fac_obj = AnonymousFacade(api=True,id=flight_id)
@@ -66,6 +71,7 @@ def api_get_all_flights():
 #     else:
 #         return jsonify({ 'error': 'flight not found'})
 
+
 # def api_get_country_by_id(country_id):
 #     fac_obj = AnonymousFacade(api=True,id=country_id)
 #     res = fac_obj.get_country_by_id()
@@ -73,6 +79,7 @@ def api_get_all_flights():
 #         return res
 #     else:
 #         return jsonify({ 'error': 'country not found'})
+    
     
 def api_check_login():
     email = request.args.get('email')
@@ -83,6 +90,7 @@ def api_check_login():
         return jsonify({ 'success': 'email and password are correct', 'user_id': user.id,'user_role': user.user_role})
     else:
         return jsonify({ 'error': 'one of the parameters are wrong'})
+    
     
 def api_create_new_user():
     username = request.args.get('username')
@@ -95,7 +103,6 @@ def api_create_new_user():
         return jsonify(res)
     
     password = bcrypt.generate_password_hash(password) # encrypt password
-    
     if username and password and email and user_role:
         fac_obj = AnonymousFacade(api=True,username=username,password=password,email=email,user_role=user_role)
         res = fac_obj.create_new_user()
@@ -105,6 +112,7 @@ def api_create_new_user():
             return jsonify({ 'error': 'error occured'})
     else:
         return jsonify({ 'error': 'one of more parameters are'})
+
 
 @require_api_auth
 def api_get_admin_by_user_id():
@@ -132,6 +140,7 @@ def api_get_customer_by_user_id():
         else:
             return jsonify({'error': "no user found"})
 
+
 @require_api_auth
 def api_get_airline_by_user_id():
     user_id = request.args.get('user_id')
@@ -145,6 +154,7 @@ def api_get_airline_by_user_id():
         else:
             return jsonify({'error': "no user found"})
 
+
 @require_api_auth
 def api_register_as_customer():
     if not current_user.is_authenticated:
@@ -156,7 +166,6 @@ def api_register_as_customer():
         phone_no = request.args.get('phone_no')
         credit_card_no = request.args.get('credit_card_no')
         user_id = session['user_id'] 
-
         if first_name and last_name and user_id and address and phone_no and credit_card_no and user_id:
             res = validate_customer(first_name=first_name,last_name=last_name,address=address,\
                                               phone_no=phone_no,credit_card_no=credit_card_no,user_id=user_id)
@@ -172,6 +181,7 @@ def api_register_as_customer():
                 return jsonify({ 'error': 'phone number or credit card number already exists in the database'})
         else:
             return jsonify({ 'error': 'one of more parameters are missing'})
+        
         
 @require_api_auth
 def api_register_as_airline():

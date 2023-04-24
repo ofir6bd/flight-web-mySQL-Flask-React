@@ -12,11 +12,11 @@ sys.path.append(parent)
 from wtforms import ValidationError,validators,SelectField
 from wtforms.validators import DataRequired
 from wtforms import StringField, DateTimeLocalField
-
 from flask_wtf import FlaskForm
 from wtforms import ValidationError
 from models import *
 from Facades.AnonymousFacade import AnonymousFacade
+
 
 def get_all_countries():
     final_list = [(0, 'Choose which Country')]

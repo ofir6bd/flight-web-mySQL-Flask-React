@@ -1,8 +1,7 @@
 """
-That data can be used to GET, PUT, POST and DELETE data types,
- which refers to the reading, updating, creating and deleting
- of operations concerning resources.
+The following code refering to API, will be used to GET, PUT (updade), POST (Add) and DELETE data types
 """
+
 import sys
 import os
  
@@ -20,6 +19,7 @@ from flask import jsonify
 from per_req_Wrappers import require_api_auth
 from API_routes.api_validation import *
 
+
 @require_api_auth
 def api_get_my_tickets():
     if not current_user.is_authenticated:
@@ -28,6 +28,7 @@ def api_get_my_tickets():
         if session['user_role'] == 'customer':
             fac_obj = CustomerFacade(api=True,customer_id=session['customer_id'])
             return fac_obj.get_my_ticket()
+
 
 @require_api_auth
 def api_delete_my_ticket(ticket_id):
@@ -51,6 +52,7 @@ def api_delete_my_ticket(ticket_id):
         else:
             return jsonify({ 'error': 'you do not have customer role'})
     
+    
 @require_api_auth
 def api_add_ticket():
     if not current_user.is_authenticated:
@@ -73,7 +75,7 @@ def api_add_ticket():
             else:
                 return jsonify({ 'error': 'one or more parameters are missing'})
         else:
-            return jsonify({ 'error': 'you do not have cutomer permissions'})  
+            return jsonify({ 'error': 'you do not have customer permissions'})  
         
 
 @require_api_auth
@@ -91,7 +93,7 @@ def api_update_customer():
             user_id = session['user_id'] 
 
             res = validate_customer(action="update",first_name=first_name,last_name=last_name,address=address,\
-                                              phone_no=phone_no,credit_card_no=credit_card_no,user_id=user_id)
+                                            phone_no=phone_no,credit_card_no=credit_card_no,user_id=user_id)
             if res:
                 return jsonify(res)
 
@@ -105,6 +107,7 @@ def api_update_customer():
                 return jsonify({ 'error': 'Duplication error in DB'})
         else:
             return jsonify({ 'error': 'you do not have customer permissions'})  
+        
         
 @require_api_auth
 def api_get_customer_details():

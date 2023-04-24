@@ -1,8 +1,7 @@
 """
-That data can be used to GET, PUT, POST and DELETE data types,
- which refers to the reading, updating, creating and deleting
- of operations concerning resources.
+The following code refering to API, will be used to GET, PUT (updade), POST (Add) and DELETE data types
 """
+
 import sys
 import os
 from datetime import datetime
@@ -55,6 +54,7 @@ def api_delete_my_flight(flight_id):
                 return jsonify({ 'error': 'flight not found'}) 
         else:
             return jsonify({ 'error': 'you do not have airline permissions'})
+
 
 @require_api_auth
 def api_add_flight():
@@ -117,6 +117,7 @@ def api_update_airline():
                 return jsonify({ 'error': 'Duplication error in DB'})
         else:
             return jsonify({ 'error': 'you do not have airline permissions'})  
+        
         
 @require_api_auth
 def api_update_flight(flight_id):

@@ -1,4 +1,3 @@
-# Register route
 import sys
 import os
  
@@ -14,6 +13,7 @@ from flask_login import login_required
 from per_req_Wrappers import require_admin_role
 from Forms_templates.admin_forms import add_airline_form,add_customer_form,add_admin_form,remove_airline_form,remove_customer_form,remove_admin_form
 from Facades.AdministratorFacade import AdministratorFacade
+
 
 @login_required
 @require_admin_role
@@ -35,6 +35,7 @@ def add_airline():
         title="Add airline",
         btn_action="Add airline",
         )
+
 
 @login_required
 @require_admin_role
@@ -59,6 +60,7 @@ def add_customer():
         btn_action="Add customer",
         )
 
+
 @login_required
 @require_admin_role
 def add_admin():
@@ -80,6 +82,7 @@ def add_admin():
         btn_action="Add admin",
         )
 
+
 @login_required
 @require_admin_role
 def remove_airline():
@@ -97,6 +100,7 @@ def remove_airline():
         btn_action="Remove airline",
         )
 
+
 @login_required
 @require_admin_role
 def remove_customer():
@@ -113,6 +117,7 @@ def remove_customer():
         title="Remove customer",
         btn_action="Remove customer",
         )
+
 
 @login_required
 @require_admin_role

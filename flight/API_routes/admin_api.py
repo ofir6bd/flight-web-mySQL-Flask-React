@@ -1,7 +1,5 @@
 """
-That data can be used to GET, PUT (updade), POST (Add) and DELETE data types,
-which refers to the reading, updating, creating and deleting
-of operations concerning resources.
+The following code refering to API, will be used to GET, PUT (updade), POST (Add) and DELETE data types
 """
 import sys
 import os
@@ -20,6 +18,7 @@ from flask import jsonify
 from per_req_Wrappers import require_api_auth
 from API_routes.api_validation import *
 
+
 @require_api_auth
 def api_get_all_customers():
     if not current_user.is_authenticated:
@@ -31,6 +30,7 @@ def api_get_all_customers():
         else:
             return jsonify({ 'error': 'you do not have admin permissions'}) 
         
+        
 @require_api_auth
 def api_get_all_admins():
     if not current_user.is_authenticated:
@@ -41,6 +41,7 @@ def api_get_all_admins():
             return dal_obj.get_all_administrators()
         else:
             return jsonify({ 'error': 'you do not have admin permissions'}) 
+
 
 @require_api_auth
 def api_delete_customer(customer_id):
@@ -61,6 +62,7 @@ def api_delete_customer(customer_id):
         else:
             return jsonify({ 'error': 'you do not have admin permissions'})            
 
+
 @require_api_auth
 def api_delete_airline(airline_id):
     if not current_user.is_authenticated:
@@ -79,6 +81,7 @@ def api_delete_airline(airline_id):
                 return jsonify({ 'error': 'Airline not found'}) 
         else:
             return jsonify({ 'error': 'you do not have admin permissions'})  
+
 
 @require_api_auth
 def api_delete_admin(admin_id):
@@ -101,6 +104,7 @@ def api_delete_admin(admin_id):
                 return jsonify({ 'error': 'Admin not found'}) 
         else:
             return jsonify({ 'error': 'you do not have admin permissions'})  
+        
         
 @require_api_auth
 def api_add_admin():
@@ -127,6 +131,7 @@ def api_add_admin():
         else:
             return jsonify({ 'error': 'you do not have admin permissions'})  
         
+        
 @require_api_auth
 def api_add_customer():
     if not current_user.is_authenticated:
@@ -142,11 +147,11 @@ def api_add_customer():
 
             if first_name and last_name and user_id and address and phone_no and credit_card_no and user_id:
                 res = validate_customer(first_name=first_name,last_name=last_name,address=address,\
-                                              phone_no=phone_no,credit_card_no=credit_card_no,user_id=user_id)
+                                            phone_no=phone_no,credit_card_no=credit_card_no,user_id=user_id)
                 if res:
                     return jsonify(res)
                 fac_obj = AdministratorFacade(api=True,first_name=first_name,last_name=last_name,address=address,\
-                                              phone_no=phone_no,credit_card_no=credit_card_no,user_id=user_id)
+                                            phone_no=phone_no,credit_card_no=credit_card_no,user_id=user_id)
                 res = fac_obj.add_customer()
                 if res: 
                     return jsonify({ 'success': 'Customer added'}) 
@@ -156,6 +161,7 @@ def api_add_customer():
                 return jsonify({ 'error': 'one or more parameters are missing'})
         else:
             return jsonify({ 'error': 'you do not have admin permissions'})  
+        
         
 @require_api_auth
 def api_add_airline():

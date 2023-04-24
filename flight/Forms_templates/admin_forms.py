@@ -1,4 +1,3 @@
-
 import sys
 import os
  
@@ -10,13 +9,13 @@ parent = os.path.dirname(current)
 sys.path.append(parent)
 
 from wtforms import StringField
-
 from flask_wtf import FlaskForm
 from wtforms.validators import Length, Regexp
 from wtforms import ValidationError,SelectField
 from models import *
 from Facades.AnonymousFacade import AnonymousFacade
 from wtforms.validators import DataRequired
+
 
 def get_all_countries():
     final_list = [(0, 'Choose which Country')]
@@ -25,6 +24,7 @@ def get_all_countries():
     for i in items:
         final_list.append((i.id, i.name))
     return final_list
+
 
 def get_airline_user_list():
     final_list = [(0, 'Choose which user')]
@@ -35,6 +35,7 @@ def get_airline_user_list():
             final_list.append((i.id, i.username))
     return final_list
 
+
 def get_customer_user_list():
     final_list = [(0, 'Choose which user')]
     fac_obj = AnonymousFacade()
@@ -43,6 +44,7 @@ def get_customer_user_list():
         if i.user_role == 3:
             final_list.append((i.id, i.username))
     return final_list
+
 
 def get_admin_user_list():
     final_list = [(0, 'Choose which user')]
@@ -53,6 +55,7 @@ def get_admin_user_list():
             final_list.append((i.id, i.username))
     return final_list
 
+
 def get_all_airlines():
     final_list = [(0, 'Airline company')]
     fac_obj = AnonymousFacade()
@@ -61,6 +64,7 @@ def get_all_airlines():
         full_details = f'{i.name},{i.country_id}'
         final_list.append((i.id, full_details))
     return final_list
+
 
 def get_all_customers():
     final_list = [(0, 'Customers')]
@@ -71,6 +75,7 @@ def get_all_customers():
         final_list.append((i.id,full_details))
     return final_list
 
+
 def get_all_admins():
     final_list = [(0, 'Administrators')]
     fac_obj = AnonymousFacade()
@@ -79,6 +84,7 @@ def get_all_admins():
         full_details = f'{i.first_name},{i.last_name}'
         final_list.append((i.id, full_details))
     return final_list
+
 
 class add_airline_form(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])

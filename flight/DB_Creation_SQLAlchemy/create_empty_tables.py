@@ -1,3 +1,6 @@
+"""
+This file generates the table w/o data 
+"""
 import sys
 import os
 # import a module in the parent
@@ -39,7 +42,6 @@ class Users(db.Model,UserMixin):
     email = db.Column(db.String(50), nullable=False, unique=True)
     user_role = db.Column(db.Integer, db.ForeignKey('user_roles.id'))
     user_role_ = db.relationship('UserRoles')
-    
 
     def __repr__(self):
         return f'<Table: "Users", id:"{self.id}", username:"{self.username}", password:"{self.password}", email:"{self.email}", user_role:"{self.user_role}">'
@@ -142,7 +144,6 @@ class Tickets(db.Model):
 user_roles_list = ['Administrator', 'Airline_Company', 'Customer', 'Anonymous']
 countries_list = ['Israel', 'Marocco', 'USA', 'Lebanon']
 
-
 if __name__ == '__main__':
     with app.app_context():
         db.drop_all()
@@ -163,7 +164,7 @@ if __name__ == '__main__':
                 print(f"Error: {e}")
         
 
-print("empty Tables created ")
+print("Empty Tables created ")
 
 
 

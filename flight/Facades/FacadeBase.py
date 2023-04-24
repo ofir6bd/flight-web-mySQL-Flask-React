@@ -1,4 +1,6 @@
-
+""" 
+This file is connecting between the DAL (the connection to the DB) and the views, for the shared and general functions
+"""
 import sys
 import os
  
@@ -45,50 +47,62 @@ class FacadeBase(object):
         self.airline_company_id = airline_company_id
         self.customer_id = customer_id
 
+
     def get_all_flights(self):
         dal_obj = DataLayer(table1=Flights, api=self.api)      
         return dal_obj.get_all()
+    
     
     def get_all_user_roles(self):
         dal_obj = DataLayer(table1=UserRoles, api=self.api)      
         return dal_obj.get_all()
     
+    
     def get_all_users(self):
         dal_obj = DataLayer(table1=Users)      
         return dal_obj.get_all()
+    
     
     def get_all_countries(self):
         dal_obj = DataLayer(table1=Countries, api=self.api)  
         return dal_obj.get_all()   
     
+    
     def get_all_customers(self):
         dal_obj = DataLayer(table1=Customers, api=self.api)      
         return dal_obj.get_all()
+
 
     def get_all_administrators(self):
         dal_obj = DataLayer(table1=Administrators, api=self.api)     
         return dal_obj.get_all()
 
+
     def get_flight_by_id(self):
         dal_obj = DataLayer(api=self.api,table1=Flights,id=self.id)      
         return dal_obj.get_by_id()
+    
     
     def get_customer_by_id(self):
         dal_obj = DataLayer(table1=Customers,id=self.id)      
         return dal_obj.get_by_id()
     
+    
     def get_ticket_by_id(self):
         dal_obj = DataLayer(table1=Tickets,id=self.id)      
         return dal_obj.get_by_id()
+    
     
     def get_customer_by_phone_no(self):
         dal_obj = DataLayer(table1=Customers,input_attribute='phone_no', input_value=self.phone_no)  
         return dal_obj.get_one_by_param()
 
+
     def get_customer_by_credit_card_no(self):
         dal_obj = DataLayer(table1=Customers,input_attribute='credit_card_no', input_value=self.credit_card_no)  
         return dal_obj.get_one_by_param()
     
+    # this function filters the flights based the inputs parameters
     def get_flights_by_parameters(self):
         dal_obj = DataLayer() 
         all_flight_and_countries = dal_obj.join_flights_countries()
@@ -141,16 +155,16 @@ class FacadeBase(object):
             
         return all_flight_and_countries
 
+
     def get_all_airlines(self):
         dal_obj = DataLayer(table1=AirlineCompanies, api=self.api)       
         return dal_obj.get_all()
+
 
     def get_airline_by_id(self):
         dal_obj = DataLayer(table1=AirlineCompanies,id=self.id)      
         return dal_obj.get_by_id()
 
-    # def get_airline_by_parameteres(self,origin_country_id,destination_country_id, date):
-    #     pass
 
     def get_airline_by_name(self):
         dal_obj = DataLayer(table1=AirlineCompanies,input_attribute='name', input_value=self.name)
@@ -161,6 +175,7 @@ class FacadeBase(object):
         dal_obj = DataLayer(api=self.api,table1=Countries,id=self.id)      
         return dal_obj.get_by_id()
     
+    
     def get_admin_by_id(self):
         dal_obj = DataLayer(table1=Administrators,id=self.id)      
         return dal_obj.get_by_id()
@@ -170,33 +185,41 @@ class FacadeBase(object):
         dal_obj = DataLayer()      
         return dal_obj.insert_obj(user)
     
+    
     def get_user_by_email(self):
         dal_obj = DataLayer(table1=Users,input_attribute='email', input_value=self.email)
         return dal_obj.get_one_by_param()
+    
     
     def get_user_by_username(self):
         dal_obj = DataLayer(table1=Users,input_attribute='username', input_value=self.username)
         return dal_obj.get_one_by_param()
     
+    
     def get_user_by_id(self):
         dal_obj = DataLayer(table1=Users,input_attribute='id', input_value=self.id)
         return dal_obj.get_one_by_param()
+    
     
     def get_admin_by_user_id(self):
         dal_obj = DataLayer(table1=Administrators,input_attribute='user_id', input_value=self.user_id)
         return dal_obj.get_one_by_param()
     
+    
     def get_airline_by_user_id(self):
         dal_obj = DataLayer(table1=AirlineCompanies,input_attribute='user_id', input_value=self.user_id)
         return dal_obj.get_one_by_param()
+    
     
     def get_customer_by_user_id(self):
         dal_obj = DataLayer(table1=Customers,input_attribute='user_id', input_value=self.user_id)
         return dal_obj.get_one_by_param()
     
+    
     def get_flights_by_airline_id(self):
         dal_obj = DataLayer(table1=Flights,input_attribute='airline_company_id', input_value=int(self.airline_company_id))
         return dal_obj.get_all_by_filter()
+    
     
     def get_ticket_by_flight_id(self):
         dal_obj = DataLayer(table1=Tickets,input_attribute='flight_id', input_value=self.flight_id)

@@ -1,3 +1,6 @@
+""" 
+This file generates the tables in the DB and insert the following data inside 
+"""
 import sys
 import os
 # import a module in the parent
@@ -39,7 +42,6 @@ class Users(db.Model,UserMixin):
     user_role = db.Column(db.Integer, db.ForeignKey('user_roles.id'))
     user_role_ = db.relationship('UserRoles')
     
-
     def __repr__(self):
         return f'<Table: "Users", id:"{self.id}", username:"{self.username}", password:"{self.password}", email:"{self.email}", user_role:"{self.user_role}">'
     

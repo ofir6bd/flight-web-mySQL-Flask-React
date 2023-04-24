@@ -8,8 +8,8 @@ import Messages from "../../messages";
 
 function Login() {
   let navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
 
   const handleEmail = (event) => {
     setEmail(event.target.value);
@@ -20,34 +20,43 @@ function Login() {
 
   //actions post button submit
   const handleClick = () => {
+    if (email !== null && password !== null) {
+      auth(email, password);
+      setTimeout(() => {
+        if (localStorage.getItem("globalVarCustomerId")) {
+          navigate("/customerPage");
+        } else if (localStorage.getItem("globalVarAdminId")) {
+          navigate("/adminPage");
+        } else if (localStorage.getItem("globalVarAirlineId")) {
+          navigate("/airlinePage");
+        } else if (
+          localStorage.getItem("globalVarUserId") &&
+          localStorage.getItem("globalVarUserRole") == 3
+        ) {
+          navigate("/registerAsCustomer");
+        } else if (
+          localStorage.getItem("globalVarUserId") &&
+          localStorage.getItem("globalVarUserRole") == 2
+        ) {
+          navigate("/registerAsAirline");
+        } else {
+          localStorage.setItem(
+            "globalVarMessage",
+            "Email or password are incorrect"
+          );
+          localStorage.setItem("globalVarMessageType", "error");
+          navigate("/login");
+        }
+      }, 1000);
+    } else {
+      localStorage.setItem(
+        "globalVarMessage",
+        "one or more of the fields are missing"
+      );
+      localStorage.setItem("globalVarMessageType", "error");
+      navigate("/login");
+    }
     //auth function checks the authentication and saves the basic data in the local storage
-    auth(email, password);
-    setTimeout(() => {
-      if (localStorage.getItem("globalVarCustomerId")) {
-        navigate("/customerPage");
-      } else if (localStorage.getItem("globalVarAdminId")) {
-        navigate("/adminPage");
-      } else if (localStorage.getItem("globalVarAirlineId")) {
-        navigate("/airlinePage");
-      } else if (
-        localStorage.getItem("globalVarUserId") &&
-        localStorage.getItem("globalVarUserRole") == 3
-      ) {
-        navigate("/registerAsCustomer");
-      } else if (
-        localStorage.getItem("globalVarUserId") &&
-        localStorage.getItem("globalVarUserRole") == 2
-      ) {
-        navigate("/registerAsAirline");
-      } else {
-        localStorage.setItem(
-          "globalVarMessage",
-          "Email or password are incorrect"
-        );
-        localStorage.setItem("globalVarMessageType", "error");
-        navigate("/login");
-      }
-    }, 1000);
   };
 
   return (

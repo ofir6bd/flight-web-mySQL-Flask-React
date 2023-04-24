@@ -1,3 +1,7 @@
+"""
+    This file is the main core of the flask app project.
+    All the API views located in the designated files per the corresponding role admin/customer/airline or general
+"""
 from flask import Flask, redirect, url_for,request, render_template, session, flash
 from flask_login import login_user,login_required, logout_user,current_user
 from Facades.AnonymousFacade import AnonymousFacade
@@ -20,10 +24,6 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO) 
 file_Handler = logging.FileHandler("log_main.log")
 file_Handler = logging.Formatter('%(levelname)s:%(name)s:%(message)s')
-# file_Handler.setLevel(logging.ERROR)
-# logger.addHandler(file_Handler)
-
-
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -32,152 +32,154 @@ def load_user(user_id):
 
 app = create_app()
 
-# Home route
-@app.route("/", methods=("GET", "POST"), strict_slashes=False)
-def index():
-    if current_user.is_authenticated:    #Do the authentication here
-        customer_details = session['user_id']
-    else:
-        customer_details=0
-    form = search_flights_form()
-    if request.method == "GET":
-        return render_template("index.html",
-            form=form,
-            text="Book your next flight today with us!",
-            title="Home",
-            btn_action="Search",
-            customer_details=customer_details
-            )
-    if request.method == "POST":
-        origin_country = form.origin_country.data
-        destination_country = form.destination_country.data
-        departure_time = form.departure_time.data
-        landing_time = form.landing_time.data
+########################### these lines for the website on port 5000 that no longer in use, but keepet here maybe for later use
 
-        fac_obj = AnonymousFacade(origin_country=origin_country,destination_country=destination_country,\
-                                departure_time=departure_time,landing_time=landing_time)
-        flights = fac_obj.get_flights_by_parameters()
-        return render_template("flights.html",
-            form=form,
-            text="Book your next flight today with us!",
-            title="Home",
-            btn_action="Search",
-            flights=flights,
-            customer_details=customer_details
-            )
+# # Home route
+# @app.route("/", methods=("GET", "POST"), strict_slashes=False)
+# def index():
+#     if current_user.is_authenticated:    #Do the authentication here
+#         customer_details = session['user_id']
+#     else:
+#         customer_details=0
+#     form = search_flights_form()
+#     if request.method == "GET":
+#         return render_template("index.html",
+#             form=form,
+#             text="Book your next flight today with us!",
+#             title="Home",
+#             btn_action="Search",
+#             customer_details=customer_details
+#             )
+#     if request.method == "POST":
+#         origin_country = form.origin_country.data
+#         destination_country = form.destination_country.data
+#         departure_time = form.departure_time.data
+#         landing_time = form.landing_time.data
 
-# Login route
-@app.route("/login/", methods=("GET", "POST"), strict_slashes=False)
-def login():
-    form = login_form()
+#         fac_obj = AnonymousFacade(origin_country=origin_country,destination_country=destination_country,\
+#                                 departure_time=departure_time,landing_time=landing_time)
+#         flights = fac_obj.get_flights_by_parameters()
+#         return render_template("flights.html",
+#             form=form,
+#             text="Book your next flight today with us!",
+#             title="Home",
+#             btn_action="Search",
+#             flights=flights,
+#             customer_details=customer_details
+#             )
 
-    if form.validate_on_submit():
-        try:
-            fac_obj = CustomerFacade(email=form.email.data)
-            user = fac_obj.get_user_by_email()
-            if check_password_hash(user.password, form.password.data):
-                login_user(user)
+# # Login route
+# @app.route("/login/", methods=("GET", "POST"), strict_slashes=False)
+# def login():
+#     form = login_form()
+
+#     if form.validate_on_submit():
+#         try:
+#             fac_obj = CustomerFacade(email=form.email.data)
+#             user = fac_obj.get_user_by_email()
+#             if check_password_hash(user.password, form.password.data):
+#                 login_user(user)
             
-                session['user_id'] = user.id
+#                 session['user_id'] = user.id
 
-                fac_obj = AnonymousFacade(user_id=int(user.id))
-                admin = fac_obj.get_admin_by_user_id()
-                airline = fac_obj.get_airline_by_user_id()
-                customer = fac_obj.get_customer_by_user_id()
+#                 fac_obj = AnonymousFacade(user_id=int(user.id))
+#                 admin = fac_obj.get_admin_by_user_id()
+#                 airline = fac_obj.get_airline_by_user_id()
+#                 customer = fac_obj.get_customer_by_user_id()
 
-                if admin:
-                    session['user_role'] = 'admin'
-                elif airline:
-                    session['user_role'] = 'airline'
-                    return redirect(url_for('company_home',company_name=airline.name))
-                elif customer:
-                    session['user_role'] = 'customer'
-                    return redirect(url_for('customer_home',customer_details=customer.user_id))
-                else:
-                    session['user_role'] = 'general_user'
-                    if user.user_role == 3:
-                        session['user_role_num'] = "pre_customer"
+#                 if admin:
+#                     session['user_role'] = 'admin'
+#                 elif airline:
+#                     session['user_role'] = 'airline'
+#                     return redirect(url_for('company_home',company_name=airline.name))
+#                 elif customer:
+#                     session['user_role'] = 'customer'
+#                     return redirect(url_for('customer_home',customer_details=customer.user_id))
+#                 else:
+#                     session['user_role'] = 'general_user'
+#                     if user.user_role == 3:
+#                         session['user_role_num'] = "pre_customer"
 
                     
-                return redirect(url_for('index'))
-            else:
-                flash("Invalid Username or password!", "danger")
-        except Exception as e:
-            flash(e, "danger")
+#                 return redirect(url_for('index'))
+#             else:
+#                 flash("Invalid Username or password!", "danger")
+#         except Exception as e:
+#             flash(e, "danger")
 
-    return render_template("auth.html",
-        form=form,
-        text="Login",
-        title="Login",
-        btn_action="Login"
-        )
+#     return render_template("auth.html",
+#         form=form,
+#         text="Login",
+#         title="Login",
+#         btn_action="Login"
+#         )
 
-# Register route
-@app.route("/register/", methods=("GET", "POST"), strict_slashes=False)
-def register():
-    form = register_form() 
+# # Register route
+# @app.route("/register/", methods=("GET", "POST"), strict_slashes=False)
+# def register():
+#     form = register_form() 
 
-    if form.validate_on_submit():        
-        username = form.username.data
-        password = form.password.data
-        password=bcrypt.generate_password_hash(password) # encrypt password
-        email = form.email.data
-        role = form.role.data
+#     if form.validate_on_submit():        
+#         username = form.username.data
+#         password = form.password.data
+#         password=bcrypt.generate_password_hash(password) # encrypt password
+#         email = form.email.data
+#         role = form.role.data
     
-        fac_obj = AnonymousFacade(username=username,password=password,email=email,user_role=role)
-        res = fac_obj.create_new_user()
-        if res:
-            flash(f"Account Succesfully created", "success")
-            fac_obj = CustomerFacade(email=email)
-            user = fac_obj.get_user_by_email()
-            login_user(user)
-            session['user_id'] = user.id
-            session['user_role'] = 'general_user'
-            if user.user_role == 3:
-                session['user_role_num'] = "pre_customer"
-            return redirect(url_for('index'))
+#         fac_obj = AnonymousFacade(username=username,password=password,email=email,user_role=role)
+#         res = fac_obj.create_new_user()
+#         if res:
+#             flash(f"Account Succesfully created", "success")
+#             fac_obj = CustomerFacade(email=email)
+#             user = fac_obj.get_user_by_email()
+#             login_user(user)
+#             session['user_id'] = user.id
+#             session['user_role'] = 'general_user'
+#             if user.user_role == 3:
+#                 session['user_role_num'] = "pre_customer"
+#             return redirect(url_for('index'))
         
-    return render_template("auth.html",
-        form=form,
-        text="Create account",
-        title="Register",
-        btn_action="Register account"
-        )
+#     return render_template("auth.html",
+#         form=form,
+#         text="Create account",
+#         title="Register",
+#         btn_action="Register account"
+#         )
 
-@app.route("/logout")
-@login_required
-def logout():
-    logout_user()
-    session.pop('user_id', None)
-    session.pop('user_role', None)
-    session.pop('admin_id', None)
-    session.pop('airline_id', None)
-    session.pop('customer_id', None)
-    session.pop('user_role_num', None)
-    return redirect(url_for('login'))    
+# @app.route("/logout")
+# @login_required
+# def logout():
+#     logout_user()
+#     session.pop('user_id', None)
+#     session.pop('user_role', None)
+#     session.pop('admin_id', None)
+#     session.pop('airline_id', None)
+#     session.pop('customer_id', None)
+#     session.pop('user_role_num', None)
+#     return redirect(url_for('login'))    
 
-@app.route("/register_customer/", methods=("GET", "POST"), strict_slashes=False)
-@login_required
-def register_customer():
-    user_id = session['user_id']
-    form = register_customer_form() 
-    if form.validate_on_submit():
-        fac_obj = AnonymousFacade(first_name=form.first_name.data,\
-                                    last_name=form.last_name.data,\
-                                        address=form.address.data,\
-                                            phone_no=form.phone_no.data,\
-                                                credit_card_no=form.credit_card_no.data,user_id=user_id)
-        res = fac_obj.add_customer()
-        if res:
-            flash(f"Customer registered", "success")
-            session['user_role'] = 'customer'
-        return redirect(url_for('index'))
-    return render_template("register_customer.html",
-        form=form,
-        text="Register customer",
-        title="Register customer",
-        btn_action="Register customer",
-        )
+# @app.route("/register_customer/", methods=("GET", "POST"), strict_slashes=False)
+# @login_required
+# def register_customer():
+#     user_id = session['user_id']
+#     form = register_customer_form() 
+#     if form.validate_on_submit():
+#         fac_obj = AnonymousFacade(first_name=form.first_name.data,\
+#                                     last_name=form.last_name.data,\
+#                                         address=form.address.data,\
+#                                             phone_no=form.phone_no.data,\
+#                                                 credit_card_no=form.credit_card_no.data,user_id=user_id)
+#         res = fac_obj.add_customer()
+#         if res:
+#             flash(f"Customer registered", "success")
+#             session['user_role'] = 'customer'
+#         return redirect(url_for('index'))
+#     return render_template("register_customer.html",
+#         form=form,
+#         text="Register customer",
+#         title="Register customer",
+#         btn_action="Register customer",
+#         )
 
 # Customer routes
 app.add_url_rule('/customer/<int:customer_details>/', view_func=customer_home,  methods=("GET", "POST"), strict_slashes=False)

@@ -1,3 +1,6 @@
+"""
+      this page validating the inputs values of the api
+"""
 
 import re
 from Facades.CustomerFacade import CustomerFacade
@@ -6,6 +9,7 @@ from Facades.AdministratorFacade import AdministratorFacade
 from Facades.AirlineFacade import AirlineFacade
 from datetime import datetime
  
+# regex patterns in order to check the inputs
 first_name_regex_pattern = re.compile(r"^[a-zA-Z\s]{1,50}$")
 last_name_regex_pattern = re.compile(r"^[A-Za-z\s]{1,50}$")
 address_regex_pattern = re.compile(r"^[A-Za-z0-9]{1,50}$")
@@ -47,6 +51,7 @@ def validate_customer(action="",first_name="",last_name="",address="",phone_no="
    else:
       return
    
+   
 name_regex_pattern = re.compile(r"^[a-zA-Z\s]{1,50}$")
 country_id_regex_pattern = re.compile(r"^[0-9]{0,50}$")
 
@@ -81,6 +86,7 @@ def validate_airline(action="",name="",country_id="",user_id=""):
    else:
       return
 
+
 def validate_admin(action="",first_name="",last_name="",user_id=""):
    final_error_lst = []  
    if not first_name_regex_pattern.search(first_name) and first_name:
@@ -103,13 +109,13 @@ def validate_admin(action="",first_name="",last_name="",user_id=""):
       if user:
          if user.user_role != 1:
             final_error_lst.append({'error': 'user role for this user is not admin'}) 
-
    if len(final_error_lst) > 0:
       return final_error_lst
    else:
       return
    
 flight_id_regex_pattern = re.compile(r"^[0-9]{0,50}$")
+
 
 def validate_ticket(flight_id="",customer_id=""):
    final_error_lst = []  
@@ -180,6 +186,7 @@ def validate_flight(action="",id="",origin_country_id="",destination_country_id=
    else:
       return
       
+      
 def validate_dates(departure_time,landing_time):
    final_error_lst = [] 
    try:
@@ -198,11 +205,11 @@ def validate_dates(departure_time,landing_time):
    else:
       return
    
+   
 username_regex_pattern = re.compile(r"^[a-zA-Z\s]{1,50}$")
 password_regex_pattern = re.compile(r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$")
 email_regex_pattern = re.compile(r"([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+")
 user_role_regex_pattern = re.compile(r"^[1-3]$")
-
 
 def validate_user(action="",username="",password="",email="",user_role=""):
    final_error_lst = []  

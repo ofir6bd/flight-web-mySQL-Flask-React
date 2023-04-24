@@ -1,3 +1,6 @@
+""" 
+This file is connecting between the DAL (the connection to the DB) and the views, for the Customer functions
+"""
 from flask import session
 from Facades.FacadeBase import *
 from flask import jsonify
@@ -27,6 +30,7 @@ class CustomerFacade(FacadeBase):
         dal_obj = DataLayer()
         return dal_obj.update_item(customer)
 
+
     def add_ticket(self):
         dal_obj = DataLayer(table1=Customers,input_attribute='user_id', input_value=int(session['user_id']))
         user = dal_obj.get_one_by_param()
@@ -43,6 +47,7 @@ class CustomerFacade(FacadeBase):
         else:
             return res
         
+        
     def remove_ticket(self):
         dal_obj = DataLayer(id=self.id,table1=Tickets)
         ticket = dal_obj.get_by_id()
@@ -57,6 +62,7 @@ class CustomerFacade(FacadeBase):
         else:
             return res
         
+        
     def get_my_ticket(self):
         dal_obj = DataLayer(api=self.api,table1=Tickets,input_attribute='customer_id', input_value=self.customer_id)
         all_my_tickets =  dal_obj.get_all_by_filter()
@@ -68,7 +74,6 @@ class CustomerFacade(FacadeBase):
             for i in range(len(all_flight_and_countries)):
                 if ticket.flight_id == all_flight_and_countries[i][0].id:
                     final_list.append(all_flight_and_countries[i])
-
         if self.api:
             lst = []
             for ticket in all_my_tickets:
@@ -83,6 +88,7 @@ class CustomerFacade(FacadeBase):
                         lst.append(temp)
             return jsonify(lst)
         return final_list
+
 
     def check_one_flight_customer_combination_on_ticket(self):
         dal_obj = DataLayer(table1=Tickets)

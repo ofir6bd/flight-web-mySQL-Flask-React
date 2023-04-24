@@ -1,3 +1,6 @@
+""" 
+This file is connecting between the DAL (the connection to the DB) and the views, for the airline functions
+"""
 from Facades.FacadeBase import *
 from flask import jsonify
 
@@ -27,6 +30,7 @@ class AirlineFacade(FacadeBase):
         dal_obj = DataLayer()
         return dal_obj.insert_obj(flight)
 
+
     def update_flight(self):
         dal_obj = DataLayer(id = self.id,table1=Flights)
         flight = dal_obj.get_by_id()
@@ -44,17 +48,18 @@ class AirlineFacade(FacadeBase):
         dal_obj = DataLayer()
         return dal_obj.update_item(flight)
 
+
     def remove_flight(self):
         dal_obj = DataLayer(id=self.id,table1=Flights)
         flight = dal_obj.get_by_id()
         return dal_obj.delete_obj(flight)
+
 
     def get_my_flights(self):
         dal_obj = DataLayer(table1=AirlineCompanies,input_attribute='name', input_value=self.name)
         airline = dal_obj.get_one_by_param()
         dal_obj = DataLayer(table1=Flights,input_attribute='airline_company_id', input_value=int(airline.id))
         flights = dal_obj.get_all_by_filter()
-        
         if self.api:
             dal_obj = DataLayer()
             all_flights_countries = dal_obj.join_flights_countries() 
@@ -75,6 +80,7 @@ class AirlineFacade(FacadeBase):
                         lst.append(temp)
             return jsonify(lst)    
         return flights
+
 
     def get_airline_by_username(self):
         dal_obj = DataLayer(table1=AirlineCompanies,table_column1="user_id",\

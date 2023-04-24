@@ -1,4 +1,3 @@
-# Register route
 import sys
 import os
  
@@ -15,6 +14,7 @@ from flask_login import login_required
 from per_req_Wrappers import require_customer_role
 from Facades.CustomerFacade import CustomerFacade
 from Forms_templates.general_forms import search_flights_form
+
 
 @login_required
 @require_customer_role
@@ -40,7 +40,6 @@ def update_customer(customer_details):
     address = customer.address
     phone_no = customer.phone_no
     credit_card_no = customer.credit_card_no
-
     if form.validate_on_submit():
         fac_obj = CustomerFacade(id=customer.id, first_name=form.first_name.data,last_name=form.last_name.data,address=form.address.data,phone_no=form.phone_no.data,credit_card_no=form.credit_card_no.data)
         res = fac_obj.update_customer()

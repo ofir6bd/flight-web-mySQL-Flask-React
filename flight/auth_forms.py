@@ -14,6 +14,7 @@ class login_form(FlaskForm):
         validators=[Optional()]
     )
 
+
 def get_user_role_list():
     final_list = []
     final_list.append((0, 'User role'))
@@ -23,6 +24,7 @@ def get_user_role_list():
         if i.role_name != "Anonymous":
             final_list.append((i.id, i.role_name))
     return final_list
+
 
 class register_form(FlaskForm):
     username = StringField(
@@ -48,14 +50,17 @@ class register_form(FlaskForm):
 
     role = SelectField('UserRoles', coerce=int, validators=[DataRequired()])
 
+
     def __init__(self, *args, **kwargs):
         super(register_form, self).__init__(*args, **kwargs)
         self.role.choices =  get_user_role_list()
+
 
     def validate_email(self, email):
         fac_obj = AnonymousFacade(email=email.data)
         if fac_obj.get_user_by_email():
             raise ValidationError("Email already registered!")
+
 
     def validate_username(self, username):
         fac_obj = AnonymousFacade(username=username.data)
