@@ -73,7 +73,7 @@ export default function UpdateFlightForm() {
         messageType={localStorage.getItem("globalVarMessageType")}
       />
       <h2> Update Flight page</h2>
-      <div class="float-container">
+      <div className="float-container">
         <div style={{ width: "300px" }}>
           <Select
             name="outlined-From"

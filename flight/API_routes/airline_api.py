@@ -136,11 +136,11 @@ def api_update_flight(flight_id):
                     if request.args.get('departure_time'):
                         departure_time = datetime.strptime(request.args.get('departure_time'), '%Y-%m-%dT%H:%M')
                     else:
-                        departure_time = ""
+                        departure_time = flight.departure_time
                     if request.args.get('landing_time'):
                         landing_time = datetime.strptime(request.args.get('landing_time'), '%Y-%m-%dT%H:%M')
                     else:
-                        landing_time = ""
+                        landing_time = flight.landing_time
                     remaining_tickets = request.args.get('remaining_tickets')
 
                     res = validate_flight(action="update",id=id,origin_country_id=origin_country_id,destination_country_id=destination_country_id,\

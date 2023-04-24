@@ -49,19 +49,17 @@ export default function AddFlightForm() {
         departure_time,
         landing_time,
         remainingTickets
-      )
-        .then((response) => {
-          if (response.success) {
-            localStorage.setItem("globalVarMessage", response.success);
-            localStorage.setItem("globalVarMessageType", "success");
-          } else {
-            localStorage.setItem("globalVarMessage", JSON.stringify(response));
-            localStorage.setItem("globalVarMessageType", "error");
-          }
-        })
-        .then(() => {
+      ).then((response) => {
+        if (response.success) {
+          localStorage.setItem("globalVarMessage", response.success);
+          localStorage.setItem("globalVarMessageType", "success");
           navigate("/airlinePage");
-        });
+        } else {
+          localStorage.setItem("globalVarMessage", JSON.stringify(response));
+          localStorage.setItem("globalVarMessageType", "error");
+          navigate("/addFlight");
+        }
+      });
     } else {
       localStorage.setItem(
         "globalVarMessage",
@@ -79,7 +77,7 @@ export default function AddFlightForm() {
         messageType={localStorage.getItem("globalVarMessageType")}
       />
       <h2> Add Flight page</h2>
-      <div class="float-container">
+      <div className="float-container">
         <div style={{ width: "300px" }}>
           <Select
             name="outlined-From"

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@mui/material";
-
+import Messages from "../../../messages";
 import { useNavigate } from "react-router";
 import { apiGetMyFlights } from "../../../apiHandler/apiHandlerAirline";
 import Select from "react-select";
@@ -27,6 +27,10 @@ export default function ChooseFlightForm() {
 
   return (
     <div className="container">
+      <Messages
+        message={localStorage.getItem("globalVarMessage")}
+        messageType={localStorage.getItem("globalVarMessageType")}
+      />
       <h2> Choose which flight to update</h2>
       <Select
         name="Flight"
@@ -47,7 +51,7 @@ export default function ChooseFlightForm() {
           ", Remaining tickets: " +
           option.remaining_tickets
         }
-        getOptionValue={(option) => option.flight_id} 
+        getOptionValue={(option) => option.flight_id}
       />
       <Button variant="contained" className="Button" onClick={handleClick}>
         Submit

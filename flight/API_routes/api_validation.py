@@ -155,7 +155,13 @@ def validate_flight(action="",id="",origin_country_id="",destination_country_id=
    if not remaining_tickets_regex_pattern.search(str(remaining_tickets)) and remaining_tickets:
       final_error_lst.append({'error': 'remaining_tickets must be between 0-250'}) 
    
-   
+   # delta = landing_time-departure_time
+   # minutes = delta
+   minutes_diff = (landing_time - departure_time).total_seconds() / 60.0
+   if minutes_diff < 0:
+      final_error_lst.append({'error': 'landing time cannot be before departure time'}) 
+
+
    # validate FK
    if origin_country_id:
       fac_obj = AirlineFacade(id=origin_country_id)
