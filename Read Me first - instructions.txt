@@ -1,6 +1,13 @@
 
 -------------------------information how to upload the servers / website-------------------------
 steps:
+
+- The "secret_keys.py" file contains:
+	SECRET_KEY='secret-key'
+	PASSWORD='admin'
+	DATABASE='flight_db'
+    you need to create this file and place it in the flight dirctory
+
 - install all requirements for the enviroment
 - create db in mySQL as "flight_db"
 - open in vsc "flight/DB_Creation_SQLAlchemy" and run the file "create_tables.py"
