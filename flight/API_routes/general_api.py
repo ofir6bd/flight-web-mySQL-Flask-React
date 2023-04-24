@@ -86,10 +86,13 @@ def api_check_login():
     password = request.args.get('password')
     fac_obj = AnonymousFacade(email=email)
     user = fac_obj.get_user_by_email()
-    if check_password_hash(user.password, password):
-        return jsonify({ 'success': 'email and password are correct', 'user_id': user.id,'user_role': user.user_role})
+    if user:
+        if check_password_hash(user.password, password):
+            return jsonify({ 'success': 'email and password are correct', 'user_id': user.id,'user_role': user.user_role})
+        else:
+            return jsonify({ 'error': 'one of the parameters are wrong'})
     else:
-        return jsonify({ 'error': 'one of the parameters are wrong'})
+         return jsonify({ 'error': "Email's user not found"})
     
     
 def api_create_new_user():
