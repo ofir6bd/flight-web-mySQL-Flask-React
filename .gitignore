@@ -16,7 +16,6 @@ build/
 .pytest_cache/
 .idea/
 docs/_build/
-Archive*
 
 # Coverage reports
 htmlcov/
