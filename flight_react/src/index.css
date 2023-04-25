@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.mainPage {
+  background-color: aqua;
+  margin: 40px 30% auto 30%;
+  border-radius: 25px;
+  padding: 20px;
+  width: 750px !important;
+  height: 300px !important;
+  align-content: left;
+}

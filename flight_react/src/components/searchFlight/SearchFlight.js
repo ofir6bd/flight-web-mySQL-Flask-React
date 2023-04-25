@@ -66,8 +66,10 @@ function SearchFlight() {
         message={localStorage.getItem("globalVarMessage")}
         messageType={localStorage.getItem("globalVarMessageType")}
       />
-      <h2> Search flight </h2>
-      <h4>The best flight deals to everywhere, from anywhere</h4>
+      <div className="mainPageSearchFlight">
+        <h2> Search flight </h2>
+        <h4>The best flight deals to everywhere, from anywhere</h4>
+      </div>
       <div className="container-all">
         <div className="container-select-first">
           <div style={{ width: "300px" }}>

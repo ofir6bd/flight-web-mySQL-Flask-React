@@ -8,7 +8,7 @@ function airlinePage({}) {
         message={localStorage.getItem("globalVarMessage")}
         messageType={localStorage.getItem("globalVarMessageType")}
       />
-      <h1> Airline Page </h1>
+      <h1 className="mainPage"> Airline Page </h1>
     </div>
   );
 }

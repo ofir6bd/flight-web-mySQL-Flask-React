@@ -8,7 +8,7 @@ function adminPage({}) {
         message={localStorage.getItem("globalVarMessage")}
         messageType={localStorage.getItem("globalVarMessageType")}
       />
-      <h1> Admin Page </h1>
+      <h1 className="mainPage"> Admin Page </h1>
     </div>
   );
 }

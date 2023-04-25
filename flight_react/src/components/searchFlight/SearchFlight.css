@@ -28,3 +28,13 @@
     margin-top: 20px;
     height: 600px!important;
 }
+
+.mainPageSearchFlight {
+    background-color: aqua;
+    margin: 40px 30% auto 30%;
+    border-radius: 25px;
+    padding: 20px;
+    width: 750px !important;
+    height: 125px ;
+    align-content: left;
+}

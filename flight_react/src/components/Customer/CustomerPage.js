@@ -8,7 +8,7 @@ function customerPage({}) {
         message={localStorage.getItem("globalVarMessage")}
         messageType={localStorage.getItem("globalVarMessageType")}
       />
-      <h1> Customer Page </h1>
+      <h1 className="mainPage"> Customer Page </h1>
     </div>
   );
 }
