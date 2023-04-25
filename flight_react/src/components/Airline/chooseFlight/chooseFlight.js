@@ -12,8 +12,9 @@ export default function ChooseFlightForm() {
   const [options, setOptions] = React.useState([]);
 
   const handleClick = () => {
+    if (value !== null) {
     navigate("/updateFlight", { state: { flight: value } });
-  };
+  }};
 
   //to load the options for the dropdown
   useEffect(() => {

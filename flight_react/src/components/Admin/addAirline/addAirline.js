@@ -33,7 +33,6 @@ export default function AddAirlineForm() {
   }, []);
 
   const handleClick = () => {
-    console.log("start add customer handleClick");
     var country_id = "";
     var user_id = "";
     if (countryID) {

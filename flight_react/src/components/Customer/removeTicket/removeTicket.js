@@ -7,7 +7,7 @@ import Select from "react-select";
 
 export default function RemoveTicketForm() {
   let navigate = useNavigate();
-  const [value, setValue] = React.useState();
+  const [value, setValue] = React.useState(null);
   const [options, setOptions] = React.useState([]);
 
   //to load the options for the dropdown

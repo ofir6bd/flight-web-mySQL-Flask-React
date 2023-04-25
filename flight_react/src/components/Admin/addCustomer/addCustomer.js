@@ -33,7 +33,7 @@ export default function AddCustomerForm() {
     setCreditCardNo(event.target.value);
   };
 
-  //to load the ptions for the dropdown
+  //to load the options for the dropdown
   useEffect(() => {
     function fetchData() {
       apiGetAllUsersPreCustomer().then((response) => {
@@ -44,7 +44,6 @@ export default function AddCustomerForm() {
   }, []);
 
   const handleClick = () => {
-    console.log("start add customer handleClick");
     var user_id = "";
     if (userID) {
       user_id = userID.id;
