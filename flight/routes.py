@@ -256,4 +256,4 @@ app.add_url_rule('/API/airline/get_airline_details/', view_func=api_get_airline_
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True,port=5000,host='0.0.0.0')

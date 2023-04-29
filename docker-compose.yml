@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+  dockerdb:
+    image: mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+    volumes:
+      - mysql:/var/lib/mysql
+      - mysql_config:/etc/mysql
+
+  backend:
+    build:
+      context: .
+      dockerfile: flight/Dockerfile
+    container_name: flask-container
+    working_dir: /flight
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./flight:/flight
+    command: python routes.py
+
+  frontend:
+    build:
+      context: .
+      dockerfile: flight_react/Dockerfile
+    container_name: react-container
+    working_dir: /flight_react
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    volumes:
+      - ./flight_react:/flight_react
+    command: npm start
+
+volumes:
+  mysql:
+  mysql_config:

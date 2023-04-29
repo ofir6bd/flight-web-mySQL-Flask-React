@@ -26,7 +26,8 @@ def create_app():
     CORS(app)
     # Set Flask app configurations
     app.secret_key = SECRET_KEY
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://root:{PASSWORD}@localhost/{DATABASE}'
+    # app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://root:{PASSWORD}@localhost/{DATABASE}'
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://root:{PASSWORD}@dockerdb/{DATABASE}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     # Initialize Flask extensions with Flask app object
     login_manager.init_app(app)

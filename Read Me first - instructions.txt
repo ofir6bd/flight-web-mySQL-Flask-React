@@ -1,14 +1,33 @@
 
--------------------------information how to upload the servers / website-------------------------
-steps:
-
+-------------------------general instruction -------------------------
 - The "secret_keys.py" file contains:
 	SECRET_KEY='secret-key'
 	PASSWORD='admin'
 	DATABASE='flight_db'
-    you need to create this file and place it in the flight dirctory
+    you need to create this file and place it in the flight directory
 
-- install all requirements for the enviroment
+
+-------------------------instructions how to run with docker-------------------------
+
+'docker compose -f docker-compose.yml up --build'
+'docker ps'
+//identify the line of mysql image and check on the last column what is the name of that container it should be "project2-flight-dockerdb-1"
+'docker exec -ti project2-flight-dockerdb-1 mysql -u root -p'
+insert password: "admin"
+'create database flight_db;'
+'use flight_db;'
+'ctrl+d'
+'docker ps'
+//identify the line of "project2-flight-backend" image and take the container_ID
+///go inside to the BE container
+'docker exec -ti 636517c39d84 bash'
+'python DB_Creation_SQLAlchemy/create_tables.py'
+'ctrl+d'
+
+now you can open http://localhost:3000/ and wait 10 minutes - it can take a wail
+
+-------------------------instruction how to run manually on your computer the servers / website-------------------------
+- install all requirements for the environment
 - create db in mySQL as "flight_db"
 - open in vsc "flight/DB_Creation_SQLAlchemy" and run the file "create_tables.py"
 - click on "run and debug" and click on the green rectangular icon (this should use the "launch.json" file inorder to run the "flight/routes.py" file).
@@ -18,12 +37,10 @@ steps:
 	for all the users in DB the password is "1qaz2wsx"
 
 
-
-
 -------------------------general info-------------------------
-I didn't gave comments for every function since the name of the function is self explenatory
+I didn't gave comments for every function since the name of the function is self explanatory
 Postman queries exported to the main folder as "Postman-Flight-project.postman_collection.json"
 - The date range search for a specific date it's 3 days forward and one day before
-- At the begining I worked on the website in the flask application with templates forms and all.
+- At the beginning I worked on the website in the flask application with templates forms and all.
 	later after I changed some functions for react website, I don't know what is the status of the flask website and it dosen't matter "http://localhost:5000/"
-	but just for you to know I keeped the structure for it maybe for later use. 
+	but just for you to know I keep the structure for it maybe for later use. 
