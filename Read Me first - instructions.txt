@@ -34,8 +34,10 @@ now you can open http://localhost:3000/ and wait 10 minutes - it can take a wail
 	now the api should be available "http://localhost:3000/"
 - open/ navigate in/to vsc "flight_react" and run in the terminal "npm start"
 	this should open the website
-	for all the users in DB the password is "1qaz2wsx"
-
+		customer email: ofir6bd@gmail.com	
+		admin email: admin1234@gmail.com
+		airline email: El_Al_company@gmail.com
+		for all users in DB the password is "1qaz2wsx"
 
 -------------------------general info-------------------------
 I didn't gave comments for every function since the name of the function is self explanatory
