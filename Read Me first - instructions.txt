@@ -4,10 +4,10 @@
 	SECRET_KEY='secret-key'
 	PASSWORD='admin'
 	DATABASE='flight_db'
-    you need to create this file and place it in the flight directory
-
 
 -------------------------instructions how to run with docker-------------------------
+download 'docker-compose.yml' from git
+open VSC to the directory of the docker-compose file location
 
 'docker compose -f docker-compose.yml up --build'
 'docker ps'
@@ -16,33 +16,32 @@
 insert password: "admin"
 'create database flight_db;'
 'use flight_db;'
-'ctrl+d'
+'ctrl+d' for exit
 'docker ps'
-//identify the line of "project2-flight-backend" image and take the container_ID
-///go inside to the BE container
+//under NAMES column identify the line of "flask-container" and take the container_ID, to replace in the next line in order to create tables and insert data to DB
 'docker exec -ti 636517c39d84 bash'
 'python DB_Creation_SQLAlchemy/create_tables.py'
 'ctrl+d'
 
 now you can open http://localhost:3000/ and wait 10 minutes - it can take a wail
 
--------------------------instruction how to run manually on your computer the servers / website-------------------------
-- install all requirements for the environment
-- create db in mySQL as "flight_db"
-- open in vsc "flight/DB_Creation_SQLAlchemy" and run the file "create_tables.py"
-- click on "run and debug" and click on the green rectangular icon (this should use the "launch.json" file inorder to run the "flight/routes.py" file).
-	now the api should be available "http://localhost:3000/"
-- open/ navigate in/to vsc "flight_react" and run in the terminal "npm start"
-	this should open the website
-		customer email: ofir6bd@gmail.com	
-		admin email: admin1234@gmail.com
-		airline email: El_Al_company@gmail.com
-		for all users in DB the password is "1qaz2wsx"
+
+
+------------using the website---------
+I created 3 different users and even more for your use: 
+	customer email: ofir6bd@gmail.com	
+	admin email: admin1234@gmail.com
+	airline email: El_Al_company@gmail.com
+	for all users in DB the password is "1qaz2wsx"
 
 -------------------------general info-------------------------
-I didn't gave comments for every function since the name of the function is self explanatory
+I didn't gave comments for every function since the name of the functions it's self explanatory
 Postman queries exported to the main folder as "Postman-Flight-project.postman_collection.json"
 - The date range search for a specific date it's 3 days forward and one day before
 - At the beginning I worked on the website in the flask application with templates forms and all.
-	later after I changed some functions for react website, I don't know what is the status of the flask website and it dosen't matter "http://localhost:5000/"
-	but just for you to know I keep the structure for it maybe for later use. 
+	later after I changed some functions for react, I don't know what is the status of the flask website and it dosen't matter "http://localhost:5000/"
+	but just for you to know I keep the structure for it maybe for later use (as comment of course) 
+
+
+-link for dockerhub: 
+	https://hub.docker.com/repository/docker/ofir6bd/flight_website_react_flask/general
