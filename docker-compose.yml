@@ -12,9 +12,7 @@ services:
       - mysql_config:/etc/mysql
 
   backend:
-    build:
-      context: .
-      dockerfile: flight/Dockerfile
+    image: ofir6bd/flight_website_react_flask:flask-image
     container_name: flask-container
     working_dir: /flight
     ports:
@@ -24,9 +22,7 @@ services:
     command: python routes.py
 
   frontend:
-    build:
-      context: .
-      dockerfile: flight_react/Dockerfile
+    image: ofir6bd/flight_website_react_flask:react-image
     container_name: react-container
     working_dir: /flight_react
     ports:
